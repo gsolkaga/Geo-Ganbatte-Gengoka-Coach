@@ -181,7 +181,18 @@ function nextQuestion() {
                 高さを固定して各ペインを内部スクロールさせる。
                 こうしないと 14 スロットの縦長さに引きずられて回答欄が画面外に出る。
             -->
-            <div class="grid gap-4 xl:min-h-0 xl:flex-1 xl:grid-cols-[7fr_3fr]">
+            <!--
+                採点後もペインの高さを保つ。**外すと崩れる。**
+                右列（14 スロット）が全高に伸びて 2,000px を超え、左列は短いので
+                巨大な空白ができる。内部スクロールを維持したまま、結果は下に積む。
+
+                入力中は flex-1 で画面の残りを埋める（ページを固定しているため計算不要）。
+                採点後はページ固定を外すので、比率で高さを与えて fr 行を解決させる。
+            -->
+            <div
+                class="grid gap-4 xl:min-h-0 xl:grid-cols-[7fr_3fr]"
+                :class="phase === 'input' ? 'xl:flex-1' : 'xl:h-[60dvh]'"
+            >
                 <div class="grid min-h-0 gap-4 xl:grid-rows-[7fr_3fr]">
                     <!-- 左上：風景 -->
                     <div class="flex min-h-0 flex-col gap-1">
@@ -189,14 +200,10 @@ function nextQuestion() {
                             既定は Embed（無料・無制限）。`NUXT_PUBLIC_STREETVIEW_MODE=nomove` で
                             JavaScript API に切り替わり移動を止められるが、Pro SKU で課金対象になる。
                         -->
-                        <!--
-                            `fill` は height:100% なので、親の高さが不定だと潰れる。
-                            入力中はページを固定しているので有効。採点後は固定を外すため
-                            16:9 の内在高さに戻す。
-                        -->
+                        <!-- 親の高さは全フェーズで確定しているので fill が効く -->
                         <div class="min-h-0 flex-1">
-                            <StreetViewNoMove v-if="noMove" :pano-id="current.panoId" :fill="phase === 'input'" />
-                            <StreetViewFrame v-else :pano-id="current.panoId" :fill="phase === 'input'" />
+                            <StreetViewNoMove v-if="noMove" :pano-id="current.panoId" fill />
+                            <StreetViewFrame v-else :pano-id="current.panoId" fill />
                         </div>
                         <p v-if="!noMove" class="shrink-0 text-xs text-slate-500">
                             この表示は移動できる。<strong>移動すると正解タグと一致しなくなる。</strong>
