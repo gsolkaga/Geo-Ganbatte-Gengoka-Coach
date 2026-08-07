@@ -50,10 +50,17 @@ const jsKey = computed(() => String(config.public.googleMapsJsKey ?? ''))
 
 const host = useTemplateRef<HTMLDivElement>('host')
 const error = ref<string | null>(null)
+/** キーの不備が原因のときだけ、キーに関する案内を出す */
+const keyProblem = ref(false)
 let panorama: google.maps.StreetViewPanorama | null = null
 
 /**
- * Maps JavaScript API を読み込む。多重読み込みを避けるため 1 度だけ注入する。
+ * ブートストラップスクリプトを注入する。多重読み込みを避けるため 1 度だけ。
+ *
+ * **`onload` が発火してもクラスはまだ使えない。**
+ * `loading=async` を付けたブートストラップは、実体を遅延読み込みする方式であり、
+ * `google.maps.StreetViewPanorama` は `importLibrary('streetView')` を待つまで未定義である。
+ * ここを飛ばすと `StreetViewPanorama is not a constructor` になる（実測）。
  */
 function loadMapsApi(key: string): Promise<void> {
   if (typeof window === 'undefined') return Promise.resolve()
@@ -90,9 +97,15 @@ function loadMapsApi(key: string): Promise<void> {
  * `disableDefaultUI` は使わない。**Google の帰属表記まで消える恐れがあるため。**
  * 必要なものだけを個別に false にする。
  */
-function render(): void {
+async function render(): Promise<void> {
   if (!host.value || !props.panoId) return
-  panorama = new google.maps.StreetViewPanorama(host.value, {
+
+  // ブートストラップの onload では足りない。ライブラリの読み込みを待つ
+  const { StreetViewPanorama } = (await google.maps.importLibrary(
+    'streetView',
+  )) as google.maps.StreetViewLibrary
+
+  panorama = new StreetViewPanorama(host.value, {
     pano: props.panoId,
     pov: { heading: props.heading, pitch: props.pitch },
     // --- NoMove ---
@@ -112,15 +125,19 @@ function render(): void {
 
 onMounted(async () => {
   if (!jsKey.value) {
+    keyProblem.value = true
     error.value = 'NUXT_PUBLIC_GOOGLE_MAPS_JS_KEY が設定されていない'
     return
   }
   try {
     await loadMapsApi(jsKey.value)
-    render()
+    await render()
   }
   catch (e) {
-    error.value = e instanceof Error ? e.message : String(e)
+    const message = e instanceof Error ? e.message : String(e)
+    // 読み込み失敗はキーの制限が原因になりやすい。それ以外は案内を出さない
+    keyProblem.value = /読み込みに失敗|InvalidKey|ApiNotActivated|RefererNotAllowed/i.test(message)
+    error.value = message
   }
 })
 
@@ -142,9 +159,12 @@ watch(
       role="status"
     >
       <p>
-        {{ error }}<br>
-        NoMove 表示には <strong>Maps JavaScript API を許可したブラウザ用キー</strong>が必要である。
-        Embed 用のキーは Embed API のみに制限しているため使えない。
+        {{ error }}
+        <template v-if="keyProblem">
+          <br>
+          NoMove 表示には <strong>Maps JavaScript API を許可したブラウザ用キー</strong>が必要である。
+          Embed 用のキーは Embed API のみに制限しているため使えない。
+        </template>
       </p>
     </div>
 
