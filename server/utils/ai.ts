@@ -52,6 +52,30 @@ export const MODEL_MAX_TOKENS: Readonly<Record<string, number>> = {
 /** タイムアウトは約 300 秒。少し余裕を持たせてサーバ側の 504 を観測できるようにする */
 export const REQUEST_TIMEOUT_MS = 310_000
 
+/**
+ * 蓄積したテキストが完結した JSON オブジェクトになっているかを判定する。
+ *
+ * ストリーミング中に毎チャンク呼ぶため、まず安価な検査で弾いてから `JSON.parse` する。
+ * 末尾が `}` でなければパースを試みない。
+ *
+ * 用途は 2 つある。
+ *   1. JSON が閉じた時点でストリームの読み取りをやめる（gemma の空白埋めを止める）
+ *   2. `finish_reason=length` でも中身が使えるかを判定する
+ *
+ * **`finish_reason` は信号であり、使えるかどうかの事実はパースで決まる。**
+ */
+export function looksLikeCompleteJson(text: string): boolean {
+    const trimmed = text.trim()
+    if (!trimmed.startsWith('{') || !trimmed.endsWith('}')) return false
+    try {
+        const parsed: unknown = JSON.parse(trimmed)
+        return typeof parsed === 'object' && parsed !== null
+    }
+    catch {
+        return false
+    }
+}
+
 export interface AiChatRequest {
     category: UsageCategory
     /** 呼び出し元の識別子。`normalize` `grade` `draft` など */
@@ -335,6 +359,8 @@ export async function callChatStream(request: AiStreamRequest): Promise<AiStream
     let finishReason: string | null = null
     let usage: AiTokenUsage | null = null
     let result: AiStreamResult
+    /** JSON が閉じたのでこちらから読むのをやめたか */
+    let jsonClosedEarly = false
 
     try {
         const stream = await getClient().chat.completions.create({
@@ -381,24 +407,62 @@ export async function callChatStream(request: AiStreamRequest): Promise<AiStream
                 firstByteMs,
                 elapsedMs: Date.now() - startedAt,
             })
+
+            /**
+             * JSON が閉じた時点で読むのをやめる。
+             *
+             * 実測（2026-08-07）で `preview/gemma-4-31B-it` が、JSON を書き終えた後も
+             * **空白を吐き続けて max_tokens を使い切った**（8,002 チャンク、110.4 秒、
+             * 生テキストの後半が全て空白）。`finish_reason=length` になるが、
+             * **出力が長すぎたのではなく止まらなかったのである。**
+             *
+             * max_tokens を上げても空白が増えて遅くなるだけなので、こちら側で打ち切る。
+             * リクエストは既に消費されているため節約にはならないが、待ち時間が消える。
+             */
+            if (request.responseFormat && looksLikeCompleteJson(content)) {
+                jsonClosedEarly = true
+                break
+            }
         }
 
         const totalMs = Date.now() - startedAt
 
-        // HTTP 200 でも成功とは限らない。finish_reason の有無で判定する
+        /**
+         * 状態の判定。
+         *
+         * **`finish_reason` だけで決めていたのは粗かった。**
+         * gemma のように JSON が完成した後に空白で枠を使い切る場合、
+         * `finish_reason=length` でも中身は使える。
+         *
+         * したがって `finish_reason` は信号として記録し、**使えるかどうかはパースで決める。**
+         * 逆に、途中で切れて JSON が壊れていればパースが失敗するので取りこぼさない。
+         */
         let status: AiStreamResult['status'] = 'ok'
         let error: string | null = null
-        if (!finishReason) {
-            status = 'truncated'
-            error = `finish_reason が返らずストリームが終了した（${chunks} チャンク受信、content ${content.length} 文字、reasoning ${reasoning.length} 文字）`
-        }
-        else if (finishReason === 'length') {
-            status = 'truncated'
-            error = `finish_reason=length。max_tokens=${maxTokens} で打ち切られた`
+        const parsable = looksLikeCompleteJson(content)
+
+        if (jsonClosedEarly) {
+            // JSON が閉じたのでこちらから読むのをやめた。成功である
+            status = 'ok'
         }
         else if (!content.trim()) {
             status = 'truncated'
-            error = 'content が空である。推論が max_tokens を使い切った可能性がある'
+            error = !finishReason
+                ? `content が空のままストリームが終了した（${chunks} チャンク受信、reasoning ${reasoning.length} 文字）`
+                : 'content が空である。推論が max_tokens を使い切った可能性がある'
+        }
+        else if (!finishReason && !parsable) {
+            status = 'truncated'
+            error = `finish_reason が返らずストリームが終了した（${chunks} チャンク受信、content ${content.length} 文字、reasoning ${reasoning.length} 文字）`
+        }
+        else if (finishReason === 'length' && !parsable) {
+            status = 'truncated'
+            error = `finish_reason=length。max_tokens=${maxTokens} で打ち切られた`
+        }
+        else if (finishReason === 'length' && parsable) {
+            // 中身は完成している。事実として記録するが失敗にはしない
+            status = 'ok'
+            error = `finish_reason=length だが JSON は完成していた（末尾の空白で枠を使い切ったとみられる。max_tokens=${maxTokens}）`
         }
 
         result = {
