@@ -52,7 +52,18 @@ export const GRADING_SYSTEM_PROMPT = `あなたはGeoGuessrの上達を支援す
 これを失敗として扱わず、発見として認めてください。
 
 観察空間は無限であり、用意された項目はその一部を切り出したものにすぎません。
-項目の外を見た学習者を、項目に収まらなかったことで減点しないでください。`
+項目の外を見た学習者を、項目に収まらなかったことで減点しないでください。
+
+## 分量
+**短く書いてください。** 学習者が読むのは、この文章より先に表示される
+「コードが計算した判定」です。あなたの役割はその補足です。
+
+- 各項目は指定された字数を守る
+- 同じことを言い直さない
+- 全体で 1,200 字以内におさめる
+- 網羅より優先順位。**指摘は重要なものだけに絞る**
+
+長い説明は読まれません。読まれない説明は学習の役に立ちません。`
 
 /** 採点結果の出力スキーマ。**v1 / v2 で同一。** 配列には minItems / maxItems を明示する */
 export const GRADING_JSON_SCHEMA: Record<string, unknown> = {
@@ -65,19 +76,36 @@ export const GRADING_JSON_SCHEMA: Record<string, unknown> = {
         failureModeExplanation: {
             type: 'string',
             description:
-                '入力で与えられた失敗モードが学習上どういう意味を持つかの説明。失敗モードを追加・変更しない',
+                '入力で与えられた失敗モードが学習上どういう意味を持つかの説明。失敗モードを追加・変更しない。150字以内',
         },
+        /**
+         * maxItems は 14（スロット数）から 4 に下げた。
+         *
+         * 実測（2026-08-07、v1 の初回プレイ）で 4 モデルすべてが完走しなかった。
+         *   gpt-oss / gemma / Qwen  max_tokens=4000 で finish_reason=length
+         *   Kimi                    max_tokens=24000、本文 21,306 字でも 300 秒でタイムアウト
+         *
+         * 枠を 6 倍与えたモデルでも終わらなかった。**要求している出力量そのものが過大だった。**
+         * missedClues / wrongReasoning / vocabulary が各 14 件で、文字列に長さ制限がなく、
+         * 最大 42 個のオブジェクトを無制限の文章で書ける状態だった。
+         *
+         * そして本アプリの設計では feedback は従である（design.md「画面の優先順位」）。
+         * **数千文字の添削は学習者が読まない。トークンの問題ではなく設計の誤りだった。**
+         *
+         * 網羅性は捨てる。指摘は重要なものだけに絞る。
+         */
         missedClues: {
             type: 'array',
-            description: '見落としたスロットの説明。正解タグがない場合は空配列',
+            description:
+                '見落としたスロットの説明。正解タグがない場合は空配列。**重要な順に最大4件**',
             minItems: 0,
-            maxItems: 14,
+            maxItems: 4,
             items: {
                 type: 'object',
                 properties: {
                     slot: { type: 'string' },
-                    whatWasThere: { type: 'string', description: '正解タグの記述に基づく説明のみ' },
-                    whyItMatters: { type: 'string', description: '絞り込み力を件数とともに述べる' },
+                    whatWasThere: { type: 'string', description: '正解タグの記述に基づく説明のみ。80字以内' },
+                    whyItMatters: { type: 'string', description: '絞り込み力を件数とともに述べる。80字以内' },
                 },
                 required: ['slot', 'whatWasThere', 'whyItMatters'],
                 additionalProperties: false,
@@ -85,14 +113,14 @@ export const GRADING_JSON_SCHEMA: Record<string, unknown> = {
         },
         wrongReasoning: {
             type: 'array',
-            description: '誤った根拠の指摘。該当がなければ空配列',
+            description: '誤った根拠の指摘。該当がなければ空配列。**重要な順に最大3件**',
             minItems: 0,
-            maxItems: 14,
+            maxItems: 3,
             items: {
                 type: 'object',
                 properties: {
                     slot: { type: 'string' },
-                    explanation: { type: 'string' },
+                    explanation: { type: 'string', description: '100字以内' },
                 },
                 required: ['slot', 'explanation'],
                 additionalProperties: false,
@@ -100,15 +128,16 @@ export const GRADING_JSON_SCHEMA: Record<string, unknown> = {
         },
         vocabulary: {
             type: 'array',
-            description: '学習者の素人語に正式な用語を対応づける。辞書にある用語のみ',
+            description:
+                '学習者の素人語に正式な用語を対応づける。辞書にある用語のみ。**最大5件**',
             minItems: 0,
-            maxItems: 14,
+            maxItems: 5,
             items: {
                 type: 'object',
                 properties: {
                     learnerWrote: { type: 'string' },
                     canonicalTerm: { type: 'string' },
-                    note: { type: 'string' },
+                    note: { type: 'string', description: '60字以内' },
                 },
                 required: ['learnerWrote', 'canonicalTerm', 'note'],
                 additionalProperties: false,
@@ -117,7 +146,7 @@ export const GRADING_JSON_SCHEMA: Record<string, unknown> = {
         discriminationHint: {
             type: 'string',
             description:
-                '候補が複数ある場合、どのスロットを見れば区別できるか。候補が1つなら空文字列',
+                '候補が複数ある場合、どのスロットを見れば区別できるか。候補が1つなら空文字列。150字以内',
         },
         nextPriority: {
             type: 'array',

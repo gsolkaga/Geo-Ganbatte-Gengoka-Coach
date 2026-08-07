@@ -30,8 +30,18 @@ export type StructuredMode = 'json_schema' | 'json_object' | 'prompt' | 'none'
  * `max_tokens` の下限。
  * 推論が JSON 本体の 5〜10 倍を消費する（実測）。無償枠はリクエスト数で数えられるため
  * トークンを節約する動機はない。
+ *
+ * 4,000 では足りなかった（実測 2026-08-07、v1 の初回プレイ）。
+ * gpt-oss / gemma / Qwen の 3 モデルが `finish_reason=length` で打ち切られ、
+ * チャンク数が 3962 / 4002 / 4001 とほぼ同一だった。**全部が枠で切れていた。**
+ *
+ * ただし枠を上げるだけでは直らない。Kimi は 24,000 でも本文 21,306 字を書いて
+ * 300 秒のタイムアウトに達した。**出力量そのものを削る必要があった**
+ * （`prompts.ts` の `GRADING_JSON_SCHEMA` で maxItems と字数を絞った）。
+ *
+ * 8,000 は、絞った後の出力に対する余裕であって、無制限の出力を通すための値ではない。
  */
-export const MIN_MAX_TOKENS = 4000
+export const MIN_MAX_TOKENS = 8000
 
 /** モデルごとの `max_tokens`。一律の値では失敗するモデルがある（実測） */
 export const MODEL_MAX_TOKENS: Readonly<Record<string, number>> = {
