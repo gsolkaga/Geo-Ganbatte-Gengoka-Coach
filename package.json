@@ -11,14 +11,16 @@
         "generate": "nuxt generate",
         "preview": "nuxt preview",
         "postinstall": "nuxt prepare",
-        "typecheck": "nuxt typecheck",
-        "test": "vitest --run"
+        "typecheck": "vue-tsc --build",
+        "test": "vitest --run",
+        "measure:concurrency": "node tools/measure-concurrency.mjs",
+        "add:question": "node tools/add-question.mjs"
     },
     "dependencies": {
         "nuxt": "4.5.2",
         "openai": "7.4.0",
         "vue": "3.5.41",
-        "vue-router": "4.6.3",
+        "vue-router": "5.2.0",
         "zod": "4.4.3"
     },
     "devDependencies": {
@@ -28,6 +30,6 @@
         "tailwindcss": "4.3.3",
         "typescript": "5.9.3",
         "vitest": "4.1.10",
-        "vue-tsc": "2.2.12"
+        "vue-tsc": "3.3.9"
     }
 }

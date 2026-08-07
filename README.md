@@ -74,6 +74,33 @@ npm run typecheck         # 型検査（vue-tsc）
 npm run build             # 本番ビルド
 ```
 
+### 出題データを登録する
+
+開発サーバを起動した状態で、座標と国コードを渡す。pano の解決と著作権表記の確認はサーバ側で行う。
+
+```bash
+node tools/add-question.mjs --country JP --lat 35.123 --lng 139.456 --difficulty 1
+```
+
+**座標は人間が選ぶ。** 有名観光地は個人投稿の全天球写真を拾いやすく、著作権表記が Google に
+ならないため避ける。道路上の座標を選ぶ。**メタデータ照会は無料でクォータも消費しない**ので、
+採用されるまで何度でも試してよい。
+
+著作権表記が Google 以外だった場合は HTTP 422 で不採用となり、理由が
+`data/pano-rejections.jsonl` に記録される。
+
+### 同時実行数を測る
+
+さくらの AI Engine の**同時実行数の上限は非公開である**（タイムアウトと同じ）。実測する。
+
+```powershell
+$env:SAKURA_AI_TOKEN = Read-Host "token"
+node tools/measure-concurrency.mjs   # 4 リクエストを消費する
+```
+
+429 が返る、または並列で短縮されない場合、採点の複数モデル同時実行を直列に落とす必要がある。
+判断材料は `docs/generated-concurrency/` に保存される。
+
 初回の `npm install` で、Nuxt が匿名の利用統計への参加を尋ねる場合がある
 （`Are you interested in participating?`）。
 
