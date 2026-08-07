@@ -120,8 +120,19 @@ function nextQuestion() {
 </script>
 
 <template>
-    <div class="mx-auto grid max-w-7xl gap-4 p-4">
-        <header class="flex flex-wrap items-baseline justify-between gap-2">
+    <!--
+        入力中はページを画面高さに固定し、ペインだけを内部スクロールさせる。
+        **高さをマジックナンバーで引き算しない。** ヘッダーの実高さと合わず、
+        ページ全体が画面より高くなって外側のスクロールバーと余白が出る。
+        flex で残りを埋めさせれば計算不要になる。
+
+        採点後は結果を下に積むためページのスクロールを許す。
+    -->
+    <div
+        class="mx-auto flex max-w-7xl flex-col gap-4 p-4"
+        :class="phase === 'input' ? 'xl:h-dvh xl:overflow-hidden' : ''"
+    >
+        <header class="shrink-0 flex flex-wrap items-baseline justify-between gap-2">
             <div>
                 <h1 class="text-xl font-bold text-slate-900">
                     Geo-Ganbatte-Gengoka-Coach
@@ -156,7 +167,7 @@ function nextQuestion() {
         </section>
 
         <template v-else-if="current">
-            <p class="text-sm text-slate-600">
+            <p class="shrink-0 text-sm text-slate-600">
                 問題 {{ currentIndex + 1 }} / {{ questions.length }}（難易度 {{ current.difficulty }}）
             </p>
 
@@ -170,7 +181,7 @@ function nextQuestion() {
                 高さを固定して各ペインを内部スクロールさせる。
                 こうしないと 14 スロットの縦長さに引きずられて回答欄が画面外に出る。
             -->
-            <div class="grid gap-4 xl:h-[calc(100vh-11rem)] xl:grid-cols-[7fr_3fr]">
+            <div class="grid gap-4 xl:min-h-0 xl:flex-1 xl:grid-cols-[7fr_3fr]">
                 <div class="grid min-h-0 gap-4 xl:grid-rows-[7fr_3fr]">
                     <!-- 左上：風景 -->
                     <div class="flex min-h-0 flex-col gap-1">
@@ -178,9 +189,14 @@ function nextQuestion() {
                             既定は Embed（無料・無制限）。`NUXT_PUBLIC_STREETVIEW_MODE=nomove` で
                             JavaScript API に切り替わり移動を止められるが、Pro SKU で課金対象になる。
                         -->
+                        <!--
+                            `fill` は height:100% なので、親の高さが不定だと潰れる。
+                            入力中はページを固定しているので有効。採点後は固定を外すため
+                            16:9 の内在高さに戻す。
+                        -->
                         <div class="min-h-0 flex-1">
-                            <StreetViewNoMove v-if="noMove" :pano-id="current.panoId" fill />
-                            <StreetViewFrame v-else :pano-id="current.panoId" fill />
+                            <StreetViewNoMove v-if="noMove" :pano-id="current.panoId" :fill="phase === 'input'" />
+                            <StreetViewFrame v-else :pano-id="current.panoId" :fill="phase === 'input'" />
                         </div>
                         <p v-if="!noMove" class="shrink-0 text-xs text-slate-500">
                             この表示は移動できる。<strong>移動すると正解タグと一致しなくなる。</strong>
