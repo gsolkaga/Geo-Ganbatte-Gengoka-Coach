@@ -1,0 +1,81 @@
+{
+    "_comment": [
+        "人手による訂正と確認の記録。merge-country-table.mjs が適用する。",
+        "",
+        "overrides: 多数決の結果が誤っていた項目を訂正する。値を書き換える。",
+        "verified:  多数決の結果が正しいことを人間が確認した項目。値は変えず記録だけ残す。",
+        "",
+        "reason には必ず根拠を書く。後から検証できない訂正を入れないこと。",
+        "overrides の status が 'proposed' のものは適用しない。'confirmed' に変えてから適用される。"
+    ],
+    "overrides": [
+        {
+            "code": "GH",
+            "status": "confirmed",
+            "field": "traffic_side",
+            "from": "left",
+            "to": "right",
+            "reason": "ガーナは1974年に左側通行から右側通行へ変更している。4モデルのうち3モデルがleftと回答し多数決が誤った。正解したのはpreview/Kimi-K2.6のみ。GeoGuessrプレイヤーが確認済み。",
+            "confirmedAt": "2026-08-07"
+        }
+    ],
+    "verified": [
+        {
+            "code": "KZ",
+            "field": "scripts",
+            "value": [
+                "cyrillic",
+                "latin"
+            ],
+            "note": "キリル文字とラテン文字の併用。Kimi-K2.6 が scripts を空配列で返したため disputed になっていた。Plonk It のカザフスタンのページ（https://www.plonkit.net/kazakhstan）で確認。カザフ語固有の文字が判別の手がかりになる。"
+        },
+        {
+            "code": "NG",
+            "field": "traffic_side",
+            "value": "right",
+            "note": "Qwen3.6-35B-A3B のみ left と誤答。多数決は正しかった。"
+        },
+        {
+            "code": "RW",
+            "field": "traffic_side",
+            "value": "right",
+            "note": "Qwen3.6-35B-A3B のみ left と誤答。東アフリカで唯一の右側通行であり、ケニア・ウガンダとの弁別に使える。"
+        },
+        {
+            "code": "BT",
+            "field": "traffic_side",
+            "value": "left",
+            "note": "gemma-4-31B-it のみ right と誤答。"
+        },
+        {
+            "code": "KH",
+            "field": "traffic_side",
+            "value": "right",
+            "note": "gpt-oss-120b のみ left と誤答。"
+        },
+        {
+            "code": "ID",
+            "field": "traffic_side",
+            "value": "left",
+            "note": "Qwen3.6-35B-A3B のみ right と誤答。"
+        },
+        {
+            "code": "PH",
+            "field": "traffic_side",
+            "value": "right",
+            "note": "gemma-4-31B-it のみ left と誤答。"
+        },
+        {
+            "code": "HK",
+            "field": "traffic_side",
+            "value": "left",
+            "note": "gemma-4-31B-it のみ right と誤答。台湾は右側通行であり、繁体字を共有する2地域の弁別に使える。"
+        },
+        {
+            "code": "AU",
+            "field": "traffic_side",
+            "value": "left",
+            "note": "gpt-oss-120b のみ right と誤答。採点用に選定したモデルが基本的な事実を誤った例。"
+        }
+    ]
+}

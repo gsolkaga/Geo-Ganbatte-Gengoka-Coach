@@ -1,0 +1,193 @@
+{
+    "_comment": [
+        "メタの強さを判定するための地域グループ。",
+        "",
+        "GeoGuessr の失点は距離で決まるため、候補国の件数だけでなく地理的な散らばりが重要である。",
+        "同じ 3 カ国でも、隣接していれば失点が小さく、大陸が違えば失点が大きい。",
+        "",
+        "この分類は地理学上の区分ではなく、GeoGuessr プレイヤーが実際にどう扱っているかに従う。",
+        "配置の根拠は _notes に記録する。"
+    ],
+    "regions": {
+        "nordic": [
+            "NO",
+            "SE",
+            "FI",
+            "IS",
+            "DK"
+        ],
+        "west_europe": [
+            "IE",
+            "GB",
+            "NL",
+            "FR",
+            "BE",
+            "LU",
+            "DE",
+            "CH",
+            "AT"
+        ],
+        "south_europe": [
+            "ES",
+            "PT",
+            "AD",
+            "IT",
+            "MT",
+            "GR",
+            "CY"
+        ],
+        "baltic": [
+            "EE",
+            "LV",
+            "LT"
+        ],
+        "east_europe": [
+            "PL",
+            "CZ",
+            "SK",
+            "HU",
+            "SI",
+            "HR",
+            "BA",
+            "ME",
+            "XK",
+            "AL",
+            "RO",
+            "RS",
+            "MK",
+            "BG",
+            "UA",
+            "TR"
+        ],
+        "former_soviet_asia": [
+            "RU",
+            "KZ",
+            "KG",
+            "MN",
+            "UZ",
+            "GE"
+        ],
+        "middle_east": [
+            "IL",
+            "LB",
+            "JO",
+            "QA",
+            "AE",
+            "OM"
+        ],
+        "north_africa": [
+            "TN"
+        ],
+        "west_africa": [
+            "SN",
+            "GH",
+            "NG",
+            "ST"
+        ],
+        "east_africa": [
+            "KE",
+            "UG",
+            "RW"
+        ],
+        "southern_africa": [
+            "NA",
+            "BW",
+            "ZA",
+            "LS",
+            "SZ"
+        ],
+        "indian_ocean": [
+            "MG",
+            "RE"
+        ],
+        "south_asia": [
+            "IN",
+            "LK",
+            "BD",
+            "NP",
+            "BT"
+        ],
+        "southeast_asia": [
+            "TH",
+            "KH",
+            "VN",
+            "MY",
+            "SG",
+            "ID",
+            "PH"
+        ],
+        "east_asia": [
+            "HK",
+            "TW",
+            "KR",
+            "JP"
+        ],
+        "oceania": [
+            "AU",
+            "NZ"
+        ],
+        "north_america": [
+            "US",
+            "CA",
+            "MX"
+        ],
+        "central_america_caribbean": [
+            "GT",
+            "CR",
+            "PA",
+            "DO",
+            "PR"
+        ],
+        "south_america": [
+            "CO",
+            "EC",
+            "PE",
+            "BO",
+            "BR",
+            "PY",
+            "UY",
+            "CL",
+            "AR"
+        ]
+    },
+    "continents": {
+        "europe": [
+            "nordic",
+            "west_europe",
+            "south_europe",
+            "baltic",
+            "east_europe"
+        ],
+        "eurasia": [
+            "former_soviet_asia",
+            "middle_east"
+        ],
+        "africa": [
+            "north_africa",
+            "west_africa",
+            "east_africa",
+            "southern_africa",
+            "indian_ocean"
+        ],
+        "asia": [
+            "south_asia",
+            "southeast_asia",
+            "east_asia"
+        ],
+        "oceania": [
+            "oceania"
+        ],
+        "americas": [
+            "north_america",
+            "central_america_caribbean",
+            "south_america"
+        ]
+    },
+    "_notes": [
+        "TR トルコは east_europe に配置した。国土はアジア側にもあるが、EU 式のナンバープレートを使用しており、メタとしてはヨーロッパ扱いになる。プレイヤーの実務に従う。",
+        "GE ジョージアは former_soviet_asia に配置した。トルコに隣接しているが、カバレッジの追加が比較的新しく、実務ではロシア周辺として扱われている。",
+        "RE レユニオンは indian_ocean（大陸区分はアフリカ）に配置した。フランス海外県だが、実務ではカーメタ（黒テープ）で一意に判別されるため、フランスメタは使われない。地理的近接を優先する。",
+        "PR プエルトリコは central_america_caribbean に配置した。米国領だが、メタはアメリカとメキシコの混在であり、中米扱いが実務に合う。",
+        "MG マダガスカルは indian_ocean に配置した。"
+    ]
+}

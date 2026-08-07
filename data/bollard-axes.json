@@ -1,0 +1,261 @@
+{
+    "_comment": [
+        "ボラードの属性軸の定義。実験 A（軸の発見と充填）で使う。",
+        "",
+        "軸はすべて GeoGuessr プレイヤー（最高到達 Master 4）の口述から抽出した。",
+        "Kiro 側からは軸を追加していない。実験の目的が「AI が軸を発見できるか」の測定であり、",
+        "第三者が軸を足すと、誰の貢献かが判別できなくなるため。",
+        "",
+        "AI が arm1（軸の発見）でここにない軸を提案した場合、それは AI 側の発見として記録する。",
+        "",
+        "設計上の決定：すべての軸を単一値の enum にする。配列にしない。",
+        "  実測（countries-disagreement.md）で、配列の enum（scripts、20 値）は盛られた。",
+        "  インドに Qwen が greek を含む 8 種を挙げた。",
+        "  一方、単一値の enum（traffic_side、2 値）では過剰生成が起きなかった。",
+        "  国内に複数種類が存在する場合の取りこぼしは受け入れる。variants は unknown で表現する。",
+        "",
+        "すべての軸に unknown を含める。含めないと、該当しない入力に対して誤った値を強制的に",
+        "選ばせることになる（要件 3-4 と同じ原則。制約が逆にハルシネーションを生む）。"
+    ],
+    "axes": [
+        {
+            "id": "presence",
+            "label": "ボラードが Street View に写るか",
+            "source": "human",
+            "values": [
+                "common",
+                "rare",
+                "absent",
+                "unknown"
+            ],
+            "note": "absent の国は積集合の母集団から除外する。母数を正直に保つための軸。"
+        },
+        {
+            "id": "material",
+            "label": "素材",
+            "source": "human",
+            "values": [
+                "plastic",
+                "metal",
+                "concrete",
+                "wood",
+                "stone",
+                "unknown"
+            ],
+            "note": "口述「四角コンクリならベトナムカンボジア」「素材」より。"
+        },
+        {
+            "id": "cross_section",
+            "label": "断面・加工形状",
+            "source": "human",
+            "values": [
+                "round",
+                "square",
+                "rectangular",
+                "triangular",
+                "half_round",
+                "v_shaped",
+                "flat_plate",
+                "unknown"
+            ],
+            "note": "口述「加工方法（V字、三角柱、四角柱、半円形等）」「太くて丸い棒」より。"
+        },
+        {
+            "id": "thickness",
+            "label": "太さ・薄さ",
+            "source": "human",
+            "values": [
+                "thin",
+                "medium",
+                "thick",
+                "unknown"
+            ],
+            "note": "口述「薄さ」「フランスは太くて丸い棒」より。フランスの弁別に太さが効くとされている。"
+        },
+        {
+            "id": "body_color",
+            "label": "本体の主色",
+            "source": "human",
+            "values": [
+                "white",
+                "yellow",
+                "red",
+                "black",
+                "grey_concrete",
+                "green",
+                "unpainted_metal",
+                "unknown"
+            ],
+            "note": "口述「本体の棒の全てが黄色ならアイスランド確定」より。反射板の色とは別の軸である。"
+        },
+        {
+            "id": "body_pattern",
+            "label": "本体の塗り分け",
+            "source": "human",
+            "values": [
+                "solid",
+                "horizontal_stripes",
+                "single_band",
+                "diagonal",
+                "top_section_colored",
+                "unknown"
+            ],
+            "note": "口述「横に帯がある（DK）」「帯なし（BE）」「ストライプならバングラディシュ」より。"
+        },
+        {
+            "id": "reflector_color",
+            "label": "反射板の色",
+            "source": "human",
+            "values": [
+                "white",
+                "yellow",
+                "red",
+                "orange",
+                "blue",
+                "none",
+                "unknown"
+            ],
+            "note": "口述「本体が白で反射板が黄色」より。body_color と独立に効く。"
+        },
+        {
+            "id": "reflector_shape",
+            "label": "反射板の形状",
+            "source": "human",
+            "values": [
+                "rectangle",
+                "circle",
+                "square",
+                "diagonal_stripe",
+                "triangle",
+                "full_width_strip",
+                "none",
+                "unknown"
+            ],
+            "note": "口述「反射板部分が斜めに赤ければポーランド」より。角度が決め手になる。"
+        },
+        {
+            "id": "reflector_surround",
+            "label": "反射板の周囲の色",
+            "source": "human",
+            "values": [
+                "none",
+                "black",
+                "white",
+                "unknown"
+            ],
+            "note": "口述「黄色の周りに黒部分があればスペインエストニアラトビア」より。"
+        },
+        {
+            "id": "rear_marking",
+            "label": "裏面の塗装",
+            "source": "human",
+            "values": [
+                "same_as_front",
+                "different_color",
+                "no_marking",
+                "unknown"
+            ],
+            "note": "口述「裏まで赤ければニュージーランド」より。AI の 17 用語にこの軸は存在しなかった。"
+        },
+        {
+            "id": "guardrail_relation",
+            "label": "ガードレールとの関係",
+            "source": "human",
+            "values": [
+                "standalone",
+                "mounted_on_guardrail",
+                "guardrail_post_serves_as_bollard",
+                "mixed",
+                "unknown"
+            ],
+            "note": "口述「ガードレールとの組み合わせ」より。"
+        },
+        {
+            "id": "top_shape",
+            "label": "上端の形状",
+            "source": "human",
+            "values": [
+                "flat",
+                "rounded",
+                "pointed",
+                "angled_cut",
+                "unknown"
+            ],
+            "note": "口述「キングジムみたいなデザインならトルコ」を軸に分解するために置いた。固有形状を軸の組み合わせで再現できるかの試験も兼ねる。"
+        }
+    ],
+    "_countries_comment": [
+        "対象国。ボラードが手がかりになりうる範囲を広めに取る。",
+        "",
+        "母数を絞ると弁別力が過大に見える。「本体全体が黄色 → IS」が強く見えるのは、",
+        "比較対象に黄色い国が入っていないだけかもしれない。だから欧州を全部入れる。",
+        "",
+        "64 カ国。batch 4 で 16 バッチ、4 モデルで 64 リクエスト。"
+    ],
+    "countries": [
+        "NO",
+        "SE",
+        "FI",
+        "IS",
+        "DK",
+        "IE",
+        "GB",
+        "NL",
+        "FR",
+        "BE",
+        "LU",
+        "DE",
+        "CH",
+        "AT",
+        "IT",
+        "ES",
+        "PT",
+        "AD",
+        "MT",
+        "PL",
+        "CZ",
+        "SK",
+        "HU",
+        "SI",
+        "HR",
+        "BA",
+        "ME",
+        "XK",
+        "AL",
+        "RO",
+        "RS",
+        "MK",
+        "BG",
+        "UA",
+        "EE",
+        "LV",
+        "LT",
+        "GR",
+        "CY",
+        "RU",
+        "TR",
+        "GE",
+        "KZ",
+        "VN",
+        "KH",
+        "TH",
+        "MY",
+        "ID",
+        "PH",
+        "BD",
+        "LK",
+        "IN",
+        "JP",
+        "KR",
+        "TW",
+        "NZ",
+        "AU",
+        "US",
+        "CA",
+        "MX",
+        "BR",
+        "AR",
+        "CL",
+        "ZA"
+    ]
+}

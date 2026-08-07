@@ -1,0 +1,410 @@
+[
+    {
+        "code": "NO",
+        "name": "ノルウェー"
+    },
+    {
+        "code": "SE",
+        "name": "スウェーデン"
+    },
+    {
+        "code": "FI",
+        "name": "フィンランド"
+    },
+    {
+        "code": "IS",
+        "name": "アイスランド"
+    },
+    {
+        "code": "DK",
+        "name": "デンマーク"
+    },
+    {
+        "code": "IE",
+        "name": "アイルランド"
+    },
+    {
+        "code": "GB",
+        "name": "イギリス"
+    },
+    {
+        "code": "NL",
+        "name": "オランダ"
+    },
+    {
+        "code": "FR",
+        "name": "フランス"
+    },
+    {
+        "code": "BE",
+        "name": "ベルギー"
+    },
+    {
+        "code": "LU",
+        "name": "ルクセンブルク"
+    },
+    {
+        "code": "DE",
+        "name": "ドイツ"
+    },
+    {
+        "code": "CH",
+        "name": "スイス"
+    },
+    {
+        "code": "AT",
+        "name": "オーストリア"
+    },
+    {
+        "code": "IT",
+        "name": "イタリア"
+    },
+    {
+        "code": "ES",
+        "name": "スペイン"
+    },
+    {
+        "code": "PT",
+        "name": "ポルトガル"
+    },
+    {
+        "code": "AD",
+        "name": "アンドラ"
+    },
+    {
+        "code": "MT",
+        "name": "マルタ"
+    },
+    {
+        "code": "PL",
+        "name": "ポーランド"
+    },
+    {
+        "code": "CZ",
+        "name": "チェコ"
+    },
+    {
+        "code": "SK",
+        "name": "スロバキア"
+    },
+    {
+        "code": "HU",
+        "name": "ハンガリー"
+    },
+    {
+        "code": "SI",
+        "name": "スロベニア"
+    },
+    {
+        "code": "HR",
+        "name": "クロアチア"
+    },
+    {
+        "code": "BA",
+        "name": "ボスニア・ヘルツェゴビナ"
+    },
+    {
+        "code": "ME",
+        "name": "モンテネグロ"
+    },
+    {
+        "code": "XK",
+        "name": "コソボ"
+    },
+    {
+        "code": "AL",
+        "name": "アルバニア"
+    },
+    {
+        "code": "RO",
+        "name": "ルーマニア"
+    },
+    {
+        "code": "RS",
+        "name": "セルビア"
+    },
+    {
+        "code": "MK",
+        "name": "北マケドニア"
+    },
+    {
+        "code": "BG",
+        "name": "ブルガリア"
+    },
+    {
+        "code": "UA",
+        "name": "ウクライナ"
+    },
+    {
+        "code": "EE",
+        "name": "エストニア"
+    },
+    {
+        "code": "LV",
+        "name": "ラトビア"
+    },
+    {
+        "code": "LT",
+        "name": "リトアニア"
+    },
+    {
+        "code": "GR",
+        "name": "ギリシャ"
+    },
+    {
+        "code": "CY",
+        "name": "キプロス"
+    },
+    {
+        "code": "RU",
+        "name": "ロシア"
+    },
+    {
+        "code": "KZ",
+        "name": "カザフスタン"
+    },
+    {
+        "code": "KG",
+        "name": "キルギス"
+    },
+    {
+        "code": "MN",
+        "name": "モンゴル"
+    },
+    {
+        "code": "UZ",
+        "name": "ウズベキスタン"
+    },
+    {
+        "code": "GE",
+        "name": "ジョージア"
+    },
+    {
+        "code": "TR",
+        "name": "トルコ"
+    },
+    {
+        "code": "IL",
+        "name": "イスラエル"
+    },
+    {
+        "code": "LB",
+        "name": "レバノン"
+    },
+    {
+        "code": "JO",
+        "name": "ヨルダン"
+    },
+    {
+        "code": "QA",
+        "name": "カタール"
+    },
+    {
+        "code": "AE",
+        "name": "アラブ首長国連邦"
+    },
+    {
+        "code": "OM",
+        "name": "オマーン"
+    },
+    {
+        "code": "TN",
+        "name": "チュニジア"
+    },
+    {
+        "code": "SN",
+        "name": "セネガル"
+    },
+    {
+        "code": "GH",
+        "name": "ガーナ"
+    },
+    {
+        "code": "NG",
+        "name": "ナイジェリア"
+    },
+    {
+        "code": "ST",
+        "name": "サントメ・プリンシペ"
+    },
+    {
+        "code": "KE",
+        "name": "ケニア"
+    },
+    {
+        "code": "UG",
+        "name": "ウガンダ"
+    },
+    {
+        "code": "RW",
+        "name": "ルワンダ"
+    },
+    {
+        "code": "NA",
+        "name": "ナミビア"
+    },
+    {
+        "code": "BW",
+        "name": "ボツワナ"
+    },
+    {
+        "code": "ZA",
+        "name": "南アフリカ共和国"
+    },
+    {
+        "code": "LS",
+        "name": "レソト"
+    },
+    {
+        "code": "SZ",
+        "name": "エスワティニ"
+    },
+    {
+        "code": "MG",
+        "name": "マダガスカル"
+    },
+    {
+        "code": "RE",
+        "name": "レユニオン"
+    },
+    {
+        "code": "IN",
+        "name": "インド"
+    },
+    {
+        "code": "LK",
+        "name": "スリランカ"
+    },
+    {
+        "code": "BD",
+        "name": "バングラデシュ"
+    },
+    {
+        "code": "NP",
+        "name": "ネパール"
+    },
+    {
+        "code": "BT",
+        "name": "ブータン"
+    },
+    {
+        "code": "TH",
+        "name": "タイ"
+    },
+    {
+        "code": "KH",
+        "name": "カンボジア"
+    },
+    {
+        "code": "VN",
+        "name": "ベトナム"
+    },
+    {
+        "code": "MY",
+        "name": "マレーシア"
+    },
+    {
+        "code": "SG",
+        "name": "シンガポール"
+    },
+    {
+        "code": "ID",
+        "name": "インドネシア"
+    },
+    {
+        "code": "PH",
+        "name": "フィリピン"
+    },
+    {
+        "code": "HK",
+        "name": "香港"
+    },
+    {
+        "code": "TW",
+        "name": "台湾"
+    },
+    {
+        "code": "KR",
+        "name": "韓国"
+    },
+    {
+        "code": "JP",
+        "name": "日本"
+    },
+    {
+        "code": "AU",
+        "name": "オーストラリア"
+    },
+    {
+        "code": "NZ",
+        "name": "ニュージーランド"
+    },
+    {
+        "code": "US",
+        "name": "アメリカ"
+    },
+    {
+        "code": "CA",
+        "name": "カナダ"
+    },
+    {
+        "code": "MX",
+        "name": "メキシコ"
+    },
+    {
+        "code": "GT",
+        "name": "グアテマラ"
+    },
+    {
+        "code": "CR",
+        "name": "コスタリカ"
+    },
+    {
+        "code": "PA",
+        "name": "パナマ"
+    },
+    {
+        "code": "DO",
+        "name": "ドミニカ共和国"
+    },
+    {
+        "code": "PR",
+        "name": "プエルトリコ"
+    },
+    {
+        "code": "CO",
+        "name": "コロンビア"
+    },
+    {
+        "code": "EC",
+        "name": "エクアドル"
+    },
+    {
+        "code": "PE",
+        "name": "ペルー"
+    },
+    {
+        "code": "BO",
+        "name": "ボリビア"
+    },
+    {
+        "code": "BR",
+        "name": "ブラジル"
+    },
+    {
+        "code": "PY",
+        "name": "パラグアイ"
+    },
+    {
+        "code": "UY",
+        "name": "ウルグアイ"
+    },
+    {
+        "code": "CL",
+        "name": "チリ"
+    },
+    {
+        "code": "AR",
+        "name": "アルゼンチン"
+    }
+]

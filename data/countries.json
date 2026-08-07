@@ -1,0 +1,1759 @@
+[
+    {
+        "code": "NO",
+        "name": "ノルウェー",
+        "region": "nordic",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "SE",
+        "name": "スウェーデン",
+        "region": "nordic",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "FI",
+        "name": "フィンランド",
+        "region": "nordic",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "IS",
+        "name": "アイスランド",
+        "region": "nordic",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "DK",
+        "name": "デンマーク",
+        "region": "nordic",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "IE",
+        "name": "アイルランド",
+        "region": "west_europe",
+        "traffic_side": "left",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "GB",
+        "name": "イギリス",
+        "region": "west_europe",
+        "traffic_side": "left",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "NL",
+        "name": "オランダ",
+        "region": "west_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "FR",
+        "name": "フランス",
+        "region": "west_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "BE",
+        "name": "ベルギー",
+        "region": "west_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "LU",
+        "name": "ルクセンブルク",
+        "region": "west_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "DE",
+        "name": "ドイツ",
+        "region": "west_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "CH",
+        "name": "スイス",
+        "region": "west_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "AT",
+        "name": "オーストリア",
+        "region": "west_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "IT",
+        "name": "イタリア",
+        "region": "south_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "ES",
+        "name": "スペイン",
+        "region": "south_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "PT",
+        "name": "ポルトガル",
+        "region": "south_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "AD",
+        "name": "アンドラ",
+        "region": "south_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "MT",
+        "name": "マルタ",
+        "region": "south_europe",
+        "traffic_side": "left",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "PL",
+        "name": "ポーランド",
+        "region": "east_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "CZ",
+        "name": "チェコ",
+        "region": "east_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "SK",
+        "name": "スロバキア",
+        "region": "east_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "HU",
+        "name": "ハンガリー",
+        "region": "east_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "SI",
+        "name": "スロベニア",
+        "region": "east_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "HR",
+        "name": "クロアチア",
+        "region": "east_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "BA",
+        "name": "ボスニア・ヘルツェゴビナ",
+        "region": "east_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "cyrillic",
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "ME",
+        "name": "モンテネグロ",
+        "region": "east_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "XK",
+        "name": "コソボ",
+        "region": "east_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "cyrillic",
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "AL",
+        "name": "アルバニア",
+        "region": "east_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "RO",
+        "name": "ルーマニア",
+        "region": "east_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "RS",
+        "name": "セルビア",
+        "region": "east_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "cyrillic",
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "MK",
+        "name": "北マケドニア",
+        "region": "east_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "cyrillic"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "BG",
+        "name": "ブルガリア",
+        "region": "east_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "cyrillic"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "UA",
+        "name": "ウクライナ",
+        "region": "east_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "cyrillic"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "EE",
+        "name": "エストニア",
+        "region": "baltic",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "LV",
+        "name": "ラトビア",
+        "region": "baltic",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "LT",
+        "name": "リトアニア",
+        "region": "baltic",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "GR",
+        "name": "ギリシャ",
+        "region": "south_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "greek"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "CY",
+        "name": "キプロス",
+        "region": "south_europe",
+        "traffic_side": "left",
+        "scripts": [
+            "greek",
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "RU",
+        "name": "ロシア",
+        "region": "former_soviet_asia",
+        "traffic_side": "right",
+        "scripts": [
+            "cyrillic"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "KZ",
+        "name": "カザフスタン",
+        "region": "former_soviet_asia",
+        "traffic_side": "right",
+        "scripts": [
+            "cyrillic",
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": true
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "KG",
+        "name": "キルギス",
+        "region": "former_soviet_asia",
+        "traffic_side": "right",
+        "scripts": [
+            "cyrillic"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "MN",
+        "name": "モンゴル",
+        "region": "former_soviet_asia",
+        "traffic_side": "right",
+        "scripts": [
+            "cyrillic"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "UZ",
+        "name": "ウズベキスタン",
+        "region": "former_soviet_asia",
+        "traffic_side": "right",
+        "scripts": [
+            "cyrillic",
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "GE",
+        "name": "ジョージア",
+        "region": "former_soviet_asia",
+        "traffic_side": "right",
+        "scripts": [
+            "georgian"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "TR",
+        "name": "トルコ",
+        "region": "east_europe",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "IL",
+        "name": "イスラエル",
+        "region": "middle_east",
+        "traffic_side": "right",
+        "scripts": [
+            "arabic",
+            "hebrew",
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "LB",
+        "name": "レバノン",
+        "region": "middle_east",
+        "traffic_side": "right",
+        "scripts": [
+            "arabic",
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "JO",
+        "name": "ヨルダン",
+        "region": "middle_east",
+        "traffic_side": "right",
+        "scripts": [
+            "arabic"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "QA",
+        "name": "カタール",
+        "region": "middle_east",
+        "traffic_side": "right",
+        "scripts": [
+            "arabic"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "AE",
+        "name": "アラブ首長国連邦",
+        "region": "middle_east",
+        "traffic_side": "right",
+        "scripts": [
+            "arabic",
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "OM",
+        "name": "オマーン",
+        "region": "middle_east",
+        "traffic_side": "right",
+        "scripts": [
+            "arabic"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "TN",
+        "name": "チュニジア",
+        "region": "north_africa",
+        "traffic_side": "right",
+        "scripts": [
+            "arabic",
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "SN",
+        "name": "セネガル",
+        "region": "west_africa",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "GH",
+        "name": "ガーナ",
+        "region": "west_africa",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": true,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": true,
+            "scripts": false
+        }
+    },
+    {
+        "code": "NG",
+        "name": "ナイジェリア",
+        "region": "west_africa",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": true,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": true,
+            "scripts": false
+        }
+    },
+    {
+        "code": "ST",
+        "name": "サントメ・プリンシペ",
+        "region": "west_africa",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "KE",
+        "name": "ケニア",
+        "region": "east_africa",
+        "traffic_side": "left",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "UG",
+        "name": "ウガンダ",
+        "region": "east_africa",
+        "traffic_side": "left",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "RW",
+        "name": "ルワンダ",
+        "region": "east_africa",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": true,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": true,
+            "scripts": false
+        }
+    },
+    {
+        "code": "NA",
+        "name": "ナミビア",
+        "region": "southern_africa",
+        "traffic_side": "left",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "BW",
+        "name": "ボツワナ",
+        "region": "southern_africa",
+        "traffic_side": "left",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "ZA",
+        "name": "南アフリカ共和国",
+        "region": "southern_africa",
+        "traffic_side": "left",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "LS",
+        "name": "レソト",
+        "region": "southern_africa",
+        "traffic_side": "left",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "SZ",
+        "name": "エスワティニ",
+        "region": "southern_africa",
+        "traffic_side": "left",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "MG",
+        "name": "マダガスカル",
+        "region": "indian_ocean",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "RE",
+        "name": "レユニオン",
+        "region": "indian_ocean",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "IN",
+        "name": "インド",
+        "region": "south_asia",
+        "traffic_side": "left",
+        "scripts": [
+            "devanagari",
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "LK",
+        "name": "スリランカ",
+        "region": "south_asia",
+        "traffic_side": "left",
+        "scripts": [
+            "latin",
+            "sinhala",
+            "tamil"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "BD",
+        "name": "バングラデシュ",
+        "region": "south_asia",
+        "traffic_side": "left",
+        "scripts": [
+            "bengali",
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "NP",
+        "name": "ネパール",
+        "region": "south_asia",
+        "traffic_side": "left",
+        "scripts": [
+            "devanagari",
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "BT",
+        "name": "ブータン",
+        "region": "south_asia",
+        "traffic_side": "left",
+        "scripts": [
+            "latin",
+            "tibetan"
+        ],
+        "verified": {
+            "traffic_side": true,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": true,
+            "scripts": false
+        }
+    },
+    {
+        "code": "TH",
+        "name": "タイ",
+        "region": "southeast_asia",
+        "traffic_side": "left",
+        "scripts": [
+            "latin",
+            "thai"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "KH",
+        "name": "カンボジア",
+        "region": "southeast_asia",
+        "traffic_side": "right",
+        "scripts": [
+            "khmer",
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": true,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": true,
+            "scripts": true
+        }
+    },
+    {
+        "code": "VN",
+        "name": "ベトナム",
+        "region": "southeast_asia",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "MY",
+        "name": "マレーシア",
+        "region": "southeast_asia",
+        "traffic_side": "left",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "SG",
+        "name": "シンガポール",
+        "region": "southeast_asia",
+        "traffic_side": "left",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "ID",
+        "name": "インドネシア",
+        "region": "southeast_asia",
+        "traffic_side": "left",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": true,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": true,
+            "scripts": false
+        }
+    },
+    {
+        "code": "PH",
+        "name": "フィリピン",
+        "region": "southeast_asia",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": true,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": true,
+            "scripts": false
+        }
+    },
+    {
+        "code": "HK",
+        "name": "香港",
+        "region": "east_asia",
+        "traffic_side": "left",
+        "scripts": [
+            "chinese_traditional",
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": true,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": true,
+            "scripts": false
+        }
+    },
+    {
+        "code": "TW",
+        "name": "台湾",
+        "region": "east_asia",
+        "traffic_side": "right",
+        "scripts": [
+            "chinese_traditional",
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "KR",
+        "name": "韓国",
+        "region": "east_asia",
+        "traffic_side": "right",
+        "scripts": [
+            "korean_hangul",
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "JP",
+        "name": "日本",
+        "region": "east_asia",
+        "traffic_side": "left",
+        "scripts": [
+            "japanese_kana_kanji",
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": true
+        }
+    },
+    {
+        "code": "AU",
+        "name": "オーストラリア",
+        "region": "oceania",
+        "traffic_side": "left",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": true,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": true,
+            "scripts": false
+        }
+    },
+    {
+        "code": "NZ",
+        "name": "ニュージーランド",
+        "region": "oceania",
+        "traffic_side": "left",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "US",
+        "name": "アメリカ",
+        "region": "north_america",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "CA",
+        "name": "カナダ",
+        "region": "north_america",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "MX",
+        "name": "メキシコ",
+        "region": "north_america",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "GT",
+        "name": "グアテマラ",
+        "region": "central_america_caribbean",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "CR",
+        "name": "コスタリカ",
+        "region": "central_america_caribbean",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "PA",
+        "name": "パナマ",
+        "region": "central_america_caribbean",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "DO",
+        "name": "ドミニカ共和国",
+        "region": "central_america_caribbean",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "PR",
+        "name": "プエルトリコ",
+        "region": "central_america_caribbean",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "CO",
+        "name": "コロンビア",
+        "region": "south_america",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "EC",
+        "name": "エクアドル",
+        "region": "south_america",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "PE",
+        "name": "ペルー",
+        "region": "south_america",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "BO",
+        "name": "ボリビア",
+        "region": "south_america",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "BR",
+        "name": "ブラジル",
+        "region": "south_america",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "PY",
+        "name": "パラグアイ",
+        "region": "south_america",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "UY",
+        "name": "ウルグアイ",
+        "region": "south_america",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "CL",
+        "name": "チリ",
+        "region": "south_america",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    },
+    {
+        "code": "AR",
+        "name": "アルゼンチン",
+        "region": "south_america",
+        "traffic_side": "right",
+        "scripts": [
+            "latin"
+        ],
+        "verified": {
+            "traffic_side": false,
+            "scripts": false
+        },
+        "disputed": {
+            "traffic_side": false,
+            "scripts": false
+        }
+    }
+]

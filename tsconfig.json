@@ -1,0 +1,18 @@
+{
+    // Nuxt が .nuxt/tsconfig.*.json を生成する。プロジェクト参照で束ねる
+    "files": [],
+    "references": [
+        {
+            "path": "./.nuxt/tsconfig.app.json"
+        },
+        {
+            "path": "./.nuxt/tsconfig.server.json"
+        },
+        {
+            "path": "./.nuxt/tsconfig.shared.json"
+        },
+        {
+            "path": "./.nuxt/tsconfig.node.json"
+        }
+    ]
+}

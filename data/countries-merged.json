@@ -1,0 +1,7695 @@
+[
+  {
+    "code": "NO",
+    "name": "ノルウェー",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "ノルウェー語（ブークモール／ニーノシュク）",
+          "北部のサーミ語（標識に併記されることあり）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "japanese",
+          "korean"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "ノルウェー語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ノルウェー語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。左端に赤・白・青の国旗と「N」のマークが入った青いストリップ。形式は「AA 12 BB」（2文字‑2数字‑2文字）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": ""
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒文字（前後同一）、左端に青EU帯（N）"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。欧州連合の青い帯（EUストリップ）は付いていない。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "SE",
+    "name": "スウェーデン",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "スウェーデン語（標識はスウェーデン語が基本）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "japanese",
+          "korean"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "スウェーデン語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "スウェーデン語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。左端にEUブルーストリップと「S」のマーク。形式は「ABC 12 DE」（3文字‑1〜2数字‑2文字）や「ABC 123」など。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": ""
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒文字（前後同一）、左端に青EU帯（S）"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。欧州連合の青い帯（EUストリップ）が付いている。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "FI",
+    "name": "フィンランド",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "スウェーデン語（両言語が同等に表記）",
+          "フィンランド語"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "japanese",
+          "korean"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "フィンランド語およびスウェーデン語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "スウェーデン語",
+          "フィンランド語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。左端にEUブルーストリップと「FIN」のマーク。形式は「ABC‑123」（3文字‑3数字）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": ""
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒文字（前後同一）、左端に青EU帯（FIN/FI）"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。欧州連合の青い帯（EUストリップ）が付いている。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "IS",
+    "name": "アイスランド",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "アイスランド語（観光地では英語が併記されることがある）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "japanese",
+          "korean"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "アイスランド語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "アイスランド語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。EUストリップはなく、単純な「ABC 12」の形式（3文字‑2数字）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": ""
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒文字、左端に青EU帯（I）"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。欧州連合の青い帯（EUストリップ）は付いていない。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "DK",
+    "name": "デンマーク",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "デンマーク語"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "japanese",
+          "korean"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "デンマーク語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "デンマーク語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。左端にEUブルーストリップと「DK」のマーク。形式は「AB‑123‑XY」（2文字‑3数字‑2文字）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": ""
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒文字（前後同一）、左端に青EU帯（DK）"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。欧州連合の青い帯（EUストリップ）が付いている。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "IE",
+    "name": "アイルランド",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "アイルランド語（ゲール語）",
+          "英語（両言語が表記される）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "japanese",
+          "korean"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "英語およびアイルランド語（ゲール語）"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "前面は白地に黒文字、背面は黄色地に黒文字。左端にEUブルーストリップと「IRL」のマーク。形式は「1234‑AB‑56」（年/郡コード‑2文字‑2数字）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": ""
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "前行き白地・後行き黄地に黒文字、左端に青EU帯（IRL）"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白（前）または黄（後）の地に黒文字。欧州連合の青い帯（EUストリップ）が付いている。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "GB",
+    "name": "イギリス",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "english"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "english"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "イギリス"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "左側通行。標識はラテン文字（英字）で表記され、言語は英語のみ。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "前部は白地に黒字、後部は黄色地に黒字。現行形式は「AB12 CDE」など。左端に青帯（国籍表示「GB」など）。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "前部白・後部黄、UK/GBCODE、EUバンドなし"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "前白後黄"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "NL",
+    "name": "オランダ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "dutch"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "dutch"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "オランダ語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "オランダ語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "右側通行。標識はラテン文字（オランダ語）で表記。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "黄色地に黒字。形式は「XX-XXX-X」など。左端に青帯（EUスターと「NL」）。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地黒字前後同色、EUバンドNL"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "黄色のプレート"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "FR",
+    "name": "フランス",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "french"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "french"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "フランス語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "フランス語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "右側通行。標識はラテン文字（フランス語）で表記。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に黒字。形式は「AB-123-CD」。左端に青帯（EUスターと「F」）、右端に青帯で登録県番号・県章あり。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地黒字、EUバンドFR、SIV方式（県コード-系列-登録順）"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "右端に地域識別コード"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "BE",
+    "name": "ベルギー",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "dutch",
+          "french",
+          "german"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "dutch",
+          "french"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "オランダ語・フランス語・ドイツ語（地域により使い分け）"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "オランダ語",
+          "ドイツ語",
+          "フランス語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "右側通行。標識はラテン文字で3言語が併記される。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に赤文字。形式は「1-ABC-234」。左端に青帯（EUスターと「B」）。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地黒字、EUバンドBE"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に赤文字"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "LU",
+    "name": "ルクセンブルク",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "french",
+          "german",
+          "luxembourgish"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "french",
+          "luxembourgish"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "フランス語・ドイツ語（標識表記の実態）"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ドイツ語",
+          "フランス語",
+          "ルクセンブルク語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "右側通行。標識はラテン文字で3言語が併記される。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に黒字。形式は「XX 1234」。左端に青帯（EUスターと「L」）。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地黒字、EUバンドL（現行は横型）"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "黄色のプレート"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "DE",
+    "name": "ドイツ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "german"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "german"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "ドイツ語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ドイツ語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "右側通行。標識はラテン文字（ドイツ語）で表記。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に黒字。形式は「B AB 1234」（登録自治体記号＋識別記号＋番号）。左端に青帯（EUスターと「D」）。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地黒字、EUバンドD、上部に県・都市略称記載"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "左端に都市・地域識別コード"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "CH",
+    "name": "スイス",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "deutsch (ドイツ語)",
+          "français (フランス語)",
+          "italiano (イタリア語)",
+          "rumantsch (ロマンシュ語)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "de",
+          "fr",
+          "it",
+          "rm"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "スイス",
+          "ナンバープレートの特徴: 白地に黒文字。左端にスイス国旗（赤地に白十字）のエンブレムと「ch」の識別帯。州コード（2文字）と番号の組み合わせ（例: zh 123456）。",
+          "文字体系: ラテン文字",
+          "標識に現れる言語: ドイツ語、フランス語、イタリア語、ロマンシュ語（連邦標識では4言語併記、地域標識では該当言語のみ）",
+          "走行車線: 右側通行"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "イタリア語",
+          "ドイツ語",
+          "フランス語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "各州（カントン）の公用語が道路標識に表記される。例：ドイツ語圏はドイツ語、フランス語圏はフランス語、イタリア語圏はイタリア語、ロマンシュ語圏はロマンシュ語。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に黒文字。州の紋章と2文字の州コード付き。EU青帯なし。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "※各国ともEU加盟国・地域は青帯「EU」仕様、非加盟国・地域は独自の識別帯を使用します。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "左端に白い縦帯があり、国名略称「CH」が表記されている"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "AT",
+    "name": "オーストリア",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "deutsch (ドイツ語)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "de"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "オーストリア",
+          "ナンバープレートの特徴: 白地に黒文字。左端にeu仕様青帯「a」。州略字（1文字）と空白、番号の順で配置（例: w 123456）。",
+          "文字体系: ラテン文字",
+          "標識に現れる言語: ドイツ語（一部地域でスロベニア語・クロアチア語との併記あり）",
+          "走行車線: 右側通行"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ドイツ語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "オーストリア語表記はドイツ語のローマ字表記のみ。州コードが1文字で、続く数字・英字で構成される。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に黒文字。左端にEU青帯（A）と州の紋章・コード付き。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "※各国ともEU加盟国・地域は青帯「EU」仕様、非加盟国・地域は独自の識別帯を使用します。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "左端に青いEU帯があり、国名コード「A」が表記されている"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "IT",
+    "name": "イタリア",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "deutsch (ドイツ語) – südtirol（南チロル）で併記",
+          "français (フランス語) – valle d'aosta（アオスタ州）で併記",
+          "italiano (イタリア語)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "it"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "イタリア",
+          "ナンバープレートの特徴: 白地に黒文字。左右に青帯「i」付き（左のみの場合も）。2桁文字-2桁数字-2桁文字の横並び（例: ab 00 cd）。",
+          "文字体系: ラテン文字",
+          "標識に現れる言語: イタリア語（自治州によってはドイツ語・フランス語・スロベニア語との併記あり）",
+          "走行車線: 右側通行"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "イタリア語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "イタリア全土で共通の欧州式ブルーストライプ。左上に EU スターと「I」。本体は黒文字で、先頭に2文字の都道府県コード（例：MI、RM）が付く。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に黒文字。左端にEU青帯（I）。現行は「AB 123 CD」形式。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "※各国ともEU加盟国・地域は青帯「EU」仕様、非加盟国・地域は独自の識別帯を使用します。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "左右両端に青い帯があり、右側に年式と州コードが表記されている"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "ES",
+    "name": "スペイン",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "català (カタルーニャ語)",
+          "español (スペイン語)",
+          "euskara (バスク語)",
+          "galego (ガリシア語)",
+          "valencià (バレンシア語) – 該当地域で併記"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "es"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "スペイン",
+          "ナンバープレートの特徴: 白地に黒文字。左端にeu仕様青帯「e」。3桁数字と3桁文字を空白で区切って記載（例: 1234 bcd）。右側に青色帯が縦に付く場合もある。",
+          "文字体系: ラテン文字",
+          "標識に現れる言語: スペイン語（自治州によってはカタルーニャ語・バスク語・ガリシア語などの併記あり）",
+          "走行車線: 右側通行"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "スペイン語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "EU ブルーストライプ（左上に「E」）＋黒文字。番号は4桁＋3文字のアルファベット（例：1234 ABC）。地方言語は自治州内の標識に併記されるが、ナンバープレートは全国統一。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に黒文字。左端にEU青帯（E）。現行は「1234 BBB」形式。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "※各国ともEU加盟国・地域は青帯「EU」仕様、非加盟国・地域は独自の識別帯を使用します。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "右端に青いEU帯があり、国名コード「E」と登録年・月が表記されている"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "PT",
+    "name": "ポルトガル",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "português (ポルトガル語)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "pt"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "ナンバープレートの特徴: 白地に黒文字。左端にeu仕様青帯「p」。2桁文字・2桁数字・2桁文字を空白で区切って記載（例: ab 00 cd）。",
+          "ポルトガル",
+          "文字体系: ラテン文字",
+          "標識に現れる言語: ポルトガル語",
+          "走行車線: 右側通行"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ポルトガル語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "左側に EU ブルーストライプ（「P」）＋黒文字。現在は 2 字‑2 数字‑2 字 の組み合わせ（例：AB‑12‑CD）が主流。旧式は県コード＋数字・字母の組み合わせ。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に黒文字（現行）。左端にEU青帯（P）。旧式は黄色地も存在。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "※各国ともEU加盟国・地域は青帯「EU」仕様、非加盟国・地域は独自の識別帯を使用します。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "左端に青いEU帯があり、右端に黄色い縦帯（登録年・月）がある形式が一般的"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "AD",
+    "name": "アンドラ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "català (カタルーニャ語)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "ca"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "アンドラ",
+          "ナンバープレートの特徴: 白地に黒文字。左端にeu様式の青帯に「and」。番号とアルファベットを組み合わせた記載（例: 1234 abc）。",
+          "文字体系: ラテン文字",
+          "標識に現れる言語: カタルーニャ語（スペイン語・フランス語表記の標識も存在）",
+          "走行車線: 右側通行"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "カタルーニャ語",
+          "スペイン語",
+          "フランス語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白底に黒文字、左側に青帯で国際コード「AND」＋アンドラの紋章。形式は 4 桁の数字＋2 文字のアルファベット（例：1234 AB）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に赤文字。左端に国章（紋章）。EU青帯なし。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "※各国ともEU加盟国・地域は青帯「EU」仕様、非加盟国・地域は独自の識別帯を使用します。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字で、国名略称「A」が含まれる形式が多い"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "MT",
+    "name": "マルタ",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "english",
+          "maltese"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "en",
+          "ja"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": []
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "マルタ語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "EU ブルーバンド (MT) + 黒字 on 白背景。形式は 3 文字 + 3 数字（例：ABC 123）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "EU統一フォーマット（青い帯）左側通行"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "EUフォーマット（青帯に「M」、白地黒字）。記号は3英字＋スペース＋3数字。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。EU旗（青地に黄星）の帯がある。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "PL",
+    "name": "ポーランド",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "polish"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "pl"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "polish"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ポーランド語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "EU ブルーバンド (PL) + 黒字 on 白背景。形式は 1‑2 文字（県コード）＋ 4‑5 文字/数字（例：WS 12345、KR A 12）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "EU統一フォーマット（青い帯）地方コードあり"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "EUフォーマット（青帯に「PL」、白地黒字）。記号は2英字＋スペース＋3数字＋スペース＋2英字。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。EU旗の帯がある。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "CZ",
+    "name": "チェコ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "czech"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "cs"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "czech"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "チェコ語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "EU ブルーバンド (CZ) + 黒字 on 白背景。形式は 1 文字（県コード）＋ 1‑3 文字＋ 1‑4 数字（例：1 AB 1234）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "EU統一フォーマット（青い帯）地方識別あり"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "EUフォーマット（青帯に「CZ」、白地黒字）。記号は2英字＋スペース＋3数字＋スペース＋2英字。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。EU旗の帯がある。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "SK",
+    "name": "スロバキア",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "slovak"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "sk"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "slovak"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "スロバキア語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "EU ブルーバンド (SK) + 黒字 on 白背景。形式は 2 文字（県コード）＋ 4‑5 数字＋ 2 文字（例：AB 1234 CD）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "EU統一フォーマット（青い帯）地方コードあり"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "EUフォーマット（青帯に「SK」、白地黒字）。記号は2英字＋スペース＋3数字＋スペース＋1英字。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。EU旗の帯がある。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "HU",
+    "name": "ハンガリー",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "hungarian"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "hu"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "hungarian"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ハンガリー語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "EU ブルーバンド (H) + 黒字 on 白背景。形式は 3 文字＋ 3 数字（例：ABC‑123）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "EU統一フォーマット（青い帯）国際記号は「H」"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "EUフォーマット（青帯に「H」、白地黒字）。記号は3英字＋スペース＋3数字。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。EU旗の帯がある。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "SI",
+    "name": "スロベニア",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "slovene"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "sl"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "slovenian"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "スロベニア語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "EU ブルーバンド (SLO) + 黒字 on 白背景。形式は 2 文字＋ 3 数字＋ 1 文字（例：AB‑123‑C）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "EU統一フォーマット（青い帯）国際記号は「SLO」"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "EUフォーマット（青帯に「S」、白地黒字）。記号は3英字＋スペース＋3数字。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。EU旗の帯がある。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "HR",
+    "name": "クロアチア",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "クロアチア語 (ラテン文字)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "croatia",
+          "croatian"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "クロアチア語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "クロアチア語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "左側に EU ブルーバンドと「HR」コード、右側に地域コード＋3桁数字＋2文字（例：ZG 123 AB）。中央左部に小さな国章シールドが付く。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "Croatian license plates feature a blue EU strip on the left with the country code 'HR', black letters/numbers on a white background."
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "EU規格（左側青帯・EU星・HR表記）、白地黒字、アルファベット2文字＋数字3文字＋アルファベット2文字の形式が主流"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "欧州連合（EU）規格の青い帯に『HR』の国識別コードがある"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "BA",
+    "name": "ボスニア・ヘルツェゴビナ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "cyrillic",
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "ボスニア語／クロアチア語／セルビア語 (ラテン文字・キリル文字)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "bosnian",
+          "croatian",
+          "serbian"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "クロアチア語",
+          "セルビア語",
+          "ボスニア語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "クロアチア語",
+          "セルビア語",
+          "ボスニア語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "左側に EU ブルーバンドと「BA」コード、右側に 2‑3 文字の自治体コード＋最大 5 桁数字（例：BRC 12345）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "Bosnian plates are white with black text, no blue EU strip; they include a regional code prefix (e.g., A for Sarajevo, M for Mostar)."
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "EU青帯なし、白地黒字、アルファベット2文字＋数字3文字＋アルファベット2文字の形式が主流、行政区コードを表示"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字で、国識別コード『BH』が記載されている"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "ME",
+    "name": "モンテネグロ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "モンテネグロ語 (ラテン文字・キリル文字)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "montenegrin"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "セルビア語",
+          "モンテネグロ語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "モンテネグロ語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "左側に EU ブルーバンドと「ME」コード、右側に地域コード＋3 桁数字＋2 文字（例：PG 123 AB）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "Montenegrin plates are white with black text, featuring the country code 'ME' on the left."
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "EU青帯なし、白地黒字、アルファベット2文字＋数字3文字＋アルファベット2文字の形式が主流、県コードを表示"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "欧州規格の青い帯に『ME』の国識別コードがある"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "XK",
+    "name": "コソボ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "cyrillic",
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "アルバニア語 (ラテン文字)",
+          "セルビア語 (キリル文字)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "albanian",
+          "serbian"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "アルバニア語",
+          "セルビア語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "アルバニア語",
+          "セルビア語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "左側に EU ブルーバンドと「RKS」コード、右側に 3 文字＋3 数字（例：K 123 AB）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "Kosovo plates are white with black text, showing the code 'RKS' (or 'KS' on older series)."
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "欧州連合様式の青帯（EU星・KS表記）、白地黒字、アルファベット2文字＋数字3文字＋アルファベット2文字の形式が主流"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "国識別コードに『RKS』が記載されている"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "AL",
+    "name": "アルバニア",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "アルバニア語 (ラテン文字)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "albanian"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "アルバニア語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "アルバニア語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "左側に EU ブルーバンドと「AL」コード、右側に地域コード＋3 桁数字＋2 文字（例：TQ 123 AB）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "Albanian plates are white with black text, with a blue left strip showing the country code 'AL'."
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "EU青帯なし（EU候補国だがEU星は使用せず）、白地黒字、左端に国旗・国コードALの青帯、アルファベット2文字＋数字3文字＋アルファベット2文字の形式が主流"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "欧州規格の青い帯に『AL』の国識別コードがある"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "RO",
+    "name": "ルーマニア",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "ハンガリー語 (ラテン文字)※ハンガリー人居住地域",
+          "ルーマニア語 (ラテン文字)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "romanian"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "ルーマニア語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ルーマニア語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "左側に EU ブルーバンドと「RO」コード、右側に県コード＋2 桁数字＋3 文字（例：B 12 ABC）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "Romanian license plates carry a blue EU strip on the left with the country code 'RO', black text on a white background."
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "EU規格（左側青帯・EU星・RO表記）、白地黒字、アルファベット2文字＋数字3文字＋アルファベット2文字の形式が主流、右端に県コードを表示"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "欧州連合（EU）規格の青い帯に『RO』の国識別コードがある"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "RS",
+    "name": "セルビア",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "cyrillic",
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "セルビア語（キリル文字）",
+          "セルビア語（ラテン文字）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "serbian (cyrillic, latin are both present on signs)"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "セルビア語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "セルビア語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。左端にセルビア国旗と青帯の“SRB”コード、番号は AA 123 BB （2文字‑3数字‑2文字）形式。フォントは DIN 1451 系。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "Left blue band with 🇷🇸Вил on it."
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒字、左端に青帯（国コード「SRB」及びEU星マーク）"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白い地色に黒文字。左端に青い帯（国名コードRS）がある。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "MK",
+    "name": "北マケドニア",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "cyrillic"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "アルバニア語（ラテン文字・アルバニア人居住地区）",
+          "マケドニア語（キリル文字）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "albanian can appear in some areas",
+          "macedonian"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "マケドニア語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "マケドニア語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。左側にマケドニア国旗と青帯の“MK”コード、番号は AA 1234 BB （2文字‑4数字‑2文字）形式。フォントは DIN 1451 系。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "Сандански Band is blue with 'MK' text."
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒字、左端に青帯（国コード「MKD」及びEU星マーク）"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白い地色に黒文字。左端に青い帯（国名コードMK）がある。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "BG",
+    "name": "ブルガリア",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "cyrillic"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "ブルガリア語（キリル文字）",
+          "英語・ラテン文字（観光地・eu指示で補助的に併記）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "bulgarian"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "ブルガリア語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ブルガリア語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。左端にEU青帯と国コード“BG”、番号は AA 1234 AA （2文字‑4数字‑2文字）形式。フォントは FE‑Schrift。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "EU blue band with 'BG'. Uses Cyrillic characters in plate code."
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒字、左端に青帯（国コード「BG」及びEU星マーク）"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白い地色に黒文字。左端に青い帯（国名コードBG）がある。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "UA",
+    "name": "ウクライナ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "cyrillic"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "ウクライナ語（キリル文字）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "ukrainian"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "ウクライナ語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ウクライナ語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。左側にウクライナ国旗と青帯の“UA”コード、番号は AA 1234 AA （2文字‑4数字‑2文字）形式。フォントは国家規格のラテン/キリル混在体。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "Blue band at left with UA and trident. Sovremennaya ploskost-."
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒字、左端に青帯（国コード「UA」及びEU星マーク）"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白い地色に黒文字。右端に青い帯（国名コードUAと国旗）がある。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "EE",
+    "name": "エストニア",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "エストニア語（ラテン文字）",
+          "スウェーデン語（海岸部の少数言語として併記されることあり）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "estonian"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "エストニア語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "エストニア語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。左端にEU青帯と国コード“EE”、番号は 123 ABC （3数字‑3文字）形式。フォントは FE‑Schrift。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "EU band with 'EST'."
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒字、左端に青帯（国コード「EE」及びEU星マーク）"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白い地色に黒文字。左端に青い帯（国名コードEST）がある。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "LV",
+    "name": "ラトビア",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "ラトビア語（ラテン文字）",
+          "ロシア語（一部地域で補助的に表示）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "latvian"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "ラトビア語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ラトビア語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。左側にEU青帯と国コード“LV”、番号は AA 123 AA （2文字‑3数字‑2文字）形式。フォントは FE‑Schrift。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "EU blue band with 'LV'."
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒字、左端に青帯（国コード「LV」及びEU星マーク）"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白い地色に黒文字。左端に青い帯（国名コードLV）がある。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "LT",
+    "name": "リトアニア",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "道路標識に現れる言語: リトアニア語（ラテン文字）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "。。。"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "リトアニア"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "リトアニア語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "文字体系: ラテン文字（リトアニア語）"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": ""
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "EU規格（左端青帯にEUマークと国コード「LT」）"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "欧州標準の形式で、左端に青いEU帯がある"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "GR",
+    "name": "ギリシャ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "greek"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "道路標識に現れる言語: ギリシャ語（ギリシャ文字）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": []
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "greek"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ギリシャ語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "文字体系: ギリシャ文字"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": ""
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "EU規格（左端青帯にEUマークと国コード「GR」）"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字で、左端に青いEU帯がある"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "CY",
+    "name": "キプロス",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "greek",
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "道路標識に現れる言語: ギリシャ語（ギリシャ文字）・トルコ語（ラテン文字）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": []
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "english",
+          "greek"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ギリシャ語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "文字体系: ラテン文字（英語・ギリシャ語・トルコ語表記）"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": ""
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "EU規格（左端青帯にEUマークと国コード「CY」）"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字で、左端に青いEU帯がある"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "RU",
+    "name": "ロシア",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "cyrillic"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "道路標識に現れる言語: ロシア語（キリル文字）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": []
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "russian"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ロシア語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "文字体系: キリル文字（ロシア語）"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": ""
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "ロシア規格（国コード「RUS」・国旗表示・地域番号2桁付き）"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "右端に地域コード（数字）と国旗が表記される"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "KZ",
+    "name": "カザフスタン",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "cyrillic",
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "道路標識に現れる言語: カザフ語（ラテン文字）・ロシア語（キリル文字）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": []
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "kazakh",
+          "russian"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "カザフ語",
+          "ロシア語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "文字体系: ラテン文字（カザフ語）＋キリル文字（ロシア語）"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": ""
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "カザフスタン規格（国コード「KZ」・国旗表示・文字3・数字3の組み合わせ）"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "右端に地域コードと国旗が表記される"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": true,
+    "verifiedNote": "キリル文字とラテン文字の併用。Kimi-K2.6 が scripts を空配列で返したため disputed になっていた。Plonk It のカザフスタンのページ（https://www.plonkit.net/kazakhstan）で確認。カザフ語固有の文字が判別の手がかりになる。"
+  },
+  {
+    "code": "KG",
+    "name": "キルギス",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "cyrillic"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "道路標識に現れる言語: キルギス語（キリル文字）・ロシア語（キリル文字）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": []
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "kyrgyz",
+          "russian"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "キルギス語",
+          "ロシア語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "文字体系: キリル文字（キルギス語・ロシア語）"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": ""
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "キルギス規格（国コード「KG」・国旗表示・数字3・文字3の組み合わせ）"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "右端に地域コードと国旗が表記される"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "MN",
+    "name": "モンゴル",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "cyrillic"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "モンゴル語（キリル文字）",
+          "英語（主要幹線・観光地で併記）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "モンゴル語"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "モンゴル語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "キリル文字",
+          "モンゴル文字"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "右側通行。都市部・高速道路は片側1車線（合計2車線）または片側2車線が一般的。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に黒字。左側に赤い縦帯（国旗・国名コード「MNG」）の欧州サイズ・プレート"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒文字。左端に青帯（国コードMN）、中央に国章。数字とアルファベットの組み合わせ（例：123ABC45 など、9桁程度）。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。左側に国旗と国コード(MN)が配置される。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "UZ",
+    "name": "ウズベキスタン",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "cyrillic",
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "ウズベク語（ラテン文字）",
+          "ロシア語（キリル文字）",
+          "英語（観光地で併記）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "ウズベク語"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "ウズベク語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ウズベク語",
+          "ロシア語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "右側通行。主要道路は片側1‑2車線（合計2‑4車線）となることが多い。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に黒字。左側に青い縦帯（国旗・「UZ」）の欧州サイズ・プレート。2009年以降の新型はラテン文字形式"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒文字。左端に青帯（国コードUZ）とウズベキスタン国旗。フォーマットは「アルファベット1文字＋数字3桁＋アルファベット2文字」（例：A 001 AA）。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。右端に地域コードの数字が含まれる。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "GE",
+    "name": "ジョージア",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "georgian"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "ジョージア語（ムヘドリ文字）",
+          "英語（観光ルートで併記）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "ジョージア語"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "グルジア語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ジョージア語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "右側通行。都市部の幹線は片側2車線（合計4車線）が標準。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に黒字。左側に青い縦帯（国旗・「GEO」）の欧州サイズ・プレート。形式はラテン文字のみ"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒文字。左端に青帯（国コードGE）、国章。フォーマットは「数字3桁＋アルファベット2文字」（例：123 AB）。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。左側に国旗と国コード(GE)が配置される。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "TR",
+    "name": "トルコ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "トルコ語（ラテン文字）",
+          "英語（観光道路で併記）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "トルコ語"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "トルコ語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "トルコ語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "右側通行。高速道路は片側3車線（合計6車線）まで整備されている。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に黒字。左側に青い縦帯（国旗・「TR」）の欧州サイズ・プレート。先頭に県を示す数字コードが付く"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒文字。左端に青帯（国コードTR）とトルコ国旗。フォーマットは「数字（1〜3桁）＋アルファベット（2〜3桁）」（例：34 ABC）。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。左端に青色の帯があり、国コード(TR)が表記される。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "IL",
+    "name": "イスラエル",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "arabic",
+      "hebrew",
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "アラビア語",
+          "ヘブライ語（右から左へ）",
+          "英語（外国人向けに併記）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "ヘブライ語",
+          "英語"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "アラビア語",
+          "ヘブライ語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "アラビア語",
+          "ヘブライ語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "右側通行。都市部・主要道路は片側2車線（合計4車線）が一般的。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "民用車は黄色地に黒字の欧州サイズ・プレート。数字オンリー（7〜8桁、ハイフン区切り）"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒文字。青帯なし。下部に「ISRAEL」（英語）とヘブライ語表記。フォーマットは「数字3桁－数字3桁」（例：123-456）。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。黄色い縁取りがあるタイプが存在する。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "LB",
+    "name": "レバノン",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "arabic",
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "アラビア語（標準アラビア文字）",
+          "フランス語（ラテン文字）",
+          "英語（観光エリアで併記）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "アラビア語",
+          "フランス語"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "アラビア語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "アラビア語",
+          "フランス語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "右側通行。ビルート（高速道路）は片側2車線（合計4車線）だが、市街地は片側1車線が多い。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に黒字。左側に青い縦帯（国旗・「LB」）の欧州サイズ・プレート。形式は「A 123456」など"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒文字。上部に「LEBANON」（英語）とアラビア語表記。フォーマットは「数字1〜2桁＋アルファベット3文字＋数字1〜3桁」（例：1 ABC 23）。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。アラビア文字とラテン文字が併記される。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "JO",
+    "name": "ヨルダン",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "arabic"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "アラビア語（現代標準アラビア語）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "ja"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "ヨルダン"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "アラビア語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。左側に国際コード “JO” とヨルダンの国旗が配置。文字はアラビア数字・アラビア文字とローマ字が併記され、車種別に赤・青の縦線が入る。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "アラビア数字とラテン文字を併用。左端に国旗がデザインされ、車種に応じた色分け（白・黄・赤など）がある。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒字、左端に青い帯（「JOR」と国旗）、地域コード（アラビア語／英語）と数字の組み合わせ"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。右側にアラビア語で国名が表記される。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "QA",
+    "name": "カタール",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "arabic"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "アラビア語（標準アラビア語）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "aar"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "カタール"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "アラビア語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。左上に国際コード “Q” とカタール国旗。アラビア文字・数字とラテン文字が横並びで表示され、警察・民間・公用車で色が変わる（黒・赤・青）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "アラビア数字とラテン文字を併用。国旗や「Qatar」の表記が入り、車種別に色分けされる。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒字、左端に青い帯（「QAT」と国旗）、主にアラビア数字のみのシリーズ番号"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。右側にカタール国旗と国名が表記される。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "AE",
+    "name": "アラブ首長国連邦",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "arabic",
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "アラビア語（標準アラビア語）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "arabic"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "アラブ首長国連邦"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "アラビア語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。左側にアラブ首長国連邦のエミレート別シンボルと “UAE” のローマ字。アラビア文字・数字とローマ字が併記。エミレートごとに背景色（例：ドバイ＝白、アブダビ＝黄）や縦線が変化。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "アラビア数字とラテン文字を併用。所属する首長国ごとにデザイン・配色が異なり、左端に国旗が入る。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒字、左端に青い帯（「UAE」と国旗）、首長国名（アラビア語／英語表記）と数字の組み合わせ（首長国によりプレフィックスが異なる）"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。各首長国名がアラビア語と英語で表記される。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "OM",
+    "name": "オマーン",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "arabic"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "アラビア語（標準アラビア語）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "urdu"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "オマーン"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "アラビア語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。左側に国際コード “OM” とオマーン国旗。アラビア文字・数字とローマ字が横並びで、車種別に赤・青・黒の縦線が入る。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "アラビア数字とラテン文字を併用。左端に国旗が入り、用途によって白・赤・黄・青などの色分けがある。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に赤字、左端に青い帯（「OMA」と国旗）、数字主体の番号表記"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。アラビア数字とアラビア文字が併記される。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "TN",
+    "name": "チュニジア",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "arabic",
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "アラビア語（標準アラビア語）",
+          "フランス語（一部観光地・高速道路標識）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "french"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "チュニジア"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "アラビア語",
+          "フランス語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。左側に国際コード “TN” とチュニジア国旗。アラビア文字・数字とラテン文字が併記され、車両種別で赤・青・緑の帯が付く。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "アラビア数字とラテン文字を併用。左端に青い帯と国名表記があり、白地に黒字のタイプが一般的。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒字、左端に青い帯（「TN」と国旗）、1桁の地域コード＋4〜5桁の数字＋2文字のアルファベット"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。右側にアラビア文字で地域名が表記される。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "SN",
+    "name": "セネガル",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "ウロフ語（道路標識の補助表示）",
+          "フランス語"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "french"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "セネガル"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "フランス語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。左側に国際コード “SN” とセネガル国旗。ローマ字のみで構成され、3文字＋4桁の形式（例：ABC 1234）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "アラビア数字とラテン文字を使用。左端に青い帯と国コード「SN」が入る白地の、西アフリカ統一フォーマット（UEMOA）が採用されている。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒字、左端に青い帯（「SN」と国旗）、地域コード＋数字＋アルファベット"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。左端に青い帯があり、国コード（SN）等が記載される。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "GH",
+    "name": "ガーナ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "英語"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "english"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "english"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "左側通行。標識はローマ字（ラテン文字）表記。看板は英語のみ。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "一般为黄底黑字（出租车及商用车常见），白底黑字等也存在；格式多含州名或GH前缀"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "前白・後黄・黒文字。英数字（主に3文字＋3数字）。左端に青帯（GHコード・国章）。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "黄色地に黒文字。左端に縦の帯がある。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": true,
+    "overrideReason": "ガーナは1974年に左側通行から右側通行へ変更している。4モデルのうち3モデルがleftと回答し多数決が誤った。正解したのはpreview/Kimi-K2.6のみ。GeoGuessrプレイヤーが確認済み。"
+  },
+  {
+    "code": "NG",
+    "name": "ナイジェリア",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "英語"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "english"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "english"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "右側通行。標識はローマ字（ラテン文字）表記。看板は英語のみ。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "多为白底配黑字或绿字，格式常见“州名-LGA代码-英数字”（如 ABC-123DE）；商用车等常见黄底黑字"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "前後白地・黒文字。英数字。左端に青帯（NGコード・国章）。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。州名が上部に記載される。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": true,
+    "verifiedNote": "Qwen3.6-35B-A3B のみ left と誤答。多数決は正しかった。"
+  },
+  {
+    "code": "ST",
+    "name": "サントメ・プリンシペ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "ポルトガル語"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "portuguese"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "portuguese"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ポルトガル語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "右側通行。標識はローマ字（ラテン文字）表記。看板はポルトガル語のみ。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "多为黄底或白底黑字，样式接近葡萄牙传统；部分带有 STP 国码"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地・黒文字。英数字。左端に青帯（STPコード・国章）。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "KE",
+    "name": "ケニア",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "スワヒリ語",
+          "英語"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "english",
+          "swahili"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "english",
+          "swahili"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "スワヒリ語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "左側通行。標識はローマ字（ラテン文字）表記。英語とスワヒリ語が併記される。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "常见前牌白底黑字、后牌黄底黑字（或前后皆白），以 K 开头的英数字组合"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "前白・後黄・黒文字。英数字（3文字＋3数字＋1文字）。左端に青帯（KEコード・国章）。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。後部は黄色地に黒文字。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "UG",
+    "name": "ウガンダ",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "英語"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "english",
+          "swahili"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "english"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "左側通行。標識はローマ字（ラテン文字）表記。看板は英語のみ。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "前牌多为白底黑字，后牌多为黄底黑字；以 U 开头的英数字组合"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "前白・後黄・黒文字。英数字（2文字＋3数字＋1文字）。左端に青帯（UGコード・国章）。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "RW",
+    "name": "ルワンダ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "キニヤルワンダ語",
+          "フランス語",
+          "英語"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "english",
+          "french"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "english",
+          "kinyarwanda"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "キニヤルワンダ語",
+          "フランス語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "右側通行。標識はローマ字（ラテン文字）表記。3言語が同時に表記されることが多い。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "多为白底或黄底黑字；东非共同体统一样式中可见 RW 国码"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "前後白地・黒文字。英数字（3文字＋3数字）。左端に青帯（RWコード・国章）。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": true,
+    "verifiedNote": "Qwen3.6-35B-A3B のみ left と誤答。東アフリカで唯一の右側通行であり、ケニア・ウガンダとの弁別に使える。"
+  },
+  {
+    "code": "NA",
+    "name": "ナミビア",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "英語 (english)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "en",
+          "ja"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "ラテン文字",
+          "左側通行",
+          "白地に黒文字。上部に「nam」の文字。フォーマットは「[アルファベット1〜2文字] [数字3〜4桁]」など（例: nam a 123 456）",
+          "英語（主要幹線道は英語のみ。地方部でアフリカーンス語やドイツ語の併記がある場合あり）"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "路側標識はローマ字（ラテン文字）で表記されます。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "黄色地に黒字"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "標準規格は白背景・黒文字、上部に国コード入り"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。左側にナミビアの国旗や地域の識別表記が入る。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "BW",
+    "name": "ボツワナ",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "ツワナ語 (setswana)",
+          "英語 (english)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "en"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "ラテン文字",
+          "左側通行",
+          "白地に黒文字。左上または右上に「bw」のマーク。フォーマットは「[アルファベット] [数字]」タイプ",
+          "英語（主要道路は英語中心。一部自治体でセツワナ語の併記）"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "路側標識はローマ字（ラテン文字）で表記されます。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に黒字"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "標準規格は白背景・黒文字、国コード入り"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。左側にボツワナの国旗や地域コードが入る。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "ZA",
+    "name": "南アフリカ共和国",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "アフリカーンス語 (afrikaans)",
+          "ズールー語、コサ語など（主要標識は英語・アフリカーンス語）",
+          "英語 (english)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "af",
+          "en"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "ラテン文字",
+          "左側通行",
+          "白地に黒文字。フォーマットは「[アルファベット1〜3文字] [数字1〜3桁] [数字1〜3桁]」（例: cpc 123 45）。端に「za」または国旗エンブレムが入る場合あり",
+          "英語（国道・高速は英語のみ。一部地方自治体で多言語併記あり）"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "路側標識はローマ字（ラテン文字）で表記されます。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "後部は黄色地に黒字・前部は白地に黒字（州コード入り）"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "標準規格は白背景・黒文字、シリーズ番号＋数字構成"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "地域によって形式が異なるが、一般的に白地に黒文字。州名が表記される。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "LS",
+    "name": "レソト",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "ソト語 (sesotho)",
+          "英語 (english)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "en",
+          "st"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "ラテン文字",
+          "左側通行",
+          "白地に黒文字。上部に「ls」の文字。フォーマットは「ls [アルファベット] [数字]」など",
+          "英語とセソト語（ソト語）の併記が標準"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "路側標識はローマ字（ラテン文字）で表記されます。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に黒字"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "標準規格は白背景・黒文字、国コード入り"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。シンプルな形式が多い。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "SZ",
+    "name": "エスワティニ",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "スワジ語 (siswati)",
+          "英語 (english)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "en",
+          "ss"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "ラテン文字",
+          "左側通行",
+          "白地に黒文字。上部に「sz」の文字。フォーマットは「sz [アルファベット] [数字]」など",
+          "英語とシスワティ語（スワティ語）の併記"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "路側標識はローマ字（ラテン文字）で表記されます。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に黒字（「SD」または「SZ」で始まる）"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "標準規格は白背景・黒文字、国コード入り"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。シンプルな形式が多い。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "MG",
+    "name": "マダガスカル",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "フランス語 (french)",
+          "マダガスカル語 (malagasy)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "fr"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "マダガスカル語とフランス語の併記（主要道路・都市部は両語併記が基本）",
+          "ラテン文字",
+          "右側通行",
+          "白地に黒文字。上部に「madagascar」または「mg」の文字。フォーマットは「[アルファベット] [数字] [アルファベット] [数字]」など（例: a 123 b 456）"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "フランス語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "路側標識はローマ字（ラテン文字）で表記されます。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に黒字（地域コードを含む形式）"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "標準規格は白背景・黒文字、国コード入り"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。右側に地域コードが入る。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "RE",
+    "name": "レユニオン",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "フランス語 (ラテン文字)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "フランス語"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "réunion",
+          "レユニオン"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "フランス語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "フランス本土と同様の欧州型ナンバープレート。白地に黒文字で、左側にEU旗＋フランス国章、右側に2桁の地域番号「974」または「99」＋アルファベット2‑3‑2 の形式（例 AA‑123‑AA）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "フランス本土と同形式で、左端に青帯（EU星章と国際記号F）が入る"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "フランスEU規格"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "欧州形式の白いプレート。左端に青色の帯（Fおよび地域コード）がある。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "IN",
+    "name": "インド",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "devanagari",
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "ヒンディー語 (デーヴァナーガリー)",
+          "英語 (ラテン文字)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "english",
+          "hindi"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "india",
+          "インド"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ヒンディー語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "前面は白地に黒文字、背面は黄地に黒文字。形式は「XX 00 AA 0000」(州コード‑年度‑シリーズ‑番号)。例 DL 07 AB 1234。左側にインド国旗と「IND」コードが付く。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白色地に黒色文字の高セキュリティ登録プレート（HSRP）が標準。州コード、地域番号、シリアル番号から構成される"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "AIフォーマット"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字（自家用）。左端に州コードと登録番号が記載される。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "LK",
+    "name": "スリランカ",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "latin",
+      "sinhala",
+      "tamil"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "シンハラ語 (シンハラ文字)",
+          "タミル語 (タミル文字)",
+          "英語 (ラテン文字)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "english",
+          "sinhala",
+          "tamil"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "sri lanka",
+          "スリランカ"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "シンハラ語",
+          "タミル語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。形式は「AB 1234」(2文字の県コード＋4桁番号)。左側にスリランカ国旗と「SL」コード、右側にシンハラ文字で「ශ්‍රී ලංකා」(シュリー・ラーカ) が入ることも。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白色地に黒色文字（個人用）。先頭にシンハラ文字で「ශ්‍රී」（スリ）が表記され、州識別記号と数字の組み合わせ"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "Sri Lanka plates"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。車両の種類に応じてプレートの色や表記が異なる。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "BD",
+    "name": "バングラデシュ",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "bengali",
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "ベンガル語 (ベンガル文字)",
+          "英語 (ラテン文字)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "bengali",
+          "english"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "bangladesh",
+          "バングラデシュ"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ベンガル語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。形式は「DD‑1234」(地区コード2文字＋4桁番号)。左側にバングラデシュ国旗と「BD」コード、ベンガル文字で「বাংলাদেশ」も併記される。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白色地に黒色文字（個人用）。ベンガル文字と英数字が併用され、地域コードとシリアル番号からなる"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "Bangladesh plates"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字（自家用）。上部に車両区分、下部に登録番号が記載される。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "NP",
+    "name": "ネパール",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "devanagari",
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "ネパール語 (デーヴァナーガリー)",
+          "英語 (ラテン文字)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "english",
+          "nepali"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "nepal",
+          "ネパール"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ネパール語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。形式は「##‑####」(数字2桁＋ハイフン＋数字4桁)で、左側にネパール国旗と「NP」コード、右側にデーヴァナーガリー文字で「नेपाल」表記がある。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "デーヴァナーガリー文字とラテン文字が併記され、上部に国名が表記される"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "Nepal plates"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "赤地に白文字（自家用）。地域名と登録番号が記載される。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "BT",
+    "name": "ブータン",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin",
+      "tibetan"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "ゾンカ語 (チベット文字)",
+          "英語 (ラテン文字)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "dzongkha",
+          "english"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "bhutan",
+          "ブータン"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ゾンカ語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。形式は「AB‑1234」(2文字アルファベット＋ハイフン＋4桁番号)で、左側にブータン国旗と「BT」コード、右側にゾンカ文字で「འབྲུག」(ブータン) が入る。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "ブータン独自のフォーマットで、ゾンカ文字とラテン文字の登録番号が併記される"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "Bhutan plates"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。登録番号が中心に配置される。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": true,
+    "verifiedNote": "gemma-4-31B-it のみ right と誤答。"
+  },
+  {
+    "code": "TH",
+    "name": "タイ",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "latin",
+      "thai"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "タイ語（タイ文字）",
+          "英語（ラテン文字）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "english",
+          "thai"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "タイ語",
+          "英語（併記）"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "タイ語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "道路標識はタイ文字が主、観光地や高速道路の案内では英語表記が併記されます。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "Generally white plate with black letters. Thai script for province name plus Arabic numerals. Red, green etc. for specific uses. Both portrait and landscape formats exist, though landscape is increasingly standard on newer cars."
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒文字（自家用車）。地域コード＋アルファベット＋数字の形式で、下部に都道府県名が表記される。商用車は背景色が異なる。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字が一般的。上段に登録番号、下段に登録省名が記載される"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "KH",
+    "name": "カンボジア",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "khmer",
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "クメール語（クメール文字）",
+          "英語（ラテン文字）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "english",
+          "khmer"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "クメール語",
+          "英語（併記）"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "クメール語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "標識はクメール文字が基本、主要道路や観光スポットでは英語表記が付くことが多いです。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "Modern plates are white with black text for private cars, yellow with black for commercial use, in landscape orientation. Left-side blue band with Cambodian flag and Khmer script province name, plus Arabic numerals. Older simple white plates remain on some vehicles."
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒文字（自家用車）。アルファベットと数字の組み合わせで州コードが入る。左端に青帯（国番号「KH」）が付くASEAN規格プレートが標準。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。車種により色分けされており、自家用車は白、政府車両は黄など"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": true,
+    "verifiedNote": "gpt-oss-120b のみ left と誤答。"
+  },
+  {
+    "code": "VN",
+    "name": "ベトナム",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "ベトナム語（ラテン文字）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "vietnamese"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "ベトナム語",
+          "英語（併記）"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ベトナム語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "ベトナム国内の標識は全てラテン文字（ベトナム語表記）です。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "White plate with black letters for private passenger cars. Landscape format, beginning with a single Latin letter (provincial code) followed by numerals. Other colors include blue (state), red (military), yellow (commercial)."
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒文字（自家用車・二輪車）。アルファベット2文字（地域コード）＋数字3文字が基本。左端に青帯（「VN」表記）が付く。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。地域コード（2桁）が最初に記載される"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "MY",
+    "name": "マレーシア",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "マレー語（ラテン文字）",
+          "英語（ラテン文字）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "chinese",
+          "english",
+          "malay",
+          "tamil"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "マレー語",
+          "英語（併記）"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "マレー語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "道路標識はラテン文字でマレー語が基本、英語が併記されます。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "Black plate with white text is standard for private passenger cars. Landscape format, left side features the Malaysian flag and state name in Latin script, followed by numerals. Red (commercial), blue (taxi) etc. also used."
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒文字（自家用車）。州コードのアルファベット1〜2文字＋数字＋末尾アルファベット（検査年号など）の形式。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "黒地に白文字。アルファベットと数字の組み合わせで地域を示す"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "SG",
+    "name": "シンガポール",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "タミル語（タミル文字）",
+          "マレー語（ラテン文字）",
+          "中国語（繁体字）",
+          "英語（ラテン文字）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "chinese",
+          "english",
+          "malay",
+          "tamil"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "英語"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "標識は英語が主軸ですが、国語4つ（英・中・マ・タ）が同時に表示されます。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "Front plate is generally white with black text; rear plate is yellow with black text for most vehicle classes. Landscape format, starting with a letter prefix (S, E, A, etc.) followed by numerals. Other color schemes apply to taxis, rental cars, etc."
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒文字（自家用車）。英数字の固定形式（例：SBA 1234 A）で、末尾の文字はチェックサム。車両種別により文字色・背景色が異なる。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字（前方）および黄地に黒文字（後方）が一般的"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "ID",
+    "name": "インドネシア",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "インドネシア語（ラテン文字）"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "indonesian"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "インドネシア語",
+          "英語（併記）"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "インドネシア語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "標識はすべてラテン文字でインドネシア語です。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "Current standard for private cars is a white plate with black text in landscape orientation, with the province name in Latin script on top, a lettered regional code on the left, and Arabic numerals in the center. Older black-plate/white-text versions are still seen on older vehicles. Commercial vehicles use yellow plates."
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒文字（自家用車）。州コードのアルファベット＋数字。州ごとにプレート上部や左端にカラー帯や州名が記載される。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "黒地に白文字（自家用車）。現在は白地に黒文字への移行が進んでいる"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": true,
+    "verifiedNote": "Qwen3.6-35B-A3B のみ right と誤答。"
+  },
+  {
+    "code": "PH",
+    "name": "フィリピン",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "フィリピン語（タガログ語）",
+          "英語"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "フィリピン語",
+          "英語"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": []
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "右側通行。道路標識はローマ字（ラテン文字）表記のフィリピン語と英語が併記される。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に黒字、または都道府県ごとに異なる色"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": ""
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字が一般的。地域名や登録番号が表記される。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": true,
+    "verifiedNote": "gemma-4-31B-it のみ left と誤答。"
+  },
+  {
+    "code": "HK",
+    "name": "香港",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "chinese_traditional",
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "繁体字中国語",
+          "英語"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "中国語（広東語）",
+          "英語"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "chinese",
+          "english",
+          "french"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "中国語(繁体字)",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "左側通行。標識は繁体字とローマ字（英語）で表記される。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "ドライビングミュージアム（ドラモ）、前面白・後面黄"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "front_white_black, rear_black_white"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "前白後黄。欧州形式のプレートが一般的。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": true,
+    "verifiedNote": "gemma-4-31B-it のみ right と誤答。台湾は右側通行であり、繁体字を共有する2地域の弁別に使える。"
+  },
+  {
+    "code": "TW",
+    "name": "台湾",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "chinese_traditional",
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "繁体字中国語",
+          "英語"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "中国語（北京語/台湾国語）",
+          "英語"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "chinese",
+          "traditional_chinese"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "中国語(繁体字)"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "右側通行。標識は繁体字とローマ字（英語）が併記される。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に黒字、上段に地名"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "white_black"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。二輪車は黄色いプレートが使用される。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "KR",
+    "name": "韓国",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "korean_hangul",
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "ハングル",
+          "英語"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "英語",
+          "韓国語"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "korean"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "英語",
+          "韓国語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "右側通行。標識はハングルとローマ字（英語）が併記される。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に黒字、アルファベットと数字の組み合わせ"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "white_green"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字が一般的。近年、欧州風の青い帯が入ったデザインが導入されている。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "JP",
+    "name": "日本",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "japanese_kana_kanji",
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "ひらがな",
+          "カタカナ",
+          "漢字",
+          "英語"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "日本語",
+          "英語"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "japanese"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "日本語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "左側通行。標識は漢字・かなとローマ字（英語）が併記される。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "白地に緑字（東京など）、東京ナンバーなど地域ごとに色が異なる"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "white_green, green_white"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に緑文字（自家用）が一般的。地域名と分類番号が表記される。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "AU",
+    "name": "オーストラリア",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "英語"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "英語"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "english"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "右側通行。標識は英語（ラテン文字）のみ。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "州ごとに異なるデザインと色（多くは白地に黒字）"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "white_black"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "州ごとにデザインが異なるが、白地に黒や青、緑などの文字が一般的。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": true,
+    "verifiedByHuman": true,
+    "verifiedNote": "gpt-oss-120b のみ right と誤答。採点用に選定したモデルが基本的な事実を誤った例。"
+  },
+  {
+    "code": "NZ",
+    "name": "ニュージーランド",
+    "traffic_side": "left",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "left"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "left"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "left"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "left"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "english (英語)",
+          "māori (マオリ語)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "english",
+          "japanese"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": []
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "ナンバープレートは前面が白・背面が黄色で、黒の文字・3文字＋3数字（例 ABC 123）。左端に小さなニュージーランド国旗ロゴが付く。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "全国統一の白地に黒文字。左側に銀葉（シルバーファーン）エンブレムまたはNZマークが入る英数字プレート"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒字の標準デザインが基本。原則前後装着。地域や車両種別に応じた表記・レイアウトがある。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字が一般的"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "US",
+    "name": "アメリカ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "english (英語)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "english"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": []
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "州ごとにデザイン・形式が異なるが、基本は白地に黒文字の 1〜7 桁の英数字。州名・ロゴ・年号が入ることが多い。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "各州が独自に発行。州名と英数字の組み合わせで、配色・デザイン・形式は州ごとに異なる"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "州ごとにデザイン・配色・文字配置が異なり、州名やスローガンが入る場合が多い。原則前後装着（米国一部州は後輪のみ）。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "州ごとにデザインが異なり多様"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "CA",
+    "name": "カナダ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "english (英語)",
+          "french (フランス語)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "english",
+          "french"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": []
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "フランス語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "各州・準州が独自デザイン。省略せずに「Ontario」や「Québec」などの州名とスローガンが入る。文字は黒か白で、白地に黒文字が一般的。形式は 1〜4 文字＋数字（例 AB 1234）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "州・準州ごとに独自に発行。州名と英数字の組み合わせで、配色・デザイン・形式は州ごとに異なる"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "州ごとにデザイン・配色・スローガンが異なる。原則前後装着。オンタリオ州は黄色地に黒字、BC州は白地に緑字など特徴的な州もある。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "州・準州ごとにデザインが異なる"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "MX",
+    "name": "メキシコ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "spanish (スペイン語)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "spanish"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": []
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "スペイン語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "2016 年以降は全国統一デザイン。白地に黒文字の 3 文字＋3 数字（例 ABC‑123）。左上にメキシコ国章、右側に州名と州の紋章が入る。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "連邦政府が統一発行。上部に国名、下部に州名、中央に英数字が記載される"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "連邦高速道路（QURO）用プレートは白地に緑字/黒字で「QURO」ロゴ入り。州プレートは地方自治体ごとにデザイン・配色が異なる。原則前後装着。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に青や黒の文字、州名が入る"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "GT",
+    "name": "グアテマラ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "spanish (スペイン語)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "spanish"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": []
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "スペイン語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。県名を表す 2 文字のプレフィックス＋4 桁の数字（例 GT 1234）。左側に「GUATEMALA」の文字と国章がある。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "中央アメリカ統一規格（CA‐4）準拠。国名と中央アメリカ地図が入る英数字プレート"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒字。原則前後装着。上部に「GUATEMALA」国名または国章、中央にアルファベット・数字の組み合わせが記載される。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "用途別に色分けされており、私用車は白地"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "CR",
+    "name": "コスタリカ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "spanish (スペイン語)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "spanish"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": []
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "スペイン語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白底に黒文字。3 文字＋3 数字または 2 文字＋4 数字の形式（例 ABC 123、CR‑1234）。左上に「CR」マークと省略した県コードが表示される。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "中央アメリカ統一規格（CA‐4）準拠。国旗や国識別記号（CR）と中央アメリカ地図が入る英数字プレート"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "白地に黒字。原則前後装着。上部に「COSTA RICA」、中央に国章が配置される。商業車・個人車でレイアウトが異なる場合がある。"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字で、右端に国旗が入る"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "PA",
+    "name": "パナマ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "文字体系：ラテン文字（アルファベット）",
+          "標識に表記される言語：スペイン語",
+          "走行側：右側通行"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "スペイン語"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "panama"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "スペイン語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に青文字。左側に青い帯と国章が入ったデザイン。形式は「ABC‑123」など、3文字＋3数字が基本。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "現行は3文字+4桁（例：ABC-1234）。白地に黒字で、上部に青帯と「PANAMA」の国名表記がある。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": ""
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。左端に垂直の青い帯がある。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "DO",
+    "name": "ドミニカ共和国",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "文字体系：ラテン文字（アルファベット）",
+          "標識に表記される言語：スペイン語",
+          "走行側：右側通行"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "スペイン語"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "dominican republic"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "スペイン語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。上部に青い帯と国旗が配置。形式は「ABC‑123」など、3文字＋3数字が一般的。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "現行は1文字+6桁（例：A-001234）。白地に黒字で、上部に赤帯と「REP. DOM.」の国名表記がある。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": ""
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。上部に国名やスローガンが記載されている。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "PR",
+    "name": "プエルトリコ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "文字体系：ラテン文字（アルファベット）",
+          "標識に表記される言語：スペイン語、英語（バイリンガル表記）",
+          "走行側：右側通行"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "スペイン語",
+          "英語"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "puerto rico"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "スペイン語",
+          "英語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "米国式サイズ。白地に青文字・青いロゴが左上に配置。形式は「PR‑1234」や「123‑PR」など、数字と「PR」の組み合わせ。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "米国式のデザインで3文字+3桁（例：ABC-123）。上部に「PUERTO RICO」と星型のマークが入る。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": ""
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に青または黒文字。上部に大きく「PUERTO RICO」と表記されている。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "CO",
+    "name": "コロンビア",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "文字体系：ラテン文字（アルファベット）",
+          "標識に表記される言語：スペイン語",
+          "走行側：右側通行"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "スペイン語"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "colombia"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "スペイン語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。左側に青い帯とコロンビア国章が入る。形式は「ABC‑123」など、3文字＋3数字が標準。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "現行は3文字+2桁+1文字（例：ABC-12D）。白地に黒字で、上部に青帯と「COLOMBIA」、左側に国旗色の縦帯・下部にバーコードが入る。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": ""
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "自家用車は白地に黒文字。商用車（タクシー等）は黄色地に黒文字。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "EC",
+    "name": "エクアドル",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "文字体系：ラテン文字（アルファベット）",
+          "標識に表記される言語：スペイン語",
+          "走行側：右側通行"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "スペイン語"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "ecuador"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "スペイン語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。左側に青い帯とエクアドル国章。形式は「ABC‑123」など、3文字＋3数字が基本。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "現行は3文字+4桁（例：ABC-1234）。白地に黒字で、上部に虹色（黄・青・赤）の帯と「ECUADOR」の国名表記がある。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": ""
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。左側に州や市を示す識別コードが含まれる。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "PE",
+    "name": "ペルー",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "文字体系：ラテン文字（アルファベット）",
+          "標識に表記される言語：スペイン語（ペルー国内の標識では、一部地域でケチュア語が併記されることもある）",
+          "走行側：右側通行"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "スペイン語"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "peru"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "スペイン語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白地に黒文字。左側に青い帯とペルー国章が配置。形式は「ABC‑123」など、3文字＋3数字が主流。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "現行は3文字+3桁（例：ABC-123）。白地に黒字で、上部に「PERU」、左側にペルー国旗の縦三色（赤・白・赤）が入る。"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": ""
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。左端に垂直の青い帯がある。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "BO",
+    "name": "ボリビア",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "アイマラ語・ケチュア語 (ラテン文字)（一部標識）",
+          "スペイン語 (ラテン文字)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "es"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "spainese"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "スペイン語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白底黒文字。左上に青帯でボリビア国旗と「BO」の識別コードが入る。番号はアルファベット3文字＋数字3桁（例：ABC‑123）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "Mercosur統一ナンバープレート（白地・上部青帯・「BOLIVIA」表記・Mercosurロゴ）への移行が進んでいる"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "White, 3L+3N"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。上部に国名（BOLIVIA）が表記される。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "BR",
+    "name": "ブラジル",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "ポルトガル語 (ラテン文字)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "pt"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "portuguese"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "ポルトガル語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白底黒文字のメルコスール方式。左端に青帯・白抜きで「BR」＋州略称が入る。番号は3文字＋1数字＋1文字＋2数字（例：ABC1D23）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "Mercosur統一ナンバープレート（白地・上部青帯・「BRASIL」表記・Mercosurロゴ）。形式は「ABC1D23」（旧式「ABC-1234」も一部残存）"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "White (Mercosur), 3L-4N"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "メルコスール共通規格（白地に青い帯）への移行が進んでいる。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "PY",
+    "name": "パラグアイ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "スペイン語 (ラテン文字)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "es",
+          "gn"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "guarani",
+          "spanish"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "スペイン語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白底黒文字。左側に青帯で国旗と「PY」コードが掲示。番号はアルファベット3文字＋数字3桁（例：ABC‑123）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "Mercosur統一ナンバープレート（白地・上部青帯・「PARAGUAY」表記・Mercosurロゴ）"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "White, 4L+4N"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "メルコスール共通規格（白地に青い帯）が導入されている。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "UY",
+    "name": "ウルグアイ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "スペイン語 (ラテン文字)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "es"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "spanish"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "スペイン語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白底黒文字。左上に青帯で国旗と「UY」コードがある。番号はアルファベット2文字＋数字3桁＋アルファベット2文字（例：AB‑123‑CD）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "Mercosur統一ナンバープレート（白地・上部青帯・「URUGUAY」表記・Mercosurロゴ）"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "White, 3L+4N"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "メルコスール共通規格（白地に青い帯）が導入されている。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "CL",
+    "name": "チリ",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "スペイン語 (ラテン文字)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "es"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "spanish"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "スペイン語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白底黒文字。左側に青帯で国旗と「CL」コードが配置。現在はアルファベット2文字＋数字3桁＋アルファベット2文字（例：AB‑123‑CD）※地域コードは省略されることが多い。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "Mercosur統一ナンバーは採用しておらず、独自のナンバープレートが使用される。現在の一般的な乗用車用プレートは白地に黒文字で「AB-CD-12」（2文字-2文字-2数字）形式"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "White, 4L+4N"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "白地に黒文字。形式により上部に国名や地域名が入る。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  },
+  {
+    "code": "AR",
+    "name": "アルゼンチン",
+    "traffic_side": "right",
+    "traffic_side_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "value": "right"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "value": "right"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "value": "right"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "value": "right"
+      }
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "languages_by_model": [
+      {
+        "model": "gpt-oss-120b",
+        "values": [
+          "スペイン語 (ラテン文字)"
+        ]
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "values": [
+          "es"
+        ]
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "values": [
+          "spanish"
+        ]
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "values": [
+          "スペイン語"
+        ]
+      }
+    ],
+    "plate_notes": [
+      {
+        "model": "gpt-oss-120b",
+        "note": "白底黒文字。上部に青帯・白抜きで国旗と「AR」コードが入る。番号はアルファベット2文字＋数字3桁＋アルファベット2文字（例：AB‑123‑CD）。"
+      },
+      {
+        "model": "preview_Kimi-K2.6",
+        "note": "Mercosur統一ナンバープレート（白地・上部青帯・「ARGENTINA」表記・Mercosurロゴ）。形式は「AB 123 CD」"
+      },
+      {
+        "model": "preview_Qwen3.6-35B-A3B",
+        "note": "Yellow, 6 chars (3x2)"
+      },
+      {
+        "model": "preview_gemma-4-31B-it",
+        "note": "メルコスール共通規格（白地に青い帯）が導入されている。"
+      }
+    ],
+    "modelCount": 4,
+    "disputed": false,
+    "verifiedByHuman": false
+  }
+]

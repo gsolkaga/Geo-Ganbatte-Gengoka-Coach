@@ -1,0 +1,109 @@
+# データと文書のライセンス
+
+対象は以下である。コードは `LICENSE`（MIT）が適用される。
+
+```
+data/       用語辞書、国定数テーブル、軸定義、地域グループ
+docs/       検証の記録と結果
+.kiro/specs/  要件・設計・タスク・スロット定義
+README.md
+```
+
+## 人手で書いた部分：CC BY 4.0
+
+Creative Commons Attribution 4.0 International
+
+https://creativecommons.org/licenses/by/4.0/
+
+**再利用・改変・商用利用が可能である。条件は出典の表示のみ。**
+
+該当するもの。
+
+```
+data/glossary-human.json          人手記述の用語辞書
+data/glossary-human-axes.json     用語を軸に翻訳した表
+data/bollard-axes.json            軸の定義
+data/regions.json                 地域グループ
+data/countries-overrides.json     人手による訂正と確認の記録
+.kiro/specs/**                    要件・設計・スロット定義
+docs/*.md                          検証の記録と考察
+README.md
+```
+
+出典表示の例。
+
+```
+Geo-Ganbatte-Gengoka-Coach (gsolkaga), CC BY 4.0
+https://github.com/gsolkaga/Geo-Ganbatte-Gengoka-Coach
+```
+
+## AI が生成した部分：権利を主張しない
+
+```
+docs/generated/                    仕様書生成の出力
+docs/generated-countries/          国定数テーブルの生成出力
+docs/generated-glossary/           用語辞書の生成出力
+docs/generated-glossary-variant/   対照実験の出力
+docs/generated-bollard/            属性軸・属性行列の生成出力
+docs/generated-streaming/          ストリーミング検証の出力
+data/countries-merged.json         上記から機械的に生成したもの
+```
+
+これらは大規模言語モデルの出力そのものであり、**人間の創作的寄与を含まない。**
+したがって著作権が発生しないものとして扱い、権利を主張しない（CC0 相当）。
+
+**自分が持っていない権利を許諾することはできない**ため、「CC BY で提供する」とは書かない。
+
+生成に使ったモデルはファイル名に記録している。原文のまま保存しており、要約や編集を加えていない。
+
+### 出力を再配布できる根拠
+
+| モデル | 条件 |
+|---|---|
+| `gemma-4-31B-it` | [Apache-2.0](https://ai.google.dev/gemma/apache_2)。旧 Gemma Terms も「Google は出力に権利を主張しない」「出力は Model Derivatives に該当しない」と明記している（[Gemma Terms of Use](https://ai.google.dev/gemma/terms) 3.3 および 1.1(e)） |
+| `gpt-oss-120b` | Apache-2.0 |
+| `Qwen3.6-35B-A3B` | Apache-2.0 |
+| `Kimi-K2.6` | Modified MIT |
+
+いずれも出力の再配布に条件の継承を課さない。**ただし各モデルの条件は変更されうる**ため、
+再利用する場合は自分で最新の条件を確認すること。
+
+出力は無保証である。**内容の正しさは保証されない。**
+`verifiedByHuman` が `false` の項目は人手検証を経ていない。
+
+## この範囲に含まれないもの
+
+以下はこのリポジトリのライセンスの対象外である。**再利用の許諾を与えていない。**
+
+### Street View の画像とパノラマ
+
+Google および各撮影者に権利がある。**このリポジトリに画像ファイルは 1 枚も含まれていない**
+（`.gitignore` で画像拡張子を全除外している）。
+
+`data/questions.json` に保存しているのは pano ID・座標・著作権表記・撮影年月のみである。
+Google Maps Platform の規約により pano ID の保存は許容されているが、
+**画像のキャッシュ・再配布は禁止されている。**
+
+### Plonk It
+
+https://www.plonkit.net/ © 2021-2026 Plonk It
+
+**人手検証の一次情報源として参照したのみであり、内容をこのリポジトリに取り込んでいない。**
+本文の複製・翻訳・要約は行っていない。参照した箇所は URL のみを記録している。
+
+### GeoGuessr
+
+`GeoGuessr` は GeoGuessr AB の商標である。
+**本プロジェクトは非公式であり、GeoGuessr AB とは関係がない。**
+
+### その他の商標
+
+`data/glossary-human.json` の `bollard_turkey_shape` の記述に、形状の説明として
+日本のプレイヤー間で使われる表現（特定の文具製品名）を含んでいる。
+これは形状を伝えるための言い換えであり、当該製品や商標権者との関係を示すものではない。
+UI に表示する際は形状そのものの説明に置き換える。
+
+### 地理的な事実そのもの
+
+「アイスランドのボラードは本体全体が黄色である」のような事実に著作権は及ばない。
+ライセンスの対象は、その事実の**選択・配列・表現**および付随する註記である。

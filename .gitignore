@@ -1,0 +1,22 @@
+node_modules
+.nuxt
+.output
+dist
+
+# 認証情報。絶対にコミットしない
+.env
+.env.local
+.env.*.local
+
+# 画像は 1 枚も置かない（Street View の画像はキャッシュ・再配布が禁止されている）
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.bmp
+*.tiff
+
+# 一時ファイル
+.scratch/
+*.log

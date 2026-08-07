@@ -1,0 +1,163 @@
+{
+    "_comment": [
+        "人間の 10 用語を、bollard-axes.json の軸の言葉に翻訳したもの。",
+        "実験 A の「再現」判定に使う。コードが導出した組み合わせが、この表と一致するかを見る。",
+        "",
+        "Kiro が口述をそのまま軸に写しただけであり、知識を足していない。",
+        "口述で言及されていない軸は null にしている。null は「指定なし」であって unknown ではない。",
+        "",
+        "★要人手確認：null と gaps を埋めるか、そのままにするかを判断する必要がある。"
+    ],
+    "_gaps_comment": [
+        "軸に写した時点で見つかった、軸の側の不足。",
+        "",
+        "1. 2 色の塗り分けを表現できない。",
+        "   「赤と白で、太くて丸い棒（FR）」の赤白が body_color（単一値）に入らない。",
+        "   body_pattern で塗り分けの形は表せるが、色は表せない。",
+        "   → secondary_color 軸が必要か、あるいは body_color を配列にするか。",
+        "     ただし配列にすると盛られる（インドの scripts で実測）。",
+        "",
+        "2. キングジム型を分解できない。",
+        "   TR の固有形状が、既存 12 軸のどの組み合わせなのかを Kiro は判定できない。",
+        "   実物を見た人間が分解する必要がある。",
+        "",
+        "この 2 件は「人間も軸の設計に失敗しうる」実例である。",
+        "AI が arm1 でこれらの軸を提案してきた場合、AI 側の発見として記録する。"
+    ],
+    "gaps": [
+        {
+            "issue": "two_tone_body",
+            "affects": [
+                "bollard_red_white_thick_round",
+                "bollard_red_white_square_concrete"
+            ],
+            "resolved": false
+        },
+        {
+            "issue": "turkey_shape_undecomposed",
+            "affects": [
+                "bollard_turkey_shape"
+            ],
+            "resolved": false
+        }
+    ],
+    "mappings": [
+        {
+            "id": "bollard_all_yellow",
+            "countries": [
+                "IS"
+            ],
+            "axes": {
+                "body_color": "yellow",
+                "body_pattern": "solid"
+            },
+            "sourceQuote": "本体の棒の全てが黄色ならアイスランド確定"
+        },
+        {
+            "id": "bollard_white_yellow_reflector_banded",
+            "countries": [
+                "DK"
+            ],
+            "axes": {
+                "body_color": "white",
+                "reflector_color": "yellow",
+                "body_pattern": "single_band"
+            },
+            "sourceQuote": "本体が白で反射板が黄色なら帯ありでデンマーク"
+        },
+        {
+            "id": "bollard_white_yellow_reflector_plain",
+            "countries": [
+                "BE"
+            ],
+            "axes": {
+                "body_color": "white",
+                "reflector_color": "yellow",
+                "body_pattern": "solid"
+            },
+            "sourceQuote": "帯なしでベルギー"
+        },
+        {
+            "id": "bollard_yellow_with_black",
+            "countries": [
+                "ES",
+                "EE",
+                "LV"
+            ],
+            "axes": {
+                "reflector_color": "yellow",
+                "reflector_surround": "black"
+            },
+            "sourceQuote": "黄色の周りに黒部分があればスペインエストニアラトビア"
+        },
+        {
+            "id": "bollard_red_white_thick_round",
+            "countries": [
+                "FR"
+            ],
+            "axes": {
+                "cross_section": "round",
+                "thickness": "thick"
+            },
+            "incomplete": true,
+            "sourceQuote": "フランスは太くて丸い棒",
+            "note": "赤白の 2 色を軸で表現できていない（gaps.two_tone_body）。この状態では他の丸くて太いボラードと分離できない可能性がある。"
+        },
+        {
+            "id": "bollard_red_white_square_concrete",
+            "countries": [
+                "VN",
+                "KH"
+            ],
+            "axes": {
+                "material": "concrete",
+                "cross_section": "square"
+            },
+            "incomplete": true,
+            "sourceQuote": "四角コンクリならベトナムカンボジア",
+            "note": "赤白の 2 色を軸で表現できていない（gaps.two_tone_body）。"
+        },
+        {
+            "id": "bollard_red_white_stripe",
+            "countries": [
+                "BD"
+            ],
+            "axes": {
+                "body_pattern": "horizontal_stripes"
+            },
+            "sourceQuote": "ストライプならバングラディシュ"
+        },
+        {
+            "id": "bollard_red_diagonal_reflector",
+            "countries": [
+                "PL"
+            ],
+            "axes": {
+                "reflector_color": "red",
+                "reflector_shape": "diagonal_stripe"
+            },
+            "sourceQuote": "反射板部分が斜めに赤ければポーランド"
+        },
+        {
+            "id": "bollard_red_both_sides",
+            "countries": [
+                "NZ"
+            ],
+            "axes": {
+                "rear_marking": "same_as_front"
+            },
+            "sourceQuote": "裏まで赤ければニュージーランド",
+            "note": "AI が生成した 17 用語に、裏面を扱う軸は 1 つもなかった。"
+        },
+        {
+            "id": "bollard_turkey_shape",
+            "countries": [
+                "TR"
+            ],
+            "axes": {},
+            "incomplete": true,
+            "sourceQuote": "キングジムみたいなデザインならトルコ",
+            "note": "軸に分解できていない（gaps.turkey_shape_undecomposed）。人手で埋める必要がある。"
+        }
+    ]
+}

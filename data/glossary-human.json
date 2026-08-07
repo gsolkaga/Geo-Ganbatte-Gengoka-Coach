@@ -1,0 +1,200 @@
+{
+    "_comment": [
+        "人間が書いた用語辞書。AI が生成できなかった、あるいは誤って生成した項目を収録する。",
+        "",
+        "AI 生成の辞書（docs/generated-glossary/）とは別ファイルで管理する。",
+        "由来を混ぜないため。記事で「AI が生成したもの」と「人間が足したもの」を区別できるようにする。",
+        "",
+        "出典は GeoGuessr プレイヤー（最高到達 Master 4）の知識による。",
+        "Plonk It で裏付けを取れるものは reference に URL を記録する。"
+    ],
+    "terms": [
+        {
+            "id": "bollard_all_yellow",
+            "slot": "bollard",
+            "canonical": "全体が黄色のボラード",
+            "plain": "棒ぜんぶが黄色い",
+            "aliases": [
+                "黄色い杭",
+                "全部黄色のポール",
+                "真っ黄色の杭"
+            ],
+            "countries": [
+                "IS"
+            ],
+            "confusableWith": [
+                "bollard_white_yellow_reflector_banded",
+                "bollard_white_yellow_reflector_plain",
+                "bollard_yellow_with_black"
+            ],
+            "note": "本体そのものが黄色。反射板だけが黄色のものとは別。",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "bollard_white_yellow_reflector_banded",
+            "slot": "bollard",
+            "canonical": "白本体・黄色の反射板・帯あり",
+            "plain": "白い棒に黄色い反射板、横に帯がある",
+            "aliases": [
+                "白い杭に黄色い反射板と帯"
+            ],
+            "countries": [
+                "DK"
+            ],
+            "confusableWith": [
+                "bollard_white_yellow_reflector_plain"
+            ],
+            "note": "帯の有無だけでベルギーと分かれる。",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "bollard_white_yellow_reflector_plain",
+            "slot": "bollard",
+            "canonical": "白本体・黄色の反射板・帯なし",
+            "plain": "白い棒に黄色い反射板だけ",
+            "aliases": [
+                "白い杭に黄色い反射板"
+            ],
+            "countries": [
+                "BE"
+            ],
+            "confusableWith": [
+                "bollard_white_yellow_reflector_banded"
+            ],
+            "note": "帯の有無だけでデンマークと分かれる。",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "bollard_yellow_with_black",
+            "slot": "bollard",
+            "canonical": "黄色の周囲に黒がある",
+            "plain": "黄色の周りが黒くなっている",
+            "aliases": [
+                "黄色と黒の組み合わせ",
+                "黄色に黒縁"
+            ],
+            "countries": [
+                "ES",
+                "EE",
+                "LV"
+            ],
+            "confusableWith": [
+                "bollard_all_yellow"
+            ],
+            "note": "3 カ国に絞れる。さらに他の要素との組み合わせが必要。",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "bollard_red_white_thick_round",
+            "slot": "bollard",
+            "canonical": "赤白・太くて丸い棒",
+            "plain": "赤と白で、太くて丸い棒",
+            "aliases": [
+                "太い丸棒で赤白"
+            ],
+            "countries": [
+                "FR"
+            ],
+            "confusableWith": [
+                "bollard_red_white_square_concrete",
+                "bollard_red_white_stripe"
+            ],
+            "note": "赤白でも形状で国が分かれる。太さと断面が決め手。",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "bollard_red_white_square_concrete",
+            "slot": "bollard",
+            "canonical": "赤白・四角いコンクリート",
+            "plain": "赤白の四角いコンクリの杭",
+            "aliases": [
+                "四角いコンクリで赤白"
+            ],
+            "countries": [
+                "VN",
+                "KH"
+            ],
+            "confusableWith": [
+                "bollard_red_white_thick_round"
+            ],
+            "note": "東南アジア。フランス式の丸い棒とは形状で分かれる。",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "bollard_red_white_stripe",
+            "slot": "bollard",
+            "canonical": "赤白のストライプ",
+            "plain": "赤と白のしましま",
+            "aliases": [
+                "赤白の縞模様"
+            ],
+            "countries": [
+                "BD"
+            ],
+            "confusableWith": [
+                "bollard_red_white_thick_round"
+            ],
+            "note": "",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "bollard_red_diagonal_reflector",
+            "slot": "bollard",
+            "canonical": "反射板部分が斜めに赤い",
+            "plain": "反射板のところが斜めに赤い",
+            "aliases": [
+                "斜めの赤い反射板"
+            ],
+            "countries": [
+                "PL"
+            ],
+            "confusableWith": [
+                "bollard_red_both_sides"
+            ],
+            "note": "赤の入る角度が決め手。",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "bollard_red_both_sides",
+            "slot": "bollard",
+            "canonical": "裏面まで赤い",
+            "plain": "裏側まで赤い",
+            "aliases": [
+                "両面が赤い"
+            ],
+            "countries": [
+                "NZ"
+            ],
+            "confusableWith": [
+                "bollard_red_diagonal_reflector"
+            ],
+            "note": "裏面を確認する必要がある。正面だけ見ていると判別できない。",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "bollard_turkey_shape",
+            "slot": "bollard",
+            "canonical": "トルコ固有の形状のボラード",
+            "plain": "キングジムのバインダーみたいな形",
+            "aliases": [
+                "キングジム型"
+            ],
+            "countries": [
+                "TR"
+            ],
+            "confusableWith": [],
+            "note": "「キングジムみたい」は日本のプレイヤー間の表現。UI では形状そのものの説明に置き換える必要がある（要記述）。",
+            "verifiedByHuman": true,
+            "disputed": false
+        }
+    ]
+}

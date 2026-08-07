@@ -1,0 +1,9 @@
+model,slot,before,after,ok,durationMs,finishReason
+"gpt-oss-120b","bollard","17","6","true","8132","stop"
+"gpt-oss-120b","road_marking","11","7","true","11835","stop"
+"preview/gemma-4-31B-it","bollard","","5","true","19127","stop"
+"preview/gemma-4-31B-it","road_marking","","5","true","14706","stop"
+"preview/Qwen3.6-35B-A3B","bollard","","5","true","28689","stop"
+"preview/Qwen3.6-35B-A3B","road_marking","","6","true","49750","stop"
+"preview/Qwen3-VL-30B-A3B-Instruct","bollard","","10","true","40673","stop"
+"preview/Qwen3-VL-30B-A3B-Instruct","road_marking","","-1","true","102531","length"
