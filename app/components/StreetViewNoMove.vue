@@ -36,9 +36,14 @@ const props = withDefaults(
     panoId: string
     heading?: number
     pitch?: number
+    /** 親要素の高さいっぱいに広げる。ペイン分割したレイアウトで使う */
+    fill?: boolean
   }>(),
-  { heading: 0, pitch: 0 },
+  { heading: 0, pitch: 0, fill: false },
 )
+
+/** `fill` のときは高さを親に任せる。そうでなければ 16:9 を保つ */
+const boxClass = computed(() => (props.fill ? 'size-full' : 'aspect-video w-full'))
 
 const config = useRuntimeConfig()
 const jsKey = computed(() => String(config.public.googleMapsJsKey ?? ''))
@@ -129,10 +134,11 @@ watch(
 </script>
 
 <template>
-  <div class="w-full">
+  <div :class="fill ? 'size-full min-h-0' : 'w-full'">
     <div
       v-if="error"
-      class="flex aspect-video w-full items-center justify-center rounded border border-amber-400 bg-amber-50 p-6 text-sm text-amber-900"
+      :class="boxClass"
+      class="flex items-center justify-center rounded border border-amber-400 bg-amber-50 p-6 text-sm text-amber-900"
       role="status"
     >
       <p>
@@ -149,7 +155,8 @@ watch(
     <div
       v-else
       ref="host"
-      class="aspect-video w-full rounded border border-slate-300"
+      :class="boxClass"
+      class="rounded border border-slate-300"
       role="application"
       aria-label="出題地点の Street View。視点は回転できるが移動はできない"
     />

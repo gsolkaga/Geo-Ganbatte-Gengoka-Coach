@@ -20,14 +20,23 @@ const props = withDefaults(
     fov?: number
     /** スクリーンリーダー向けの説明。何が表示されているかを伝える */
     title?: string
+    /**
+     * 親要素の高さいっぱいに広げる。
+     * ペイン分割したレイアウトで使う（`aspect-video` では行の高さに追従しない）。
+     */
+    fill?: boolean
   }>(),
   {
     heading: undefined,
     pitch: undefined,
     fov: undefined,
     title: '出題地点の Street View。視点を回転・移動して観察する',
+    fill: false,
   },
 )
+
+/** `fill` のときは高さを親に任せる。そうでなければ 16:9 を保つ */
+const boxClass = computed(() => (props.fill ? 'size-full' : 'aspect-video w-full'))
 
 const config = useRuntimeConfig()
 const embedKey = computed(() => String(config.public.googleEmbedKey ?? ''))
@@ -46,10 +55,11 @@ const src = computed(() => {
 </script>
 
 <template>
-  <div class="w-full">
+  <div :class="fill ? 'size-full min-h-0' : 'w-full'">
     <div
       v-if="!embedKey"
-      class="flex aspect-video w-full items-center justify-center rounded border border-amber-400 bg-amber-50 p-6 text-sm text-amber-900"
+      :class="boxClass"
+      class="flex items-center justify-center rounded border border-amber-400 bg-amber-50 p-6 text-sm text-amber-900"
       role="status"
     >
       <p>
@@ -60,7 +70,8 @@ const src = computed(() => {
 
     <div
       v-else-if="!panoId"
-      class="flex aspect-video w-full items-center justify-center rounded border border-slate-300 bg-slate-50 text-sm text-slate-600"
+      :class="boxClass"
+      class="flex items-center justify-center rounded border border-slate-300 bg-slate-50 text-sm text-slate-600"
       role="status"
     >
       pano ID が指定されていない
@@ -74,7 +85,8 @@ const src = computed(() => {
       v-else
       :src="src"
       :title="title"
-      class="aspect-video w-full rounded border border-slate-300"
+      :class="boxClass"
+      class="rounded border border-slate-300"
       loading="lazy"
       allowfullscreen
       referrerpolicy="no-referrer-when-downgrade"

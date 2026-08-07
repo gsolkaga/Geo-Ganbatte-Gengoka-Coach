@@ -1,6 +1,11 @@
 <script setup lang="ts">
 /**
- * 学習モード。出題読み込み → 観察 → 回答 → 採点 → 結果表示。
+ * 学習モード。出題読み込み → 観察と回答（同一画面）→ 採点 → 結果表示。
+ *
+ * **観察と回答を画面で分けない。**
+ * 決め手スロットは観察欄を見ながら選ぶものであり、画面遷移で片方が隠れてはならない。
+ * 当初は観察フェーズと回答フェーズを分けていたが、決め手スロットを選ぶ時点で
+ * 自分が何を書いたか見えなくなるため誤りだった。
  *
  * 画面の優先順位を守る。**コード算出分（JudgementPanel）が主、`feedback` が従。**
  * `feedback` を最上部に大きく置かない。学習者が「次に何を見ればよいか」を得るのは
@@ -13,7 +18,11 @@ import { createEmptySlots } from '#shared/slots'
 import { MAX_GRADING_MODELS } from '#shared/schemas'
 import type { AnswerDraft, SlotRecord } from '#shared/types'
 
-type Phase = 'loading' | 'observe' | 'answer' | 'grading' | 'result' | 'empty'
+/**
+ * `observe` と `answer` を `input` に統合した。**観察と回答は同じ画面で行う。**
+ * 分けていた頃の「回答へ進む」「観察に戻る」ボタンは不要になったため削除した。
+ */
+type Phase = 'loading' | 'empty' | 'input' | 'grading' | 'result'
 
 /** 比較対象のモデル。既定は先頭 1 件のみ */
 const COMPARISON_MODELS = [
@@ -67,7 +76,7 @@ onMounted(async () => {
         ])
         questions.value = questionResponse.questions
         countryOptions.value = countryResponse.countries
-        phase.value = questions.value.length ? 'observe' : 'empty'
+        phase.value = questions.value.length ? 'input' : 'empty'
     }
     catch (error) {
         loadError.value = error instanceof Error ? error.message : String(error)
@@ -106,7 +115,7 @@ function nextQuestion() {
     if (currentIndex.value + 1 < questions.value.length) currentIndex.value += 1
     slots.value = createEmptySlots()
     answer.value = { candidates: [{ country: '', confidence: 'medium' }], decisiveSlot: null, reasoning: null }
-    phase.value = 'observe'
+    phase.value = 'input'
 }
 </script>
 
@@ -152,89 +161,85 @@ function nextQuestion() {
             </p>
 
             <!--
-                上段は 2 ペイン。左に風景、右に観察の記入欄。
-                **風景を見ながらスロットを埋めるための配置である。**
-                縦に積むと、見て書くたびにスクロールが発生して観察が途切れる。
+                3 ペイン。左上に風景（大きく）、左下に回答、右列すべてに観察欄。
+                左列の縦比は 7:3。
+
+                **観察と回答を同じ画面に置く。** 決め手スロットは観察欄を見ながら選ぶ。
+                画面を分けると、選ぶ時点で自分が何を書いたか見えなくなる。
+
+                高さを固定して各ペインを内部スクロールさせる。
+                こうしないと 14 スロットの縦長さに引きずられて回答欄が画面外に出る。
             -->
-            <div class="grid items-start gap-4 xl:grid-cols-2">
-                <div class="xl:sticky xl:top-4">
-                    <!--
-                        既定は Embed（無料・無制限）。`NUXT_PUBLIC_STREETVIEW_MODE=nomove` で
-                        JavaScript API に切り替わり移動を止められるが、Pro SKU で課金対象になる。
-                    -->
-                    <StreetViewNoMove v-if="noMove" :pano-id="current.panoId" />
-                    <StreetViewFrame v-else :pano-id="current.panoId" />
-                    <p v-if="!noMove" class="mt-1 text-xs text-slate-500">
-                        この表示は移動できる。<strong>移動すると正解タグと一致しなくなる。</strong>
-                        視点の回転だけで観察する。
-                    </p>
+            <div class="grid gap-4 xl:h-[calc(100vh-11rem)] xl:grid-cols-[7fr_3fr]">
+                <div class="grid min-h-0 gap-4 xl:grid-rows-[7fr_3fr]">
+                    <!-- 左上：風景 -->
+                    <div class="flex min-h-0 flex-col gap-1">
+                        <!--
+                            既定は Embed（無料・無制限）。`NUXT_PUBLIC_STREETVIEW_MODE=nomove` で
+                            JavaScript API に切り替わり移動を止められるが、Pro SKU で課金対象になる。
+                        -->
+                        <div class="min-h-0 flex-1">
+                            <StreetViewNoMove v-if="noMove" :pano-id="current.panoId" fill />
+                            <StreetViewFrame v-else :pano-id="current.panoId" fill />
+                        </div>
+                        <p v-if="!noMove" class="shrink-0 text-xs text-slate-500">
+                            この表示は移動できる。<strong>移動すると正解タグと一致しなくなる。</strong>
+                            視点の回転だけで観察する。
+                        </p>
+                    </div>
+
+                    <!-- 左下：回答。採点後も値を残し、編集だけ止める -->
+                    <div class="min-h-0 overflow-y-auto pr-1">
+                        <fieldset :disabled="phase !== 'input'" class="grid min-w-0 gap-3">
+                            <AnswerPanel ref="answerPanel" v-model="answer" :country-options="countryOptions" />
+
+                            <div class="rounded border border-slate-300 p-3">
+                                <p class="text-sm font-medium text-slate-900">
+                                    採点に使うモデル
+                                </p>
+                                <label class="mt-1 flex items-center gap-2 text-sm text-slate-800">
+                                    <input v-model="multiModel" type="checkbox" class="size-4">
+                                    4 モデルで同時に採点する（比較用）
+                                </label>
+                                <p class="mt-1 text-xs text-slate-600">
+                                    既定は 1 モデル。同時採点は解釈のばらつきを見るための副機能である。
+                                    <strong>消費: {{ selectedModels.length }} リクエスト</strong>
+                                </p>
+                            </div>
+
+                            <button
+                                type="button"
+                                :disabled="answerPanel?.valid === false"
+                                class="justify-self-start rounded bg-slate-900 px-4 py-2 text-sm text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-40"
+                                @click="submit"
+                            >
+                                採点する（{{ selectedModels.length }} リクエスト）
+                            </button>
+                        </fieldset>
+                    </div>
                 </div>
 
                 <!--
+                    右列：観察欄。14 スロットは縦に長いので、この列だけを内部スクロールさせる。
                     採点後も入力した値を残す。消さない。
                     自分が何を書いたかを見ながら講評を読めないと、指摘の意味が分からない。
-                    ただし記録は保存済みなので、採点後は編集を止める。
                 -->
-                <fieldset :disabled="phase === 'grading' || phase === 'result'" class="min-w-0">
-                    <SlotForm v-model="slots" mode="learn" />
-                </fieldset>
-            </div>
-
-            <button
-                v-if="phase === 'observe'"
-                type="button"
-                class="justify-self-start rounded bg-slate-900 px-4 py-2 text-sm text-white hover:bg-slate-800"
-                @click="phase = 'answer'"
-            >
-                回答へ進む
-            </button>
-
-            <!-- 下段は全幅。回答と、その下に採点結果を積む -->
-            <template v-if="phase !== 'observe'">
-                <fieldset :disabled="phase !== 'answer'" class="min-w-0">
-                    <AnswerPanel ref="answerPanel" v-model="answer" :country-options="countryOptions" />
-                </fieldset>
-            </template>
-
-            <template v-if="phase === 'answer'">
-                <fieldset class="rounded border border-slate-300 p-3">
-                    <legend class="px-1 text-sm font-medium text-slate-900">
-                        採点に使うモデル
-                    </legend>
-                    <label class="flex items-center gap-2 text-sm text-slate-800">
-                        <input v-model="multiModel" type="checkbox" class="size-4">
-                        4 モデルで同時に採点する（比較用）
-                    </label>
-                    <p class="mt-1 text-xs text-slate-600">
-                        既定は 1 モデル。同時採点は解釈のばらつきを見るための副機能である。
-                        <strong>消費: {{ selectedModels.length }} リクエスト</strong>
-                    </p>
-                </fieldset>
-
-                <div class="flex flex-wrap gap-2">
-                    <button
-                        type="button"
-                        class="rounded border border-slate-400 px-4 py-2 text-sm text-slate-800 hover:bg-slate-50"
-                        @click="phase = 'observe'"
-                    >
-                        観察に戻る
-                    </button>
-                    <button
-                        type="button"
-                        :disabled="answerPanel?.valid === false"
-                        class="rounded bg-slate-900 px-4 py-2 text-sm text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-40"
-                        @click="submit"
-                    >
-                        採点する（{{ selectedModels.length }} リクエスト）
-                    </button>
+                <div class="min-h-0 overflow-y-auto pr-1">
+                    <fieldset :disabled="phase !== 'input'" class="min-w-0">
+                        <SlotForm v-model="slots" mode="learn" />
+                    </fieldset>
                 </div>
-            </template>
+            </div>
 
             <!--
                 採点中も同じブロックを描画する。`grading` を外すと
                 ストリーミングの進捗が画面に出なくなる（打ち切りの兆候が見えなくなる）。
             -->
-            <template v-else-if="phase === 'grading' || phase === 'result'">
+            <!--
+                下段は全幅。採点中も描画する。`grading` を外すと
+                ストリーミングの進捗が出なくなり、打ち切りの兆候が見えなくなる。
+            -->
+            <template v-if="phase === 'grading' || phase === 'result'">
                 <!-- 主：コードで確定した判定。モデルを替えても変わらない -->
                 <JudgementPanel
                     v-if="grading.judgement.value && grading.questionInfo.value"
