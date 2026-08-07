@@ -56,6 +56,46 @@ result.models[]   モデルごとの status / feedback / rawContent / finishReas
 
 `3〜10 問 × 4 モデル = 12〜40 リクエスト`（v1 は正規化しないため 1 プレイ 1 モデル 1 回）
 
+### 手順（B が実装済み。コードで完結する部分は全部できている）
+
+```
+Copy-Item .env.example .env      # 3 本の鍵を埋める
+node tools/measure-concurrency.mjs   # 4 リクエスト。並列の可否を測る
+npm run dev                          # 別ウィンドウで起動しておく
+node tools/add-question.mjs --country JP --lat 35.123 --lng 139.456 --difficulty 1
+```
+
+**出題する 10 カ国は確定している。** `curriculum.md` の出題リスト。
+
+```
+JP  KR  TH  BR  AU  IS  BG  RU  KZ  KG
+```
+
+- `HTTP 422` は**仕様どおりの不採用**（著作権表記が Google 以外など）。別の座標で再試行する
+- **メタデータ照会は無料でクォータも消費しない。** 何件試してもよい
+- `measure-concurrency.mjs` が「直列に落とす」と出たら、**報告だけしてそのまま進める**
+  （`grade.post.ts` の `Promise.all` を 1 箇所替えるだけなので 8/17 でよい）
+
+プレイ時の注意。
+
+- **分からないスロットは「未確認」のまま。「見えない」にしない**
+  （`unknown` と `absent` の区別が本アプリの中心的な規約である）
+- **「4 モデルで同時に採点する」にチェックを入れる**（既定はオフ。1 プレイ 4 リクエスト）
+- `grading-prompt.md` の「記録すべき観測点」6 項目を見ながら記録する
+  - **`summary` が当たり障りのない励ましになっているか**が章 6 の中核である
+
+### 記録は push する
+
+**`data/runs/` と `data/usage.jsonl` を commit して push する。**
+これがないと 8/17 に Kiro が v2 との比較を組めない。
+
+```
+node scripts/check-secrets.mjs    # 公開前の点検。画像とキーの混入を検出する
+git add data/ ; git commit -m "v1 の評価記録" ; git push
+```
+
+**スクリーンショットは push しない**（`.gitignore` が画像を全除外している）。ローカル保管。
+
 ---
 
 ## 2. スクリーンショット
