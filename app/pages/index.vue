@@ -104,7 +104,7 @@ function nextQuestion() {
 </script>
 
 <template>
-    <div class="mx-auto grid max-w-3xl gap-6 p-6">
+    <div class="mx-auto grid max-w-7xl gap-4 p-4">
         <header class="flex flex-wrap items-baseline justify-between gap-2">
             <div>
                 <h1 class="text-xl font-bold text-slate-900">
@@ -144,22 +144,43 @@ function nextQuestion() {
                 問題 {{ currentIndex + 1 }} / {{ questions.length }}（難易度 {{ current.difficulty }}）
             </p>
 
-            <StreetViewFrame :pano-id="current.panoId" />
+            <!--
+                上段は 2 ペイン。左に風景、右に観察の記入欄。
+                **風景を見ながらスロットを埋めるための配置である。**
+                縦に積むと、見て書くたびにスクロールが発生して観察が途切れる。
+            -->
+            <div class="grid items-start gap-4 xl:grid-cols-2">
+                <div class="xl:sticky xl:top-4">
+                    <StreetViewFrame :pano-id="current.panoId" />
+                </div>
 
-            <template v-if="phase === 'observe'">
-                <SlotForm v-model="slots" mode="learn" />
-                <button
-                    type="button"
-                    class="justify-self-start rounded bg-slate-900 px-4 py-2 text-sm text-white hover:bg-slate-800"
-                    @click="phase = 'answer'"
-                >
-                    回答へ進む
-                </button>
+                <!--
+                    採点後も入力した値を残す。消さない。
+                    自分が何を書いたかを見ながら講評を読めないと、指摘の意味が分からない。
+                    ただし記録は保存済みなので、採点後は編集を止める。
+                -->
+                <fieldset :disabled="phase === 'grading' || phase === 'result'" class="min-w-0">
+                    <SlotForm v-model="slots" mode="learn" />
+                </fieldset>
+            </div>
+
+            <button
+                v-if="phase === 'observe'"
+                type="button"
+                class="justify-self-start rounded bg-slate-900 px-4 py-2 text-sm text-white hover:bg-slate-800"
+                @click="phase = 'answer'"
+            >
+                回答へ進む
+            </button>
+
+            <!-- 下段は全幅。回答と、その下に採点結果を積む -->
+            <template v-if="phase !== 'observe'">
+                <fieldset :disabled="phase !== 'answer'" class="min-w-0">
+                    <AnswerPanel ref="answerPanel" v-model="answer" :country-options="countryOptions" />
+                </fieldset>
             </template>
 
-            <template v-else-if="phase === 'answer'">
-                <AnswerPanel ref="answerPanel" v-model="answer" :country-options="countryOptions" />
-
+            <template v-if="phase === 'answer'">
                 <fieldset class="rounded border border-slate-300 p-3">
                     <legend class="px-1 text-sm font-medium text-slate-900">
                         採点に使うモデル
@@ -193,7 +214,11 @@ function nextQuestion() {
                 </div>
             </template>
 
-            <template v-else>
+            <!--
+                採点中も同じブロックを描画する。`grading` を外すと
+                ストリーミングの進捗が画面に出なくなる（打ち切りの兆候が見えなくなる）。
+            -->
+            <template v-else-if="phase === 'grading' || phase === 'result'">
                 <!-- 主：コードで確定した判定。モデルを替えても変わらない -->
                 <JudgementPanel
                     v-if="grading.judgement.value && grading.questionInfo.value"
