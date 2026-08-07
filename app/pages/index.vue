@@ -24,6 +24,13 @@ const COMPARISON_MODELS = [
 ] as const
 
 const phase = ref<Phase>('loading')
+
+/**
+ * Street View の表示方式。既定は Embed（無料・無制限）。
+ * `nomove` は Maps JavaScript API を使い移動を止められるが、Pro SKU で課金対象になる。
+ */
+const runtimeConfig = useRuntimeConfig()
+const noMove = computed(() => String(runtimeConfig.public.streetviewMode ?? 'embed') === 'nomove')
 const loadError = ref<string | null>(null)
 
 const questions = ref<
@@ -151,7 +158,16 @@ function nextQuestion() {
             -->
             <div class="grid items-start gap-4 xl:grid-cols-2">
                 <div class="xl:sticky xl:top-4">
-                    <StreetViewFrame :pano-id="current.panoId" />
+                    <!--
+                        既定は Embed（無料・無制限）。`NUXT_PUBLIC_STREETVIEW_MODE=nomove` で
+                        JavaScript API に切り替わり移動を止められるが、Pro SKU で課金対象になる。
+                    -->
+                    <StreetViewNoMove v-if="noMove" :pano-id="current.panoId" />
+                    <StreetViewFrame v-else :pano-id="current.panoId" />
+                    <p v-if="!noMove" class="mt-1 text-xs text-slate-500">
+                        この表示は移動できる。<strong>移動すると正解タグと一致しなくなる。</strong>
+                        視点の回転だけで観察する。
+                    </p>
                 </div>
 
                 <!--

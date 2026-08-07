@@ -17,6 +17,17 @@ export default defineNuxtConfig({
     typescript: {
         typeCheck: false,
         strict: true,
+        /**
+         * `google` 名前空間の型を読み込む。`StreetViewNoMove.vue` で使う。
+         *
+         * 型検査を効かせる目的は補完ではない。**`addressControl` と `showRoadLabels` を
+         * 取り違えると住所と道路名が表示され、正解が漏れる。** そこを型で守る。
+         */
+        tsConfig: {
+            compilerOptions: {
+                types: ['google.maps'],
+            },
+        },
     },
 
     /**
@@ -46,6 +57,32 @@ export default defineNuxtConfig({
              * HTTP リファラー制限が唯一の防御である。Embed API のみに制限すること。
              */
             googleEmbedKey: '',
+
+            /**
+             * Street View の表示方式。**既定は `embed`（無料・無制限）。**
+             *
+             *   embed   Maps Embed API。移動できてしまう
+             *   nomove  Maps JavaScript API。移動を止められるが **Pro SKU で課金対象**
+             *
+             * `nomove` にする理由は利便性ではない。**移動されると正解タグが無効になる。**
+             * タグは pano ID に写っているものを記述しているため、学習者が動くと
+             * 見落とし判定と過剰申告判定の両方が狂う。
+             *
+             * 既定にしないのは、**課金経路を既定で作らない**ためである。
+             */
+            streetviewMode: process.env.NUXT_PUBLIC_STREETVIEW_MODE ?? 'embed',
+
+            /**
+             * Maps JavaScript API のキー。`streetviewMode=nomove` のときのみ使う。
+             *
+             * **Embed 用のキーは流用できない。** あちらは Embed API のみに制限しているため、
+             * JavaScript API の呼び出しは弾かれる。別のキーを作り、
+             * Maps JavaScript API のみに制限して HTTP リファラー制限をかけること。
+             *
+             * Dynamic Street View SKU（Pro カテゴリ）は**パノラマ単位の従量課金**である。
+             * 無料枠は月 5,000 リクエスト（SKU ごと。他の SKU とプールされない）。
+             */
+            googleMapsJsKey: '',
         },
     },
 })

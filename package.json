@@ -25,6 +25,7 @@
     },
     "devDependencies": {
         "@tailwindcss/vite": "4.3.3",
+        "@types/google.maps": "3.65.4",
         "@types/node": "22.20.1",
         "@vue/test-utils": "2.4.11",
         "tailwindcss": "4.3.3",

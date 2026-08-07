@@ -180,10 +180,37 @@ Google のキーを 1 本で兼用しないこと。3 本目は iframe の URL �
 | Maps Embed API（`streetview` モード含む） | **無料・リクエスト無制限** | [Maps Embed API usage and billing](https://developers.google.com/maps/documentation/embed/usage-and-billing) |
 | Street View Static API の**メタデータ照会** | **無料。クォータも消費しない** | [Street View Image Metadata](https://developers.google.com/maps/documentation/streetview/metadata) |
 | Street View Static API の**画像取得** | **従量課金。パノラマ単位** | [Street View Static API usage and billing](https://developers.google.com/maps/documentation/streetview/usage-and-billing) |
+| **Dynamic Street View**（NoMove 表示。**既定では無効**） | **Pro SKU。月 5,000 リクエストまで無料、超過は従量課金** | [料金カテゴリ](https://developers.google.com/maps/billing-and-pricing/pricing-categories) |
 | さくらの AI Engine チャット補完 | 無償プランは月 3,000 リクエスト | 実測 |
 | さくらの AI Engine の **RAG / embeddings** | **無償プランでも課金対象** | 公式マニュアル記載 |
 
-**本アプリは画像取得エンドポイントを呼ばない。** メタデータ照会と Embed の iframe だけで成立する。
+**本アプリは画像取得エンドポイントを呼ばない。** 既定ではメタデータ照会と Embed の iframe だけで成立し、**課金経路が 1 つもない。**
+
+### NoMove 表示だけが例外である（既定では無効）
+
+Maps Embed API には**移動を止めるパラメータがない**（`pano` `location` `heading` `pitch` `fov` のみ）。
+iframe の外側からクリックを止めることもできない。
+
+これは利便性の問題ではない。**移動されると正解タグが無効になる。**
+タグは pano ID に写っているものを記述しているため、学習者が別地点へ動くと
+見落とし判定と過剰申告判定の両方が狂う。**採点の正しさに関わる。**
+
+そこで Maps JavaScript API による NoMove 表示を用意したが、**既定では無効にしている。**
+
+```
+NUXT_PUBLIC_STREETVIEW_MODE=nomove
+NUXT_PUBLIC_GOOGLE_MAPS_JS_KEY=...     # Embed 用のキーは流用できない
+```
+
+| | 移動 | 課金 |
+|---|---|---|
+| `embed`（**既定**） | できてしまう | **なし** |
+| `nomove` | 止められる | **Pro SKU。月 5,000 リクエストまで無料** |
+
+**既定にしないのは、課金経路を既定で作らないためである。** 有効化は利用者の判断に委ねる。
+
+なお NoMove 表示では、`addressControl` と `showRoadLabels` を必ず `false` にしている。
+**既定値のままだと住所と道路名が表示され、正解が漏れる。**
 
 踏みやすい罠が 3 つある。
 
