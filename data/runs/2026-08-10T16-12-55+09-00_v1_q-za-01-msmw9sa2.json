@@ -1,0 +1,236 @@
+{
+  "id": "q-za-01-msmw9sa2",
+  "ts": "2026-08-10T16:12:55+09:00",
+  "variant": "v1",
+  "questionId": "q-za-01",
+  "answer": {
+    "questionId": "q-za-01",
+    "slots": {
+      "traffic_side": {
+        "state": "visible",
+        "plain": "左側通行",
+        "terms": []
+      },
+      "road_marking": {
+        "state": "visible",
+        "plain": "中央線は白い実線、路肩はなし、停止線も中央線と同様で「STOP」の表記",
+        "terms": []
+      },
+      "bollard": {
+        "state": "absent",
+        "plain": null,
+        "terms": []
+      },
+      "pole": {
+        "state": "visible",
+        "plain": "街灯が細い鉄柱製かな、ところどころ錆びている",
+        "terms": []
+      },
+      "sign": {
+        "state": "visible",
+        "plain": "遠くに白地に赤い矢印のシェブロンが見える",
+        "terms": []
+      },
+      "script": {
+        "state": "visible",
+        "plain": "アルファベットは見えるが英語？かは不明",
+        "terms": []
+      },
+      "ground": {
+        "state": "visible",
+        "plain": "赤茶色の土、乾燥している",
+        "terms": []
+      },
+      "terrain_vegetation": {
+        "state": "visible",
+        "plain": "細い葉っぱの植物しか生えていない、少し遠くになだらかな山が見え三方を囲まれている",
+        "terms": []
+      },
+      "architecture": {
+        "state": "visible",
+        "plain": "赤茶色のレンガ作りの店舗が並ぶ",
+        "terms": []
+      },
+      "vehicle": {
+        "state": "visible",
+        "plain": "白い横長のナンバープレート",
+        "terms": []
+      },
+      "pavement": {
+        "state": "visible",
+        "plain": "アスファルトで舗装はされているが、ボロボロでメンテナンスはあまりされていない",
+        "terms": []
+      },
+      "camera": {
+        "state": "absent",
+        "plain": null,
+        "terms": []
+      },
+      "season": {
+        "state": "visible",
+        "plain": "太陽が北から照っている",
+        "terms": []
+      },
+      "other": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      }
+    },
+    "candidates": [
+      {
+        "country": "ZA",
+        "confidence": "high"
+      },
+      {
+        "country": "AU",
+        "confidence": "medium"
+      }
+    ],
+    "decisiveSlot": "ground",
+    "reasoning": "南半球の左側通行で赤土は南アフリカ共和国が濃厚だと思うため"
+  },
+  "result": {
+    "variant": "v1",
+    "hit": true,
+    "hitConfidence": "high",
+    "confusionPairs": [
+      [
+        "AU",
+        "ZA"
+      ]
+    ],
+    "discoveries": null,
+    "missedSlots": null,
+    "wrongAbsentSlots": null,
+    "overclaimedSlots": null,
+    "failureModes": null,
+    "narrowingPower": null,
+    "intersection": null,
+    "nextPriority": null,
+    "models": [
+      {
+        "model": "gpt-oss-120b",
+        "status": "ok",
+        "feedback": {
+          "summary": "今回の観察は「交通側」「道路標示」「地面・植生」に焦点が当たり、南半球・乾燥帯という大局的な推測を支える重要な手がかりとなっています。次は「文字情報」「標識の詳細」「ナンバープレートのフォーマット」を掘り下げることが、国・地域レベルの判定精度を上げる最短ルートです。",
+          "failureModeExplanation": "見落としの判定はできません。",
+          "missedClues": [],
+          "wrongReasoning": [],
+          "vocabulary": [
+            {
+              "learnerWrote": "左側通行",
+              "canonicalTerm": "traffic_side",
+              "note": "左側通行は多くの南半球諸国で共通です。"
+            },
+            {
+              "learnerWrote": "白い実線・STOP表記",
+              "canonicalTerm": "road_marking",
+              "note": "実線の色・幅、STOP表記の有無は国ごとの道路設計指針に差があります。"
+            }
+          ],
+          "discriminationHint": "次の観察項目を意識して追加でメモすると、国・地域の絞り込みがさらに強まります。",
+          "nextPriority": [
+            "【看板文字（script）】文字の言語・フォントをできるだけ特定（例：英語・アフリカーンス・現地言語）し、文字の形状やサイズも記録すると、国別の言語分布が手がかりになります。",
+            "【標識（sign）】形状・色だけでなく、矢印の向きや付随する文字・記号（例：速度制限、道路種別）を詳細に書き留めると、道路規制体系が地域特有か判断できます。",
+            "【ナンバープレート（vehicle）】背景色・文字・数字の配列、フォントの太さや印字位置を記録してください。南アフリカのナンバープレートは特有のコードや色パターンがあります。"
+          ],
+          "discoveries": [
+            "交通側（traffic_side）や道路標示（road_marking）を正しく捉えている点は、南半球・左側通行という大枠の絞り込みに有効です。",
+            "地面の赤茶色（ground）や乾燥した土壌、細い葉の植生（terrain_vegetation）も、南アフリカ北部・乾燥帯の特徴と合致しています。"
+          ],
+          "judgmentUnavailable": false
+        },
+        "rawContent": "{\n  \"discoveries\": [\n    \"交通側（traffic_side）や道路標示（road_marking）を正しく捉えている点は、南半球・左側通行という大枠の絞り込みに有効です。\",\n    \"地面の赤茶色（ground）や乾燥した土壌、細い葉の植生（terrain_vegetation）も、南アフリカ北部・乾燥帯の特徴と合致しています。\"\n  ],\n  \"discriminationHint\": \"次の観察項目を意識して追加でメモすると、国・地域の絞り込みがさらに強まります。\",\n  \"failureModeExplanation\": \"見落としの判定はできません。\",\n  \"judgmentUnavailable\": false,\n  \"missedClues\": [],\n  \"nextPriority\": [\n    \"【看板文字（script）】文字の言語・フォントをできるだけ特定（例：英語・アフリカーンス・現地言語）し、文字の形状やサイズも記録すると、国別の言語分布が手がかりになります。\",\n    \"【標識（sign）】形状・色だけでなく、矢印の向きや付随する文字・記号（例：速度制限、道路種別）を詳細に書き留めると、道路規制体系が地域特有か判断できます。\",\n    \"【ナンバープレート（vehicle）】背景色・文字・数字の配列、フォントの太さや印字位置を記録してください。南アフリカのナンバープレートは特有のコードや色パターンがあります。\"\n  ],\n  \"summary\": \"今回の観察は「交通側」「道路標示」「地面・植生」に焦点が当たり、南半球・乾燥帯という大局的な推測を支える重要な手がかりとなっています。次は「文字情報」「標識の詳細」「ナンバープレートのフォーマット」を掘り下げることが、国・地域レベルの判定精度を上げる最短ルートです。\"\n  ,\n  \"vocabulary\": [\n    {\n      \"canonicalTerm\": \"traffic_side\",\n      \"learnerWrote\": \"左側通行\",\n      \"note\": \"左側通行は多くの南半球諸国で共通です。\"\n    },\n    {\n      \"canonicalTerm\": \"road_marking\",\n      \"learnerWrote\": \"白い実線・STOP表記\",\n      \"note\": \"実線の色・幅、STOP表記の有無は国ごとの道路設計指針に差があります。\"\n    }\n  ]\n  ,\n  \"wrongReasoning\": []\n}",
+        "reasoning": "We need to produce a short supplementary explanation based on the judgement result. Rules: cannot change judgement, cannot infer from image. Must give advice on what to look next, specific. Must explain observations, using proper terms from dictionary, but we don't have dictionary provided. But we can infer typical terms: traffic_side, road_marking, bollard, pole, sign, script, ground, terrain_vegetation, architecture, vehicle, pavement, camera, season, other.\n\nWe need to give feedback: highlight good observations, point out missing beneficial info (e.g., missing bollard, camera info, more detailed signage, language on signs, license plate details). Encourage to note things like language on signs, vehicle type, license plate format, street furniture, etc. Provide concrete next steps.\n\nAlso note that high confidence in ZA based on ground, but could strengthen by noting language of script (English, Afrikaans, etc), signage colors, specific road markings (e.g., use of yellow lines vs white). Also note sun position indicates Southern Hemisphere but north sun is typical for summer in Southern Hemisphere? Actually sun from north indicates Southern Hemisphere (since sun is north in southern lat). Good.\n\nWe must not mention we can't see correct tags; just say \"見落としの判定はできません\". Also note they used \"ground\" as decisive, maybe also consider other clues.\n\nProvide concise feedback under 1200 characters, each item limited? Not exactly specified each line length, but overall short.\n\nWe should use proper terms: e.g., \"車両のナンバープレート\" could be \"ナンバープレートの色・形\". Also \"道路標示\" as road marking.\n\nWe shouldn't say speculation about actual scene.\n\nLet's draft:\n\n- 良い点: 交通側, 道路標示, 電柱, 看板文字の有無, 地面色, 植生, 建築, ナンバープレート, 舗装状態, 太陽位置。\n\n- 改善点: 看板の文字言語を判別、標識の具体的形状・色の詳細、ナンバープレートの文字・番号パターン、車種や車両のヘッドライト向き、道路側のガードレールやポストの有無、路肩の有無とその材質、舗装の凹凸、季節は太陽の角度だけでなく影の長さ。特に「bollard（防護柱）」が見えなかったが、遠景に小さな金属製の棒があるか注意。\n\n- 次に確認すべき具体的項目: (1) 看板・標識の文字言語とフォント、(2) ナンバープレートの数字・文字配列と背景色、(3) 道路側のガードレール・ポールの材質と配置、(4) 路面標示のカラー（白・黄）と配置パターン、(5) 植生の種類（乾燥草か低木か）と季節感、(6) 建物の屋根瓦の形状と色。\n\nMake sure we mention cannot comment on missed slots. Also not to just encourage.\n\nNow produce final answer in Japanese.",
+        "finishReason": null,
+        "structuredMode": "json_schema",
+        "chunks": 1317,
+        "firstByteMs": 1149,
+        "totalMs": 6648,
+        "error": null
+      },
+      {
+        "model": "preview/gemma-4-31B-it",
+        "status": "ok",
+        "feedback": {
+          "summary": "正解です。南半球の左側通行と赤土という主要な手がかりを正しく結びつけられました。次は候補国をさらに絞り込むため、路面標示や言語、建築様式などの詳細な差異に着目しましょう。",
+          "failureModeExplanation": "",
+          "missedClues": [],
+          "wrongReasoning": [],
+          "vocabulary": [],
+          "discriminationHint": "南半球の左側通行かつ赤土という組み合わせから南アフリカ共和国（ZA）を導き出した推論は非常に鋭いです。AU（オーストラリア）との区別をより確実にするために、今後は路面標示（road_marking）や看板の文字（script）にある言語的な特徴、また建物の建築様式（architecture）に注目して、地域固有の差異を探してみてください。",
+          "nextPriority": [
+            "road_marking",
+            "script",
+            "architecture"
+          ],
+          "discoveries": [],
+          "judgmentUnavailable": true
+        },
+        "rawContent": "{\"discoveries\": [], \"discriminationHint\": \"南半球の左側通行かつ赤土という組み合わせから南アフリカ共和国（ZA）を導き出した推論は非常に鋭いです。AU（オーストラリア）との区別をより確実にするために、今後は路面標示（road_marking）や看板の文字（script）にある言語的な特徴、また建物の建築様式（architecture）に注目して、地域固有の差異を探してみてください。\", \"failureModeExplanation\": \"\", \"judgmentUnavailable\": true, \"missedClues\": [], \"nextPriority\": [\"road_marking\", \"script\", \"architecture\"], \"summary\": \"正解です。南半球の左側通行と赤土という主要な手がかりを正しく結びつけられました。次は候補国をさらに絞り込むため、路面標示や言語、建築様式などの詳細な差異に着目しましょう。\", \"vocabulary\": []  , \"wrongReasoning\": []}",
+        "reasoning": "",
+        "finishReason": null,
+        "structuredMode": "json_schema",
+        "chunks": 215,
+        "firstByteMs": 1155,
+        "totalMs": 4038,
+        "error": null
+      },
+      {
+        "model": "preview/Qwen3.6-35B-A3B",
+        "status": "ok",
+        "feedback": {
+          "summary": "正解候補（ZA）にhigh確信で正解となりました。南半球（太陽が北から照る）＋左側通行＋赤土という推理の軸は堅実です。ただし、`ground（地表色）`のみをhigh確信の決め手にしたのは注意が必要です。赤茶色の土壌は南アフリカだけでなくオーストラリアや南米などでも広く見られるため、単独では国を絞り込む力が弱いです。AUとZAを明確に区別するには、地表色以外のスロット（例：ナンバープレートの文字配置・フォーマット、道路標識の形状）を複数組み合わせて論理を補強する必要があります。見落としの判定は、正解タグが提供されていないため行えません。次のステップ：赤土と左側通行のセットで見かけたら、必ず「ナンバープレートのサイズ・配色・文字の縦横配置」と「標識の枠線形状」を確認してください。一般的に、これらの手がかりを併記することで、確信度の振れ幅を狭め、AUとZAの線引きを正確に行えるようになります。次回のパスでも、複数のスロットを掛け合わせる思考を続けてください。",
+          "failureModeExplanation": "判定していない（正解タグまたは用語辞書が与えられていないため算出不能）",
+          "missedClues": [],
+          "wrongReasoning": [],
+          "vocabulary": [],
+          "discriminationHint": "正解候補（ZA）にhigh確信で正解となりました。南半球（太陽が北から照る）＋左側通行＋赤土という推理の軸は堅実です。ただし、`ground（地表色）`のみをhigh確信の決め手にしたのは注意が必要です。赤茶色の土壌は南アフリカだけでなくオーストラリアや南米などでも広く見られるため、単独では国を絞り込む力が弱いです。AUとZAを明確に区別するには、地表色以外のスロット（例：ナンバープレートの文字配置・フォーマット、道路標識の形状）を複数組み合わせて論理を補強する必要があります。見落としの判定は、正解タグが提供されていないため行えません。次のステップ：赤土と左側通行のセットで見かけたら、必ず「ナンバープレートのサイズ・配色・文字の縦横配置」と「標識の枠線形状」を確認してください。一般的に、これらの手がかりを併記することで、確信度の振れ幅を狭め、AUとZAの線引きを正確に行えるようになります。次回のパスでも、複数のスロットを掛け合わせる思考を続けてください。",
+          "nextPriority": [
+            "ナンバープレートのサイズ・配色・文字の縦横配置",
+            "標識の枠線形状"
+          ],
+          "discoveries": [],
+          "judgmentUnavailable": true
+        },
+        "rawContent": "{\n\"discoveries\": []\n, \"discriminationHint\": \"正解候補（ZA）にhigh確信で正解となりました。南半球（太陽が北から照る）＋左側通行＋赤土という推理の軸は堅実です。ただし、`ground（地表色）`のみをhigh確信の決め手にしたのは注意が必要です。赤茶色の土壌は南アフリカだけでなくオーストラリアや南米などでも広く見られるため、単独では国を絞り込む力が弱いです。AUとZAを明確に区別するには、地表色以外のスロット（例：ナンバープレートの文字配置・フォーマット、道路標識の形状）を複数組み合わせて論理を補強する必要があります。見落としの判定は、正解タグが提供されていないため行えません。次のステップ：赤土と左側通行のセットで見かけたら、必ず「ナンバープレートのサイズ・配色・文字の縦横配置」と「標識の枠線形状」を確認してください。一般的に、これらの手がかりを併記することで、確信度の振れ幅を狭め、AUとZAの線引きを正確に行えるようになります。次回のパスでも、複数のスロットを掛け合わせる思考を続けてください。\"\n, \"failureModeExplanation\": \"判定していない（正解タグまたは用語辞書が与えられていないため算出不能）\"\n, \"judgmentUnavailable\": true\n, \"missedClues\": []\n, \"nextPriority\": [\"ナンバープレートのサイズ・配色・文字の縦横配置\", \"標識の枠線形状\"]\n, \"summary\": \"正解候補（ZA）にhigh確信で正解となりました。南半球（太陽が北から照る）＋左側通行＋赤土という推理の軸は堅実です。ただし、`ground（地表色）`のみをhigh確信の決め手にしたのは注意が必要です。赤茶色の土壌は南アフリカだけでなくオーストラリアや南米などでも広く見られるため、単独では国を絞り込む力が弱いです。AUとZAを明確に区別するには、地表色以外のスロット（例：ナンバープレートの文字配置・フォーマット、道路標識の形状）を複数組み合わせて論理を補強する必要があります。見落としの判定は、正解タグが提供されていないため行えません。次のステップ：赤土と左側通行のセットで見かけたら、必ず「ナンバープレートのサイズ・配色・文字の縦横配置」と「標識の枠線形状」を確認してください。一般的に、これらの手がかりを併記することで、確信度の振れ幅を狭め、AUとZAの線引きを正確に行えるようになります。次回のパスでも、複数のスロットを掛け合わせる思考を続けてください。\"\n, \"vocabulary\": []\n, \"wrongReasoning\": []\n}",
+        "reasoning": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n    - **Role:** GeoGuessr coach.\n    - **Task:** Read learner's observation notes, provide learning advice based on given judgment results.\n    - **Constraints:**\n        - Assume I haven't seen the image.\n        - Only use info from \"correct answer tags\" (not provided here, but I know the answer is ZA/southern_africa).\n        - Use terminology from a \"glossary\" (not provided, so I'll stick to the learner's terms or standard GeoGuessr terms if necessary, but carefully).\n        - Do not change the judgment results.\n        - If no correct answer tags are given, explicitly state that missed clues can't be evaluated.\n        - Don't just encourage; give concrete next steps.\n        - Explain learner's informal terms with formal ones if needed.\n        - Handle \"Other observations\" properly (acknowledge if they found something unlisted, but here it's empty).\n        - Keep it short: under 1200 chars, prioritize importance, avoid repetition.\n    - **Learner's Notes:**\n        - Traffic side: Left\n        - Road markings: White center line, no shoulder, STOP line matches center\n        - Bollards: Not visible\n        - Poles: Thin rusted metal streetlight\n        - Signs: White with red arrow chevron in distance\n        - Script: Alphabet visible, not sure if English\n        - Ground: Reddish-brown, dry\n        - Terrain/Veg: Thin-leaf plants, rolling hills/mountains in distance\n        - Architecture: Reddish-brown brick shops\n        - Vehicle/Plate: White horizontal license plate\n        - Pavement: Asphalt, poor condition\n        - Camera: Not visible\n        - Season/Sun: Sun shining from north\n        - Other: Unconfirmed\n    - **Learner's Guess:** ZA (high), AU (medium). Deciding factor: ground (red soil). Reasoning: Southern hemisphere, left-hand traffic, red soil -> South Africa.\n    - **Correct Answer:** ZA (southern_africa)\n    - **Judgment Results:** Correct candidate included (high confidence). No evaluation for missed/wrong/overclaimed slots due to missing tags/glossary. Failure mode: N/A. Pair: AU-ZA. Slot filtering power: N/A.\n    - **Note:** Explicitly says: \"This location's correct answer tags are not provided. Glossary not provided. Cannot comment on missed clues.\"\n\n2.  **Identify Key Points for Feedback:**\n    - The learner correctly guessed ZA with high confidence based on `ground` (red soil) and `traffic_side` (left).\n    - The judgment confirms high confidence and correct inclusion.\n    - Since tags/glossary aren't provided, I must state I can't evaluate missed/wrong slots, but I can still give constructive advice based on their *actual* notes and guess.\n    - The learner's reasoning relied heavily on `ground`. In GeoGuessr, red soil is common in many places (Australia, South Africa, Brazil, Mediterranean, etc.). They also noted left-hand traffic, sun from north (implies southern hemisphere), and Australian/SA architecture/road conditions.\n    - I need to point out that `ground` alone is ambiguous. Suggest combining multiple weak clues (e.g., plate shape, road markings, vegetation, sun position) for higher confidence.\n    - Acknowledge their correct logic flow.\n    - Give a concrete next step: When seeing red soil + left traffic + southern hemisphere sun, look for specific differentiators between AU and ZA (e.g., specific sign shapes, language on plates/street signs, exact shade/color of soil vs. vegetation, architecture styles).\n    - Keep it concise.\n\n3.  **Draft Construction (Mental Refinement):**\n    判定結果は「正解候補（ZA）にhigh確信で正解」となりました。推理の骨組みは正しいです。\n\n    一方で、判定で使われた「ground（赤茶色の土）」単独ではオーストラリア（AU）や南米、地中海沿岸など多国籍に通用する汎用的な手がかりです。確信度を「high」まで上げた決め手として、他のスロットとの整合性確認が弱点でした。\n\n    太陽が北から照っている点から「南半球」と読み取り、左側通行・赤土と組み合わせるアプローチは優れています。ただし、AUとZAを峻別するためには、車線標示や看板の形状、ナンバープレートのフォーマット（文字配置や色合い）など、より局所的な手がかりを併せて拾う練習が必要です。\n\n    次のステップ：赤土と左側通行の組み合わせで迷ったら、必ず「標識の形状（例：シェブロンや三角警告標識の枠線）」と「ナンバープレート・文字の配置」を確認してください。これらのスロットを組み合わせることで、確信度の変動幅を小さくでき、AUとZAの線引きが明確になります。\n\n    判定結果の変更は行っていません。見落としの判定は正解タグの提供がないため行えませんが、あなたの観察メモには有効な手がかりがすでに揃っています。次回も同様のスロットから論理の積み上げを試してみてください。\n\n4.  **Check Constraints:**\n    - Assume no image? Yes.\n    - Only use info from tags? I'll stick to general GeoGuessr principles and their notes. I explicitly state I can't evaluate missed clues due to missing tags.\n    - Don't change judgment? Checked. Matches exactly.\n    - Explain informal terms? Used their terms, added formal brackets where needed (already in notes).\n    - Handle \"Other\"? It's empty, so skip.\n    - Short & under 1200 chars? Let's count.\n      The draft is about 450 Japanese characters. Well within limit.\n    - Prioritize important points? Focuses on the core reasoning flaw (over-reliance on one ambiguous clue) and gives a concrete next step.\n    - Doesn't just encourage? Yes, gives specific actionable advice.\n    - Matches tone/role? Yes, coach-like.\n\n    One minor adjustment: Ensure I strictly follow \"正解タグが与えられていない場合、見落としについて何も述べない。「見落としの判定はできません」と明示する。\" The prompt says \"この地点の正解タグは与えられていません。用語辞書も与えられていません。見落としについて述べることはできません。\" in the input, but my output should explicitly state it if needed, or just follow the rule. I'll make sure to explicitly say it as instructed.\n    Also, I should avoid guessing what the tags *would* have said. I'll stick to evaluating their *own* notes against their guess.\n\n    Refined Draft:\n    判定結果は「正解候補（ZA）にhigh確信で正解」となりました。南半球（太陽が北から）＋左側通行＋赤土という推理の軸は堅実です。\n\n    ただし、「ground（地表色）」のみをhigh確信の決め手にしたのはリスクがありました。赤茶色の土壌は南アフリカだけでなくオーストラリアやブラジルなどでも広く見られるため、単独では国を絞り込む力が弱いです。AUとZAを明確に区別するには、地表色以外のスロット（例：ナンバープレートの文字配置・フォーマット、道路標識の形状、舗装の状態や損耗パターン）を複数組み合わせて論理を補強する必要があります。\n\n    見落としの判定は、正解タグが提供されていないため行えません。\n\n    次のステップ：赤土と左側通行のセットで見かけたら、必ず「ナンバープレートのサイズ・配色・文字の縦横配置」と「標識の枠線形状」を確認してください。これらの手がかりを併記することで、確信度の振れ幅を狭め、AUとZAの線引きを正確に行えるようになります。次回のパスでも、複数のスロットを掛け合わせる思考を続けてください。\n\n    Character count: ~380. Fits perfectly. Covers all constraints. Explicitly states inability to judge missed clues. Gives concrete next steps. Doesn't change judgment. Uses their terms. Ready.✅\n    One check: The prompt says \"正解タグが与えられていない場合、見落としについて何も述べない。「見落としの判定はできません」と明示する。\" I have done that.\n    All good. Output matches refined draft. \n    Proceeds. \n    Output Generation. \n    *(Self-Correction/Verification during thought)*\n    - Check constraint 5: \"正解タグが与えられていない場合、見落としについて何も述べない。「見落としの判定はできません」と明示する。\" -> I explicitly state it.\n    - Check constraint 3: \"用語辞書から得た知識は「この国では一般に」という一般的な傾向として述べる。当該地点の事実として断定しない。\" -> I'm giving general GeoGuessr advice, not claiming facts about ZA/AU as absolute, but as general tips for differentiation. I'll adjust slightly to be safer: \"一般的に、南アフリカとオーストラリアの区別には～が有効です。\"\n    - Check constraint 6: \"学習者を励ますだけの内容を書かない。次に何を見るべきかを必ず具体的に示す。\" -> Done.\n    - Length: ~360 chars. Well under 1200.\n    - All constraints met. Output matches. \n    Proceeds. \n    [Output Generation] -> *Proceeds to generate response*\n    *(Note: I will carefully ensure the tone matches the prompt's strict guidelines.)* \n    Final Check of the prompt: \"正解タグが与えられていない場合、見落としについて何も述べない。「見落としの判定はできません」と明示する。\" -> I will place this exactly as requested.\n    All good. \n    Output matches the refined draft. \n    [Done] \n    *(Self-Correction/Note during drafting)*: I should make sure I don't accidentally imply facts about ZA/AU as if I saw the image. I'll phrase the differentiation advice as general GeoGuessr strategy.\n    \"一般的に、南アフリカとオーストラリアの区別には…\" is fine.\n    The prompt says: \"正解タグが与えられていない場合、見落としについて何も述べない。「見落としの判定はできません」と明示する。\" I will explicitly state that sentence.\n    Ready. \n    Output Generation. \n    *(Output Generation)*\n    判定結果は「正解候補（ZA）にhigh確信で正解」となりました。南半球（太陽が北から）＋左側通行＋赤土という推理の軸は堅実です。\n\n    ただし、「ground（地表色）」のみをhigh確信の決め手にしたのは注意が必要です。赤茶色の土壌は南アフリカだけでなくオーストラリアや南米などでも広く見られるため、単独では国を絞り込む力が弱いです。AUとZAを明確に区別するには、地表色以外のスロット（例：ナンバープレートの文字配置・フォーマット、道路標識の形状）を複数組み合わせて論理を補強する必要があります。\n\n    見落としの判定は、正解タグが提供されていないため行えません。\n\n    次のステップ：赤土と左側通行のセットで見かけたら、必ず「ナンバープレートのサイズ・配色・文字の縦横配置」と「標識の枠線形状」を確認してください。一般的に、これらの手がかりを併記することで、確信度の振れ幅を狭め、AUとZAの線引きを正確に行えるようになります。次回のパスでも、複数のスロットを掛け合わせる思考を続けてください。 \n    *(Matches all constraints. Proceeds.)*\n",
+        "finishReason": null,
+        "structuredMode": "json_schema",
+        "chunks": 3179,
+        "firstByteMs": 1150,
+        "totalMs": 16506,
+        "error": null
+      },
+      {
+        "model": "preview/Kimi-K2.6",
+        "status": "ok",
+        "feedback": {
+          "summary": "南半球の左側通行・赤土からZAを導く筋道は正しいが、AUとの区別を早段階でつけるにはナンバープレートの色と看板の言語が最も効果的。",
+          "failureModeExplanation": "",
+          "missedClues": [],
+          "wrongReasoning": [],
+          "vocabulary": [],
+          "discriminationHint": "南半球・左側通行・赤土という複合的な絞り込みは有効です。今後、AUとの優柔不断を解消するには、ナンバープレートと看板の言語に注目してください。ZAでは一般的に黄色いナンバープレート（後部が黄地に黒字）が多く、AUとは配色の傾向が異なります。また看板にアフリカーンス語特有の文字（Ä、Ëなど）が含まれていれば、ZAの可能性が大きく上がります。赤土と太陽の位置で南半球に絞ったら、次はまず文字の有無とナンバープレートの色を確認するようにしましょう。",
+          "nextPriority": [
+            "ナンバープレートの色（ZAでは後部が黄色のケースが多い）",
+            "看板にアフリカーンス語の文字がないか"
+          ],
+          "discoveries": [
+            "正解タグが与えられていないため、見落としの判定はできません。"
+          ],
+          "judgmentUnavailable": true
+        },
+        "rawContent": " { \"discoveries\": [ \"正解タグが与えられていないため、見落としの判定はできません。\" ], \"discriminationHint\": \"南半球・左側通行・赤土という複合的な絞り込みは有効です。今後、AUとの優柔不断を解消するには、ナンバープレートと看板の言語に注目してください。ZAでは一般的に黄色いナンバープレート（後部が黄地に黒字）が多く、AUとは配色の傾向が異なります。また看板にアフリカーンス語特有の文字（Ä、Ëなど）が含まれていれば、ZAの可能性が大きく上がります。赤土と太陽の位置で南半球に絞ったら、次はまず文字の有無とナンバープレートの色を確認するようにしましょう。\", \"failureModeExplanation\": \"\" , \"judgmentUnavailable\": true, \"missedClues\": [], \"nextPriority\": [ \"ナンバープレートの色（ZAでは後部が黄色のケースが多い）\", \"看板にアフリカーンス語の文字がないか\" ] , \"summary\": \"南半球の左側通行・赤土からZAを導く筋道は正しいが、AUとの区別を早段階でつけるにはナンバープレートの色と看板の言語が最も効果的。\" , \"vocabulary\": [], \"wrongReasoning\": [] }",
+        "reasoning": " ユーザーはGeoGuessrのコーチとして、学習者の観察メモを読んで助言を与えることを求められています。\n\nまず、ルールを確認します：\n1. 画像を見ていないことを前提に振る舞う。風景について推測で語らない。\n2. 「この地点に写っている」と断定してよいのは、入力の「正解タグ」に記載された手がかりだけである。\n3. 「用語辞書」から得た知識は「この国では一般に」という一般的な傾向として述べる。当該地点の事実として断定しない。\n4. 入力の判定結果（見落とし、正誤、失敗モード）を変更しない。追加も削除もしない。\n5. 正解タグが与えられていない場合、見落としについて何も述べない。「見落としの判定はできません」と明示する。推測で補わない。\n6. 学習者を励ますだけの内容を書かない。次に何を見るべきかを必ず具体的に示す。\n7. 語彙の扱い：学習者は専門用語を知りません。学習者が素人語で書いた表現には、正式な用語を添えて説明します。正式な用語は「用語辞書」に載っているものだけ。→ 今回用語辞書が与えられていないので、これは適用できません。\n8. 「その他の気づき」の扱い：今回「未確認／—」なので特になし。\n9. 分量：**短く**。1,200字以内。重要なものだけに絞る。\n10. 正解タグが与えられていないため、用語辞書も与えられていないため、見落としの判定はできません。これを明示する必要があります。\n\n学習者のメモの分析：\n- 左側通行（ZA, AU, UK, JP, IN, NZなど）\n- 赤茶色の土（南アフリカらしいが、オーストラリアにも赤土はある）\n- 太陽が北から照っている → 南半球。これはZAとAUの両方に当てはまる\n- 赤茶色のレンガ作りの店舗\n- 白い横長ナンバープレート\n- 細い葉っぱの植物（硬葉植物？ユーカリ？）→ 推測で語らない\n- アスファルトがボロボロ\n- 白地に赤い矢印のシェブロン（chevron）\n\n学習者は「ground（赤土）」を決め手にZAと推論し、AUも候補に入れた。\n結果はZAで正解。\n\nただし、正解タグも用語辞書もないため、具体的な「この手がかりを見落とした」という指摘はできません。\nまた、画像を見ていないため、風景について推測で語れません。\n\n何を書くべきか：\n- 見落としの判定はできないことを1文で述べる\n- 学習者の推論を評価（ただし励ますだけではなく、具体的な次のステップを示す）\n- 南半球の左側通行で赤土、という点は良い着眼点だが、AUとの区別について今後の課題を示す\n- 具体的に「次に何を見るべきか」を示す：ナンバープレートの詳細（ZAは黄色のナンバープレートもある、英連邦フォーマットなど）、建物の様式、道路標識の詳細、言語（アフリカーンス語や英語の看板）、植生の詳細、地形の違いなど\n\nただし、画像を見ていない前提なので、「この地点では」という断定は避け、一般的な傾向として述べる。\n\n重要なポイント：\n- 学習者はナンバープレートを「白い横長」と記録。ZAのナンバープレートは一般的に黄色地に黒字（後部）や白地に黒字（前部）など、複数の形式がある。オーストラリアも状態によっては白いナンバープレートがある。これは両国を区別する手がかりになる可能性があるが、画像を見ていないため断定できない。しかし一般的な知識として「ZAでは黄色いナンバープレートが一般的」などを述べられるか？\n- ただし、これは「用語辞書」に載っている知識か？与えられていないので、自分の知識を使っても良いのか？プロンプトでは「用語辞書」から得た知識は一般的な傾向として述べるとありますが、今回用語辞書がないため、自分の持っている一般的知識を使うべきか、それとも控えるべきか。\n\nプロンプトを再確認：\n「画像を見ていないことを前提に振る舞う。風景について推測で語らない。」\n「用語辞書から得た知識は「この国では一般に」という一般的な傾向として述べる。当該地点の事実として断定しない。」\n→ 用語辞書がない場合、自分の一般知識を「用語辞書」に準じて扱うべきか、それとも使わないべきか？\n\n「語彙の扱い」で「正式な用語は「用語辞書」に載っているものだけを使います。辞書にない用語を持ち出さないでください。」とある。これは語彙（名称）の話。知識そのものについては、用語辞書がなくてもGeoGuessrの知識を持っている前提でコーチとして振る舞うのかもしれない。しかし「画像を見ていないことを前提」「推測で語らない」「当該地点の事実として断定しない」という制約は厳格。\n\nここでは、一般的なGeoGuessr知識（ZAとAUの区別ポイント）を「この国では一般に」という形で使うのが適切だと解釈します。ただし、分量は短く。\n\n次に何を見るべきかの具体例：\n- ナンバープレート：ZAでは一般的に黄色いナンバープレート（後部）が多い。オーストラリアは州ごとに色が異なるが、白色や黄色もある。\n- 言語：ZAでは看板にアフリカーンス語（オランダ語系）が混じることがある。AUは英語のみ。\n- 標識：シェブロンの形状や道路標識のデザインの違い（ただしこれは専門的）\n- 地形：AUの赤土は内陸部に多く、海岸部は異なる。ZAの特定の地形（ドラケンスバーグ山脈など）→ 推測で語りすぎ？\n- ボラードの有無や形状\n- 電柱：ZAとAUでは街灯の形状が異なる場合がある\n\nただし「画像を見ていないため、風景について推測で語らない」ので、「今回の地点には〜があったかも」という言い方は避ける。「今後、AUとZAを見分ける際には〜に注目すると効果的」という形で書く。\n\nまた、「正解タグが与えられていないため、見落としの判定はできません」と明示する必要がある。\n\n構成：\n1. 見落とし判定不可の文言（短く）\n2. 学習者の推論について：南半球＋左側通行＋赤土という複合的な推理は合理的。ただしAUとの優柔不断を解消するための次のステップを提示。\n3. 次に注目すべきポイント（1-2点に絞る）：\n   - ナンバープレートの色と形式（ZAは一般的に黄色いナンバープレート、複数列の数字配置など）\n   - 看板の言語（アフリカーンス語の有無は決定的）\n   - または地形＋植生＋建物の組み合わせ（オーストラリアらしさ vs 南アフリカらしさ）\n4. 字数を意識して短く。\n\n「太陽が北から照っている」は南半球の良い証拠。ZAとAUを絞り込んだ点は良い。\n\n名称について：学習者は「シェブロン」と書いているが用語辞書がないので補足不要。「シェブロン」は一般語か？GeoGuessr用語か？普通の日本語では「矢印型誘導標」などだが、プロンプトで用語辞書がないので無理に補足しない。\n\n具体的なアドバイス：\nZAとAUは両方とも左側通行、英語圏、赤土のエリアがある、南半球、という点で紛らわしい。\n決定的な違い：\n- ZA：ナンバープレートが一般的に黄色（後部）。看板にアフリカーンス語（Äなどのウムラウト文字）が出現することがある。電柱やボラードに独自の形状がある。\n- AU：ナンバープレートは州ごとに色が異なるが、一般的に白や黄、青など。道路標識のフォントやデザインが独自（オーストラリア道路標識）。\n\n「シェブロン」について、学習者は「白地に赤い矢印」と書いている。これは両国ともある可能性。\n\n分量を短く。全体で400字程度に。\n\n下書き：\n「まず、正解タグが与えられていないため、見落としの判定はできません。\n\n南半球・左側通行・赤土という複合的な絞り込みは効果的でした。ただしZAとAUの優柔不断を解消するには、ナンバープレートと看板の言語が最も有力です。\n\nZAでは一般的に黄色いナンバープレート（後部が黄地に黒字）が多く、これはAUの州ごとの白・青・黄色とは頻度やデザインが異なります。また看板にアフリカーンス語（Ä, Ö, Üなどの記号を含むオランダ語系）が混じっていれば、ZAの可能性が急激に高まります。\n\n次回以降、赤土と左側通行で南半球に絞った後は、まずナンバープレートの色と看板の文字列に注目してみてください。」\n\nこれで约250字。良い。\n\nただし、「画像を見ていないことを前提に」と「用語辞書がない」ことを考慮。\n「ZAでは一般的に黄色いナンバープレートが多い」→ これは自分の知識に基づくが、プロンプト上許容されるか。「用語辞書がない」ので用語辞書に頼らない一般知識として使うことになる。コーチとしてGeoGuessrの知識を持っているのは自然。ただし「当該地点の事実として断定しない」こと。\n\n「看板にアフリカーンス語が混じっていれば」→ これは一般的傾向としての助言。\n\n最終確認：\n- 見落とし不可：明記した\n- 推測で語っていない：「一般的に」「次回以降」という形\n- 判定結果の変更なし：問題なし\n- 励ますだけでない：次に何を見るか具体的に示した（ナンバープレートの色、看板の言語）\n- 短い：問題なし\n\nもう少し短くてもいいかもしれないが、この程度なら読める。\n\n他に指摘すべき点？\n- 学習者は「英語？かは不明」と書いている。これは重要な自覚。\n- 「赤茶色のレンガ作りの店舗」→ ZAの一部の地域では見られるが、AUではレンガ建築もある。あまり決定的ではない。\n- 太陽の位置→ 良い。\n\n指摘は重要なものだけに絞る、とのことなので、ZA vs AUの区別が最重要。\n\n修正版：\n正解タグが与えられていないため、見落としの判定はできません。\n\n南半球・左側通行・赤土という複合的な絞り込みは有効です。今後、AUとの優柔不断を解消するには、ナンバープレートと看板の言語に注目してください。ZAでは一般的に黄色いナンバープレート（後部が黄地に黒字）が多く、AUとは配色のパターンが異なります。また看板にアフリカーンス語特有の文字（例：Ä, Ë）が含まれていれば、ZAの可能性が大きく上がります。\n\n赤土と太陽の位置で南半球に絞ったら、次は文字の有無とナンバープレートの色を先に確認するようにしましょう。\n\n約230字。これで十分。用語辞書がないので「アフリカーンス語」「Ä」などは自分の知識として出せるか？用語辞書に依存しない一般知識として使っているので問題ないと思う。ただしプロンプトに「正式な用語は「用語辞書」に載っているものだけを使います」とあるが、これは学習者の素人語に対して用語辞書の正式用語を添える、というルール。逆にコーチが使う用語まで制限しているわけではない（自分の語彙で説明するのがコーチだから）。ただし用語辞書がないので、補足の必要がないなら不要。\n\n「アフリカーンス語」は学習者が知らない用語かもしれないが、説明として使っているので問題ない。\n\n「用語辞書が与えられていないため算出不能」が入力にあるので、見落としについてはそのまま伝える。\n\nこれで良さそう。\n\n1,200字以内の制限をクリア。重要なものだけ指摘。次に何を見るか具体的。",
+        "finishReason": null,
+        "structuredMode": "json_schema",
+        "chunks": 3837,
+        "firstByteMs": 1352,
+        "totalMs": 73645,
+        "error": null
+      }
+    ]
+  }
+}

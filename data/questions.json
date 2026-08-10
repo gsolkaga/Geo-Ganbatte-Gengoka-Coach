@@ -1,1 +1,912 @@
-[]
+[
+  {
+    "id": "q-jp-01",
+    "panoId": "flkfISvL09X9SJG2cylZqQ",
+    "fallback": {
+      "lat": 34.39673626454307,
+      "lng": 131.4444564330241,
+      "heading": 0
+    },
+    "country": "JP",
+    "region": "east_asia",
+    "difficulty": 1,
+    "copyright": "© Google",
+    "captureDate": "2013-05",
+    "slots": {
+      "traffic_side": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "road_marking": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "bollard": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "pole": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "sign": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "script": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "ground": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "terrain_vegetation": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "architecture": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "vehicle": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "pavement": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "camera": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "season": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "other": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      }
+    },
+    "decisiveSlots": [],
+    "note": null,
+    "source": {
+      "draftBy": []
+    }
+  },
+  {
+    "id": "q-th-01",
+    "panoId": "UXcOz-mSilIXuAbifqiViA",
+    "fallback": {
+      "lat": 13.76843856388382,
+      "lng": 100.4776209577825,
+      "heading": 0
+    },
+    "country": "TH",
+    "region": "southeast_asia",
+    "difficulty": 1,
+    "copyright": "© Google",
+    "captureDate": "2025-01",
+    "slots": {
+      "traffic_side": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "road_marking": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "bollard": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "pole": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "sign": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "script": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "ground": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "terrain_vegetation": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "architecture": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "vehicle": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "pavement": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "camera": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "season": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "other": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      }
+    },
+    "decisiveSlots": [],
+    "note": null,
+    "source": {
+      "draftBy": []
+    }
+  },
+  {
+    "id": "q-tr-01",
+    "panoId": "bnbZhAX_k3nhJ5xaggZRTA",
+    "fallback": {
+      "lat": 37.85396978251664,
+      "lng": 27.83408744892139,
+      "heading": 0
+    },
+    "country": "TR",
+    "region": "east_europe",
+    "difficulty": 1,
+    "copyright": "© Google",
+    "captureDate": "2024-04",
+    "slots": {
+      "traffic_side": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "road_marking": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "bollard": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "pole": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "sign": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "script": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "ground": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "terrain_vegetation": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "architecture": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "vehicle": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "pavement": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "camera": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "season": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "other": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      }
+    },
+    "decisiveSlots": [],
+    "note": null,
+    "source": {
+      "draftBy": []
+    }
+  },
+  {
+    "id": "q-br-01",
+    "panoId": "pbA-uPWFxFehKtPG1uEutw",
+    "fallback": {
+      "lat": -3.640675856977935,
+      "lng": -45.18617008348726,
+      "heading": 0
+    },
+    "country": "BR",
+    "region": "south_america",
+    "difficulty": 2,
+    "copyright": "© Google",
+    "captureDate": "2019-11",
+    "slots": {
+      "traffic_side": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "road_marking": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "bollard": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "pole": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "sign": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "script": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "ground": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "terrain_vegetation": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "architecture": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "vehicle": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "pavement": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "camera": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "season": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "other": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      }
+    },
+    "decisiveSlots": [],
+    "note": null,
+    "source": {
+      "draftBy": []
+    }
+  },
+  {
+    "id": "q-au-01",
+    "panoId": "1-ixqV9JfTOAt3TN3_5Qog",
+    "fallback": {
+      "lat": -31.88304959060174,
+      "lng": 116.4678788671725,
+      "heading": 0
+    },
+    "country": "AU",
+    "region": "oceania",
+    "difficulty": 2,
+    "copyright": "© Google",
+    "captureDate": "2025-02",
+    "slots": {
+      "traffic_side": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "road_marking": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "bollard": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "pole": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "sign": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "script": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "ground": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "terrain_vegetation": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "architecture": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "vehicle": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "pavement": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "camera": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "season": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "other": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      }
+    },
+    "decisiveSlots": [],
+    "note": null,
+    "source": {
+      "draftBy": []
+    }
+  },
+  {
+    "id": "q-is-01",
+    "panoId": "TuKj7NKjbggR_zk7cQg2Ww",
+    "fallback": {
+      "lat": 65.36388167160467,
+      "lng": -13.74608662218572,
+      "heading": 0
+    },
+    "country": "IS",
+    "region": "nordic",
+    "difficulty": 2,
+    "copyright": "© Google",
+    "captureDate": "2024-07",
+    "slots": {
+      "traffic_side": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "road_marking": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "bollard": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "pole": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "sign": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "script": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "ground": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "terrain_vegetation": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "architecture": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "vehicle": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "pavement": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "camera": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "season": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "other": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      }
+    },
+    "decisiveSlots": [],
+    "note": null,
+    "source": {
+      "draftBy": []
+    }
+  },
+  {
+    "id": "q-bg-01",
+    "panoId": "SMq22qb15SuvD_CuHxiteg",
+    "fallback": {
+      "lat": 42.86695849724168,
+      "lng": 25.32065993109908,
+      "heading": 0
+    },
+    "country": "BG",
+    "region": "east_europe",
+    "difficulty": 2,
+    "copyright": "© Google",
+    "captureDate": "2012-03",
+    "slots": {
+      "traffic_side": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "road_marking": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "bollard": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "pole": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "sign": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "script": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "ground": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "terrain_vegetation": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "architecture": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "vehicle": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "pavement": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "camera": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "season": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "other": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      }
+    },
+    "decisiveSlots": [],
+    "note": null,
+    "source": {
+      "draftBy": []
+    }
+  },
+  {
+    "id": "q-ru-01",
+    "panoId": "UCAgH3P7-68ze5fi5PJnDg",
+    "fallback": {
+      "lat": 51.70288885466001,
+      "lng": 39.18163489871121,
+      "heading": 0
+    },
+    "country": "RU",
+    "region": "former_soviet_asia",
+    "difficulty": 3,
+    "copyright": "© Google",
+    "captureDate": "2018-08",
+    "slots": {
+      "traffic_side": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "road_marking": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "bollard": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "pole": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "sign": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "script": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "ground": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "terrain_vegetation": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "architecture": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "vehicle": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "pavement": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "camera": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "season": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "other": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      }
+    },
+    "decisiveSlots": [],
+    "note": null,
+    "source": {
+      "draftBy": []
+    }
+  },
+  {
+    "id": "q-kz-01",
+    "panoId": "EODi6zsUibjTqsUN7yv_HQ",
+    "fallback": {
+      "lat": 51.17518275703861,
+      "lng": 71.40596752713459,
+      "heading": 0
+    },
+    "country": "KZ",
+    "region": "former_soviet_asia",
+    "difficulty": 3,
+    "copyright": "© Google",
+    "captureDate": "2022-08",
+    "slots": {
+      "traffic_side": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "road_marking": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "bollard": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "pole": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "sign": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "script": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "ground": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "terrain_vegetation": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "architecture": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "vehicle": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "pavement": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "camera": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "season": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "other": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      }
+    },
+    "decisiveSlots": [],
+    "note": null,
+    "source": {
+      "draftBy": []
+    }
+  },
+  {
+    "id": "q-za-01",
+    "panoId": "H0VXtRXsqHQF_xGnVhSgPw",
+    "fallback": {
+      "lat": -24.5888841590607,
+      "lng": 27.41275016835344,
+      "heading": 0
+    },
+    "country": "ZA",
+    "region": "southern_africa",
+    "difficulty": 3,
+    "copyright": "© Google",
+    "captureDate": "2024-05",
+    "slots": {
+      "traffic_side": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "road_marking": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "bollard": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "pole": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "sign": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "script": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "ground": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "terrain_vegetation": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "architecture": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "vehicle": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "pavement": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "camera": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "season": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      },
+      "other": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      }
+    },
+    "decisiveSlots": [],
+    "note": null,
+    "source": {
+      "draftBy": []
+    }
+  }
+]
