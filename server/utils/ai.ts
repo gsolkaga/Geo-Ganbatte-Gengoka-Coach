@@ -267,6 +267,31 @@ function describeError(caught: unknown): string {
     return String(caught)
 }
 
+/**
+ * **無償枠を消費したかどうか。** `ok` とは別である。
+ *
+ * 実測（2026-08-17）で、`SAKURA_AI_TOKEN` が無い環境の動作確認により
+ * `usage.jsonl` に 6 行が追加された。**1 バイトも送信していないのに記録された。**
+ *
+ * 集計スクリプトが行数を数えていたため、**消費数が過大に出る。**
+ * 本記事の主題が「3,000 リクエストを何に使ったか」であるため、
+ * ここを間違えると全体の数字が狂う。
+ *
+ * 判定はこうする。
+ * - **送信前に落ちた**（トークン未設定・入力の組み立て失敗）→ 消費していない
+ * - 送信して 4xx / 5xx / タイムアウト → **消費している**（サーバに届いている）
+ *
+ * `durationMs === 0` は「送信していない」の目印になる。
+ * 通信すれば必ず 1ms 以上かかる。
+ */
+function wasSent(result: AiChatResult): boolean {
+    if (result.ok) return true
+    // トークンが無い場合は OpenAI クライアントを作る前に throw している
+    if (result.error?.includes('SAKURA_AI_TOKEN')) return false
+    // 送信していれば必ず時間がかかる。0ms は組み立て段階の失敗である
+    return result.durationMs > 0
+}
+
 async function logUsage(request: AiChatRequest, result: AiChatResult): Promise<void> {
     const record = {
         ts: localIsoString(),
@@ -275,6 +300,11 @@ async function logUsage(request: AiChatRequest, result: AiChatResult): Promise<v
         endpoint: request.endpoint,
         ...(request.variant ? { variant: request.variant } : {}),
         ok: result.ok,
+        /**
+         * **無償枠を消費したか。`ok` とは別である。**
+         * 送信前に落ちた試行を消費として数えると、集計が過大になる。
+         */
+        sent: wasSent(result),
         /** 常に 0。リトライは実装しない。フォールバックの試行は attempt で数える */
         retries: 0,
         attempt: request.attempt ?? 1,
@@ -512,6 +542,13 @@ async function logStreamUsage(
         endpoint: request.endpoint,
         ...(request.variant ? { variant: request.variant } : {}),
         ok: result.status === 'ok',
+        /**
+         * **無償枠を消費したか。** 打ち切り（`truncated`）は消費している。
+         * HTTP 200 で受け取ったうえで途中までしか来なかった状態である。
+         */
+        sent: result.status === 'truncated'
+            || (result.status === 'ok')
+            || !(result.error?.includes('SAKURA_AI_TOKEN') ?? false) && result.totalMs > 0,
         streamed: true,
         truncated: result.status === 'truncated',
         /** 常に 0。リトライは実装しない */

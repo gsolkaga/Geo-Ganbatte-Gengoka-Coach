@@ -16,6 +16,8 @@
         "typecheck:tooling": "tsc -p tsconfig.tooling.json",
         "test": "vitest --run",
         "measure:concurrency": "node tools/measure-concurrency.mjs",
+        "usage:report": "node tools/usage-report.mjs",
+        "inspect:run": "node tools/inspect-run.mjs",
         "add:question": "node tools/add-question.mjs",
         "tag:apply": "node scripts/apply-tag-drafts.mjs",
         "combos": "node scripts/extract-combos.mjs",
