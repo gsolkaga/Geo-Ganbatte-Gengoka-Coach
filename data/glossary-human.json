@@ -1506,6 +1506,280 @@
             "sources": [
                 "https://en.wikipedia.org/wiki/List_of_writing_systems"
             ]
+        },
+        {
+            "id": "ref_plate_yellow_front_and_rear",
+            "slot": "vehicle",
+            "canonical": "前も後ろも黄色いナンバープレート",
+            "plain": "車の前も後ろもナンバーが黄色い",
+            "aliases": [
+                "黄色いナンバー（前後）",
+                "前後とも黄色いプレート"
+            ],
+            "countries": [
+                "IL",
+                "LU",
+                "NL"
+            ],
+            "confusableWith": [
+                "ref_plate_yellow_rear_only"
+            ],
+            "note": "**強い。** 前後とも黄色い国は少ない。後ろだけ黄色い国（イギリス・香港・ケニアなど）と混同しないよう、**前を見たかどうかを確認する。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/license_plate/"
+            ]
+        },
+        {
+            "id": "ref_plate_yellow_rear_only",
+            "slot": "vehicle",
+            "canonical": "後ろだけ黄色いナンバープレート",
+            "plain": "後ろのナンバーが黄色く、前は白い",
+            "aliases": [
+                "後ろだけ黄色いプレート",
+                "リアが黄色"
+            ],
+            "countries": [
+                "GB",
+                "HK",
+                "KE",
+                "LK",
+                "RW",
+                "UG"
+            ],
+            "confusableWith": [
+                "ref_plate_yellow_front_and_rear"
+            ],
+            "note": "**強い。** 香港はほぼ正方形、ケニアは後ろが四角、スリランカとルワンダとウガンダは前が白で後ろが黄色。**前後の色が違うこと自体が手がかりである。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/license_plate/"
+            ]
+        },
+        {
+            "id": "ref_plate_blue_stripes_both_sides",
+            "slot": "vehicle",
+            "canonical": "左右両端に青い縦帯",
+            "plain": "ナンバーの左と右の両方に青い縦線がある",
+            "aliases": [
+                "両端が青いプレート",
+                "青い縦帯が2本"
+            ],
+            "countries": [
+                "AL",
+                "IT"
+            ],
+            "confusableWith": [
+                "ref_plate_eu_blue_band"
+            ],
+            "note": "**非常に強い。2 カ国しかない。**EU 標準は左端だけなので、**右端にもあるかを見る。**アルバニアには左端が赤い別の型もある。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/license_plate/"
+            ]
+        },
+        {
+            "id": "ref_plate_white_elongated_no_band",
+            "slot": "vehicle",
+            "canonical": "青い帯のない細長い白プレート",
+            "plain": "横に長くて真っ白なナンバー（青い線がない）",
+            "aliases": [
+                "真っ白な細長いプレート",
+                "帯なしの白プレート"
+            ],
+            "countries": [
+                "HR",
+                "IS",
+                "RU"
+            ],
+            "confusableWith": [],
+            "note": "**欧州では珍しく、強い。**ロシアの識別法として最も確実なものの 1 つ。アイスランドも青い帯がない。クロアチアは 2016 年に EU 型へ変えたが、**Street View の撮影年が古い区間では旧型の白い長いプレートが残る。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/license_plate/"
+            ]
+        },
+        {
+            "id": "ref_plate_eu_blue_band",
+            "slot": "vehicle",
+            "canonical": "EU 式の青い縦帯（左端）",
+            "plain": "ナンバーの左端に青い縦の帯がある",
+            "aliases": [
+                "EUプレート",
+                "左が青いプレート",
+                "ユーロプレート"
+            ],
+            "countries": [
+                "AT",
+                "BE",
+                "BG",
+                "CY",
+                "CZ",
+                "DE",
+                "DK",
+                "EE",
+                "ES",
+                "FI",
+                "FR",
+                "GR",
+                "HR",
+                "HU",
+                "IE",
+                "IT",
+                "LT",
+                "LU",
+                "LV",
+                "MT",
+                "NL",
+                "PL",
+                "PT",
+                "RO",
+                "SE",
+                "SI",
+                "SK"
+            ],
+            "confusableWith": [],
+            "note": "**単独では絞れない（EU 加盟国はこの型である）。**価値は**無いことが分かったとき**にある。欧州の景観で青い帯が無ければ、スイス・アイスランド・アンドラ・ロシア・ウクライナなどへ寄る。> **強いのは、あることではなく無いことである。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/license_plate/"
+            ]
+        },
+        {
+            "id": "ref_plate_black_background",
+            "slot": "vehicle",
+            "canonical": "黒地に白文字のナンバープレート",
+            "plain": "ナンバーが黒くて文字が白い",
+            "aliases": [
+                "黒いプレート",
+                "黒地のナンバー"
+            ],
+            "countries": [
+                "ID",
+                "MY",
+                "TN"
+            ],
+            "confusableWith": [],
+            "note": "**強い。** マレーシアは白い文字の塊が 2 つ、インドネシアは黒い区切りで**3 つ**に分かれる。**塊の数で分かれる。**チュニジアは細長い黒プレート。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/license_plate/"
+            ]
+        },
+        {
+            "id": "ref_plate_blue_strip_top",
+            "slot": "vehicle",
+            "canonical": "上端に青い帯（白プレート）",
+            "plain": "白いナンバーの上のほうに青い帯がある",
+            "aliases": [
+                "上が青いプレート",
+                "メルコスール型"
+            ],
+            "countries": [
+                "BR"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**2018 年より前のブラジルは真っ白なので、**古い区間では出ない。**商用車は赤いプレートで、これも同じ国を示す。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/license_plate/"
+            ]
+        },
+        {
+            "id": "ref_plate_red_stripe_left",
+            "slot": "vehicle",
+            "canonical": "左端に赤い縦帯",
+            "plain": "ナンバーの左端に赤い縦線がある",
+            "aliases": [
+                "左が赤いプレート"
+            ],
+            "countries": [
+                "AL",
+                "KG"
+            ],
+            "confusableWith": [],
+            "note": "**強い。** キルギスの標準型。アルバニアは 2 番目に多い型がこれで、最も多い型は左右が青い。マン島は後ろが黄色いうえに左端が赤い。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/license_plate/"
+            ]
+        },
+        {
+            "id": "ref_plate_yellow_stripe_right",
+            "slot": "vehicle",
+            "canonical": "右端に黄色い縦帯（左端は青）",
+            "plain": "ナンバーの右端が黄色く、左端が青い",
+            "aliases": [
+                "右が黄色いプレート"
+            ],
+            "countries": [
+                "PT"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。** EU 式の青い帯に加えて右端が黄色い。**両端の色が違うことを見る。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/license_plate/"
+            ]
+        },
+        {
+            "id": "ref_plate_no_front_plate",
+            "slot": "vehicle",
+            "canonical": "前ナンバーが無い",
+            "plain": "車の前にナンバープレートが付いていない",
+            "aliases": [
+                "フロントプレートなし"
+            ],
+            "countries": [
+                "PR",
+                "US"
+            ],
+            "confusableWith": [],
+            "note": "**アメリカでも地域による。** 南東部からミシガン、南部を横切ってアリゾナまでの州で見られる。**国全体の性質ではないので、これだけで州を決めない。**プエルトリコも前ナンバーが無い。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/license_plate/"
+            ]
         }
     ],
     "_unconvertible": [
