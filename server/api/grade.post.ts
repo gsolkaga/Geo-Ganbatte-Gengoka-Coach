@@ -25,7 +25,7 @@ import {
     buildGradingUserPrompt,
 } from '../utils/prompts'
 import type { GradingContext as PromptContext } from '../utils/prompts'
-import { callChatStream, localIsoString, resolveModel } from '../utils/ai'
+import { callChatStream, httpStatusOf, localIsoString, resolveModel, wasBilled } from '../utils/ai'
 import type { StreamProgress } from '../utils/ai'
 import { buildJsonSchemaFormat, extractJson, requestStructured } from '../utils/structured'
 import { repairTruncatedJson } from '../../shared/json-repair'
@@ -138,7 +138,14 @@ export default defineEventHandler(async (event) => {
         }
         const record = await persistRun(body.variant, question.id, answer, judgement, results)
         return {
-            requestsConsumed: models.length,
+            /**
+             * **実際に枠を消費した数を返す。** モデル数ではない。
+             *
+             * 4xx で弾かれた呼び出しは推論に入っていないため消費していない
+             * （実測 2026-08-17、モデル ID の誤りで 400 が 15 回）。
+             * モデル数で返していたため、**消費していない 15 を消費として報告した。**
+             */
+            requestsConsumed: results.filter((r) => r.billed !== false).length,
             judgement,
             question: publicQuestionInfo(question.id, question.country, question.region),
             models: results,
@@ -231,6 +238,7 @@ async function gradeWithModelStreamed(
         firstByteMs: stream.firstByteMs,
         totalMs: stream.totalMs,
         error: stream.error,
+        billed: wasBilled(stream),
     }
 
     // 打ち切り時は閉じ括弧を足して中身を救えることがある。**生テキストは捨てない**
@@ -278,6 +286,7 @@ async function gradeWithModelBuffered(
             firstByteMs: null,
             totalMs: Date.now() - startedAt,
             error: null,
+            billed: true,
         }
     }
 
@@ -293,7 +302,18 @@ async function gradeWithModelBuffered(
         firstByteMs: null,
         totalMs: Date.now() - startedAt,
         error: structured.error,
+        /**
+         * **4xx は消費していない。** モデル ID の誤りやスキーマの誤りで
+         * 推論に入る前に弾かれた場合、枠は減らない（実測 2026-08-17、400 が 15 回）。
+         */
+        billed: !isClientErrorMessage(structured.error),
     }
+}
+
+/** エラー文から 4xx を判定する。**枠を消費していない印である** */
+function isClientErrorMessage(message: string | null): boolean {
+    const status = httpStatusOf(message)
+    return status !== null && status >= 400 && status < 500
 }
 
 function parseFeedback(

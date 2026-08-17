@@ -265,6 +265,20 @@ export interface ModelGrading {
     firstByteMs: number | null
     totalMs: number
     error: string | null
+    /**
+     * **無償枠を消費したか。** `status` とは別である。
+     *
+     * 打ち切り（`truncated`）は消費している（HTTP 200 で受け取っている）。
+     * **4xx は消費していない**（届いたが推論に入る前に弾かれた）。
+     *
+     * 実測（2026-08-17）。`preview/` の接頭辞が抜けたモデル ID で 15 回 400 になり、
+     * **消費 15 として報告された。** 実際には 1 つも消費していない。
+     *
+     * > **届いたことと、使われたことは別である。**
+     *
+     * 古い記録にはこの項目が無い（`undefined`）。**無いことを `false` と読まない。**
+     */
+    billed?: boolean
 }
 
 export interface GradingResult extends CodeJudgement {

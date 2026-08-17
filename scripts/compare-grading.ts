@@ -51,6 +51,7 @@
 import { readFile, readdir, mkdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import type { Question, RunRecord } from '../shared/types'
+import { COMPARISON_MODELS, displayName } from '../shared/models'
 import { resolveBaseUrl } from './lib/base-url'
 
 /**
@@ -65,13 +66,13 @@ const RUNS_DIR = join('data', 'runs')
 const OUT_DIR = join('data', 'compare')
 const REPORT_PATH = join('docs', 'v1-v2-comparison.md')
 
-/** 比較対象のモデル。v1 の記録と同じ 4 モデルで揃える */
-const MODELS = [
-    'gpt-oss-120b',
-    'gemma-4-31B-it',
-    'Qwen3.6-35B-A3B',
-    'Kimi-K2.6',
-]
+/**
+ * 比較対象のモデル。**`shared/models.ts` が唯一の定義である。**
+ *
+ * ここに書き写していたため `preview/` の接頭辞が抜け、
+ * **4 モデルのうち 3 つが全件 400 になった**（実測 2026-08-17）。
+ */
+const MODELS: string[] = [...COMPARISON_MODELS]
 
 const dryRun = process.argv.includes('--dry-run')
 /**
@@ -327,6 +328,38 @@ async function main() {
     console.log('そのまま v2 に渡すと絞り込み力・積集合・次に見るべきスロットが全部「算出不能」になる。')
     console.log('先に npx vite-node scripts/normalize-answer-keys.ts を実行して正解タグ側も埋めること。')
 
+    /**
+     * **モデル ID が v1 の記録と一致するか。投げる前に確かめる。**
+     *
+     * 実測（2026-08-17）。`preview/` の接頭辞が抜けたリストで 65 リクエストを開始し、
+     * **4 モデルのうち 3 つが全件 400 になった。**
+     *
+     * このとき画面には `v1=記録なし` と出ていた。**1 件目から出ていた。**
+     * 突き合わせる相手が居ないのだから、ID が違うと分かる情報だった。
+     * それを表示しながら 5 件分投げ続けた。
+     *
+     * > **異常を表示することと、異常で止まることは別である。**
+     *
+     * 記録に無いモデル ID があれば**1 件も投げずに終わる。** 確認は消費 0 でできる。
+     */
+    const recordedModels = new Set(allRuns.flatMap((r) => r.result.models.map((m) => m.model)))
+    const unknownModels = MODELS.filter((m) => !recordedModels.has(m))
+    console.log('')
+    if (unknownModels.length) {
+        console.log('**モデル ID が v1 の記録に無い。1 件も投げずに終わる。**')
+        console.log('')
+        for (const m of unknownModels) console.log(`  無い: ${m}`)
+        console.log('')
+        console.log('  記録にあるモデル ID:')
+        for (const m of [...recordedModels].sort()) console.log(`    ${m}`)
+        console.log('')
+        console.log('`shared/models.ts` の COMPARISON_MODELS を直すこと。')
+        console.log('**`preview/` の接頭辞は提供側の名前空間である。落としてはならない。**')
+        process.exitCode = 1
+        return
+    }
+    console.log(`モデル ID は v1 の記録と一致した（${MODELS.length} 件）。突き合わせできる`)
+
     if (dryRun) {
         console.log('')
         console.log('--dry-run のため実行しない')
@@ -407,9 +440,38 @@ async function main() {
                 v2MissedCluesCount: countArray(v2Model.feedback?.missedClues),
             })
             console.log(
-                `  ${v2Model.model.padEnd(18)} v1=${(v1Model?.status ?? '記録なし').padEnd(9)} → v2=${v2Model.status
-                }（${Math.round(v2Model.totalMs / 1000)} 秒）`,
+                `  ${displayName(v2Model.model).padEnd(18)} v1=${(v1Model?.status ?? '記録なし').padEnd(9)} → v2=${v2Model.status
+                }（${Math.round(v2Model.totalMs / 1000)} 秒）`
+                // **error の理由を出す。** 「error（0 秒）」だけでは何が起きたか分からない
+                + (v2Model.error ? `\n      理由: ${v2Model.error.slice(0, 300)}` : ''),
             )
+        }
+
+        /**
+         * **1 件目で失敗したモデルがあれば、そこで止める。**
+         *
+         * 実測（2026-08-17）。3 モデルが 1 件目から `error（0 秒）` を返していたのに
+         * 6 件目まで進み、**同じ失敗を 15 回並べた。**
+         *
+         * 0 秒の error は入力側の誤りである（モデル ID、スキーマ、権限）。
+         * **回数を増やしても直らない。** 1 件目で止めて原因を直す方が速い。
+         *
+         * > **同じ失敗を並べない。** 接続断で `break` するのと同じ判断である。
+         */
+        if (index === 0) {
+            const failed = response.models.filter((m) => m.status === 'error')
+            if (failed.length) {
+                console.log('')
+                console.log(`**1 件目で ${failed.length} / ${response.models.length} モデルが error になった。ここで止める。**`)
+                for (const m of failed) {
+                    console.log(`  ${m.model}: ${m.error ?? '理由なし'}`)
+                }
+                console.log('')
+                console.log('0 秒の error は入力側の誤りである（モデル ID、スキーマ、権限）。')
+                console.log('**回数を増やしても直らない。** 原因を直してから再実行すること。')
+                console.log(`ここまでの消費: ${consumed}　実際に送ったかは npm run usage:report で確認できる`)
+                break
+            }
         }
 
         // 対応づけた生データを残す。**打ち切りでも捨てない**
@@ -499,7 +561,7 @@ async function writeReport(
 
     for (const [model, list] of byModel) {
         lines.push(
-            `| ${model} | ${count(list, 'v1Status', 'ok')} | ${count(list, 'v1Status', 'truncated')} | ${count(list, 'v1Status', 'error')
+            `| ${displayName(model)} | ${count(list, 'v1Status', 'ok')} | ${count(list, 'v1Status', 'truncated')} | ${count(list, 'v1Status', 'error')
             } | ${count(list, 'v2Status', 'ok')} | ${count(list, 'v2Status', 'truncated')} | ${count(list, 'v2Status', 'error')} |`,
         )
     }

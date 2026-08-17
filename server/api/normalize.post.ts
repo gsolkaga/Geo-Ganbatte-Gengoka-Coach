@@ -30,6 +30,8 @@ import {
     selectTargetSlots,
 } from '../utils/normalize'
 import { requestStructured } from '../utils/structured'
+// **試行回数と消費数は違う。** 4xx で弾かれた試行は枠を消費していない
+import { countBilledAttempts } from '../../shared/billing'
 import { appendGlossaryCandidate, readGlossary } from '../utils/store'
 
 const bodySchema = z.object({
@@ -80,7 +82,12 @@ export default defineEventHandler(async (event) => {
     if (!result.ok || result.data === null) {
         // **失敗を成功に見せない。** terms は空のまま採点に進める
         return {
-            requestsConsumed: result.attempts.length,
+            /**
+             * **試行回数ではなく消費した回数を返す。**
+             * モデル ID の誤りなどで 4xx になった試行は推論に入っていない
+             * （実測 2026-08-17）。
+             */
+            requestsConsumed: countBilledAttempts(result.attempts),
             ok: false,
             mode: null,
             slots: [],
@@ -107,7 +114,8 @@ export default defineEventHandler(async (event) => {
     }
 
     return {
-        requestsConsumed: result.attempts.length,
+        // 成功していても、フォールバックで 2 回投げたなら消費は 2 である
+        requestsConsumed: countBilledAttempts(result.attempts),
         ok: true,
         mode: result.mode,
         slots: normalized,

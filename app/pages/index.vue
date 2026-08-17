@@ -24,6 +24,7 @@ import {
     mergeNormalizedTerms,
     runToFormState,
 } from '#shared/run-form'
+import { COMPARISON_MODELS } from '#shared/models'
 import type { AnswerDraft, SlotRecord, Variant } from '#shared/types'
 
 /**
@@ -32,13 +33,11 @@ import type { AnswerDraft, SlotRecord, Variant } from '#shared/types'
  */
 type Phase = 'loading' | 'empty' | 'input' | 'grading' | 'result'
 
-/** 比較対象のモデル。既定は先頭 1 件のみ */
-const COMPARISON_MODELS = [
-    'gpt-oss-120b',
-    'preview/gemma-4-31B-it',
-    'preview/Qwen3.6-35B-A3B',
-    'preview/Kimi-K2.6',
-] as const
+/**
+ * 比較対象のモデルは `shared/models.ts` にある（既定は先頭 1 件のみ）。
+ * **ここに書き写すと比較スクリプトとずれる**
+ * （実測 2026-08-17、`preview/` の接頭辞が抜けて 3 モデルが全件 400 になった）。
+ */
 
 const phase = ref<Phase>('loading')
 

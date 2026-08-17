@@ -14,6 +14,8 @@
 import OpenAI from 'openai'
 import type { Variant } from '../../shared/types'
 import type { StreamProgress } from '../../shared/grading-stream'
+// 消費判定は純粋な関数として切り出してある。**テストが届く場所に置く**
+import { httpStatusOf, wasBilled as wasBilledPure } from '../../shared/billing'
 import { appendUsageLog } from './store'
 
 export type UsageCategory =
@@ -296,12 +298,25 @@ function describeError(caught: unknown): string {
  * 通信すれば必ず 1ms 以上かかる。
  */
 function wasSent(result: AiChatResult): boolean {
-    if (result.ok) return true
-    // トークンが無い場合は OpenAI クライアントを作る前に throw している
-    if (result.error?.includes('SAKURA_AI_TOKEN')) return false
-    // 送信していれば必ず時間がかかる。0ms は組み立て段階の失敗である
-    return result.durationMs > 0
+    // 非ストリーミング経路。判定の中身は `shared/billing.ts` に置いてある
+    return wasBilledPure({
+        status: result.ok ? 'ok' : 'error',
+        error: result.error,
+        totalMs: result.durationMs,
+    })
 }
+
+/** ストリーミング経路の消費判定。**`shared/billing.ts` に委譲する** */
+export function wasBilled(result: AiStreamResult): boolean {
+    return wasBilledPure({
+        status: result.status,
+        error: result.error,
+        httpStatus: result.httpStatus,
+        totalMs: result.totalMs,
+    })
+}
+
+export { httpStatusOf }
 
 async function logUsage(request: AiChatRequest, result: AiChatResult): Promise<void> {
     const record = {
@@ -365,6 +380,19 @@ export interface AiStreamResult {
     structuredMode: StructuredMode
     usage: AiTokenUsage | null
     error: string | null
+    /**
+     * HTTP のステータスコード。**例外で終わったときだけ入る。**
+     *
+     * 無償枠を消費したかの判定に使う。**4xx は消費していない。**
+     * リクエストは届いたが推論に入る前に弾かれている
+     * （モデル ID の誤り、スキーマの誤り、権限、レート制限）。
+     *
+     * 実測（2026-08-17）。`preview/` の接頭辞が抜けたモデル ID で 15 回 400 になり、
+     * **消費 15 として記録された。** 実際には 1 つも消費していない。
+     *
+     * > **届いたことと、使われたことは別である。**
+     */
+    httpStatus: number | null
 }
 
 export interface AiStreamRequest extends AiChatRequest {
@@ -556,6 +584,7 @@ export async function callChatStream(request: AiStreamRequest): Promise<AiStream
             structuredMode,
             usage,
             error,
+            httpStatus: null,
         }
     }
     catch (caught) {
@@ -572,6 +601,7 @@ export async function callChatStream(request: AiStreamRequest): Promise<AiStream
             structuredMode,
             usage,
             error: describeError(caught),
+            httpStatus: httpStatusOf(caught),
         }
     }
 
@@ -595,9 +625,10 @@ async function logStreamUsage(
          * **無償枠を消費したか。** 打ち切り（`truncated`）は消費している。
          * HTTP 200 で受け取ったうえで途中までしか来なかった状態である。
          */
-        sent: result.status === 'truncated'
-            || (result.status === 'ok')
-            || !(result.error?.includes('SAKURA_AI_TOKEN') ?? false) && result.totalMs > 0,
+        sent: wasBilled(result),
+        ...(result.httpStatus !== null ? { httpStatus: result.httpStatus } : {}),
+        // **4xx は「届いたが使われていない」。** ok でも sent でもない状態を残す
+        ...(result.status === 'error' && !wasBilled(result) ? { rejected: true } : {}),
         streamed: true,
         truncated: result.status === 'truncated',
         /** 常に 0。リトライは実装しない */
