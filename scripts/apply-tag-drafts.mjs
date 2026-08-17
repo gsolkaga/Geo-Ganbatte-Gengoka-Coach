@@ -100,6 +100,16 @@ const ABSENT_PATTERNS = [
     /何も見るものが無い/,
     /何も無さそう/,
     /何も無い$/,
+    /**
+     * **「舗装されており見えない」は不在である。**
+     *
+     * 舗装で覆われているなら、その地点に土の手がかりは存在しない。
+     * これを `visible` + `blind` にすると、学習者の「見えない」という
+     * **正しい判断が「見落とし」として扱われる。**
+     *
+     * 3 件で発生した（`q-kz-01` `q-ru-01` `q-bg-01` の `ground`）。
+     */
+    /舗装(され|されており)?.*(見えない|視認不可|見えず)/,
 ]
 
 function looksAbsent(actual) {
@@ -116,6 +126,9 @@ function mapRecognition(raw) {
     if (v.includes('見えない扱い')) return { value: 'blind', reason: '「見えない扱い」' }
     if (v.includes('見えなくはない')) return { value: 'hard', reason: '「見えなくはない」= 探せば見える' }
     if (v.includes('不明')) return { value: 'hard', reason: '「不明」= 探しても決められない' }
+    if (v.includes('難し')) return { value: 'hard', reason: '「難しい」= 探せば見えるが手間がかかる' }
+    // **「見えない」系より後に置く。** 「見えない扱いで十分」に先に当たらせるため
+    if (v.includes('見えた')) return { value: 'easy', reason: '「見えた」を含む' }
     return { value: null, reason: `自由記述「${v}」を 3 値に寄せられない` }
 }
 
@@ -216,8 +229,11 @@ function buildEntry(state, row, recog, learnerSaw) {
 const DECISIVE_KEYWORDS = [
     [/左側通行|右側通行|走行車線/, 'traffic_side'],
     [/ナンバープレート|ナンバー|車両/, 'vehicle'],
+    // **カーメタ（撮影車のメタ）は camera。「カーブミラー」と語頭が似るので先に置く**
+    [/カーメタ|Gen\d|カメラ|撮影車|ノーカー/, 'camera'],
     // 「ポルトガル語」「タイ語」なども拾う。**言語名を列挙しない**
-    [/カーブミラー|キリル|ハングル|繁体字|簡体字|аб|文字|[ぁ-んァ-ヶ一-龥ー]+語/, 'script'],
+    // ドメイン名（`.kz` など）は看板の文字として観察される
+    [/カーブミラー|キリル|ハングル|繁体字|簡体字|аб|文字|ドメイン|[ぁ-んァ-ヶ一-龥ー]+語/, 'script'],
     [/ガードレール|ボラード|杭/, 'bollard'],
     [/標識|DUR/, 'sign'],
     [/電柱|街灯|ポール/, 'pole'],
@@ -226,8 +242,9 @@ const DECISIVE_KEYWORDS = [
     [/舗装|タイル|砂利|アスファルト/, 'pavement'],
     [/屋根|建物|家|建築/, 'architecture'],
     [/土|地面/, 'ground'],
-    [/路面標示|中央線|白線/, 'road_marking'],
-    [/Gen\d|カメラ|撮影車/, 'camera'],
+    // **縁石は road_marking である**（`data/glossary.json` の kerb_large / kerb_on_narrow_lane）。
+    // 路面まわりで迷うが、辞書側の割り当てに合わせる
+    [/縁石|路面標示|中央線|白線|外側線/, 'road_marking'],
 ]
 
 /** 自由記述の決め手をスロット ID に変換する。**変換できなかった断片は報告する** */

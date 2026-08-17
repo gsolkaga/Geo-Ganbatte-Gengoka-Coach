@@ -167,7 +167,8 @@
         "state": "visible",
         "plain": "中央分離帯の植物の根部分は見える、白い砂",
         "terms": [],
-        "confirmed": true
+        "confirmed": true,
+        "recognition": "easy"
       },
       "terrain_vegetation": {
         "state": "visible",
@@ -217,7 +218,8 @@
       }
     },
     "decisiveSlots": [
-      "script"
+      "script",
+      "road_marking"
     ],
     "note": null,
     "source": {
@@ -730,10 +732,9 @@
         "recognition": "easy"
       },
       "ground": {
-        "state": "visible",
-        "plain": "舗装されており視認不可",
-        "terms": [],
-        "confirmed": true
+        "state": "absent",
+        "plain": null,
+        "terms": []
       },
       "terrain_vegetation": {
         "state": "visible",
@@ -846,10 +847,9 @@
         "recognition": "easy"
       },
       "ground": {
-        "state": "visible",
-        "plain": "舗装されており見えない",
-        "terms": [],
-        "confirmed": true
+        "state": "absent",
+        "plain": null,
+        "terms": []
       },
       "terrain_vegetation": {
         "state": "visible",
@@ -899,6 +899,7 @@
     },
     "decisiveSlots": [
       "script",
+      "road_marking",
       "vehicle"
     ],
     "note": null,
@@ -961,10 +962,9 @@
         "recognition": "easy"
       },
       "ground": {
-        "state": "visible",
-        "plain": "舗装されており見えない",
-        "terms": [],
-        "confirmed": true
+        "state": "absent",
+        "plain": null,
+        "terms": []
       },
       "terrain_vegetation": {
         "state": "visible",
@@ -1005,7 +1005,8 @@
         "state": "visible",
         "plain": "秋？街路樹の一部が黄色い葉となっている",
         "terms": [],
-        "confirmed": true
+        "confirmed": true,
+        "recognition": "hard"
       },
       "other": {
         "state": "visible",
@@ -1017,6 +1018,7 @@
     },
     "decisiveSlots": [
       "script",
+      "camera",
       "vehicle"
     ],
     "note": null,
