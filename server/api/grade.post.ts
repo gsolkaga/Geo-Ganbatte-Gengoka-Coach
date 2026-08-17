@@ -28,6 +28,7 @@ import type { GradingContext as PromptContext } from '../utils/prompts'
 import { callChatStream, localIsoString, resolveModel } from '../utils/ai'
 import type { StreamProgress } from '../utils/ai'
 import { buildJsonSchemaFormat, extractJson, requestStructured } from '../utils/structured'
+import { repairTruncatedJson } from '../../shared/json-repair'
 import { readGlossary, readQuestion, saveRun } from '../utils/store'
 
 /**
@@ -232,7 +233,9 @@ async function gradeWithModelStreamed(
         error: stream.error,
     }
 
-    // 打ち切り・エラー時は生テキストを保持したまま返す。捨てない
+    // 打ち切り時は閉じ括弧を足して中身を救えることがある。**生テキストは捨てない**
+    if (stream.status === 'truncated') return salvageTruncated(base)
+    // エラー時は生テキストを保持したまま返す
     if (stream.status !== 'ok') return base
 
     const parsedFeedback = parseFeedback(stream.content)
@@ -308,6 +311,49 @@ function parseFeedback(
         return { ok: false, error: `Zod 検証に失敗した: ${validated.error.message}` }
     }
     return { ok: true, feedback: validated.data satisfies Feedback }
+}
+
+/**
+ * 打ち切られた応答から中身を救い出す。
+ *
+ * ## なぜやるか（実測 2026-08-17、カザフスタンの出題）
+ *
+ * 2 モデルが `finish_reason=length` で落ちたが、**中身の量は問題ではなかった。**
+ *
+ *   gemma  12,052 字中 11,790 字（98%）が末尾の空白。本文 262 字。欠落 7/9
+ *   Kimi   41,508 字中 40,952 字（99%）が末尾の空白。本文 556 字。**欠落 1/9**
+ *
+ * `Kimi` は `wrongReasoning` だけが欠けており、`feedbackSchema` の既定値で埋まる。
+ * **閉じ括弧を足すだけで使える結果になる。** リクエストを 1 つ救える。
+ *
+ * ## 成功に見せない
+ *
+ * 救えても `status` は `truncated` のままにする。**打ち切りは起きた事実である。**
+ * `error` に修復した旨を残し、記録から消さない。
+ */
+function salvageTruncated(base: ModelGrading): ModelGrading {
+    const repaired = repairTruncatedJson(base.rawContent)
+    const wsNote = repaired.trimmedWhitespace > 0
+        ? `末尾の空白 ${repaired.trimmedWhitespace} 字を落とした`
+        : '末尾の空白はなかった'
+
+    if (!repaired.ok || repaired.text === null) {
+        return { ...base, error: `${base.error ?? ''} / 修復できなかった（${wsNote}）`.trim() }
+    }
+    const parsed = feedbackSchema.safeParse(JSON.parse(repaired.text))
+    if (!parsed.success) {
+        // **必須項目が欠けていれば救えない。** 推測で埋めない
+        return {
+            ...base,
+            error: `${base.error ?? ''} / JSON は閉じられたが必須項目が欠けていた（${wsNote}）`.trim(),
+        }
+    }
+    return {
+        ...base,
+        feedback: parsed.data,
+        // **status は truncated のまま。** 打ち切りが起きた事実を消さない
+        error: `${base.error ?? ''} / 修復して中身を取り出した（${wsNote}、足した文字 ${JSON.stringify(repaired.appended)}）`.trim(),
+    }
 }
 
 /**

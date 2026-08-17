@@ -64,6 +64,17 @@ export const REQUEST_TIMEOUT_MS = 310_000
  *
  * **`finish_reason` は信号であり、使えるかどうかの事実はパースで決まる。**
  */
+/**
+ * 末尾の空白がこの長さを超えたらストリームを打ち切る。
+ *
+ * 実測（2026-08-17）で 11,790 字（gemma、119.9 秒）と
+ * 40,952 字（Kimi、280.0 秒）の空白が出た。**待っても中身は増えない。**
+ *
+ * 512 字にしたのは、整形（インデント・改行）で正当に出る空白と区別するため。
+ * JSON の整形で連続 512 字の空白が出ることはない。
+ */
+export const WHITESPACE_RUN_LIMIT = 512
+
 export function looksLikeCompleteJson(text: string): boolean {
     const trimmed = text.trim()
     if (!trimmed.startsWith('{') || !trimmed.endsWith('}')) return false
@@ -391,6 +402,8 @@ export async function callChatStream(request: AiStreamRequest): Promise<AiStream
     let result: AiStreamResult
     /** JSON が閉じたのでこちらから読むのをやめたか */
     let jsonClosedEarly = false
+    /** 空白の暴走を検知してこちらから打ち切ったか。**成功にしない** */
+    let whitespaceRunAborted = false
 
     try {
         const stream = await getClient().chat.completions.create({
@@ -453,6 +466,29 @@ export async function callChatStream(request: AiStreamRequest): Promise<AiStream
                 jsonClosedEarly = true
                 break
             }
+
+            /**
+             * **JSON が閉じないまま空白だけが続く場合も打ち切る。**
+             *
+             * 上の判定は「JSON が閉じたら止める」であり、
+             * **閉じないまま空白を吐き続ける場合には発火しない。**
+             *
+             * 実測（2026-08-17、カザフスタンの出題）。
+             *
+             *   gemma  12,052 字中 11,790 字（98%）が末尾の空白。**119.9 秒**
+             *   Kimi   41,508 字中 40,952 字（99%）が末尾の空白。**280.0 秒**
+             *
+             * どちらも本文を書き終えたあと、必須項目を残したまま空白に入っている。
+             * **待っても中身は増えない。**
+             *
+             * リクエストは既に消費されているので節約にはならないが、
+             * **280 秒の待ち時間が消える。** 打ち切ったあとは
+             * `grade.post.ts` の `salvageTruncated` が閉じ括弧を足して中身を救う。
+             */
+            if (content.length - content.trimEnd().length >= WHITESPACE_RUN_LIMIT) {
+                whitespaceRunAborted = true
+                break
+            }
         }
 
         const totalMs = Date.now() - startedAt
@@ -474,6 +510,19 @@ export async function callChatStream(request: AiStreamRequest): Promise<AiStream
         if (jsonClosedEarly) {
             // JSON が閉じたのでこちらから読むのをやめた。成功である
             status = 'ok'
+        }
+        else if (whitespaceRunAborted) {
+            /**
+             * **空白の暴走をこちらから止めた。成功にしない。**
+             *
+             * JSON が閉じていないので中身は不完全である。
+             * ただし `grade.post.ts` の `salvageTruncated` が
+             * 閉じ括弧を足して救えることがある（欠落が既定値を持つ項目だけの場合）。
+             */
+            status = 'truncated'
+            error = `空白が ${WHITESPACE_RUN_LIMIT} 字以上続いたため打ち切った`
+                + `（本文 ${content.trimEnd().length} 字、${chunks} チャンク、max_tokens=${maxTokens}）。`
+                + '**待っても中身は増えない**'
         }
         else if (!content.trim()) {
             status = 'truncated'
