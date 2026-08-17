@@ -26,12 +26,22 @@
  * 記録 13 件 × （正規化 1 + モデル 4）= **65 リクエスト**である。
  * `--unique` で出題ごとに 1 件（50）に絞れる。
  *
- * ## 転送方式を揃える
+ * ## 転送方式を v1 に揃える（`stream: true`）
  *
- * **非ストリーミングで実行する**（`stream: false`）。
- * v1 の記録はストリーミングで取ったが、比較の対象は
- * 「同じ観察メモに対して何が返るか」であり、転送方式は揃える必要がある。
- * ストリーミングと非ストリーミングで打ち切りの起き方が変わる（実測 2026-08-07）。
+ * 当初は `stream: false` にして「転送方式を揃える」と書いていた。**揃っていなかった。**
+ * **v1 の記録は画面から取っており、画面はストリーミングである。**
+ *
+ * ストリーミングと非ストリーミングでは打ち切りの起き方が変わる（実測 2026-08-07）。
+ * つまり `stream: false` は**v1 と v2 の差に転送方式の差を混ぜていた。**
+ *
+ * さらに非ストリーミングでは 2 つ失う。
+ *
+ * - **モデルが直列になる。** 1 記録 265 秒（4 + 117 + 25 + 119）
+ * - **空白の早期打ち切りが効かない。** チャンクを見られないため
+ *   `max_tokens` を使い切るまで止まらない（`gemma` が 117 秒。
+ *   ストリーミングなら 8.6 秒で止まる）
+ *
+ * > **速くするために直列をやめたのではない。v1 と同じ条件にしたら速くなった。**
  *
  * ## 前提
  *
@@ -45,6 +55,7 @@
  *   npm run compare                             全件（記録 13 件 = 65）
  *   npm run compare -- --unique                 出題ごとに 1 件（10 問 = 50）
  *   npm run compare -- --skip-graded            v2 済みの出題を飛ばす
+ *   npm run compare -- --jobs 2                 記録を 2 件同時に流す（**条件が変わる**）
  *
  * 読むのは `npm run read:v2`（消費 0）。`docs/v2-feedback-read.md` に書き出す。
  */
@@ -52,6 +63,8 @@ import { readFile, readdir, mkdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import type { Question, RunRecord } from '../shared/types'
 import { COMPARISON_MODELS, displayName } from '../shared/models'
+// NDJSON の切り出しは画面と同じものを使う。**二重に書かない**
+import { createNdjsonParser } from '../shared/grading-stream'
 import { resolveBaseUrl } from './lib/base-url'
 
 /**
@@ -85,6 +98,24 @@ const dryRun = process.argv.includes('--dry-run')
 const useAll = !process.argv.includes('--unique')
 /** 既に v2 で採点した出題を飛ばす。やり直しで枠を使わないため */
 const skipGraded = process.argv.includes('--skip-graded')
+
+/**
+ * 同時に流す**記録**の数（既定 1）。モデル 4 件は常に並列である。
+ *
+ * ## なぜ既定を 1 にするか
+ *
+ * `--jobs 2` にすると同時に 8 本の呼び出しが飛ぶ。
+ * **同時実行数の上限を測っていない**（タスク 26.2 が未実行）。
+ * 超えると 429 が返る。429 は 4xx なので**枠は消費しない**が、
+ * その記録は失敗して投げ直しになる。
+ *
+ * v1 の記録は画面から取っており、**画面は 1 記録ずつ・モデル 4 並列**である。
+ * `--jobs 1` がその条件と一致する。**上げると条件がずれる。**
+ *
+ * 待ち時間を縮めたいときだけ上げる。**比較の条件を変えていることを自覚して使う。**
+ */
+const jobsArg = process.argv.indexOf('--jobs')
+const JOBS = jobsArg >= 0 ? Math.max(1, Math.min(4, Number(process.argv[jobsArg + 1]) || 1)) : 1
 
 // ============================================================
 // v1 の記録を読む
@@ -164,6 +195,8 @@ interface GradeResponse {
         structuredMode: string | null
         totalMs: number
         error: string | null
+        /** 無償枠を消費したか。**古い記録には無い**（`undefined` を `false` と読まない） */
+        billed?: boolean
     }[]
     runFile: string
 }
@@ -206,9 +239,33 @@ async function normalizeSlots(record: RunRecord): Promise<{
     return { slots, consumed: body.requestsConsumed, ok: true }
 }
 
+/**
+ * v2 を投げる。**ストリーミングを使う。**
+ *
+ * ## 当初は非ストリーミングにしていた。誤りだった
+ *
+ * 「転送方式を揃える」と書いて `stream: false` にしていたが、
+ * **v1 の記録は画面から取っており、画面はストリーミングである。**
+ * 揃えるつもりで揃っていなかった。
+ *
+ * 非ストリーミングにすると 3 つ壊れる。
+ *
+ * | | 非ストリーミング | ストリーミング（v1 と同じ） |
+ * |---|---|---|
+ * | モデルの実行 | **直列**（1 件 265 秒） | **並列**（1 件 = 最も遅いモデル） |
+ * | 空白の早期打ち切り | **効かない**（チャンクを見られない） | 効く（512 字で止める） |
+ * | v1 との比較 | **転送方式が違う** | 同じ |
+ *
+ * 早期打ち切りが効かないのが一番悪い。`gemma` が空白を吐き続けても
+ * `max_tokens` を使い切るまで止まらない。**実測で 117 秒かかった**
+ * （ストリーミングなら 8.6 秒で止まる）。
+ *
+ * > **速くするために直列をやめたのではない。v1 と同じ条件にしたら速くなった。**
+ */
 async function gradeV2(
     record: RunRecord,
     slots: RunRecord['answer']['slots'],
+    onModelDone?: (result: GradeResponse['models'][number]) => void,
 ): Promise<GradeResponse> {
     const response = await fetch(`${BASE_URL}/api/grade`, {
         method: 'POST',
@@ -221,14 +278,61 @@ async function gradeV2(
             decisiveSlot: record.answer.decisiveSlot,
             reasoning: record.answer.reasoning,
             models: MODELS,
-            stream: false,
+            // **v1 と同じ経路にする。** 画面もこれを使っている
+            stream: true,
         }),
     })
     if (!response.ok) {
         const text = await response.text()
         throw new Error(`HTTP ${response.status}: ${text.slice(0, 400)}`)
     }
-    return (await response.json()) as GradeResponse
+    if (!response.body) throw new Error('ストリームの本文が無い')
+
+    const models: GradeResponse['models'] = []
+    let judgement: Record<string, unknown> = {}
+    let question: GradeResponse['question'] = { id: record.questionId, country: '', region: null }
+    let runFile = ''
+
+    const parser = createNdjsonParser((event) => {
+        if (event.type === 'judgement') {
+            judgement = event.judgement as unknown as Record<string, unknown>
+            question = event.question
+        }
+        else if (event.type === 'result') {
+            // **index で並べる。** 完了順に詰めるとモデルの順序が実行ごとに変わる
+            const result = event.result as unknown as GradeResponse['models'][number]
+            models[event.index] = result
+            onModelDone?.(result)
+        }
+        else if (event.type === 'done') {
+            runFile = event.runFile
+        }
+        // progress は捨てる。**進捗は画面のためのものであり、集計には使わない**
+    })
+
+    const decoder = new TextDecoder()
+    const reader = response.body.getReader()
+    for (; ;) {
+        const { done, value } = await reader.read()
+        if (done) break
+        parser.push(decoder.decode(value, { stream: true }))
+    }
+    parser.flush()
+
+    const received = models.filter(Boolean)
+    if (received.length === 0) throw new Error('result イベントが 1 件も届かなかった')
+
+    return {
+        /**
+         * **実際に消費した数を数える。** `judgement` イベントが先に流す
+         * `requestsConsumed` はモデル数の見積りであり、4xx を含む。
+         */
+        requestsConsumed: received.filter((m) => m.billed !== false).length,
+        judgement,
+        question,
+        models: received,
+        runFile,
+    }
 }
 
 // ============================================================
@@ -319,6 +423,14 @@ async function main() {
     console.log('')
     console.log(`モデル ${MODELS.length} 件: ${MODELS.join(', ')}`)
     console.log('')
+    console.log('転送はストリーミング（**v1 の記録と同じ経路**）。モデル 4 件は並列に流れる。')
+    console.log(`同時に流す記録: ${JOBS} 件`
+        + (JOBS > 1
+            ? `　→ **同時に ${JOBS * MODELS.length} 本の呼び出しが飛ぶ。v1 の条件（1 記録ずつ）とは違う**`
+            : '（v1 の条件と同じ。--jobs で増やせるが条件が変わる）'))
+    console.log(`所要時間の目安: 1 記録が最も遅いモデルの時間（実測 119 秒）なので、`
+        + `**${Math.ceil(targets.length / JOBS * 130 / 60)} 分**前後`)
+    console.log('')
     console.log('| 用途 | 1 件あたり | 合計 |')
     console.log(`| 観察メモの正規化 | 1 | ${targets.length} |`)
     console.log(`| v2 の採点 | ${MODELS.length} | ${targets.length * MODELS.length} |`)
@@ -382,10 +494,19 @@ async function main() {
     const rows: Row[] = []
     let consumed = 0
     let normalizeFailed = 0
+    /** 以降を投げないための旗。接続断と最初の全滅で立てる */
+    let stop = false
+    let completed = 0
 
-    for (const [index, record] of targets.entries()) {
-        console.log('')
-        console.log(`[${index + 1}/${targets.length}] ${record.questionId}（${record.id}）`)
+    /**
+     * 1 記録分の処理。**ログは溜めてから一度に出す。**
+     *
+     * `--jobs 2` 以上では複数の記録が同時に進む。行ごとに出すと
+     * **どの記録の行なのか分からなくなる。** まとめて出せば読める。
+     */
+    async function processRecord(record: RunRecord, index: number): Promise<void> {
+        const out: string[] = ['', `[${index + 1}/${targets.length}] ${record.questionId}（${record.id}）`]
+        const flush = () => console.log(out.join('\n'))
 
         // ---- 1. 観察メモの正規化。**絞り込み計算の入力を作る** ----
         let slots = record.answer.slots
@@ -394,32 +515,33 @@ async function main() {
             consumed += normalized.consumed
             slots = normalized.slots
             const filled = Object.entries(slots).filter(([, v]) => v.terms.length).length
-            console.log(`  正規化 ${normalized.ok ? 'ok' : '失敗'} / 用語 ID が入ったスロット ${filled} 件`)
+            out.push(`  正規化 ${normalized.ok ? 'ok' : '失敗'} / 用語 ID が入ったスロット ${filled} 件`)
             if (!normalized.ok) normalizeFailed += 1
         }
         catch (error) {
             // **正規化の失敗で採点まで止めない。** 正解タグはあるので v2 の一部は動く
             normalizeFailed += 1
-            console.log(`  正規化に失敗した: ${error instanceof Error ? error.message : String(error)}`)
+            out.push(`  正規化に失敗した: ${error instanceof Error ? error.message : String(error)}`)
         }
 
-        // ---- 2. v2 の採点 ----
+        // ---- 2. v2 の採点。**モデル 4 件は並列に流れる（v1 と同じ）** ----
         let response: GradeResponse
         try {
             response = await gradeV2(record, slots)
         }
         catch (error) {
             const message = error instanceof Error ? error.message : String(error)
-            console.log(`  失敗: ${message}`)
-            // **接続が切れたなら残りも失敗する。同じ失敗を 11 回並べない**
+            out.push(`  失敗: ${message}`)
+            // **接続が切れたなら残りも失敗する。同じ失敗を並べない**
             if (message.includes('fetch failed') || message.includes('ECONNREFUSED')) {
-                console.error(`${BASE_URL} への接続が切れた。開発サーバを確認すること`)
-                break
+                out.push(`${BASE_URL} への接続が切れた。開発サーバを確認すること`)
+                stop = true
             }
-            // 個別の失敗は次へ進む。消費した枠は戻らない
-            continue
+            flush()
+            return
         }
         consumed += response.requestsConsumed
+        completed += 1
 
         const v1ByModel = new Map(record.result.models.map((m) => [m.model, m]))
         for (const v2Model of response.models) {
@@ -439,7 +561,7 @@ async function main() {
                     (v2Model.feedback?.judgmentUnavailable as boolean | undefined) ?? null,
                 v2MissedCluesCount: countArray(v2Model.feedback?.missedClues),
             })
-            console.log(
+            out.push(
                 `  ${displayName(v2Model.model).padEnd(18)} v1=${(v1Model?.status ?? '記録なし').padEnd(9)} → v2=${v2Model.status
                 }（${Math.round(v2Model.totalMs / 1000)} 秒）`
                 // **error の理由を出す。** 「error（0 秒）」だけでは何が起きたか分からない
@@ -448,29 +570,31 @@ async function main() {
         }
 
         /**
-         * **1 件目で失敗したモデルがあれば、そこで止める。**
+         * **最初に完了した記録で失敗したモデルがあれば、そこで止める。**
          *
          * 実測（2026-08-17）。3 モデルが 1 件目から `error（0 秒）` を返していたのに
          * 6 件目まで進み、**同じ失敗を 15 回並べた。**
          *
          * 0 秒の error は入力側の誤りである（モデル ID、スキーマ、権限）。
-         * **回数を増やしても直らない。** 1 件目で止めて原因を直す方が速い。
+         * **回数を増やしても直らない。** 止めて原因を直す方が速い。
          *
-         * > **同じ失敗を並べない。** 接続断で `break` するのと同じ判断である。
+         * > **同じ失敗を並べない。** 接続断で止めるのと同じ判断である。
          */
-        if (index === 0) {
+        if (completed === 1) {
             const failed = response.models.filter((m) => m.status === 'error')
             if (failed.length) {
-                console.log('')
-                console.log(`**1 件目で ${failed.length} / ${response.models.length} モデルが error になった。ここで止める。**`)
+                out.push('')
+                out.push(`**最初に完了した記録で ${failed.length} / ${response.models.length} モデルが error になった。ここで止める。**`)
                 for (const m of failed) {
-                    console.log(`  ${m.model}: ${m.error ?? '理由なし'}`)
+                    out.push(`  ${m.model}: ${m.error ?? '理由なし'}`)
                 }
-                console.log('')
-                console.log('0 秒の error は入力側の誤りである（モデル ID、スキーマ、権限）。')
-                console.log('**回数を増やしても直らない。** 原因を直してから再実行すること。')
-                console.log(`ここまでの消費: ${consumed}　実際に送ったかは npm run usage:report で確認できる`)
-                break
+                out.push('')
+                out.push('0 秒の error は入力側の誤りである（モデル ID、スキーマ、権限）。')
+                out.push('**回数を増やしても直らない。** 原因を直してから再実行すること。')
+                out.push(`ここまでの消費: ${consumed}　実際に送ったかは npm run usage:report で確認できる`)
+                stop = true
+                flush()
+                return
             }
         }
 
@@ -493,7 +617,26 @@ async function main() {
             )}\n`,
             'utf8',
         )
+        flush()
     }
+
+    /**
+     * ワーカープール。**取り出しは 1 か所で行う。**
+     *
+     * 記録を等分して割り当てると、遅い記録に当たった側だけが最後まで残る。
+     * 空いた順に次を取る形にすれば待ちが偏らない。
+     */
+    let next = 0
+    const worker = async () => {
+        for (; ;) {
+            if (stop) return
+            const index = next++
+            const record = targets[index]
+            if (!record) return
+            await processRecord(record, index)
+        }
+    }
+    await Promise.all(Array.from({ length: Math.min(JOBS, targets.length) }, worker))
 
     await writeReport(rows, consumed, skipped.length, normalizeFailed)
     console.log('')
