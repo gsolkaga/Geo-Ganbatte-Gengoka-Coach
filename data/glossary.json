@@ -18,7 +18,7 @@
         "AI 由来の confusableWith は捨てた。国コードが入っておりスキーマの誤用だった。",
         "AI 由来の id は振り直した。全ファイルが coarse-01 から始まり衝突するため。"
     ],
-    "generatedAt": "2026-08-17T08:51:35.357Z",
+    "generatedAt": "2026-08-17T09:01:56.463Z",
     "terms": [
         {
             "id": "bollard_all_yellow",
@@ -1698,6 +1698,694 @@
             "confusableWith": [],
             "requires": null,
             "note": "**アメリカでも地域による。** 南東部からミシガン、南部を横切ってアリゾナまでの州で見られる。**国全体の性質ではないので、これだけで州を決めない。**プエルトリコも前ナンバーが無い。",
+            "disputed": false
+        },
+        {
+            "id": "ref_camera_snorkel",
+            "slot": "camera",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "前部にスノーケル（吸気管）",
+            "plain": "車の前に太いパイプが立っている",
+            "aliases": [
+                "スノーケル",
+                "吸気管",
+                "前に筒が立っている"
+            ],
+            "countries": [
+                "KE",
+                "MN"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**非常に強い。2 カ国。** **撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。ケニアは 2022 年以降の被写域で車両が変わり、**スノーケルあり・アンテナあり・両方・両方なし**の 4 通りがある。",
+            "disputed": false
+        },
+        {
+            "id": "ref_camera_no_antenna_eastern_europe",
+            "slot": "camera",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "アンテナが無い（東欧で）",
+            "plain": "東欧っぽい景色なのに車にアンテナが見えない",
+            "aliases": [
+                "アンテナなし",
+                "アンテナが見えない"
+            ],
+            "countries": [
+                "MK",
+                "RS"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**無いことが手がかりである。** 東欧の多くの国ではアンテナが見えるため、見えないこと自体が北マケドニアとセルビアを示す。**撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。> **強いのは、あることではなく無いことである。**",
+            "disputed": false
+        },
+        {
+            "id": "ref_camera_red_car_long_antenna",
+            "slot": "camera",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "赤い車体＋長いアンテナ",
+            "plain": "下を向くと赤い車で、長いアンテナが立っている",
+            "aliases": [
+                "赤い車",
+                "長いアンテナ"
+            ],
+            "countries": [
+                "UA"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**非常に強い。1 カ国。**ウクライナの大部分。**撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。",
+            "disputed": false
+        },
+        {
+            "id": "ref_camera_stubby_antenna",
+            "slot": "camera",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "短くて太いアンテナ",
+            "plain": "短くて太いアンテナが見える",
+            "aliases": [
+                "太いアンテナ",
+                "短いアンテナ",
+                "スタビーアンテナ"
+            ],
+            "countries": [
+                "CO",
+                "EC"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**強い。** エクアドルは白い車＋短く太いアンテナ。**撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。コロンビアは Gen 3 で黒・白・灰の車に短く太いアンテナ、Gen 4 では白か銀の車が多い。",
+            "disputed": false
+        },
+        {
+            "id": "ref_camera_unique_antenna_panama",
+            "slot": "camera",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "他に例のない形のアンテナ",
+            "plain": "見たことのない形のアンテナが付いている",
+            "aliases": [
+                "変わった形のアンテナ"
+            ],
+            "countries": [
+                "PA"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**非常に強い。1 カ国。**世界の他のどこにも無い形とされる。**撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。下を向いても常にはっきり見えるわけではない。",
+            "disputed": false
+        },
+        {
+            "id": "ref_camera_white_truck_below",
+            "slot": "camera",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "下に白いトラックの車体",
+            "plain": "下を向くと白いトラックの荷台や運転席が見える",
+            "aliases": [
+                "白いトラック",
+                "白い車体"
+            ],
+            "countries": [
+                "AE",
+                "QA",
+                "SN"
+            ],
+            "confusableWith": [
+                "ref_camera_black_car_below"
+            ],
+            "requires": null,
+            "note": "**強い。** **撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。セネガルは Gen 4 で銀か白のトラック。UAE は白、**ヨルダンは黒**なので、色で分かれる。UAE の Gen 4 のトラックはドバイとシャルジャだけに出る。",
+            "disputed": false
+        },
+        {
+            "id": "ref_camera_black_car_below",
+            "slot": "camera",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "下に黒い車体",
+            "plain": "下を向くと黒い車体がぼんやり見える",
+            "aliases": [
+                "黒い車",
+                "黒い車体"
+            ],
+            "countries": [
+                "AR",
+                "JO",
+                "UY"
+            ],
+            "confusableWith": [
+                "ref_camera_white_truck_below"
+            ],
+            "requires": null,
+            "note": "**強い。** **撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。ヨルダンは黒（**UAE の白と対になる**）。アルゼンチンとウルグアイは車の前部が黒くぼんやり写る。",
+            "disputed": false
+        },
+        {
+            "id": "ref_camera_bars_visible",
+            "slot": "camera",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "車体下のバー（骨組み）が見える",
+            "plain": "下を向くと棒みたいな枠が見える",
+            "aliases": [
+                "バーが見える",
+                "骨組みが見える",
+                "棒が見える"
+            ],
+            "countries": [
+                "BD",
+                "GT",
+                "KG",
+                "MN",
+                "RE"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**中程度。複数の国で出る。**単独では絞れないので**組み合わせで使う。****撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。モンゴルは赤いサイドミラーやキャンプ道具のような荷物が一緒に見える。キルギスは白黒のサイドミラー、グアテマラは黒いミラー。ラオスは首都では見えない。",
+            "disputed": false
+        },
+        {
+            "id": "ref_camera_motorbike",
+            "slot": "camera",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "バイクで撮影されている",
+            "plain": "下を向くとバイクかヘルメットが見える",
+            "aliases": [
+                "バイク",
+                "オートバイ",
+                "ヘルメットが見える"
+            ],
+            "countries": [
+                "VN"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**非常に強い。1 カ国。**ベトナムはバイクで撮影されている。**撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。バイク本体、ぼかされた輪郭、ヘルメットのいずれかが見える。",
+            "disputed": false
+        },
+        {
+            "id": "ref_camera_trekker",
+            "slot": "camera",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "人が担いで撮影している",
+            "plain": "車ではなく人が持って歩いて撮っている",
+            "aliases": [
+                "トレッカー",
+                "徒歩撮影",
+                "人が担いでいる"
+            ],
+            "countries": [
+                "MG"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**単独では絞れない。**徒歩撮影は世界の多くの国に部分的に存在する。パキスタンは被写域の全体が徒歩撮影という点が特徴である。**撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。",
+            "disputed": false
+        },
+        {
+            "id": "ref_camera_gen2_halo",
+            "slot": "camera",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "空にハロー・下に円形のぼかし（Gen 2）",
+            "plain": "空に輪っかが見える、下に丸いぼかしがある",
+            "aliases": [
+                "ハロー",
+                "空に輪",
+                "丸いぼかし",
+                "Gen2"
+            ],
+            "countries": [
+                "ZA"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**強い。**第 2 世代のカメラで撮影された被写域に出る。**撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。**古い被写域ほど残っている。** 更新されると消える軸の代表である。",
+            "disputed": false
+        },
+        {
+            "id": "ref_camera_lowcam",
+            "slot": "camera",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "視点が低い（ローカム）",
+            "plain": "目線が低くて道が広く見える",
+            "aliases": [
+                "ローカム",
+                "低い視点",
+                "道が広く見える"
+            ],
+            "countries": [
+                "LK"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**強い。**スリランカの Gen 4。**撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。周囲が低い位置から見え、道が広く見え、車が大きく丸くぼかされる。**Gen 3 では青・白・赤の縞（フランス国旗のよう）だった。**",
+            "disputed": false
+        },
+        {
+            "id": "ref_camera_roof_rack",
+            "slot": "camera",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "ルーフラックが見える",
+            "plain": "屋根の荷台の枠が見える",
+            "aliases": [
+                "ルーフラック",
+                "屋根の枠"
+            ],
+            "countries": [
+                "GH",
+                "NG",
+                "SN"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**組み合わせで使う。****撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。ナイジェリアは Gen 3 で**黄と黒**の縞模様のラックが出ることがあり、これは固有。ガーナは前のバーの右端に黒いテープ。フェロー諸島は無地の灰色。",
+            "disputed": false
+        },
+        {
+            "id": "ref_camera_following_car",
+            "slot": "camera",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "同じ車がずっと後ろを走っている",
+            "plain": "同じ車が何枚も後ろについてくる",
+            "aliases": [
+                "後続車",
+                "ついてくる車"
+            ],
+            "countries": [
+                "TN"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**非常に強い。1 カ国。**チュニジアは伴走車が写り続ける。**撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。**北部（ハンマメット以北）は明るい緑、中南部は濃い緑**で車種も違う。地域の切り分けにも使える。",
+            "disputed": false
+        },
+        {
+            "id": "ref_bollard_red_rectangle_front_white_back",
+            "slot": "bollard",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "正面に赤い長方形・裏は白い長方形",
+            "plain": "前から見ると赤い四角、後ろから見ると白い四角",
+            "aliases": [
+                "赤い長方形のボラード",
+                "前が赤くて後ろが白い杭"
+            ],
+            "countries": [
+                "BG",
+                "HR",
+                "HU",
+                "ME",
+                "MK",
+                "RS",
+                "SI",
+                "UA"
+            ],
+            "confusableWith": [
+                "ref_bollard_red_rectangle_offset"
+            ],
+            "requires": null,
+            "note": "**族としては中程度（8 カ国）。細部で割る。**セルビアは赤い長方形が**中心からずれている。**ウクライナは長方形が**他より横に広く、傷んでいることが多い。**> **族で候補を作り、細部で割る。** それが観察の順序である。",
+            "disputed": false
+        },
+        {
+            "id": "ref_bollard_red_rectangle_offset",
+            "slot": "bollard",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "赤い長方形が中心からずれている",
+            "plain": "赤い四角が真ん中じゃなくて片側に寄っている",
+            "aliases": [
+                "赤い四角が片寄り",
+                "ずれた赤い長方形"
+            ],
+            "countries": [
+                "RS"
+            ],
+            "confusableWith": [
+                "ref_bollard_red_rectangle_front_white_back"
+            ],
+            "requires": null,
+            "note": "**非常に強い。1 カ国。**スロベニアやモンテネグロと同型に見えるが、**赤い長方形の位置が中心でないのはセルビアである。**",
+            "disputed": false
+        },
+        {
+            "id": "ref_bollard_fluoro_orange_stripes",
+            "slot": "bollard",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "黒い部分に蛍光オレンジの縞",
+            "plain": "黒いところに光るオレンジの線が入っている",
+            "aliases": [
+                "蛍光オレンジの縞",
+                "オレンジの線が入った杭"
+            ],
+            "countries": [
+                "CZ",
+                "SK"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**非常に強い。2 カ国。**この蛍光オレンジは他に無い。**チェコとスロバキアはこの特徴では割れない。** 人手ワークシート §13 の「チェコとスロバキアで迷う」がここに対応する。割るには別の欄（ナンバープレート・標識・言語）へ移る。",
+            "disputed": false
+        },
+        {
+            "id": "ref_bollard_vertical_red_in_black_diagonal",
+            "slot": "bollard",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "黒い斜め帯の中に縦長の赤い長方形",
+            "plain": "黒い斜めの帯があって、その中に縦長の赤い四角がある",
+            "aliases": [
+                "縦長の赤い長方形",
+                "黒い斜め帯のボラード"
+            ],
+            "countries": [
+                "AL",
+                "IT"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**非常に強い。2 カ国。**縦長の赤い長方形はボラードでは珍しい。黒い部分が**頂部まで伸びる**のも特徴。裏は白い長方形。人手ワークシート §13 の「イタリアだと思ったらアルバニアだった」がここである。",
+            "disputed": false
+        },
+        {
+            "id": "ref_bollard_dark_reflector_black_top",
+            "slot": "bollard",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "黒っぽい反射板＋黒い頭",
+            "plain": "反射板が黒っぽくて、頭のところも黒い",
+            "aliases": [
+                "黒い反射板",
+                "黒い帽子のボラード"
+            ],
+            "countries": [
+                "AT"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**非常に強い。1 カ国。**反射板が黒か暗い赤で、かつ頂部が黒い。**この 2 つを併せ持つ国は他に無い。**",
+            "disputed": false
+        },
+        {
+            "id": "ref_bollard_cylindrical",
+            "slot": "bollard",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "円柱形（正面から見て丸い）",
+            "plain": "正面から見ると丸い筒みたいな形",
+            "aliases": [
+                "円柱のボラード",
+                "丸い筒の杭"
+            ],
+            "countries": [
+                "CH",
+                "EE",
+                "FI"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**強い。3 カ国。**フィンランドは**北欧では唯一**この形である（人手ワークシート §13 の「ノルウェーとスウェーデンで迷う」の外側にある）。スイスは湾曲した円柱形。エストニアは正面に長方形、裏に丸 2 つ。",
+            "disputed": false
+        },
+        {
+            "id": "ref_bollard_red_diagonal_wrap",
+            "slot": "bollard",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "赤い斜めの帯が巻き付いている",
+            "plain": "赤い線が斜めにぐるっと巻いている",
+            "aliases": [
+                "斜めに巻いた赤い帯"
+            ],
+            "countries": [
+                "PL"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**非常に強い。1 カ国。**帯が巻き付く形は他に無い。",
+            "disputed": false
+        },
+        {
+            "id": "ref_bollard_white_vertical_strip",
+            "slot": "bollard",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "正面に白い縦帯・裏に白い丸2つ",
+            "plain": "前に白い縦線、後ろに白い丸が2つ",
+            "aliases": [
+                "白い縦帯のボラード"
+            ],
+            "countries": [
+                "DE"
+            ],
+            "confusableWith": [
+                "ref_bollard_thin_white_rectangle"
+            ],
+            "requires": null,
+            "note": "**非常に強い。1 カ国。**人手ワークシート §13 の「バルト三国だと思ったらドイツだった」に効く。ラトビアは正面が**白い長方形**で縦帯ではない。",
+            "disputed": false
+        },
+        {
+            "id": "ref_bollard_thin_white_rectangle",
+            "slot": "bollard",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "細身・正面に白い長方形・裏に白い丸2つ",
+            "plain": "細い杭で、前に白い四角、後ろに白い丸が2つ",
+            "aliases": [
+                "細い白い長方形のボラード"
+            ],
+            "countries": [
+                "LV"
+            ],
+            "confusableWith": [
+                "ref_bollard_white_vertical_strip"
+            ],
+            "requires": null,
+            "note": "**非常に強い。1 カ国。**ドイツの縦帯と混同しやすい。**縦帯か長方形かを見る。**",
+            "disputed": false
+        },
+        {
+            "id": "ref_bollard_wedge_shape",
+            "slot": "bollard",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "くさび形（上が斜めに切られた形）",
+            "plain": "上が斜めに切られたような形",
+            "aliases": [
+                "くさび形のボラード",
+                "斜めに切られた杭"
+            ],
+            "countries": [
+                "ES",
+                "GR",
+                "LT",
+                "LU",
+                "SE"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**族としては中程度（5 カ国）。反射板の色で割る。**ギリシャは正面が赤・裏が白。スペインは正面がオレンジ・裏に白い丸 2 つ（中空）。リトアニアは正面がオレンジ・裏が白。ルクセンブルクは正面が灰色・裏に丸 2 つ。スウェーデンは黒白でくさび形以外の形もある。",
+            "disputed": false
+        },
+        {
+            "id": "ref_bollard_cigarette_shape",
+            "slot": "bollard",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "タバコのような白い細長い形",
+            "plain": "白くて細長い、タバコみたいな形",
+            "aliases": [
+                "タバコ型のボラード",
+                "細長い白い杭"
+            ],
+            "countries": [
+                "MX",
+                "PE"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**強い。2 カ国。**メキシコは根元近くが黒く、裏側が黄色。ペルーは黒い縞がある場合と無い場合がある。人手ワークシート §13 の「ペルーやボリビアだと思ったらメキシコだった」に効く。**根元の黒と裏の黄色があればメキシコである。**",
+            "disputed": false
+        },
+        {
+            "id": "ref_bollard_red_white_alternating",
+            "slot": "bollard",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "赤と白が交互",
+            "plain": "赤と白が交互に塗られている",
+            "aliases": [
+                "赤白の縞のボラード",
+                "紅白の杭"
+            ],
+            "countries": [
+                "BD",
+                "KH"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**強い。2 カ国。**バングラデシュは**煙突のような形**で赤白の区画が交互。短いものは区画が少ない。カンボジアは縞か、上下 2 区画に分かれる。",
+            "disputed": false
+        },
+        {
+            "id": "ref_bollard_black_white_square",
+            "slot": "bollard",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "黒と白が交互・断面が四角",
+            "plain": "黒と白が交互で、四角い柱",
+            "aliases": [
+                "黒白の四角い杭"
+            ],
+            "countries": [
+                "TH"
+            ],
+            "confusableWith": [
+                "ref_bollard_wedge_shape"
+            ],
+            "requires": null,
+            "note": "**非常に強い。1 カ国。**断面が四角いのが特徴。スウェーデンも黒白だが形が違う（くさび形・丸・細く湾曲）。",
+            "disputed": false
+        },
+        {
+            "id": "ref_bollard_stone_marker",
+            "slot": "bollard",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "石でできた小さな標石",
+            "plain": "コンクリートや石の小さな標識みたいなもの",
+            "aliases": [
+                "石の標石",
+                "石の道路標識"
+            ],
+            "countries": [
+                "BT",
+                "LK"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**強い。2 カ国。**スリランカは白と黒の小さな石。ブータンは白と黄色で、**次の集落までの距離が書かれている**（裏は反対方向）。石板が長く並ぶ光景もブータンで見られる。",
+            "disputed": false
+        },
+        {
+            "id": "ref_bollard_white_red_front_grey_back",
+            "slot": "bollard",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "白い本体・正面に赤い反射板・裏は灰色",
+            "plain": "白い杭で、前が赤くて後ろが灰色",
+            "aliases": [
+                "白い杭に赤い反射板"
+            ],
+            "countries": [
+                "AU",
+                "NL",
+                "TR"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**族としては強い（3 カ国）。****トルコは長方形がやや太い。** そこで割る。人手ワークシート §13 の「オーストラリアだと思ったら南アフリカだった」は別の軸（南アフリカは細い赤白のシェブロン）で割る。",
+            "disputed": false
+        },
+        {
+            "id": "ref_bollard_red_band_upper",
+            "slot": "bollard",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "上のほうに赤い帯が巻いている",
+            "plain": "上のあたりに赤い帯が一周している",
+            "aliases": [
+                "上が赤い帯のボラード"
+            ],
+            "countries": [
+                "NZ"
+            ],
+            "confusableWith": [
+                "ref_bollard_white_red_front_grey_back"
+            ],
+            "requires": null,
+            "note": "**非常に強い。1 カ国。**オーストラリアは正面の赤い反射板で、帯ではない。",
+            "disputed": false
+        },
+        {
+            "id": "ref_bollard_black_white_red_top",
+            "slot": "bollard",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "黒白の区画＋上部に大きな赤い長方形",
+            "plain": "黒と白に分かれていて、上に大きな赤い四角",
+            "aliases": [
+                "上が赤い大きな四角のボラード"
+            ],
+            "countries": [
+                "GB"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**非常に強い。1 カ国。****イギリスではボラード自体が少ない**（欧州の他国に比べて）。あれば強いが、無いことを手がかりにしない。",
+            "disputed": false
+        },
+        {
+            "id": "ref_bollard_yellow_front_only",
+            "slot": "bollard",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "正面だけ黄色い区画がある",
+            "plain": "前だけ黄色い部分があって、後ろには無い",
+            "aliases": [
+                "前だけ黄色いボラード"
+            ],
+            "countries": [
+                "DK"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**非常に強い。1 カ国。**デンマークは国中にボラードが多い。**アイスランドは全体が黄色**なので別である（人手記述 `bollard_all_yellow`）。",
             "disputed": false
         },
         {
