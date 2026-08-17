@@ -10,8 +10,12 @@
  *
  *   1. `blind`          写っているが認識できない → 見落としではない
  *   2. `filedElsewhere` 隣接スロットに書いた     → 見落としではない
- *   3. `alternativeRoute` 正解している           → 失敗ではない
+ *   3. `alternativeRoute` **本命として正解に到達** → 失敗ではない
  *   4. 残ったものが `missedSlots`
+ *
+ * 3 は `hit`（候補集合に含まれるか）ではない。**「本命として到達したか」である。**
+ * 低い確信度で並べただけの候補を「到達」と数えると、
+ * **弁別に必要だった観察を「不要だった」と表示してしまう**（実測 `q-kz-01`）。
  *
  * ## なぜこの順序なのか
  *
@@ -53,14 +57,18 @@ function hasDescription(slots: SlotRecord, slot: SlotId): boolean {
 /**
  * 差分を計算する。
  *
- * @param answerSlots 学習者の回答
- * @param tagSlots    正解タグ（`recognition` を含む）
- * @param hit         正解が候補集合に含まれていたか
+ * @param answerSlots   学習者の回答
+ * @param tagSlots      正解タグ（`recognition` を含む）
+ * @param reachedAnswer **本命として正解に到達したか。** `hit`（候補集合に含まれるか）ではない。
+ *   実測（`q-kz-01`）で `RU(medium) KZ(low) KG(low)` と並べ、正解は `KZ` だった。
+ *   候補には入っているが**本命は外している。** これを「別ルートで正解した」と扱うと、
+ *   ロシアとカザフスタンを弁別するために必要だった観察を「不要だった」と表示する。
+ *   算出は `server/utils/grading.ts` の `judgeReachedAnswer`。
  */
 export function diffSlots(
     answerSlots: SlotRecord,
     tagSlots: SlotRecord,
-    hit: boolean,
+    reachedAnswer: boolean,
 ): SlotDiff {
     const missedSlots: SlotId[] = []
     const wrongAbsentSlots: SlotId[] = []
@@ -91,8 +99,8 @@ export function diffSlots(
                 continue
             }
 
-            // 3. 正解しているなら、その手がかりは必要なかった
-            if (hit) {
+            // 3. 本命として正解に到達したなら、その手がかりは必要なかった
+            if (reachedAnswer) {
                 alternativeRoute.push(slot)
                 continue
             }

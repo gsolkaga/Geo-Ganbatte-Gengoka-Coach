@@ -138,7 +138,7 @@
         "recognition": "easy"
       },
       "bollard": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
@@ -164,9 +164,10 @@
         "recognition": "easy"
       },
       "ground": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "中央分離帯の植物の根部分は見える、白い砂",
+        "terms": [],
+        "confirmed": true
       },
       "terrain_vegetation": {
         "state": "visible",
@@ -191,28 +192,33 @@
       },
       "pavement": {
         "state": "visible",
-        "plain": "アスファルト舗装、少し乾燥しているのか荒れている、縁石ブロックに白黒の塗装",
+        "plain": "歩道側の縁石は赤と白の塗装",
         "terms": [],
         "confirmed": true,
         "recognition": "easy"
       },
       "camera": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "Gen3",
+        "terms": [],
+        "confirmed": true
       },
       "season": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "乾季と思われる",
+        "terms": [],
+        "confirmed": true
       },
       "other": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "頭上に高速道路もあり都心である",
+        "terms": [],
+        "confirmed": true
       }
     },
-    "decisiveSlots": [],
+    "decisiveSlots": [
+      "script"
+    ],
     "note": null,
     "source": {
       "draftBy": []
@@ -815,7 +821,7 @@
         "recognition": "easy"
       },
       "bollard": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
@@ -827,9 +833,10 @@
         "recognition": "easy"
       },
       "sign": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "遠くに横断歩道の標識あり、黄色の太枠に囲われているが歩道の本数までは見えない",
+        "terms": [],
+        "confirmed": true
       },
       "script": {
         "state": "visible",
@@ -839,9 +846,10 @@
         "recognition": "easy"
       },
       "ground": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "舗装されており見えない",
+        "terms": [],
+        "confirmed": true
       },
       "terrain_vegetation": {
         "state": "visible",
@@ -889,7 +897,10 @@
         "recognition": "easy"
       }
     },
-    "decisiveSlots": [],
+    "decisiveSlots": [
+      "script",
+      "vehicle"
+    ],
     "note": null,
     "source": {
       "draftBy": []
@@ -924,7 +935,7 @@
         "recognition": "easy"
       },
       "bollard": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
@@ -950,9 +961,10 @@
         "recognition": "easy"
       },
       "ground": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "舗装されており見えない",
+        "terms": [],
+        "confirmed": true
       },
       "terrain_vegetation": {
         "state": "visible",
@@ -990,17 +1002,23 @@
         "recognition": "easy"
       },
       "season": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "秋？街路樹の一部が黄色い葉となっている",
+        "terms": [],
+        "confirmed": true
       },
       "other": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "路肩のガードレールがオシャレな波々の模様を模した柵となっている",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "hard"
       }
     },
-    "decisiveSlots": [],
+    "decisiveSlots": [
+      "script",
+      "vehicle"
+    ],
     "note": null,
     "source": {
       "draftBy": []
@@ -1035,7 +1053,7 @@
         "recognition": "easy"
       },
       "bollard": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
@@ -1096,9 +1114,10 @@
         "recognition": "easy"
       },
       "camera": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "Gen4",
+        "terms": [],
+        "confirmed": true
       },
       "season": {
         "state": "visible",
@@ -1108,12 +1127,17 @@
         "recognition": "easy"
       },
       "other": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "ゴミがあちこち落ちている",
+        "terms": [],
+        "confirmed": true
       }
     },
-    "decisiveSlots": [],
+    "decisiveSlots": [
+      "ground",
+      "traffic_side",
+      "script"
+    ],
     "note": null,
     "source": {
       "draftBy": []

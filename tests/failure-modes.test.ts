@@ -12,7 +12,12 @@
  * それは診断ではなく誤診である。
  */
 import { describe, expect, it } from 'vitest'
-import { buildFailureModes, buildV1Judgement, buildV2Judgement } from '../server/utils/grading'
+import {
+    buildFailureModes,
+    buildV1Judgement,
+    buildV2Judgement,
+    judgeReachedAnswer,
+} from '../server/utils/grading'
 import { diffSlots } from '../server/utils/slot-diff'
 import { createEmptySlots } from '../shared/slots'
 import type { SlotId } from '../shared/slots'
@@ -177,5 +182,96 @@ describe('v1 / v2 の判定不能の扱い', () => {
             { tagSlots: createEmptySlots(), glossary: [] },
         )
         expect(j.discoveries).toEqual([])
+    })
+})
+
+/**
+ * **`hit`（候補集合に含まれるか）と「本命として到達したか」は別である。**
+ *
+ * 実測 `q-kz-01`（2026-08-17）。
+ *
+ * ```
+ * 正解  KZ
+ * 回答  RU(medium)  KZ(low)  KG(low)
+ * ```
+ *
+ * `hit` は `true` だが**本命はロシアであり外している。**
+ * これを「別ルートで正解した」と扱うと、
+ * **ロシアとカザフスタンを弁別するために必要だった観察を「不要だった」と表示する。**
+ * 本人が一番必要としていた助言が消える。
+ */
+describe('judgeReachedAnswer', () => {
+    it('本命（最高確信度）に正解が入っていれば到達', () => {
+        expect(judgeReachedAnswer([{ country: 'JP', confidence: 'high' }], 'JP')).toBe(true)
+    })
+
+    it('最高確信度が複数あり、そのどれかが正解なら到達', () => {
+        // q-is-01: IS(medium) DK(medium) で正解 IS。2 択まで詰めて本命に入れている
+        expect(judgeReachedAnswer(
+            [{ country: 'IS', confidence: 'medium' }, { country: 'DK', confidence: 'medium' }],
+            'IS',
+        )).toBe(true)
+    })
+
+    /** ここが本題 */
+    it('候補に入っているが確信度が本命より低ければ到達ではない', () => {
+        expect(judgeReachedAnswer(
+            [
+                { country: 'RU', confidence: 'medium' },
+                { country: 'KZ', confidence: 'low' },
+                { country: 'KG', confidence: 'low' },
+            ],
+            'KZ',
+        )).toBe(false)
+    })
+
+    it('候補に入っていなければ到達ではない', () => {
+        expect(judgeReachedAnswer([{ country: 'RU', confidence: 'high' }], 'KZ')).toBe(false)
+    })
+
+    it('候補が空なら到達ではない', () => {
+        expect(judgeReachedAnswer([], 'KZ')).toBe(false)
+    })
+
+    it('大文字小文字と空白を無視する', () => {
+        expect(judgeReachedAnswer([{ country: 'kz', confidence: 'high' }], ' KZ ')).toBe(true)
+    })
+})
+
+describe('本命を外した場合の未観察スロットの扱い', () => {
+    const tag = slotsWith({ vehicle: visible('ロシア式の白いナンバー'), pole: visible('木製電柱') })
+    const kzAnswer: Candidate[] = [
+        { country: 'RU', confidence: 'medium' },
+        { country: 'KZ', confidence: 'low' },
+        { country: 'KG', confidence: 'low' },
+    ]
+
+    it('alternativeRoute にせず missedSlots にする', () => {
+        const reached = judgeReachedAnswer(kzAnswer, 'KZ')
+        expect(reached).toBe(false)
+        const diff = diffSlots(createEmptySlots(), tag, reached)
+        expect(diff.alternativeRoute).toEqual([])
+        expect([...diff.missedSlots].sort()).toEqual(['pole', 'vehicle'])
+    })
+
+    /** 弁別に必要だった観察を「不要だった」と言わないことが目的である */
+    it('observation_miss と discrimination_fail の両方が立つ', () => {
+        const reached = judgeReachedAnswer(kzAnswer, 'KZ')
+        const diff = diffSlots(createEmptySlots(), tag, reached)
+        const modes = buildFailureModes(kzAnswer, true, 'low', diff)
+        expect(modes).toContain('observation_miss')
+        expect(modes).toContain('discrimination_fail')
+    })
+
+    it('本命が正解なら同じ入力でも alternativeRoute になる', () => {
+        const ruAnswer: Candidate[] = [
+            { country: 'RU', confidence: 'medium' },
+            { country: 'KZ', confidence: 'low' },
+        ]
+        const reached = judgeReachedAnswer(ruAnswer, 'RU')
+        expect(reached).toBe(true)
+        const diff = diffSlots(createEmptySlots(), tag, reached)
+        expect([...diff.alternativeRoute].sort()).toEqual(['pole', 'vehicle'])
+        expect(diff.missedSlots).toEqual([])
     })
 })

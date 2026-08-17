@@ -65,6 +65,46 @@ export function judgeHit(
     }
 }
 
+/** 確信度の強い順。比較のためだけに使う */
+const CONFIDENCE_RANK: Record<Confidence, number> = { high: 0, medium: 1, low: 2 }
+
+/**
+ * **本命として正解に到達したか。** `hit` とは別の判定である。
+ *
+ * ## なぜ分けたか（実測 `q-kz-01`、2026-08-17）
+ *
+ * ```
+ * 正解     KZ（カザフスタン）
+ * 回答     RU(medium)  KZ(low)  KG(low)
+ * ```
+ *
+ * `hit` は `true` になる。正解は候補集合に含まれている。
+ * **しかし本命はロシアであり、外している。**
+ *
+ * この状態を「別ルートで正解した」と扱うと、**ロシアとカザフスタンを
+ * 弁別するために必要だった観察を「今回は不要だった」と表示する。**
+ * 本人が一番必要としていた助言が消える。
+ *
+ * ## 判定
+ *
+ * **正解が、自分が付けた最高確信度の中にあるか。**
+ *
+ * 3 つ並べて 3 番目の `low` が当たっていたのは「到達」ではない。
+ * 逆に `IS(medium) DK(medium)` で正解が `IS` なら、2 択まで詰めて本命に入れている。
+ * 絞り切れていないことは `discrimination_fail` が別に報告する。
+ */
+export function judgeReachedAnswer(
+    candidates: Answer['candidates'],
+    answerCountry: string,
+): boolean {
+    if (candidates.length === 0) return false
+    const target = answerCountry.trim().toUpperCase()
+    const best = Math.min(...candidates.map((c) => CONFIDENCE_RANK[c.confidence]))
+    return candidates.some(
+        (c) => c.country.toUpperCase() === target && CONFIDENCE_RANK[c.confidence] === best,
+    )
+}
+
 /**
  * 併記された国の組を列挙する（要件 6-5）。
  *
@@ -182,7 +222,7 @@ export function buildV1Judgement(answer: Answer, answerCountry: string): CodeJud
  * v2 のコード判定。正解タグと辞書を参照する。
  *
  * 判定の順序が結果を決める。
- *   1. 正誤（`hit`）を先に確定する。`alternativeRoute` の判定に必要である
+ *   1. 正誤を先に確定する。**`hit` と「本命として到達したか」を分けて出す**
  *   2. 差分（`slot-diff.ts`）。除外を 3 段で行う
  *   3. 絞り込み（`narrowing.ts`）。`nextPriority` から `blindSlots` を外す
  *   4. 失敗モード。**`diff.missedSlots` を使う。生の `unknown` は使わない**
@@ -193,7 +233,10 @@ export function buildV2Judgement(
     context: GradingContext,
 ): CodeJudgement {
     const { hit, hitConfidence } = judgeHit(answer.candidates, answerCountry)
-    const diff = diffSlots(answer.slots, context.tagSlots, hit)
+    // **`hit` ではなく「本命として到達したか」を渡す。** 低確信度で並べただけの候補を
+    // 「別ルートで正解」と数えると、弁別に必要だった観察が「不要」と表示される
+    const reachedAnswer = judgeReachedAnswer(answer.candidates, answerCountry)
+    const diff = diffSlots(answer.slots, context.tagSlots, reachedAnswer)
     const byId = indexTerms(context.glossary)
     const intersection = buildIntersection(answer.slots, answerCountry, byId)
 

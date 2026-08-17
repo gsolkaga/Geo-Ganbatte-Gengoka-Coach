@@ -10,7 +10,7 @@
 import { readFile, readdir } from 'node:fs/promises'
 import { join } from 'node:path'
 import { glossarySchema, questionsSchema } from '../shared/schemas'
-import { buildV2Judgement } from '../server/utils/grading'
+import { buildV2Judgement, judgeReachedAnswer } from '../server/utils/grading'
 import type { Question, RunRecord, Term } from '../shared/types'
 
 const questions = questionsSchema.parse(
@@ -36,8 +36,13 @@ for (const name of names) {
         glossary,
     })
 
+    const candidates = run.answer.candidates.map((c) => `${c.country}(${c.confidence})`).join(' ')
+    // **`hit` と「本命として到達したか」を並べて出す。** これを混ぜていたのがバグだった
+    const reached = judgeReachedAnswer(run.answer.candidates, question.country)
+
     console.log('')
-    console.log(`=== ${run.questionId}（${question.country}）hit=${j.hit} ${j.hitConfidence ?? '—'}`)
+    console.log(`=== ${run.questionId}（正解 ${question.country}）回答: ${candidates}`)
+    console.log(`  hit=${j.hit}(${j.hitConfidence ?? '—'}) / 本命として到達=${reached}`)
     console.log(`  見落とし            : ${fmt(j.missedSlots)}`)
     console.log(`  誤って「見えない」  : ${fmt(j.wrongAbsentSlots)}`)
     console.log(`  過剰申告            : ${fmt(j.overclaimedSlots)}`)
