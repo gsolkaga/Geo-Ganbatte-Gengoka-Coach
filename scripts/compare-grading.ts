@@ -200,6 +200,9 @@ async function main() {
     const targets = runs.filter((r) => isTagged(questions.get(r.questionId)))
     const skipped = runs.filter((r) => !isTagged(questions.get(r.questionId)))
 
+    // **開発サーバの API を呼ぶ。** 止めた状態では動かない
+    console.log('**`npm run dev` を起動したまま、別のターミナルで実行する。**')
+    console.log('')
     console.log(`v1 の記録 ${runs.length} 件`)
     console.log(`  タグ済みで v2 を投げられる: ${targets.length} 件`)
     if (skipped.length) {

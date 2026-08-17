@@ -81,6 +81,18 @@ const targets = questions.filter((q) =>
     }),
 )
 
+/**
+ * **このスクリプトは開発サーバの API を呼ぶ。**
+ *
+ * 実測（2026-08-17）で「更新系のスクリプトだ」と解釈され、
+ * `npm run dev` を止めてから実行された。**書き込むのはファイルだが、
+ * 正規化は AI を呼ぶため API 経由である。**
+ *
+ * 冒頭に書いていなかったので、最初に出す。
+ */
+console.log('**`npm run dev` を起動したまま、別のターミナルで実行する。**')
+console.log('（ファイルを書き換えるが、正規化は AI を呼ぶため開発サーバの API を経由する）')
+console.log('')
 console.log(`問題 ${questions.length} 件 / 正規化が必要なもの ${targets.length} 件`)
 console.log(`**消費するリクエスト数: ${targets.length}**（1 問 1 リクエスト）`)
 
