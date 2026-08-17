@@ -176,10 +176,27 @@ export const GRADING_JSON_SCHEMA: Record<string, unknown> = {
                 additionalProperties: false,
             },
         },
+        /**
+         * v2 では `buildGradingJsonSchema` が `canonicalTerm` を辞書の enum に差し替える。
+         *
+         * 自由文字列にしていた間、**52 応答中 22 件が辞書に無い用語を教えていた**
+         * （実測 2026-08-17）。内訳は 4 種類。
+         *
+         *   (a) 欄の名前をそのまま出す   「左側通行」→ traffic_side       gpt-oss 11 件
+         *   (b) 用語 ID を名前に混ぜる   → EU帯プレート（ai_vehicle_05）  Qwen 5 件
+         *   (c) 辞書に無い正当な観察     → カーブミラー / シェブロン       4 件
+         *   (d) 誤った対応づけ           「ガードレール」→ bollard        1 件
+         *
+         * (a) は**用語ではなく欄の名前である。覚えても役に立たない。**
+         * (c) は辞書側の欠落であり、**AI は悪くない。辞書に足すべきものである。**
+         *
+         * `nextPriority` で同じことをやって形式が揃った。**選択肢が有限なら enum にする。**
+         */
         vocabulary: {
             type: 'array',
             description:
-                '学習者の素人語に正式な用語を対応づける。辞書にある用語のみ。**最大5件**',
+                '学習者の素人語に正式な用語を対応づける。辞書にある用語のみ。'
+                + '**辞書に無い場合は項目を作らない。**欄の名前（traffic_side など）は用語ではない。最大5件',
             minItems: 0,
             maxItems: 5,
             items: {
@@ -242,6 +259,81 @@ export const GRADING_JSON_SCHEMA: Record<string, unknown> = {
         'judgmentUnavailable',
     ],
     additionalProperties: false,
+}
+
+/**
+ * 出題ごとの JSON Schema。**選択肢が分かっているものは enum にする。**
+ *
+ * ## v1 では何も差し替えない
+ *
+ * v1 は辞書も正解タグも渡さない条件そのものである。
+ * 用語の enum を与えたら**辞書を渡したことになる。** 対照実験が壊れる。
+ * したがって `options` を渡さなければ静的なスキーマがそのまま返る。
+ *
+ * ## v2 で差し替える 2 つ
+ *
+ * | 項目 | 差し替え | 実測での害 |
+ * |---|---|---|
+ * | `vocabulary.canonicalTerm` | 辞書にある用語名の enum | 22 件が辞書に無い用語を教えていた |
+ * | `nextPriority` | **視認できない欄を除いた** enum | 6 件が見えない欄を「次に見ろ」と言っていた |
+ *
+ * `blindSlots` はコードが算出してプロンプトに渡している。**それでも守られなかった。**
+ *
+ * > **渡したことと、守られることは別である。**
+ * > 守らせたいなら、書ける形から外す。
+ *
+ * enum でも足りない場合に備えて、出力後に `sanitizeFeedback` で落とす。
+ * **AI の遵守に依存させない**（要件 3-2 と同じ考え方である）。
+ */
+export interface GradingSchemaOptions {
+    /** 使ってよい用語の名前。v2 のみ。**空なら差し替えない** */
+    allowedTerms?: readonly string[]
+    /** 視認できない欄。`nextPriority` の選択肢から外す */
+    blindSlots?: readonly SlotId[]
+}
+
+export function buildGradingJsonSchema(options: GradingSchemaOptions = {}): Record<string, unknown> {
+    const { allowedTerms, blindSlots = [] } = options
+    if (!allowedTerms?.length && blindSlots.length === 0) return GRADING_JSON_SCHEMA
+
+    // 浅い複製で足りる。差し替えるのは 2 か所だけであり、そこは作り直す
+    const properties = { ...(GRADING_JSON_SCHEMA.properties as Record<string, unknown>) }
+
+    if (allowedTerms?.length) {
+        const vocabulary = properties.vocabulary as Record<string, unknown>
+        const items = vocabulary.items as Record<string, unknown>
+        const itemProps = items.properties as Record<string, unknown>
+        properties.vocabulary = {
+            ...vocabulary,
+            items: {
+                ...items,
+                properties: {
+                    ...itemProps,
+                    canonicalTerm: {
+                        type: 'string',
+                        // **辞書の表記そのものを選ばせる。** 括弧や ID を混ぜる余地を消す
+                        enum: [...allowedTerms],
+                        description: '辞書にある用語名をそのまま選ぶ。該当が無ければ項目を作らない',
+                    },
+                },
+            },
+        }
+    }
+
+    if (blindSlots.length) {
+        const excluded = new Set<string>(blindSlots)
+        const remaining = SLOT_IDS.filter((s) => !excluded.has(s))
+        const nextPriority = properties.nextPriority as Record<string, unknown>
+        properties.nextPriority = {
+            ...nextPriority,
+            description:
+                '次に注目すべきスロットのIDを優先順に最大3件。**IDのみを書く。説明を混ぜない。**'
+                + `理由は discriminationHint に書く。**視認できない欄（${blindSlots.join(' ')}）は選択肢から外してある**`,
+            items: { type: 'string', enum: remaining },
+        }
+    }
+
+    return { ...GRADING_JSON_SCHEMA, properties }
 }
 
 /**

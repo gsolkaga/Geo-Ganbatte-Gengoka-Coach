@@ -16,6 +16,12 @@ import type { Variant } from '../../shared/types'
 import type { StreamProgress } from '../../shared/grading-stream'
 // 消費判定は純粋な関数として切り出してある。**テストが届く場所に置く**
 import { httpStatusOf, wasBilled as wasBilledPure } from '../../shared/billing'
+import {
+    WHITESPACE_HARD_LIMIT as WS_HARD_LIMIT,
+    WHITESPACE_RUN_LIMIT as WS_RUN_LIMIT,
+    describeWhitespaceAbort,
+    evaluateWhitespaceGuard,
+} from '../../shared/whitespace-guard'
 import { appendUsageLog } from './store'
 
 export type UsageCategory =
@@ -67,15 +73,37 @@ export const REQUEST_TIMEOUT_MS = 310_000
  * **`finish_reason` は信号であり、使えるかどうかの事実はパースで決まる。**
  */
 /**
- * 末尾の空白がこの長さを超えたらストリームを打ち切る。
+ * 空白の暴走の判定。**判定の中身は `shared/whitespace-guard.ts` にある。**
  *
- * 実測（2026-08-17）で 11,790 字（gemma、119.9 秒）と
- * 40,952 字（Kimi、280.0 秒）の空白が出た。**待っても中身は増えない。**
+ * 当初は「末尾の空白 512 字を超えたら打ち切る」だけだった。**壊した。**
+ * `gpt-oss-120b` は JSON の途中で 7,892〜26,590 字の空白を挟んでから
+ * 中身を続けることがあり（v1 の記録 52 件中 4 件）、それを切っていた。
  *
- * 512 字にしたのは、整形（インデント・改行）で正当に出る空白と区別するため。
- * JSON の整形で連続 512 字の空白が出ることはない。
+ * > **長さは、続きがあるかを教えてくれない。**
+ *
+ * 現在は「長さが下限を超え、**かつ中身が揃っている**」ときだけ打ち切る。
+ * 環境変数で上書きできる（実験用）。
  */
-export const WHITESPACE_RUN_LIMIT = 512
+export { WHITESPACE_RUN_LIMIT } from '../../shared/whitespace-guard'
+
+/** 判定を始める長さ。`GGG_WHITESPACE_RUN_LIMIT` で上書きできる */
+function whitespaceLimit(): number {
+    const raw = Number(process.env.GGG_WHITESPACE_RUN_LIMIT)
+    return Number.isFinite(raw) && raw > 0 ? raw : WS_RUN_LIMIT
+}
+
+/**
+ * 中身にかかわらず打ち切る長さ。`GGG_WHITESPACE_HARD_LIMIT` で上書きできる。
+ * **0 を渡すと打ち切らない**（証拠を取るための観察モード）。
+ */
+function whitespaceHardLimit(): number {
+    const raw = process.env.GGG_WHITESPACE_HARD_LIMIT
+    if (raw === undefined || raw === '') return WS_HARD_LIMIT
+    const value = Number(raw)
+    if (!Number.isFinite(value) || value < 0) return WS_HARD_LIMIT
+    // **0 は「打ち切らない」。** 打ち切ると、打ち切りが正しかった証拠まで消える
+    return value === 0 ? Number.POSITIVE_INFINITY : value
+}
 
 export function looksLikeCompleteJson(text: string): boolean {
     const trimmed = text.trim()
@@ -398,6 +426,16 @@ export interface AiStreamResult {
 export interface AiStreamRequest extends AiChatRequest {
     /** 進捗の通知先。UI の可観測性のためにのみ使う */
     onProgress?: (progress: StreamProgress) => void
+    /**
+     * ここまでの本文で**中身が揃っているか**（閉じ括弧を足せば使えるか）。
+     *
+     * 空白の暴走を打ち切るかの決め手である。**長さでは決められない**
+     * （`shared/whitespace-guard.ts`）。
+     *
+     * 渡さなければ「揃っていない」として扱い、上限まで待つ。
+     * **スキーマを知っているのは呼び出し側なので、判定もそちらが持つ。**
+     */
+    isSalvageable?: (content: string) => boolean
 }
 
 /**
@@ -496,7 +534,7 @@ export async function callChatStream(request: AiStreamRequest): Promise<AiStream
             }
 
             /**
-             * **JSON が閉じないまま空白だけが続く場合も打ち切る。**
+             * **JSON が閉じないまま空白だけが続く場合の判定。**
              *
              * 上の判定は「JSON が閉じたら止める」であり、
              * **閉じないまま空白を吐き続ける場合には発火しない。**
@@ -506,14 +544,26 @@ export async function callChatStream(request: AiStreamRequest): Promise<AiStream
              *   gemma  12,052 字中 11,790 字（98%）が末尾の空白。**119.9 秒**
              *   Kimi   41,508 字中 40,952 字（99%）が末尾の空白。**280.0 秒**
              *
-             * どちらも本文を書き終えたあと、必須項目を残したまま空白に入っている。
-             * **待っても中身は増えない。**
+             * ## 長さだけで決めていたのは誤りだった
              *
-             * リクエストは既に消費されているので節約にはならないが、
-             * **280 秒の待ち時間が消える。** 打ち切ったあとは
-             * `grade.post.ts` の `salvageTruncated` が閉じ括弧を足して中身を救う。
+             * 当初は 512 字で無条件に打ち切っていた。**完成する応答を壊した。**
+             * `gpt-oss-120b` は JSON の途中に 7,892〜26,590 字の空白を挟んでから
+             * 中身を続けることがある（v1 の記録 52 件中 4 件。`docs/whitespace-guard.md`）。
+             *
+             * > **長さは、続きがあるかを教えてくれない。**
+             *
+             * いまは**中身が揃っているか**で決める。揃っていれば待つ理由がない。
+             * 欠けていれば待つ（`max_tokens` まで走る。打ち切り機構が無かった頃と同じ）。
+             *
+             * 打ち切ったあとは `grade.post.ts` の `salvageTruncated` が
+             * 閉じ括弧を足して中身を救う。
              */
-            if (content.length - content.trimEnd().length >= WHITESPACE_RUN_LIMIT) {
+            if (evaluateWhitespaceGuard({
+                content,
+                isSalvageable: request.isSalvageable,
+                limit: whitespaceLimit(),
+                hardLimit: whitespaceHardLimit(),
+            }) === 'abort') {
                 whitespaceRunAborted = true
                 break
             }
@@ -548,9 +598,8 @@ export async function callChatStream(request: AiStreamRequest): Promise<AiStream
              * 閉じ括弧を足して救えることがある（欠落が既定値を持つ項目だけの場合）。
              */
             status = 'truncated'
-            error = `空白が ${WHITESPACE_RUN_LIMIT} 字以上続いたため打ち切った`
-                + `（本文 ${content.trimEnd().length} 字、${chunks} チャンク、max_tokens=${maxTokens}）。`
-                + '**待っても中身は増えない**'
+            // **どちらの条件で止めたかを残す。** 「空白が続いた」だけでは区別できない
+            error = describeWhitespaceAbort(content, chunks, maxTokens, whitespaceHardLimit())
         }
         else if (!content.trim()) {
             status = 'truncated'

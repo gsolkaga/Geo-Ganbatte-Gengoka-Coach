@@ -1,0 +1,273 @@
+{
+  "id": "q-za-01-mswy34tq",
+  "ts": "2026-08-17T17:01:26+09:00",
+  "variant": "v2",
+  "questionId": "q-za-01",
+  "answer": {
+    "questionId": "q-za-01",
+    "slots": {
+      "traffic_side": {
+        "state": "visible",
+        "plain": "左側通行",
+        "terms": []
+      },
+      "road_marking": {
+        "state": "visible",
+        "plain": "中央線は白い実線、路肩はなし、停止線も中央線と同様で「STOP」の表記",
+        "terms": [
+          "road_marking_center_white",
+          "ai_road_marking_01",
+          "ai_road_marking_02",
+          "ai_road_marking_04"
+        ]
+      },
+      "bollard": {
+        "state": "absent",
+        "plain": null,
+        "terms": []
+      },
+      "pole": {
+        "state": "visible",
+        "plain": "街灯が細い鉄柱製かな、ところどころ錆びている",
+        "terms": [
+          "ai_pole_01"
+        ]
+      },
+      "sign": {
+        "state": "visible",
+        "plain": "遠くに白地に赤い矢印のシェブロンが見える",
+        "terms": []
+      },
+      "script": {
+        "state": "visible",
+        "plain": "アルファベットは見えるが英語？かは不明",
+        "terms": [
+          "ai_script_01"
+        ]
+      },
+      "ground": {
+        "state": "visible",
+        "plain": "赤茶色の土、乾燥している",
+        "terms": [
+          "ai_ground_03"
+        ]
+      },
+      "terrain_vegetation": {
+        "state": "visible",
+        "plain": "細い葉っぱの植物しか生えていない、少し遠くになだらかな山が見え三方を囲まれている",
+        "terms": []
+      },
+      "architecture": {
+        "state": "visible",
+        "plain": "赤茶色のレンガ作りの店舗が並ぶ",
+        "terms": []
+      },
+      "vehicle": {
+        "state": "visible",
+        "plain": "白い横長のナンバープレート",
+        "terms": [
+          "ai_vehicle_01",
+          "ai_vehicle_02"
+        ]
+      },
+      "pavement": {
+        "state": "visible",
+        "plain": "アスファルトで舗装はされているが、ボロボロでメンテナンスはあまりされていない",
+        "terms": [
+          "ai_pavement_01",
+          "ai_pavement_02"
+        ]
+      },
+      "camera": {
+        "state": "absent",
+        "plain": null,
+        "terms": []
+      },
+      "season": {
+        "state": "visible",
+        "plain": "太陽が北から照っている",
+        "terms": []
+      },
+      "other": {
+        "state": "unknown",
+        "plain": null,
+        "terms": []
+      }
+    },
+    "candidates": [
+      {
+        "country": "ZA",
+        "confidence": "high"
+      },
+      {
+        "country": "AU",
+        "confidence": "medium"
+      }
+    ],
+    "decisiveSlot": "ground",
+    "reasoning": "南半球の左側通行で赤土は南アフリカ共和国が濃厚だと思うため"
+  },
+  "result": {
+    "variant": "v2",
+    "hit": true,
+    "hitConfidence": "high",
+    "confusionPairs": [
+      [
+        "AU",
+        "ZA"
+      ]
+    ],
+    "discoveries": [],
+    "missedSlots": [],
+    "wrongAbsentSlots": [],
+    "overclaimedSlots": [],
+    "filedElsewhere": [
+      {
+        "slot": "camera",
+        "foundIn": [
+          "vehicle"
+        ]
+      }
+    ],
+    "blindSlots": [],
+    "alternativeRoute": [
+      "other"
+    ],
+    "failureModes": [],
+    "narrowingPower": {},
+    "intersection": null,
+    "nextPriority": [],
+    "models": [
+      {
+        "model": "gpt-oss-120b",
+        "status": "truncated",
+        "feedback": {
+          "summary": "今回の解答は正解国を高い確信度で含んでおり、見落としや誤判定はありません。決め手にした ground だけでなく、traffic_side と script も組み合わせて使える点を覚えておくと、類似した地点でも迅速に絞り込みができます。次回はカメラ世代や街灯・ポールの形状、道路脇のbollard、遠くの標識の細部（色・矢印の向き）など、まだ観測していないスロットに目を向けてみてください。",
+          "failureModeExplanation": "なし",
+          "missedClues": [],
+          "wrongReasoning": [],
+          "vocabulary": [],
+          "discriminationHint": "次回は、以下のスロットを意識して観察すると、さらに絞り込みがしやすくなります。",
+          "nextPriority": [
+            "camera",
+            "bollard",
+            "sign"
+          ],
+          "discoveries": [
+            "ground（茶色の土） は正解タグに含まれ、赤茶色の土が見えることは ZA の候補に含まれる国の多くで確認できます。今回の決め手として正しく使用できました。",
+            "traffic_side（左側通行） と script（ラテン文字） も弁別スロットとして正解タグに含まれており、左側通行＋アルファベットは ZA を含む候補国を絞り込むのに有効です。",
+            "camera が見えた（Gen4） と other に「ゴミがあちこち落ちている」 が正解タグにありますが、今回の評価ではこれらが欠落としてカウントされていません。観測できている点はそのまま記録しておくと、後の比較で役立ちます。"
+          ],
+          "judgmentUnavailable": false
+        },
+        "rawContent": "{  \n  \"discoveries\": [  \n    \"ground（茶色の土） は正解タグに含まれ、赤茶色の土が見えることは ZA の候補に含まれる国の多くで確認できます。今回の決め手として正しく使用できました。\",  \n    \"traffic_side（左側通行） と script（ラテン文字） も弁別スロットとして正解タグに含まれており、左側通行＋アルファベットは ZA を含む候補国を絞り込むのに有効です。\",  \n    \"camera が見えた（Gen4） と other に「ゴミがあちこち落ちている」 が正解タグにありますが、今回の評価ではこれらが欠落としてカウントされていません。観測できている点はそのまま記録しておくと、後の比較で役立ちます。\"  \n  ],  \n  \"discriminationHint\": \"次回は、以下のスロットを意識して観察すると、さらに絞り込みがしやすくなります。\",  \n  \"failureModeExplanation\": \"なし\",  \n  \"judgmentUnavailable\": false,  \n  \"missedClues\": [],  \n  \"nextPriority\": [  \n    \"camera\" ,  \n    \"bollard\" ,  \n    \"sign\"    ]  \n  ,  \n  \"summary\": \"今回の解答は正解国を高い確信度で含んでおり、見落としや誤判定はありません。決め手にした ground だけでなく、traffic_side と script も組み合わせて使える点を覚えておくと、類似した地点でも迅速に絞り込みができます。次回はカメラ世代や街灯・ポールの形状、道路脇のbollard、遠くの標識の細部（色・矢印の向き）など、まだ観測していないスロットに目を向けてみてください。\"  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n\n\n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n\n\n\n  \n  \n\n  \n  \n\n  \n  \n\n  \n\n\n\n  \n  \n\n",
+        "reasoning": "We need to produce feedback based on the given evaluation. The code determined: correct country is in candidate set, high confidence, no missed slots, no errors. We must give explanation, not change result. Must note any observed issues: They used ground as decisive, that's okay, but also traffic_side and script are discriminative. Provide suggestions for next observations: maybe focus on sign, pole, architecture, etc. Also note that they didn't mention camera observed (should have seen Gen4) but it's not considered missed because they marked as unseen? Actually correct tag says camera: 見えた / Gen4, but learner says 見えない. That's an error: they said camera not seen, but correct tag says seen. However the code's \"見落としたスロット: （なし）\" meaning they didn't flag as missed? Perhaps because it's not considered a miss? Actually it's a mis-observation: they thought it was not seen, but it was seen. The system didn't count as missed? The \"見落としたスロット\" are none. Could be that camera is not required? The instruction: \"誤って「見えない」と判断したスロット: （なし）\". So none. So we don't need to mention error.\n\nBut we can still suggest they check camera generation (if visible) and other signs like sign shape, bollard etc. Provide guidance.\n\nWe should not mention anything about \"見落としの判定はできません\" because there is no missed slot.\n\nWe must not create new info. Use only given data. Provide each point concisely, within 1200 characters.\n\nAlso note that they used ground as decisive, which is okay, but also traffic_side and script are discriminative combos; they might use those too.\n\nWe need to give specifics: next slots to view: maybe bollard, sign, architecture, vehicle plate style, pavement condition? But \"次に見るべきスロット\" is none per code. However the instruction says we must always give next slots? In the earlier instructions: \"次に何を見るべきかを必ず具体的に示す。\" So even if none, we should suggest something. But the code says none. I think we should suggest useful slots for future: e.g., check camera generation, bollard, sign details, etc.\n\nBut must not contradict \"次に見るべきスロット（コードの計算結果）: （なし）\". Possibly we can say: \"今回の判定では追加で見るべきスロットはありませんが、今後の練習では...\" That respects.\n\nLet's craft response: explain why ground works, mention that traffic_side and script also discriminative, encourage to note camera generation, and to examine signs/bollards for future.\n\nKeep length <1200 Japanese characters.\n\n",
+        "finishReason": null,
+        "structuredMode": "json_schema",
+        "chunks": 1185,
+        "firstByteMs": 266,
+        "totalMs": 4955,
+        "error": "空白が 512 字以上続いたため打ち切った（本文 800 字、1185 チャンク、max_tokens=8000）。**待っても中身は増えない** / 修復して中身を取り出した（末尾の空白 515 字を落とした、足した文字 \"}\"）",
+        "billed": true
+      },
+      {
+        "model": "preview/gemma-4-31B-it",
+        "status": "truncated",
+        "feedback": null,
+        "rawContent": "{\n  \"discoveries\": [\n    \"左側通行、太陽の位置、そして赤茶色の土という複数の手がかりを組み合わせて、南半球の左側通行国である南アフリカ共和国（ZA）を導き出せたのは素晴らしい推論です。\"\n  ],\n  \"discriminationHint\": \"今回の正解地点では、ground（土の色）、traffic_side（走行車線）、script（文字）が候補国を区別するための重要な弁別スロットとなっていました。これらを意識的に観察し、組み合わせることで精度を高めることができます。\",\n  \"failureModeExplanation\": \"\",\n  \"judgmentUnavailable\": true,\n  \"missedClues\": [],\n  \"nextPriority\": []\n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  ",
+        "reasoning": "",
+        "finishReason": null,
+        "structuredMode": "json_schema",
+        "chunks": 503,
+        "firstByteMs": 726,
+        "totalMs": 7858,
+        "error": "空白が 512 字以上続いたため打ち切った（本文 360 字、503 チャンク、max_tokens=8000）。**待っても中身は増えない** / JSON は閉じられたが必須項目が欠けていた（末尾の空白 513 字を落とした）",
+        "billed": true
+      },
+      {
+        "model": "preview/Qwen3.6-35B-A3B",
+        "status": "ok",
+        "feedback": {
+          "summary": "正解を導いた推論過程を肯定し、用語辞書の数値（地面101カ国など）を用いて単独手がかりの限界を明確にしました。次は「ラテン文字」や「舗装」の詳細観察、そして視界端の「カメラ情報」取得へ焦点を当てるよう指示しています。",
+          "failureModeExplanation": "「失敗モード：なし」のため、見落としや誤判断への言及は省略しています。",
+          "missedClues": [],
+          "wrongReasoning": [],
+          "vocabulary": [
+            {
+              "learnerWrote": "赤茶色の土",
+              "canonicalTerm": "ai_ground_03／茶色の土",
+              "note": "用語辞書との対応を明示"
+            },
+            {
+              "learnerWrote": "アルファベット",
+              "canonicalTerm": "ai_script_01／ラテン文字",
+              "note": "用語辞書との対応を明示"
+            },
+            {
+              "learnerWrote": "見えない",
+              "canonicalTerm": "ai_camera／カメラの世代",
+              "note": "正解タグの記録を補足"
+            }
+          ],
+          "discriminationHint": "用語辞書に基づく数値を用いて絞り込みの限界と強みを説明し、具体的な観察優先順を追記しました。",
+          "nextPriority": [
+            "script",
+            "pavement",
+            "camera"
+          ],
+          "discoveries": [
+            "正解（ZA）をhigh確信で導けました。左側通行と赤茶色の土を結びつけて南アフリカを推論した過程は論理的です。",
+            "用語辞書によると、学習者が挙げた「赤茶色の土（ai_ground_03／茶色の土）」は101カ国で観測される一般的な特徴です。単独では絞り込み力が限られるため、左側通行という情報と組み合わせることで候補を限定できたのは優れた判断でした。",
+            "確信度をさらに上げるには、同じく「ラテン文字（ai_script_01）」や「舗装（ai_pavement）」の詳細な状態（劣化パターンや路肩の構造）を注意深く観察し、候補国ごとに異なる傾向として捉える訓練を積んでください。また、画像の端や背景に写る「カメラの世代（ai_camera）」などの記録情報も、次回は拾えるよう視野の端に意識を向けてみてください。"
+          ],
+          "judgmentUnavailable": false
+        },
+        "rawContent": "{\n  \"discoveries\": [\n    \"正解（ZA）をhigh確信で導けました。左側通行と赤茶色の土を結びつけて南アフリカを推論した過程は論理的です。\",\n    \"用語辞書によると、学習者が挙げた「赤茶色の土（ai_ground_03／茶色の土）」は101カ国で観測される一般的な特徴です。単独では絞り込み力が限られるため、左側通行という情報と組み合わせることで候補を限定できたのは優れた判断でした。\",\n    \"確信度をさらに上げるには、同じく「ラテン文字（ai_script_01）」や「舗装（ai_pavement）」の詳細な状態（劣化パターンや路肩の構造）を注意深く観察し、候補国ごとに異なる傾向として捉える訓練を積んでください。また、画像の端や背景に写る「カメラの世代（ai_camera）」などの記録情報も、次回は拾えるよう視野の端に意識を向けてみてください。\"\n  ]\n  ,\n  \"discriminationHint\": \"用語辞書に基づく数値を用いて絞り込みの限界と強みを説明し、具体的な観察優先順を追記しました。\"\n  ,\n  \"failureModeExplanation\": \"「失敗モード：なし」のため、見落としや誤判断への言及は省略しています。\"\n  ,\n  \"judgmentUnavailable\": false\n  ,\n  \"missedClues\": []\n  ,\n  \"nextPriority\": [\n    \"script\",\n    \"pavement\",\n    \"camera\"\n  ]\n  ,\n  \"summary\": \"正解を導いた推論過程を肯定し、用語辞書の数値（地面101カ国など）を用いて単独手がかりの限界を明確にしました。次は「ラテン文字」や「舗装」の詳細観察、そして視界端の「カメラ情報」取得へ焦点を当てるよう指示しています。\"\n  ,\n  \"vocabulary\": [\n    {\n      \"canonicalTerm\": \"ai_ground_03／茶色の土\",\n      \"learnerWrote\": \"赤茶色の土\"\n    ,\n    \"note\": \"用語辞書との対応を明示\"\n    }\n    ,\n    {\n      \"canonicalTerm\": \"ai_script_01／ラテン文字\",\n      \"learnerWrote\": \"アルファベット\"\n    ,\n    \"note\": \"用語辞書との対応を明示\"\n    }\n    ,\n    {\n      \"canonicalTerm\": \"ai_camera／カメラの世代\",\n      \"learnerWrote\": \"見えない\"\n    ,\n    \"note\": \"正解タグの記録を補足\"\n    }\n  ]\n  ,\n  \"wrongReasoning\": []\n}",
+        "reasoning": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n    - **Learning Notes:** The learner observed traffic side (left), road markings (white solid center line, STOP line), poles (thin, rusty), signs (chevron), script (Latin/English unclear), ground (reddish-brown, dry), terrain (thin leaves, hills), architecture (red brick shops), vehicle (white wide plate), pavement (cracked asphalt), season (sun from north), other (none).\n    - **Learner's Answer:** ZA (high), AU (medium). Reason: Southern hemisphere, left traffic, red soil -> South Africa.\n    - **Correct Answer:** ZA (Southern Africa)\n    - **Code Judgment:** Correct (ZA in candidates, high confidence). No missed slots, no false negatives, no false positives. Failure mode: none. Countries paired: AU-ZA. Slot discriminative power: none provided. Achieved narrowing: not calculated. Next to watch: none. Found clue: none.\n    - **Ground Truth Tags:** Matches learner's notes almost exactly, plus `camera: Gen4` and `other: trash everywhere`. Discriminative slots: `ground`, `traffic_side`, `script`.\n    - **Dictionary:** Provided for various slots. Note that `ground` (ai_ground_03, brown soil) has 101 countries, so it's not very restrictive. `traffic_side` (left) isn't explicitly in the provided dict, but generally implies Southern Hemisphere/Australia/UK/etc. `script` (ai_script_01/02, Latin) has 79/66 countries. `road_marking_center_white` has 1 country [CL]. Wait, the dict says `road_marking_center_white` has 1 country [CL], but the ground truth says it's a discriminative slot. The code judgment says \"slot discriminative power: none\". I must stick to the provided data. The prompt says: \"手がかりが何カ国を示すかは、入力で与えられた数値だけを使ってください。\" I will rely on the dict/codes provided.\n\n2.  **Check Constraints:**\n    - Role: Coach for GeoGuessr improvement.\n    - Do not re-judge. Explain results meaningfully.\n    - Assume I haven't seen the image. Only judge based on \"正解タグ\" (Ground Truth Tags).\n    - Generalize from \"用語辞書\". Don't assert as facts for this location.\n    - Do not change judgment results.\n    - If no correct tags given, can't judge misses (not applicable here, tags are given).\n    - Don't just encourage; give specific next steps.\n    - Ignore \"見落としではないもの\" list.\n    - Handle intersection properly (0 means failure, but here it's not calculated).\n    - Don't create narrowing power. Use provided numbers. If missing, say unknown.\n    - Handle vocabulary: translate layman terms to official terms from dict.\n    - Handle \"other\": recognize as valid discovery.\n    - Keep it short (<1200 chars). Prioritize important points.\n\n3.  **Identify Key Points for Feedback:**\n    - **Result:** Correct. ZA was chosen with high confidence. Good job.\n    - **Observations vs. Ground Truth:** Learner noted almost everything correctly. `camera` was marked \"見えない\" by learner but is \"見えた\" in GT. Wait, the code judgment says: `誤って「見えない」と判断したスロット: （なし）`. So the code didn't flag it, or I should just follow the code judgment. I'll stick to the code judgment.\n    - **Reasoning:** Learner used \"left traffic + red soil -> southern hemisphere -> ZA\". This is logical. However, \"red soil\" (`ai_ground_03`) is present in 101 countries per the dict, so it's not highly discriminative by itself. The code says `ground` is a discriminative slot in GT, but the dict shows 101 countries. I will follow the constraint: \"手がかりが何カ国を示すかは、入力で与えられた数値だけを使ってください。\" So I'll state that `ground` (茶色の土) is common in many countries, but combined with `traffic_side` (左側通行), it points to specific regions.\n    - **Next Steps:** The learner correctly identified key factors. To improve narrowing power, focus on `script` (ラテン文字) and specific road marking combinations, or look for more distinctive architectural/vegetation features. Also, notice the `camera: Gen4` in GT (though learner missed it, code says no error, maybe it was too subtle. I'll mention it as a bonus to check next time). Actually, the prompt says \"次に見るべきスロット（コードの計算結果。並べ替えないこと）: （なし）\". So I don't need to invent next steps from code, but I can give general coaching advice based on the observation.\n    - **Vocabulary:** \"赤茶色の土\" -> `ai_ground_03`（茶色の土）. \"アルファベット\" -> `ai_script_01`（ラテン文字）.\n    - **Structure:**\n        - Acknowledge correct result & good reasoning.\n        - Explain `ground` & `traffic_side` roles using dict numbers.\n        - Clarify that `ground` alone covers 101 countries, so combination is key.\n        - Mention `other` (if applicable) or just focus on main slots.\n        - Give concrete next step: e.g., focus on `script` specifics or `pole`/`architecture` details to refine narrowing.\n        - Keep it concise.\n\n    Draft:\n    正解（ZA）をhigh確信で当てました。左側通行と赤茶色の土（用語辞書では「ai_ground_03／茶色の土」）を組み合わせて南半球・南アフリカを推論したアプローチは正しいです。\n    ただし、用語辞書によると「茶色の土」は101カ国で観測される一般的な特徴であり、単体では絞り込みに限界があります。左側通行（主に南半球や英国領など）と組み合わせることで候補が南アフリカやオーストラリアに収束したのは優れた推論です。\n    次は、アルファベットが見えた「ai_script_01／ラテン文字」の特徴（使用文字数や特定の記号の有無）や、舗装の劣化度合い（ai_pavement_01／02）と路肩の有無をセットで確認すると、候補の区別精度が上がります。また、画像の隅や端に写る「カメラの世代」情報も、正解タグではGen4と記録されています。次回から視界の端に意識を向け、記録型情報も拾う訓練をすると、確信度をさらに上げられます。\n\n4.  **Check Constraints:**\n    - Role: Coach? Yes.\n    - Don't re-judge? Yes.\n    - Assume no image, only use GT? Yes.\n    - Generalize from dict? Yes, noted ground is 101 countries.\n    - Don't change judgment? Yes.\n    - No misses in judgment, so fine.\n    - Specific next steps? Yes (script details, pavement + shoulder combo, camera edge scan).\n    - Ignore \"not misses\" list? Yes.\n    - Intersection handling? Addressed that ground alone isn't narrowing.\n    - Don't create narrowing power? Used dict's 101 count for ground. Didn't invent counts for others.\n    - Vocabulary? Translated layman to dict terms.\n    - Short & prioritized? ~380 chars. Well under 1200.\n    - Check dict constraint: \"手がかりが何カ国を示すかは、入力で与えられた数値だけを使ってください。\" I used 101 for ground. Good.\n    - Check \"他の気づき\": Learner wrote \"未確認\", GT has \"ゴミ\". Not critical to mention since learner missed it and it's not in their notes. I'll stick to the main points.\n    - One minor thing: The prompt says \"達成された絞り込み（積集合）: 判定していない\". I won't mention it.\n    - The prompt says \"次に見るべきスロット（コードの計算結果。並べ替えないこと）: （なし）\". I gave advice based on general skill improvement, which is allowed as coaching. I'll adjust to strictly follow \"次に見るべき項目\" if implied, but since code says none, I'll frame it as general refinement tips based on their actual notes.\n    - I will ensure tone is coaching, concise, and strictly adheres to constraints.\n\n    Refined Draft:\n    正解（ZA）をhigh確信で導けました。左側通行と赤茶色の土を結びつけて南アフリカを推論した過程は論理的です。\n    用語辞書によると、学習者が挙げた「赤茶色の土（ai_ground_03／茶色の土）」は101カ国で観測される一般的な特徴です。単独では絞り込み力が限られるため、左側通行という情報と組み合わせることで候補を限定できたのは優れた判断でした。\n    確信度をさらに上げるには、同じく「ラテン文字（ai_script_01）」や「舗装（ai_pavement）」の詳細な状態（劣化パターンや路肩の構造）を注意深く観察し、候補国ごとに異なる傾向として捉える訓練を積んでください。また、画像の端や背景に写る「カメラの世代（ai_camera）」などの記録情報も、次回は拾えるよう視野の端に意識を向けてみてください。\n\n    Checks:\n    - <1200 chars? Yes (~280).\n    - No re-judging? Yes.\n    - Only uses GT? Yes.\n    - Dict generalized? Yes.\n    - No judgment change? Yes.\n    - Specific next steps? Yes.\n    - Handles vocab? Yes.\n    - Handles narrowing? Yes, explicitly states ground covers 101 countries.\n    - Ready. Output matches refined draft. \n    One thing: The prompt says \"正解タグが与えられていない場合、見落としについて何も述べない。\" Here tags are given, so it's fine.\n    \"達成された絞り込み...判定していない\" -> I didn't mention it.\n    \"次に見るべきスロット...なし\" -> I gave general advice, which is fine as coaching.\n    All constraints met. Proceeds. \n    Output generation. \n    [Self-Correction/Verification during thought]\n    - Check constraint: \"手がかりが何カ国を示すかは、入力で与えられた数値だけを使ってください。\" I used 101 for ground. Correct.\n    - Check constraint: \"正解タグが与えられていない場合...\" -> Tags are given.\n    - Check constraint: \"積集合の扱い\" -> I explained that ground alone isn't narrowing, which aligns with the constraint.\n    - Check constraint: \"別ルートで正解したため不要だったスロット: other\" -> Learner wrote \"未確認\". I'll skip mentioning \"other\" since it's marked as not needed.\n    - Check constraint: \"語彙の扱い\" -> I explicitly linked layman terms to dict IDs/names.\n    - Everything looks solid. Output matches. \n    Proceeds. \n    Output Generation. \n    (Note: I will make sure the tone is strictly coaching and follows the exact phrasing constraints.) \n    Final Text:\n    正解（ZA）をhigh確信で導けました。左側通行と赤茶色の土を結びつけて南アフリカを推論した過程は論理的です。\n    用語辞書によると、学習者が挙げた「赤茶色の土（ai_ground_03／茶色の土）」は101カ国で観測される一般的な特徴です。単独では絞り込み力が限られるため、左側通行という情報と組み合わせることで候補を限定できたのは優れた判断でした。\n    確信度をさらに上げるには、同じく「ラテン文字（ai_script_01）」や「舗装（ai_pavement）」の詳細な状態（劣化パターンや路肩の構造）を注意深く観察し、候補国ごとに異なる傾向として捉える訓練を積んでください。また、画像の端や背景に写る「カメラの世代（ai_camera）」などの記録情報も、次回は拾えるよう視野の端に意識を向けてみてください。 \n    Word count: ~260 Japanese chars. Well within limit. Covers all required points. Adheres strictly to constraints. Ready. \n    Output matches response. \n    [Done] \n    *(Self-Correction/Refinement during drafting)*: \n    I should explicitly mention that `road_marking_center_white` is only 1 country [CL] per the dict, but the learner observed it. Wait, the constraint says \"手がかりが何カ国を示すかは、入力で与えられた数値だけを使ってください。\" and \"辞書に載っていない手がかり...分かりません\". The learner observed it, and dict says 1 country [CL]. I could mention it, but it's not strictly necessary. I'll stick to the current draft as it's concise and accurate. The prompt emphasizes not inventing narrowing power. I've done that.\n    All good. Output matches. \n    [Output Generation] -> *Proceeds*\n",
+        "finishReason": null,
+        "structuredMode": "json_schema",
+        "chunks": 3587,
+        "firstByteMs": 567,
+        "totalMs": 18104,
+        "error": null,
+        "billed": true
+      },
+      {
+        "model": "preview/Kimi-K2.6",
+        "status": "ok",
+        "feedback": {
+          "summary": "正解を候補に含め、高い確信度で絞り込めました。見落としや誤認もありません。決め手としたgroundは辞書上で101カ国に該当するため単独での決め打ちは危険ですが、「南半球」「左側通行」と複合させた推論自体は正しかったと言えます。",
+          "failureModeExplanation": "今回の失敗モードはありません。見落とし、誤認もなく、正解を高い確信度で捉えられています。",
+          "missedClues": [],
+          "wrongReasoning": [],
+          "vocabulary": [
+            {
+              "learnerWrote": "白地に赤い矢印のシェブロン",
+              "canonicalTerm": "シェブロン",
+              "note": "用語辞書には未登録ですが、標識の形状としての観察は有効です。"
+            }
+          ],
+          "discriminationHint": "茶色の土は101カ国に該当し、単独ではZAとAUを区別できません。赤茶色のレンガ建築や三方を囲む地形、白地に赤いシェブロンといった辞書外の要素を、今後AUとの比較材料として蓄積してください。",
+          "nextPriority": [
+            "terrain_vegetation",
+            "architecture",
+            "sign"
+          ],
+          "discoveries": [
+            "南半球（太陽が北から）と左側通行を組み合わせ、ZA・AUに絞り込んだ推論は有効でした。"
+          ],
+          "judgmentUnavailable": false
+        },
+        "rawContent": " { \"discoveries\": [\"南半球（太陽が北から）と左側通行を組み合わせ、ZA・AUに絞り込んだ推論は有効でした。\"], \"discriminationHint\": \"茶色の土は101カ国に該当し、単独ではZAとAUを区別できません。赤茶色のレンガ建築や三方を囲む地形、白地に赤いシェブロンといった辞書外の要素を、今後AUとの比較材料として蓄積してください。\", \"failureModeExplanation\": \"今回の失敗モードはありません。見落とし、誤認もなく、正解を高い確信度で捉えられています。\", \"judgmentUnavailable\": false, \"missedClues\": [], \"nextPriority\": [\"terrain_vegetation\", \"architecture\", \"sign\"], \"summary\": \"正解を候補に含め、高い確信度で絞り込めました。見落としや誤認もありません。決め手としたgroundは辞書上で101カ国に該当するため単独での決め打ちは危険ですが、「南半球」「左側通行」と複合させた推論自体は正しかったと言えます。\"\n\n, \"vocabulary\": [\n    {\"canonicalTerm\": \"シェブロン\", \"learnerWrote\": \"白地に赤い矢印のシェブロン\", \"note\": \"用語辞書には未登録ですが、標識の形状としての観察は有効です。\"}\n  ]\n  \n, \"wrongReasoning\": []\n\n}",
+        "reasoning": " ユーザーはGeoGuessrのコーチとして、学習者の観察メモに基づいて助言を与える必要があります。\n\nまず、入力を詳細に分析します：\n\n**学習者の観察メモ:**\n- traffic_side: 左側通行\n- road_marking: 中央線は白い実線、路肩はなし、停止線も中央線と同様で「STOP」の表記 [用語ID: road_marking_center_white, ai_road_marking_01, ai_road_marking_02, ai_road_marking_04]\n- bollard: 見えない\n- pole: 街灯が細い鉄柱製かな、ところどころ錆びている [ai_pole_01]\n- sign: 遠くに白地に赤い矢印のシェブロンが見える\n- script: アルファベットは見えるが英語？かは不明 [ai_script_01]\n- ground: 赤茶色の土、乾燥している [ai_ground_03]\n- terrain_vegetation: 細い葉っぱの植物しか生えていない、少し遠くになだらかな山が見え三方を囲まれている\n- architecture: 赤茶色のレンガ作りの店舗が並ぶ\n- vehicle: 白い横長のナンバープレート [ai_vehicle_01, ai_vehicle_02]\n- pavement: アスファルトで舗装はされているが、ボロボロでメンテナンスはあまりされていない [ai_pavement_01, ai_pavement_02]\n- camera: 見えない\n- season: 太陽が北から照っている\n- other: 未確認\n\n**学習者の回答:**\n- 候補国: ZA（high）, AU（medium）\n- 決め手: ground\n- 総合推論: 南半球の左側通行で赤土は南アフリカ共和国が濃厚\n\n**正解:** ZA, southern_africa\n\n**判定結果:**\n- 正解が候補に含まれる: はい\n- 確信度: high\n- 見落とし: なし\n- 誤って「見えない」と判断: なし\n- 過剰に申告: なし\n\n**見落としではないもの:**\n- 視認できないスロット: なし\n- 別のスロットに書かれた観察: camera（記述があった欄: vehicle）\n- 別ルートで正解したため不要だったスロット: other\n\n**失敗モード:** なし\n\n**併記された国の組:** AU-ZA\n\n**スロット別の絞り込み力:** なし\n\n**達成された絞り込み:** 判定していない（正解タグまたは用語辞書が与えられていないため算出不能）\n\n**正解タグ:**\n- camera: Gen4（学習者は「見えない」と回答、しかしvehicle欄に「カメラ世代についての記述があった」とのこと。ただし判定では「誤って見えないと判断したスロット: なし」とあるので、これは見落としではないものとして別扱いされている）\n- other: ゴミがあちこち落ちている\n\n**用語辞書の確認:**\n- ai_ground_03（茶色の土）: 関連国101件 - 絞り込み力はゼロに等しい\n- ai_pavement_01（アスファルト舗装）: 102件\n- ai_pavement_02（ひび割れ）: 102件\n- ai_pole_01（金属製電柱）: 101件\n- ai_road_marking_01（白線）: 94件\n- ai_road_marking_02（実線）: 43件 - 実線はヨーロッパ中心だがZAが含まれていない！注意が必要\n- ai_road_marking_04（白実線）: 38件 - ZAが含まれていない\n- ai_script_01（ラテン文字）: 79件\n- ai_vehicle_01（横長プレート）: 101件\n- ai_vehicle_02（白地プレート）: 101件\n- road_marking_center_white（中央線が白）: 1件 [CL] - チリのみ\n\nここで重要なポイント：\n- road_marking_center_whiteは関連国1件（CL）だが、学習者は中央線白い実線と観察し、正解タグも同様。しかしZAはこの辞書に入っていない。ただし、これは辞書の性質であり、学習者の観察は正しい。\n- ai_road_marking_02（実線）とai_road_marking_04（白実線）はZAが含まれていない。これは、ZAでは一般的に中央線が黄色（二重黄線など）である可能性が高いことを示唆している。しかし、今回の地点では白い実線だったということ。\n- 学習者は左側通行と南半球（太陽が北から）と赤土でZAとAUを絞り込み、groundを決め手にした。\n\n**重要な制約の確認:**\n1. 画像を見ていないことを前提に振る舞う。風景について推測で語らない。\n2. 「この地点に写っている」と断定できるのは入力の「正解タグ」だけ。\n3. 用語辞書の知識は「この国では一般に」という一般的な傾向として述べる。\n4. 判定結果を変更しない。\n5. 正解タグが与えられていない場合、見落としについて何も述べない。（今回は正解タグが与えられている）\n6. 学習者を励ますだけの内容を書かない。次に何を見るべきかを必ず具体的に示す。\n7. 短く書く。各項目は指定された字数を守る（字数指定は入力にないが短く）。全体で1200字以内。\n8. 網羅より優先順位。指摘は重要なものだけに絞る。\n\n**見落としではないものの扱い:**\n- cameraはvehicle欄に書かれていた。これは「別のスロットに書かれた観察」として扱われる。学習者に対して「観察できていなかったことにはしない」とのこと。\n- otherは別ルートで正解したため不要だったスロット。\n\n**絞り込み力に関する注意:**\n- ai_ground_03は101件。groundは「決め手」にしたが、実際には茶色の土は101カ国に該当し、絞り込み力はない。\n- ただし、学習者は「南半球の左側通行で赤土」として複合的に判断した。左側通行はZAとAUなど。南半球（太陽が北）は季節スロット。これらを組み合わせた推論は合理的。\n\n**指摘すべき重要な点:**\n1. cameraの扱い: 学習者はcameraを「見えない」としたが、実際にはvehicle欄にcameraの観察（Gen4）があったということ。しかし「誤って見えないと判断したスロット: なし」と判定されているので、これは指摘しない？ いや、「別のスロットに書かれた観察」として挙げられている。これは「どちらの欄が適切かを一言添えてよい」というルールがある。ただし「観察できていなかったことにはしない」ともある。なので、「cameraの記述はvehicle欄にあったが、camera欄に移すと整理しやすい」程度に留めるべきか。でも判定では「誤って見えない」とはされていない。見落としではないものとして分類されているだけ。指摘するほど重要ではないかもしれない。\n\n2. road_marking_center_white: 辞書では関連国1件（CL）となっているが、学習者はZAでこの観察をした。これは辞書の限界。ただし学習者はai_road_marking_01/02/04も併記している。ai_road_marking_04（白実線）は38件でZAは含まれない。これは「ZAでは一般的に中央線が黄色であることが多いが、この地点では白実線だった」という可能性を示唆できるが、推測で語ってはいけない。「用語辞書では白実線の関連国にZAが含まれていない点に注意」とは言えるが、今回の地点では実際に白実線だった（正解タグ確認済み）ので、辞書が不完全であることを伝えるべきか？ それとも無視すべきか？\n→ 入力に「road_marking_center_white / 中央線が白（素人語: 中央線が白い）: 関連国 1 件 [CL]」とある。学習者はこの用語IDを挙げている。しかし正解はZA。これは辞書の矛盾を示している。しかし「達成された絞り込み」は算出不能とされている。\n→ この手がかりがZAを示すかどうかは分からない（辞書にはCLだけ）。なので「中央線が白」がZAを示すとは言えない。実際、学習者は決め手にしなかった。\n→ 重要ではないかもしれない。無視してよい。\n\n3. 決め手にしたground: ai_ground_03は101件。絞り込み力がないにもかかわらず決め手にしている。これは危険な思考法。茶色の土は世界中にある。ただし「赤茶色の土」という表現がZAの特徴かもしれないが、辞書には「茶色の土」で101件。辞書に「赤茶色の土」という用語はない。なので「groundの用語辞書は101カ国に該当し、単独では絞り込めません」と指摘すべき。\n→ ただし、学習者は「南半球の左側通行で赤土」という複合条件で使った。 season（太陽が北から）とtraffic_side（左側通行）と組み合わせた場合、ZAとAUに絞られる可能性がある。これは合理的な推論。groundは決め手の一つとして有効だが、単独では絞り込めないことを伝える。\n\n4. 次に見るべきスロット: コードの計算結果は「（なし）」。なのでコードに基づく次に見るべきスロットはない。しかし「学習者を励ますだけの内容を書かない。次に何を見るべきかを必ず具体的に示す。」という指示がある。自力で考える必要がある。\n→ 今回、学習者はZAとAUを区別できたか？ AUはmedium。区別のための手がかりとして、正解タグで「弁別スロット」として挙げられているのは ground, traffic_side, script。しかしtraffic_sideは両方左側通行。scriptは両方ラテン文字。groundは辞書的に101カ国。\n→ 実際にはarchitecture（赤茶色のレンガ作り）やterrain_vegetation（三方を山に囲まれた地形）やsign（シェブロン）などが、用語辞書にはないが観察されている。\n→ 用語辞書に載っているもので絞り込み力の高いものはあまりない。road_marking_center_whiteは1件だがZAは含まれない（矛盾）。\n\n**助言の構成:**\n- まず、正解に含められてhighで、見落としや誤認もないことを簡潔に伝える。\n- groundについて: 茶色の土は101カ国に該当するため、単独での決め手は危険。ただし南半球×左側通行と組み合わせた複合推論は有効だったと認める。\n- cameraについて: 別のスロットに書かれた観察として扱う。vehicle欄にGen4の記述があったようだが、camera欄に移すと整理しやすい（ただし軽く触れる程度）。\n- 次に見るべきもの: 今回AUとZAの区別が課題だった。用語辞書に載っていない観察（赤茶色のレンガ建築、白地に赤い矢印のシェブロン、三方を囲む山並み）を辞書化・蓄積し、AUでは頻度が低い可能性がある景観要素として留意する。あるいは、今回の「弁別スロット」として挙げられた項目のうち、辞書上の絞り込み力の限界を認識して、辞書外の手がかりを増やすことを促す。\n- ただし、「この国では一般に」という形で述べる必要がある。赤茶色のレンガは南アフリカで一般的？ 画像を見ていないので、正解タグに「赤茶色のレンガ作りの店舗が並ぶ」とあるので、この地点の事実としては書ける。AUとの区別になるかは分からない（辞書にないため）。\n- ロードマーキング: road_marking_center_whiteは辞書上CLのみだが、今回ZAで観察された。これは辞書の限界。ai_road_marking_04（白実線）は38件でZA不在。ZAでは通常黄色の中央線が多い可能性があるが（辞書からの推論）、今回は白だった。これは「一般に」として述べられるか？ ai_road_marking_04の関連国にZAがないことから、「ZAでは一般に白実線の中央線は見られず、他の色が用いられる傾向がありますが、この地点では白実線でした」という言い方は、辞書の情報を使った「一般に」として可能か？ しかし「この地点では〜でした」は正解タグで確認済みなので可能。ただし、これは重要な指摘か？ やや高度かもしれない。\n- 最も重要なのは: groundを決め手にしたが、辞書では101件。次は辞書に載っていない「その他の気づき」（other）や建築様式などを蓄積し、AUとの区別を強化すること。今回の「ゴミがあちこち落ちている」という正解タグは、ZAの都市部では一般的？かもしれないが断定できない。辞書にないので「何カ国か分からない」とする。\n\n**分量の制約:**\n- 全体で1200字以内。\n- 短く。\n\n**下書き:**\n\n今回は候補に正解を含め、かつ高い確信度で絞り込めました。見落としや誤認もなく、観察自体は堅実です。\n\n決め手としたground（茶色の土）ですが、用語辞書では101カ国に該当し、単独では絞り込めません。「南半球」「左側通行」と複合させた推論は有効でしたが、単体で決め打ちすると危険です。\n\ncameraの観察はvehicle欄に書かれていました。今後は該当するスロットに移すと、整理と検索がしやすくなります。\n\nAUとの区別について、今回の弁別スロットはground・traffic_side・scriptでしたが、いずれも辞書上は多くの国を含みます。コードからの次スロット提案はありませんが、今回観察できた赤茶色のレンガ建築や三方を囲む山並み、白地に赤い矢印のシェブロンといった辞書外の要素を、AUとの比較材料として自力で蓄積していくと、今後の絞り込みが強化されます。\n\n字数確認: 約300字。十分短い。\n\nこれでよいか検証：\n- 画像を見ていないことになっているか？ → はい、正解タグと辞書だけに基づいている。\n- 「この地点に写っている」と断定してよいのは正解タグだけか？ → はい。赤茶色のレンガ建築などは正解タグに記載されている。\n- 用語辞書の知識は「一般に」として述べているか？ → 「101カ国に該当し」は辞書情報。「単独では絞り込めません」は妥当。\n- 判定結果を変更していないか？ → 変更していない。「正解含む」「high」「見落としなし」をそのまま受け入れている。\n- 正解タグが与えられているので見落としについて述べているか？ → 見落としはなしなので「見落としもなく」と述べている。\n- 励ますだけでないか？ → groundの危険性、cameraの整理、辞書外要素の蓄積を示している。\n- 見落としではないものを見落としとして扱っていないか？ → cameraについては「別のスロットに書かれた」と触れつつ「観察できていなかったことにはしない」ように、「整理と検索がしやすく」と述べている。otherについては触れていない（不要なスロットとして扱われているため）。\n- 絞り込み力を自分で作っていないか？ → 101カ国、38件など、入力で与えられた数値だけを使っている。\n- 「その他の気づき」の扱いは適切か？ → 今回otherは未確認だったが、正解タグでは「ゴミがあちこち落ちている」。学習者は項目の外を見られなかったが、これで減点しない。他の辞書外要素（建築など）は発見として認めている。\n- 短いか？ → はい。\n\nちなみに、cameraについて：入力では「別のスロットに書かれた観察: camera（記述があった欄: vehicle）」とある。学習者のvehicle欄には「白い横長のナンバープレート」しか書かれていない。おそらく、画像認識システムやコードがvehicle欄の記述からcamera世代を推定したか、あるいは別の情報源があるのかもしれない。ユーザーの入力では「記述があった欄: vehicle」と明示されているので、コードの判断をそのまま受け入れる。しかしvehicle欄にGen4の記述は見当たらない。これは奇妙だが、与えられた判定を変更しないというルールなので、コードの判断「別のスロットに書かれた観察」として扱う。camer欄に書くよう促してもいいが、実際には書いていないので、これは微妙。無視してもいいかもしれない。別のスロットに書かれたことについて軽く触れるのがセーフ。\n\n road_markingについて、学習者は「中央線は白い実線」と観察し、road_marking_center_white [CLのみ] と ai_road_marking_02, ai_road_marking_04 [ZA含まず] を挙げている。辞書では白実線の中央線はZAに含まれていない。これは「ZAでは一般に中央線は白実線ではない」という傾向を示唆するが、今回の地点では正解タグでも確認されている。これは興味深いが、学習者はこれを決め手にしていないので、指摘する必要は低い。1200字以内で優先順位を絞るなら、書かなくてよい。\n\n signについて「白地に赤い矢印のシェブロン」は辞書にない。これは「名前のない手がかりを自力で見つけた」ことになる。これを発見として認めるべきだが、今回は特に指摘する必要はないか。\n\n season「太陽が北から照っている」は南半球の有力な手がかり。traffic_side（左側通行）と組み合わせると、絞り込みが効く。これは学習者がうまく使った。\n\n 総合的に、最も重要な指摘は「ground（茶色の土）の辞書上の絞り込み力が低い（101カ国）」こと。次に、AUとの区別を強化するために、辞書外の観察（建築、地形、看板）を蓄積すること。\n\n 文章を再確認：\n\n「今回は正解を候補に含め、かつ高い確信度で絞り込めました。見落としや誤認もなく、観察の精度は良好です。\n\n決め手としたgroundですが、用語辞書では「茶色の土」が101カ国に該当し、単独では絞り込めません。「南半球」「左側通行」と複合させた推論は有効でしたが、単体で決め打ちすると危険です。\n\nAUとの区別について、今回の弁別スロットはground・traffic_side・scriptでしたが、いずれも辞書上は多数国を含みます。コードからの次スロット提案はありませんが、今回観察できた赤茶色のレンガ建築や三方を囲む地形、白地に赤いシェブロンといった辞書外の要素を、AUとの比較材料として蓄積していくと、今後の絞り込みが強化されます。」\n\nこれで十分。cameraについては入力の「別のスロットに書かれた観察」に触れる必要があるか？ 必須ではないが、一言入れてもいい。しかし字数を抑えたい。\n\nもう少し短く：\n\n「正解を候補に含め、高い確信度で絞り込めました。見落とし、誤認もありません。\n\n決め手としたground（茶色の土）は、用語辞書で101カ国に該当します。「南半球」「左側通行」と複合した推論は有効でしたが、単独での決め打ちは避けてください。\n\nAUとの区別について、弁別スロットとされたground・traffic_side・scriptはいずれも辞書上で多数国を含みます。次に見るべき項目として、今回観察できた赤茶色のレンガ建築や三方を囲む地形、白地に赤いシェブロンといった辞書外の要素を、AUとの比較材料として蓄積してください。」\n\nこれで200字弱。良い。\n\n「別のスロットに書かれた観察」としてcameraがあるが、軽く触れてもいいが必須ではない。他の欄に書いたからといって観察ミスではないので、わざわざ指摘するほどではない。\n\n「視認できないスロット」はなし。\n\nよし、これで確定する。",
+        "finishReason": null,
+        "structuredMode": "json_schema",
+        "chunks": 6029,
+        "firstByteMs": 917,
+        "totalMs": 108990,
+        "error": null,
+        "billed": true
+      }
+    ]
+  }
+}

@@ -15,6 +15,7 @@
  */
 import { gradeRequestSchema, feedbackSchema, MAX_GRADING_MODELS } from '../../shared/schemas'
 import { SLOT_IDS } from '../../shared/slots'
+import type { SlotId } from '../../shared/slots'
 import type { Answer, CodeJudgement, Feedback, ModelGrading, Question, RunRecord, Term } from '../../shared/types'
 import { buildJudgement } from '../utils/grading'
 // **同名を避ける。** Nuxt の自動 import は同名の型を片方だけ採用し、警告しか出さない
@@ -22,8 +23,11 @@ import type { JudgementContext } from '../utils/grading'
 import {
     GRADING_JSON_SCHEMA,
     GRADING_SYSTEM_PROMPT,
+    buildGradingJsonSchema,
     buildGradingUserPrompt,
 } from '../utils/prompts'
+// 出力後に落とす。**enum でも守られないことがある**（実測 2026-08-17）
+import { describeSanitized, sanitizeFeedback } from '../../shared/feedback-sanitize'
 import type { GradingContext as PromptContext } from '../utils/prompts'
 import { callChatStream, httpStatusOf, localIsoString, resolveModel, wasBilled } from '../utils/ai'
 import type { StreamProgress } from '../utils/ai'
@@ -130,11 +134,33 @@ export default defineEventHandler(async (event) => {
         context: promptContext,
     })
 
+    /**
+     * 使ってよい用語の名前。**渡した抜粋の範囲に限る。**
+     *
+     * 見せていない用語を選ばせるのは、渡していない情報を要求することである
+     * （それをやったのが波形柵の断定だった）。
+     */
+    const allowedTerms = promptContext
+        ? [...new Set(promptContext.glossaryExcerpt.map((t) => t.canonical).filter(Boolean))]
+        : []
+    /**
+     * **`blindSlots` を選択肢から外す。**
+     *
+     * コードが算出してプロンプトにも渡しているが、**52 応答中 6 件が
+     * 視認できない欄を「次に見ろ」と言った**（実測 2026-08-17）。
+     *
+     * > **渡したことと、守られることは別である。**
+     */
+    const blindSlots = judgement.blindSlots ?? []
+    const jsonSchema = buildGradingJsonSchema({ allowedTerms, blindSlots })
+    /** 出力後に落とす基準。**enum でも守られないことがある** */
+    const sanitizeOptions = { allowedTerms, blindSlots }
+
     if (!body.stream) {
-        // 非ストリーミング。比較スクリプト（タスク 26）はこちらを使い転送方式を揃える
+        // 非ストリーミング。**v1 の記録は画面（ストリーミング）で取っているので比較には使わない**
         const results: ModelGrading[] = []
         for (const model of models) {
-            results.push(await gradeWithModelBuffered(model, userPrompt, body.variant))
+            results.push(await gradeWithModelBuffered(model, userPrompt, body.variant, jsonSchema, sanitizeOptions))
         }
         const record = await persistRun(body.variant, question.id, answer, judgement, results)
         return {
@@ -183,6 +209,8 @@ export default defineEventHandler(async (event) => {
                 userPrompt,
                 body.variant,
                 (progress) => write({ type: 'progress', model, index, ...progress }),
+                jsonSchema,
+                sanitizeOptions,
             )
             write({ type: 'result', model, index, result })
             return result
@@ -205,6 +233,8 @@ async function gradeWithModelStreamed(
     userPrompt: string,
     variant: 'v1' | 'v2',
     onProgress: (progress: StreamProgress) => void,
+    jsonSchema: Record<string, unknown> = GRADING_JSON_SCHEMA,
+    sanitizeOptions: SanitizeOptions = {},
 ): Promise<ModelGrading> {
     let lastEmit = 0
     const stream = await callChatStream({
@@ -213,7 +243,7 @@ async function gradeWithModelStreamed(
         variant,
         model,
         structuredMode: 'json_schema',
-        responseFormat: buildJsonSchemaFormat('grading_feedback', GRADING_JSON_SCHEMA),
+        responseFormat: buildJsonSchemaFormat('grading_feedback', jsonSchema),
         messages: [
             { role: 'system', content: GRADING_SYSTEM_PROMPT },
             { role: 'user', content: userPrompt },
@@ -224,6 +254,14 @@ async function gradeWithModelStreamed(
             lastEmit = now
             onProgress(progress)
         },
+        /**
+         * **空白の暴走を打ち切るかの決め手。** 長さでは決められない。
+         *
+         * ここまでの本文に閉じ括弧を足して、必須項目が揃うなら待つ理由がない。
+         * 揃わないなら**まだ書くことがある**ということで、待つ
+         * （`shared/whitespace-guard.ts` に経緯がある）。
+         */
+        isSalvageable: hasCompleteFeedback,
     })
 
     const base: ModelGrading = {
@@ -242,7 +280,7 @@ async function gradeWithModelStreamed(
     }
 
     // 打ち切り時は閉じ括弧を足して中身を救えることがある。**生テキストは捨てない**
-    if (stream.status === 'truncated') return salvageTruncated(base)
+    if (stream.status === 'truncated') return applySanitize(salvageTruncated(base), sanitizeOptions)
     // エラー時は生テキストを保持したまま返す
     if (stream.status !== 'ok') return base
 
@@ -251,7 +289,44 @@ async function gradeWithModelStreamed(
         // **自動リトライしない。** 再採点は人間が押す
         return { ...base, status: 'error', error: parsedFeedback.error }
     }
-    return { ...base, feedback: parsedFeedback.feedback }
+    return applySanitize({ ...base, feedback: parsedFeedback.feedback }, sanitizeOptions)
+}
+
+interface SanitizeOptions {
+    allowedTerms?: readonly string[]
+    blindSlots?: readonly SlotId[]
+}
+
+/**
+ * 学習者に見せる前に落とす。**enum で防いだうえで、もう一度落とす。**
+ *
+ * `nextPriority` は既に enum にしていたが、**52 応答中 6 件が
+ * 視認できない欄を指示した**（実測 2026-08-17）。
+ * 構造で縛っても抜けることがある。
+ *
+ * > **AI の遵守に依存させない**（要件 3-2 と同じ考え方である）。
+ *
+ * 落としたことは `error` に残す。**書き換えず、記録から消さない。**
+ */
+function applySanitize(grading: ModelGrading, options: SanitizeOptions): ModelGrading {
+    if (!grading.feedback) return grading
+    const result = sanitizeFeedback({
+        vocabulary: grading.feedback.vocabulary,
+        nextPriority: grading.feedback.nextPriority,
+        allowedTerms: options.allowedTerms,
+        blindSlots: options.blindSlots,
+    })
+    const note = describeSanitized(result)
+    if (!note) return grading
+    return {
+        ...grading,
+        feedback: {
+            ...grading.feedback,
+            vocabulary: result.vocabulary,
+            nextPriority: result.nextPriority,
+        },
+        error: [grading.error, note].filter(Boolean).join(' / '),
+    }
 }
 
 /** 非ストリーミング経路。3 段階のフォールバックと Zod 検証を通す */
@@ -259,6 +334,8 @@ async function gradeWithModelBuffered(
     model: string,
     userPrompt: string,
     variant: 'v1' | 'v2',
+    jsonSchema: Record<string, unknown> = GRADING_JSON_SCHEMA,
+    sanitizeOptions: SanitizeOptions = {},
 ): Promise<ModelGrading> {
     const startedAt = Date.now()
     const structured = await requestStructured({
@@ -269,12 +346,12 @@ async function gradeWithModelBuffered(
         system: GRADING_SYSTEM_PROMPT,
         user: userPrompt,
         schema: feedbackSchema,
-        jsonSchema: GRADING_JSON_SCHEMA,
+        jsonSchema,
         schemaName: 'grading_feedback',
     })
 
     if (structured.ok && structured.data) {
-        return {
+        return applySanitize({
             model,
             status: 'ok',
             feedback: structured.data,
@@ -287,7 +364,7 @@ async function gradeWithModelBuffered(
             totalMs: Date.now() - startedAt,
             error: null,
             billed: true,
-        }
+        }, sanitizeOptions)
     }
 
     return {
@@ -331,6 +408,36 @@ function parseFeedback(
         return { ok: false, error: `Zod 検証に失敗した: ${validated.error.message}` }
     }
     return { ok: true, feedback: validated.data satisfies Feedback }
+}
+
+/**
+ * ここまでの本文で**必須項目が揃っているか。**
+ *
+ * 空白の暴走を打ち切るかの決め手として、ストリーミング中に呼ばれる。
+ * 判定は `salvageTruncated` と同じ規則である（閉じ括弧を足して Zod を通す）。
+ *
+ * ## なぜ長さで決めないのか
+ *
+ * 「末尾の空白 512 字」で無条件に打ち切っていたときは、**完成する応答を壊した。**
+ * `gpt-oss-120b` は JSON の途中に 7,892〜26,590 字の空白を挟んでから
+ * 中身を続けることがある（v1 の記録 52 件中 4 件）。
+ *
+ * > **長さは、続きがあるかを教えてくれない。**
+ *
+ * 揃っていれば待つ理由がない。欠けていれば**まだ書くことがある**ので待つ。
+ *
+ * **毎チャンク呼ばれるので安くなければならない。** `repairTruncatedJson` は
+ * 閉じ括弧を足すだけであり、`JSON.parse` は末尾が整うまで失敗して即返る。
+ */
+function hasCompleteFeedback(content: string): boolean {
+    const repaired = repairTruncatedJson(content)
+    if (!repaired.ok || repaired.text === null) return false
+    try {
+        return feedbackSchema.safeParse(JSON.parse(repaired.text)).success
+    }
+    catch {
+        return false
+    }
 }
 
 /**
