@@ -18,7 +18,7 @@
         "AI 由来の confusableWith は捨てた。国コードが入っておりスキーマの誤用だった。",
         "AI 由来の id は振り直した。全ファイルが coarse-01 から始まり衝突するため。"
     ],
-    "generatedAt": "2026-08-17T01:15:07.326Z",
+    "generatedAt": "2026-08-17T06:05:52.711Z",
     "terms": [
         {
             "id": "bollard_all_yellow",
@@ -632,6 +632,30 @@
             "confusableWith": [],
             "requires": null,
             "note": "**最強メタ。** 出典が「看板が出れば一気に確信度が上がる」と明記している。Rp はインドネシアルピア。同一スロット内の組み合わせ。",
+            "disputed": false
+        },
+        {
+            "id": "roadside_wavy_fence",
+            "slot": "other",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "canonical": "波形模様の路肩柵",
+            "plain": "ガードレールが波々の模様になっている柵",
+            "aliases": [
+                "波模様のフェンス",
+                "波々の柵",
+                "うねうねしたガードレール"
+            ],
+            "countries": [
+                "KZ",
+                "UZ",
+                "KG",
+                "UA"
+            ],
+            "confusableWith": [],
+            "requires": null,
+            "note": "**補助メタ。カザフスタン固有ではない。** 旧ソ連圏で広く見られ、UZ・KG・UA にもある（BY も該当するが対象国リストに無いため除いた）。v2 の実測で AI が「KZ で頻出し他の候補国と区別する重要な手がかり」と**誤って断定した**ため追加した。**該当国を渡さない手がかりについて、AI は該当国を作る。**",
             "disputed": false
         },
         {

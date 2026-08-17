@@ -84,7 +84,22 @@ export function buildNarrowingPower(
  * 除外した結果として算出不能（`null`）になるなら、それが正直な結果である。
  */
 function usableForNarrowing(term: Term): boolean {
-    return term.certainty !== 'unverified'
+    if (term.certainty === 'unverified') return false
+    /**
+     * **`disputed` も使わない。** 不一致が分かっている用語である。
+     *
+     * `road_marking_center_white` は該当国が `CL` の 1 件しかなく、
+     * note に「**この用語は現状ほぼ機能しない。** 欧州の国を埋めるまで保留」と
+     * 自分で書いてある。白い中央線は欧州の標準であり、ロシアも南アフリカも該当する。
+     *
+     * それを絞り込みに使うと、`q-ru-01` と `q-za-01` で
+     * **「1 カ国（チリ）に絞れる」という誤った計算になる。**
+     *
+     * > **note に書いた警告は守られない。型とコードで守る。**
+     *
+     * 埋めたら `disputed` を `false` に戻す。それが再開の手続きである。
+     */
+    return term.disputed !== true
 }
 
 /**
@@ -198,7 +213,28 @@ export function buildNextPriority(
 ): { slot: SlotId, resultingSize: number }[] {
     const { answerSlots, tagSlots, byId, current, answerCountry, exclude = [] } = input
     const excluded = new Set(exclude)
-    const base = current && !current.empty ? new Set(current.countries) : null
+    /**
+     * **正解を含まない積集合を出発点にしてはならない。**
+     *
+     * 実測（2026-08-17、`q-kz-01` の v2 記録）。学習者の積集合は
+     * 「中央線が黄色」から 13 カ国になったが、**`KZ` が入っていない**
+     * （その観察は事実だが国を示さない。`docs/v2-kz.md` 章 3）。
+     *
+     * その 13 カ国を出発点にすると、波形柵（`KZ UZ KG UA`）を掛けても **0 カ国**になり、
+     * 0 は矛盾として除外される。結果、**「次に見るべき」が空になった。**
+     *
+     * ```
+     * 出発点 13 カ国（KZ なし） ∩ other 4 カ国（KZ あり） = 0 → 除外 → 助言が消える
+     * ```
+     *
+     * つまり**誤誘導された観察が、正しい助言を消していた。**
+     * 一番助言が必要な状態で助言が出なくなる。**最悪の向きの失敗である。**
+     *
+     * 正解を含まない積集合は、そこから足し算を続けても正解に届かない。
+     * **出発点を捨てて、正解タグ側の件数に戻す**（矛盾（`empty`）と同じ扱い）。
+     */
+    const usableBase = current !== null && !current.empty && current.containsAnswer
+    const base = usableBase ? new Set(current.countries) : null
     const target = answerCountry.trim().toUpperCase()
 
     const rows: { slot: SlotId, resultingSize: number }[] = []

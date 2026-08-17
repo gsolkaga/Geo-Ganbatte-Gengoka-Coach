@@ -40,11 +40,36 @@ const questions = JSON.parse(fs.readFileSync(path.join('data', 'questions.json')
 const glossary = JSON.parse(fs.readFileSync(path.join('data', 'glossary.json'), 'utf8')).terms
 const byId = new Map(glossary.map((t) => [t.id, t]))
 
-/** 絞り込みに使う用語だけを見る（`server/utils/narrowing.ts` と同じ条件） */
-const usable = (t) => t !== undefined && t.certainty !== 'unverified'
+/**
+ * 絞り込みに使う用語だけを見る（`server/utils/narrowing.ts` の
+ * `usableForNarrowing` と**同じ条件でなければならない**）。
+ *
+ * ## 検査が実態とずれていた
+ *
+ * `narrowing.ts` に `disputed !== true` を足したとき、**ここを直し忘れた。**
+ * その結果この検査は `q-ru-01` と `q-za-01` を「正解を含まない」と報告し続けた。
+ * 実際には `road_marking_center_white` は絞り込みに使われていないので、
+ * **誤った助言は出ていなかった。** 検査だけが古い実態を報告していた。
+ *
+ * > **「表示が実態を意味しない」は検査側にも起こる。**
+ *
+ * 条件を 1 か所にまとめられないのは、こちらが `.mjs`（型なし、辞書の生 JSON）で
+ * `narrowing.ts` が `Term` 型を要求するためである。**揃っていることをテストで固定する**
+ * （`tests/narrowing.test.ts` の `disputed` の describe）。
+ */
+const usable = (t) => t !== undefined && t.certainty !== 'unverified' && t.disputed !== true
 
 const gaps = []
 const missingIds = []
+/**
+ * 保留中の用語（`disputed`）で、正解タグに割り当てられているもの。
+ *
+ * **絞り込みから外したまま忘れるのが一番危ない。**
+ * 除外は誤った助言を止めるだけで、辞書の宿題は残っている。
+ */
+const heldBack = []
+/** 正解タグはあるが、絞り込みに使える用語が 1 つも無いスロット */
+const unusable = []
 
 for (const question of questions) {
     for (const [slot, entry] of Object.entries(question.slots)) {
@@ -55,8 +80,32 @@ for (const question of questions) {
             if (!t) missingIds.push({ question: question.id, slot, id })
             return t
         })
+        // 人手記述で保留中のものだけを宿題として拾う。
+        // `unverified` は最初から絞り込みの材料ではないので宿題ではない
+        for (const t of terms) {
+            if (t && t.disputed === true && t.certainty !== 'unverified') {
+                heldBack.push({
+                    question: question.id, country: question.country, slot,
+                    id: t.id, size: t.countries.length,
+                    note: String(t.note ?? '').replace(/\*\*/g, ''),
+                })
+            }
+        }
+
         const used = terms.filter(usable)
-        if (used.length === 0) continue
+        if (used.length === 0) {
+            unusable.push({
+                question: question.id, country: question.country, slot,
+                terms: entry.terms
+                    .map((id) => {
+                        const t = byId.get(id)
+                        if (!t) return `${id}(辞書に無い)`
+                        return `${id}(${t.certainty}${t.disputed ? ', disputed' : ''})`
+                    })
+                    .join(' + '),
+            })
+            continue
+        }
 
         // 同一スロット内は積集合。`narrowing.ts` と揃える
         let acc = null
@@ -190,6 +239,50 @@ if (gaps.length) {
     }
 }
 
+if (heldBack.length) {
+    lines.push(
+        `## 保留中の用語（\`disputed\`）: ${heldBack.length} 件`,
+        '',
+        '`server/utils/narrowing.ts` は `disputed` な用語を**絞り込み計算から外す。**',
+        'したがって誤った助言は出ない。**ただし辞書の宿題は残っている。**',
+        '',
+        '> **除外は問題の解決ではなく、被害の停止である。**',
+        '',
+        '`unverified`（AI 生成）は最初から絞り込みの材料ではないので、ここには出さない。',
+        '**人手記述で保留にしたものだけ**が宿題である。',
+        '',
+        '| 問 | 正解 | スロット | 用語 | 該当国数 |',
+        '|---|---|---|---|---|',
+        ...heldBack.map((h) =>
+            `| ${h.question} | ${h.country} | \`${h.slot}\` | \`${h.id}\` | ${h.size} |`),
+        '',
+    )
+    const seenNote = new Set()
+    for (const h of heldBack) {
+        if (!h.note || seenNote.has(h.id)) continue
+        seenNote.add(h.id)
+        lines.push(`- \`${h.id}\` — ${h.note.slice(0, 200)}`, '')
+    }
+}
+
+if (unusable.length) {
+    lines.push(
+        `## 絞り込みに使える用語が無いスロット: ${unusable.length} 件`,
+        '',
+        '正解タグには用語が割り当てられているが、**すべて `unverified` か `disputed`** である。',
+        '「次に見るべきスロット」として提示されない。',
+        '',
+        '**これは隠された欠落である。** 画面上は何も表示されないため、',
+        '辞書が足りないことに気づけない。この一覧がその代わりになる。',
+        '',
+        '| 問 | 正解 | スロット | 割り当てられている用語 |',
+        '|---|---|---|---|',
+        ...unusable.map((u) =>
+            `| ${u.question} | ${u.country} | \`${u.slot}\` | ${u.terms} |`),
+        '',
+    )
+}
+
 if (missingIds.length) {
     lines.push(
         '## 辞書に存在しない用語 ID',
@@ -223,6 +316,16 @@ console.log('')
 console.log(`**不整合: ${gaps.length} 件**`)
 for (const g of gaps) {
     console.log(`  ${g.question}（正解 ${g.country}）/ ${g.slot.padEnd(20)} ${g.kind.padEnd(8)} 残り ${g.size} : ${g.terms}`)
+}
+console.log('')
+console.log(`**保留中の用語（disputed、人手記述）: ${heldBack.length} 件**`)
+for (const h of heldBack) {
+    console.log(`  ${h.question}（正解 ${h.country}）/ ${h.slot.padEnd(20)} ${h.id}(${h.size})`)
+}
+console.log('')
+console.log(`**絞り込みに使える用語が無いスロット: ${unusable.length} 件**`)
+for (const u of unusable) {
+    console.log(`  ${u.question}（正解 ${u.country}）/ ${u.slot.padEnd(20)} ${u.terms}`)
 }
 if (missingIds.length) console.log(`辞書に無い用語 ID: ${missingIds.length} 件`)
 console.log('')

@@ -292,3 +292,103 @@ describe('unverified な用語を絞り込みに使わない', () => {
         expect(rows).toEqual([{ slot: 'pole', resultingSize: 2 }])
     })
 })
+
+/**
+ * 正解を含まない積集合を出発点にしない（回帰テスト）。
+ *
+ * ## 実測（2026-08-17、`q-kz-01` の v2 記録）
+ *
+ * 学習者の積集合は「中央線が黄色」から 13 カ国になったが **`KZ` を含まない。**
+ * その 13 カ国を出発点にすると、波形柵（`KZ UZ KG UA`）を掛けて **0 カ国**になり、
+ * 0 は矛盾として除外される。**「次に見るべき」が空になった。**
+ *
+ * > **誤誘導された観察が、正しい助言を消していた。**
+ * > 一番助言が必要な状態で助言が出なくなる。最悪の向きの失敗である。
+ */
+describe('正解を含まない積集合を出発点にしない', () => {
+    const kzTerms: Term[] = [
+        // 中央線が黄色。事実として正しいが KZ を示さない
+        { ...term('road_marking_center_yellow', 'road_marking', ['US', 'CA', 'TH', 'KH']), certainty: 'heuristic' },
+        // 波形柵。旧ソ連圏で広く見られる（KZ の弁別子ではないが KZ を含む）
+        { ...term('roadside_wavy_fence', 'other', ['KZ', 'UZ', 'KG', 'UA']), certainty: 'heuristic' },
+    ]
+    const kzById = indexTerms(kzTerms)
+
+    it('積集合が正解を含まないなら正解タグ側の件数に戻して提示する', () => {
+        const answer = slotsWith({ road_marking: seen(['road_marking_center_yellow']) })
+        const tag = slotsWith({ other: seen(['roadside_wavy_fence']) })
+        const current = buildIntersection(answer, 'KZ', kzById)!
+
+        expect(current.countries).toEqual(['CA', 'KH', 'TH', 'US'])
+        expect(current.containsAnswer).toBe(false)
+        expect(current.empty).toBe(false)
+
+        // 13 カ国を出発点にすると 0 になって消える。出発点を捨てれば other(4) が出る
+        const rows = buildNextPriority({
+            answerSlots: answer, tagSlots: tag, byId: kzById, current, answerCountry: 'KZ',
+        })
+        expect(rows).toEqual([{ slot: 'other', resultingSize: 4 }])
+    })
+
+    it('積集合が正解を含むなら出発点として使う（縮小が反映される）', () => {
+        const answer = slotsWith({ other: seen(['roadside_wavy_fence']) })
+        const tag = slotsWith({ script: seen(['script_ua_kz']) })
+        const withScript = indexTerms([
+            ...kzTerms,
+            { ...term('script_ua_kz', 'script', ['UA', 'KZ', 'RU', 'BG']), certainty: 'heuristic' },
+        ])
+        const current = buildIntersection(answer, 'KZ', withScript)!
+        expect(current.containsAnswer).toBe(true)
+
+        // 4 カ国 ∩ 4 カ国 = UA, KZ の 2 カ国。出発点を使っているので 4 ではない
+        const rows = buildNextPriority({
+            answerSlots: answer, tagSlots: tag, byId: withScript, current, answerCountry: 'KZ',
+        })
+        expect(rows).toEqual([{ slot: 'script', resultingSize: 2 }])
+    })
+})
+
+/**
+ * `disputed` な用語を絞り込みに使わない（回帰テスト）。
+ *
+ * `road_marking_center_white` は該当国が `CL` の 1 件しかなく、
+ * note に「**この用語は現状ほぼ機能しない。** 欧州の国を埋めるまで保留」と
+ * 自分で書いてあった。
+ *
+ * それを絞り込みに使ったため、`q-ru-01` と `q-za-01` で
+ * **「1 カ国（チリ）に絞れる」という誤った計算になった**（実測 2026-08-17）。
+ *
+ * > **note に書いた警告は守られない。型とコードで守る。**
+ */
+describe('disputed な用語を絞り込みに使わない', () => {
+    const disputedTerms: Term[] = [
+        // 保留中の用語。該当国が 1 件しかない
+        { ...term('road_marking_center_white', 'road_marking', ['CL']), certainty: 'heuristic', disputed: true },
+        { ...term('script_cyrillic_ok', 'script', ['RU', 'KZ', 'BG']), certainty: 'heuristic' },
+    ]
+    const byIdLocal = indexTerms(disputedTerms)
+
+    it('disputed だけのスロットは算出不能', () => {
+        const slots = slotsWith({ road_marking: seen(['road_marking_center_white']) })
+        expect(buildNarrowingPower(slots, byIdLocal)).toEqual({})
+    })
+
+    /** **「1 カ国に絞れた」という誤った計算をしない** */
+    it('積集合が誤って 1 カ国にならない', () => {
+        const slots = slotsWith({
+            road_marking: seen(['road_marking_center_white']),
+            script: seen(['script_cyrillic_ok']),
+        })
+        const result = buildIntersection(slots, 'RU', byIdLocal)!
+        expect(result.countries).toEqual(['BG', 'KZ', 'RU'])
+        expect(result.containsAnswer).toBe(true)
+    })
+
+    it('disputed を false に戻せば使われる（再開の手続き）', () => {
+        const revived = indexTerms([
+            { ...term('road_marking_center_white', 'road_marking', ['CL', 'RU', 'DE']), certainty: 'heuristic' },
+        ])
+        const slots = slotsWith({ road_marking: seen(['road_marking_center_white']) })
+        expect(buildNarrowingPower(slots, revived)).toEqual({ road_marking: 3 })
+    })
+})

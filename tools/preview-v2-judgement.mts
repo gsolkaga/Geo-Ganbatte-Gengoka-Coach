@@ -25,9 +25,19 @@ const names = (await readdir(join('data', 'runs'))).filter((n) => n.endsWith('.j
 
 const fmt = (v: string[] | null) => (v === null ? '判定不能' : v.length ? v.join(' ') : '（なし）')
 
+/**
+ * **v2 の記録も対象にする。** 当初は `run.variant !== 'v1'` で弾いていた。
+ *
+ * v1 の記録には正規化された用語 ID が入っていない（v1 は正規化しない）ので、
+ * **`narrowingPower` と `intersection` は必ず「算出不能」になる。**
+ * それを見て「絞り込み計算が動いていない」と読み違えた。
+ *
+ * > **入力に無いものが出ないのは、機能が壊れているのとは違う。**
+ *
+ * v2 の記録は正規化済みの用語 ID を持っているので、そちらで確認する。
+ */
 for (const name of names) {
     const run = JSON.parse(await readFile(join('data', 'runs', name), 'utf8')) as RunRecord
-    if (run.variant !== 'v1') continue
     const question = byId.get(run.questionId)
     if (!question) continue
 
@@ -41,7 +51,10 @@ for (const name of names) {
     const reached = judgeReachedAnswer(run.answer.candidates, question.country)
 
     console.log('')
-    console.log(`=== ${run.questionId}（正解 ${question.country}）回答: ${candidates}`)
+    const normalized = Object.values(run.answer.slots)
+        .reduce((n, e) => n + (e?.terms?.length ?? 0), 0)
+    console.log(`=== ${run.questionId}（正解 ${question.country}）[${run.variant}] 回答: ${candidates}`)
+    console.log(`  記録された用語 ID   : ${normalized} 件${normalized === 0 ? '（正規化前。絞り込みは算出不能になる）' : ''}`)
     console.log(`  hit=${j.hit}(${j.hitConfidence ?? '—'}) / 本命として到達=${reached}`)
     console.log(`  見落とし            : ${fmt(j.missedSlots)}`)
     console.log(`  誤って「見えない」  : ${fmt(j.wrongAbsentSlots)}`)
@@ -78,7 +91,10 @@ for (const name of names) {
         const countries = new Set(
             (tagEntry?.terms ?? [])
                 .map((id) => glossary.find((t) => t.id === id))
-                .filter((t): t is Term => t !== undefined && t.certainty !== 'unverified')
+                // `server/utils/narrowing.ts` の `usableForNarrowing` と同じ条件にする。
+                // ここを揃え忘れると、検査だけが古い実態を報告する
+                .filter((t): t is Term => t !== undefined
+                    && t.certainty !== 'unverified' && t.disputed !== true)
                 .flatMap((t) => t.countries),
         )
         if (countries.size > 0 && !countries.has(question.country)) {

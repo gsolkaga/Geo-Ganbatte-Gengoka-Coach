@@ -619,6 +619,29 @@
             "note": "**最強メタ。** 出典が「看板が出れば一気に確信度が上がる」と明記している。Rp はインドネシアルピア。同一スロット内の組み合わせ。",
             "verifiedByHuman": true,
             "disputed": false
+        },
+        {
+            "id": "roadside_wavy_fence",
+            "slot": "other",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "canonical": "波形模様の路肩柵",
+            "plain": "ガードレールが波々の模様になっている柵",
+            "aliases": [
+                "波模様のフェンス",
+                "波々の柵",
+                "うねうねしたガードレール"
+            ],
+            "countries": [
+                "KZ",
+                "UZ",
+                "KG",
+                "UA"
+            ],
+            "confusableWith": [],
+            "note": "**補助メタ。カザフスタン固有ではない。** 旧ソ連圏で広く見られ、UZ・KG・UA にもある（BY も該当するが対象国リストに無いため除いた）。v2 の実測で AI が「KZ で頻出し他の候補国と区別する重要な手がかり」と**誤って断定した**ため追加した。**該当国を渡さない手がかりについて、AI は該当国を作る。**",
+            "verifiedByHuman": true,
+            "disputed": false
         }
     ],
     "_unconvertible": [
