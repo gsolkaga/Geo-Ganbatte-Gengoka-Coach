@@ -349,6 +349,60 @@ describe('正解を含まない積集合を出発点にしない', () => {
 })
 
 /**
+ * 連想（`exhaustive: false`）を絞り込みに使わない（回帰テスト）。
+ *
+ * ## 実測（2026-08-17、オーストラリアの出題）
+ *
+ * 人手ワークシート §9 の「道路のすぐ横に木々があると、ブラジル・インドネシア・
+ * フィリピンを連想する」を `countries: ['BR','ID','PH']` として持っていた。
+ *
+ * これは**「次にどこを考えるか」の記録であり、主張ではない。**
+ * 積集合に入れたところ、**積集合が 1 カ国（インドネシア）になった。**
+ * 正解はオーストラリアである。
+ *
+ * > **1 カ国に絞れたことは、正解が分かったことではない。**
+ *
+ * `source` で `human` と `reference` を分けても、
+ * **使い方を分けなければ意味がなかった。**
+ */
+describe('連想を絞り込みに使わない', () => {
+    const mixed: Term[] = [
+        // 連想。網羅ではない
+        {
+            ...term('trees_close_to_road', 'terrain_vegetation', ['BR', 'ID', 'PH']),
+            certainty: 'heuristic',
+            exhaustive: false,
+        },
+        // 網羅。左側通行の国
+        { ...term('ref_traffic_side_left', 'traffic_side', ['AU', 'ID', 'JP', 'GB']), certainty: 'heuristic' },
+    ]
+    const byIdLocal = indexTerms(mixed)
+
+    it('連想だけのスロットは算出不能', () => {
+        const slots = slotsWith({ terrain_vegetation: seen(['trees_close_to_road']) })
+        expect(buildNarrowingPower(slots, byIdLocal)).toEqual({})
+    })
+
+    /** **これが直したかった挙動である。1 カ国に絞れて、しかも誤りだった** */
+    it('連想を混ぜても積集合が誤って 1 カ国にならない', () => {
+        const slots = slotsWith({
+            terrain_vegetation: seen(['trees_close_to_road']),
+            traffic_side: seen(['ref_traffic_side_left']),
+        })
+        const result = buildIntersection(slots, 'AU', byIdLocal)!
+        // 連想を入れると ID の 1 カ国になっていた。外せば 4 カ国で正解を含む
+        expect(result.countries).toEqual(['AU', 'GB', 'ID', 'JP'])
+        expect(result.containsAnswer).toBe(true)
+    })
+
+    it('`exhaustive` が無い項目は網羅として扱う（古い記録を壊さない）', () => {
+        const legacy = indexTerms([term('legacy', 'pole', ['AU', 'NZ'])])
+        const slots = slotsWith({ pole: seen(['legacy']) })
+        expect(buildNarrowingPower(slots, legacy)).toEqual({ pole: 2 })
+    })
+})
+
+/**
  * `disputed` な用語を絞り込みに使わない（回帰テスト）。
  *
  * `road_marking_center_white` は該当国が `CL` の 1 件しかなく、
