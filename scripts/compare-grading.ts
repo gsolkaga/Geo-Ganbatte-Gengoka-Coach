@@ -31,8 +31,16 @@
 import { readFile, readdir, mkdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import type { Question, RunRecord } from '../shared/types'
+import { resolveBaseUrl } from './lib/base-url'
 
-const BASE_URL = process.env.GGG_BASE_URL ?? 'http://localhost:3000'
+/**
+ * 接続先。**実行前に 1 回だけ確認する。**
+ *
+ * 決め打ちにしていたため、開発サーバが 3001 に居たときに
+ * `fetch failed` を 10 回並べて終わった（2026-08-17、`normalize-answer-keys.ts`）。
+ * 同じ作りだったのでここも直した。
+ */
+let BASE_URL = 'http://localhost:3000'
 const RUNS_DIR = join('data', 'runs')
 const OUT_DIR = join('data', 'compare')
 const REPORT_PATH = join('docs', 'v1-v2-comparison.md')
@@ -222,6 +230,12 @@ async function main() {
         return
     }
 
+    // **55 リクエスト投げる前に接続を確認する。** 繋がらなければ 1 件も投げない
+    const probed = await resolveBaseUrl()
+    BASE_URL = probed.baseUrl
+    console.log('')
+    console.log(`接続先: ${BASE_URL}（出題 ${probed.questionCount} 件を確認）`)
+
     await mkdir(OUT_DIR, { recursive: true })
 
     const rows: Row[] = []
@@ -254,8 +268,14 @@ async function main() {
             response = await gradeV2(record, slots)
         }
         catch (error) {
-            // **1 件の失敗で全体を止めない。** 消費した枠は戻らない
-            console.log(`  失敗: ${error instanceof Error ? error.message : String(error)}`)
+            const message = error instanceof Error ? error.message : String(error)
+            console.log(`  失敗: ${message}`)
+            // **接続が切れたなら残りも失敗する。同じ失敗を 11 回並べない**
+            if (message.includes('fetch failed') || message.includes('ECONNREFUSED')) {
+                console.error(`${BASE_URL} への接続が切れた。開発サーバを確認すること`)
+                break
+            }
+            // 個別の失敗は次へ進む。消費した枠は戻らない
             continue
         }
         consumed += response.requestsConsumed

@@ -76,7 +76,9 @@
       "pavement": {
         "state": "visible",
         "plain": "山の中にしてはアスファルトが整備されている",
-        "terms": [],
+        "terms": [
+          "ai_pavement_01"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -133,7 +135,11 @@
       "road_marking": {
         "state": "visible",
         "plain": "中央線は黄色の実線、路肩は白い実線、",
-        "terms": [],
+        "terms": [
+          "road_marking_center_yellow",
+          "ai_road_marking_01",
+          "ai_road_marking_02"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -145,7 +151,10 @@
       "pole": {
         "state": "visible",
         "plain": "四角いコンクリート製の電柱",
-        "terms": [],
+        "terms": [
+          "pole_square_section",
+          "ai_pole_03"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -187,7 +196,10 @@
       "vehicle": {
         "state": "visible",
         "plain": "横長の白いナンバープレートと、長方形の白いナンバープレートが混在して見えた",
-        "terms": [],
+        "terms": [
+          "ai_vehicle_01",
+          "ai_vehicle_02"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -243,7 +255,12 @@
       "traffic_side": {
         "state": "visible",
         "plain": "右側通行",
-        "terms": [],
+        "terms": [
+          "ai_traffic_side_01",
+          "ai_traffic_side_03",
+          "ai_traffic_side_04",
+          "ai_traffic_side_05"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -276,7 +293,9 @@
       "script": {
         "state": "visible",
         "plain": "Gの上にチェックマーク、Sの下にヒゲみたいなのが付いている",
-        "terms": [],
+        "terms": [
+          "ai_script_03"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -302,14 +321,20 @@
       "vehicle": {
         "state": "visible",
         "plain": "横長い白いナンバープレート、左側が青く見える",
-        "terms": [],
+        "terms": [
+          "ai_vehicle_01",
+          "ai_vehicle_02",
+          "ai_vehicle_05"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
       "pavement": {
         "state": "visible",
         "plain": "規則性のある模様のタイル状の石で出来ている",
-        "terms": [],
+        "terms": [
+          "pavement_tile_like"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -359,14 +384,18 @@
       "traffic_side": {
         "state": "visible",
         "plain": "車の位置だけだと判らないが、隣の道路の標識が右側通行を示唆している",
-        "terms": [],
+        "terms": [
+          "ai_traffic_side_01"
+        ],
         "confirmed": true,
         "recognition": "hard"
       },
       "road_marking": {
         "state": "visible",
         "plain": "隣の道路の中央線が黄色１本が見えなくはない",
-        "terms": [],
+        "terms": [
+          "road_marking_center_yellow"
+        ],
         "confirmed": true,
         "recognition": "hard"
       },
@@ -392,7 +421,9 @@
       "script": {
         "state": "visible",
         "plain": "Aの上にニョロ、Aの上に黒丸があり、DEやDAという区切り文字がある",
-        "terms": [],
+        "terms": [
+          "ai_script_03"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -420,14 +451,20 @@
       "vehicle": {
         "state": "visible",
         "plain": "白い長方形のナンバープレートの上部が青い帯、タクシー？かは判らないが、赤色に白文字のナンバープレートであった",
-        "terms": [],
+        "terms": [
+          "ai_vehicle_01",
+          "ai_vehicle_02",
+          "ai_vehicle_05"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
       "pavement": {
         "state": "visible",
         "plain": "アスファルト舗装されているが、ほとんど砂で埋もれている。補修はされておらず穴だらけ。",
-        "terms": [],
+        "terms": [
+          "ai_pavement_01"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -491,7 +528,9 @@
       "bollard": {
         "state": "visible",
         "plain": "白いボラードに黄色い四角い反射板が付いている、裏側は灰色で同じ形の四角い反射板が付いている。",
-        "terms": [],
+        "terms": [
+          "ai_bollard_01"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -534,14 +573,20 @@
       "vehicle": {
         "state": "visible",
         "plain": "遠くてよく見えないが、白い横長のナンバープレート",
-        "terms": [],
+        "terms": [
+          "ai_vehicle_01",
+          "ai_vehicle_02"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
       "pavement": {
         "state": "visible",
         "plain": "アスファルト舗装されており、よくメンテナンスされているが、ザラザラした凸凹に砂が入り込んで白っぽく見えている",
-        "terms": [],
+        "terms": [
+          "ai_pavement_01",
+          "ai_pavement_05"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -554,7 +599,9 @@
       "season": {
         "state": "visible",
         "plain": "木の陰が北側に出ている",
-        "terms": [],
+        "terms": [
+          "ai_season_01"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -623,7 +670,9 @@
       "ground": {
         "state": "visible",
         "plain": "茶色っぽい砂と石が散らばっている",
-        "terms": [],
+        "terms": [
+          "ai_ground_03"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -647,7 +696,9 @@
       "pavement": {
         "state": "visible",
         "plain": "砂利道",
-        "terms": [],
+        "terms": [
+          "ai_pavement_04"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -696,7 +747,10 @@
       "traffic_side": {
         "state": "visible",
         "plain": "おそらく右側通行、左ハンドル車が見える",
-        "terms": [],
+        "terms": [
+          "ai_traffic_side_01",
+          "ai_traffic_side_04"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -720,7 +774,9 @@
       "sign": {
         "state": "visible",
         "plain": "交差点に標識が１本あった、裏側であり視認は難しい、上段逆三角形下段丸錆びた丸い鉄ポールでそれぞれ小さな十字架で留めている",
-        "terms": [],
+        "terms": [
+          "ai_sign_01"
+        ],
         "confirmed": true,
         "recognition": "blind"
       },
@@ -753,14 +809,21 @@
       "vehicle": {
         "state": "visible",
         "plain": "白い横長のナンバープレート、左側が青いのでEUプレート？",
-        "terms": [],
+        "terms": [
+          "ai_vehicle_01",
+          "ai_vehicle_02",
+          "ai_vehicle_05"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
       "pavement": {
         "state": "visible",
         "plain": "アスファルト舗装されているが、メンテが荒くひび割れなどがある",
-        "terms": [],
+        "terms": [
+          "ai_pavement_01",
+          "ai_pavement_02"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -810,14 +873,21 @@
       "traffic_side": {
         "state": "visible",
         "plain": "右側通行",
-        "terms": [],
+        "terms": [
+          "ai_traffic_side_01"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
       "road_marking": {
         "state": "visible",
         "plain": "中央線は白い実線、縁石が白と黒の石、車線が白の短い破線",
-        "terms": [],
+        "terms": [
+          "road_marking_center_white",
+          "ai_road_marking_02",
+          "ai_road_marking_03",
+          "ai_road_marking_04"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -829,7 +899,9 @@
       "pole": {
         "state": "visible",
         "plain": "丸いコンクリート製、ポールトップが街路灯になっており、先が２つに分かれY字になっている",
-        "terms": [],
+        "terms": [
+          "ai_pole_03"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -868,14 +940,20 @@
       "vehicle": {
         "state": "visible",
         "plain": "横長で白いナンバープレートが見える、バスは同じ大きさの黄色",
-        "terms": [],
+        "terms": [
+          "ai_vehicle_01",
+          "ai_vehicle_02"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
       "pavement": {
         "state": "visible",
         "plain": "アスファルト、補修などされておりメンテナンスは良好",
-        "terms": [],
+        "terms": [
+          "ai_pavement_01",
+          "ai_pavement_03"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -924,14 +1002,21 @@
       "traffic_side": {
         "state": "visible",
         "plain": "右側通行",
-        "terms": [],
+        "terms": [
+          "ai_traffic_side_01"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
       "road_marking": {
         "state": "visible",
         "plain": "中央線は黄色の実線、路肩は線なし、車線は白い破線、横断歩道は縁だけ白い破線で中は何もなし",
-        "terms": [],
+        "terms": [
+          "road_marking_center_yellow",
+          "ai_road_marking_02",
+          "ai_road_marking_03",
+          "ai_road_marking_05"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -943,7 +1028,9 @@
       "pole": {
         "state": "visible",
         "plain": "信号はアメリカ風に見える、中央分離帯にある街路灯は鉄製ポールで街灯部分がT字よりも少し角度がある",
-        "terms": [],
+        "terms": [
+          "ai_pole_01"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -983,14 +1070,19 @@
       "vehicle": {
         "state": "visible",
         "plain": "白色の横長ナンバープレートが多いが、黄色の横長ナンバープレートも見られる",
-        "terms": [],
+        "terms": [
+          "ai_vehicle_01",
+          "ai_vehicle_02"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
       "pavement": {
         "state": "visible",
         "plain": "アスファルト舗装",
-        "terms": [],
+        "terms": [
+          "ai_pavement_01"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -1004,7 +1096,9 @@
       "season": {
         "state": "visible",
         "plain": "秋？街路樹の一部が黄色い葉となっている",
-        "terms": [],
+        "terms": [
+          "ai_season_04"
+        ],
         "confirmed": true,
         "recognition": "hard"
       },
@@ -1050,7 +1144,12 @@
       "road_marking": {
         "state": "visible",
         "plain": "中央線は白い実線、路肩はなし、停止線も中央線と同様で「STOP」の表記",
-        "terms": [],
+        "terms": [
+          "road_marking_center_white",
+          "ai_road_marking_01",
+          "ai_road_marking_02",
+          "ai_road_marking_04"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -1062,7 +1161,9 @@
       "pole": {
         "state": "visible",
         "plain": "街灯が細い鉄柱製かな、ところどころ錆びている",
-        "terms": [],
+        "terms": [
+          "ai_pole_01"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -1076,14 +1177,18 @@
       "script": {
         "state": "visible",
         "plain": "アルファベットは見えるが英語？かは不明",
-        "terms": [],
+        "terms": [
+          "ai_script_01"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
       "ground": {
         "state": "visible",
         "plain": "赤茶色の土、乾燥している",
-        "terms": [],
+        "terms": [
+          "ai_ground_03"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
@@ -1104,14 +1209,20 @@
       "vehicle": {
         "state": "visible",
         "plain": "白い横長のナンバープレート",
-        "terms": [],
+        "terms": [
+          "ai_vehicle_01",
+          "ai_vehicle_02"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },
       "pavement": {
         "state": "visible",
         "plain": "アスファルトで舗装はされているが、ボロボロでメンテナンスはあまりされていない",
-        "terms": [],
+        "terms": [
+          "ai_pavement_01",
+          "ai_pavement_02"
+        ],
         "confirmed": true,
         "recognition": "easy"
       },

@@ -257,14 +257,16 @@ export function buildV2Judgement(
         intersection: intersection === null
             ? null
             : { countries: intersection.countries, containsAnswer: intersection.containsAnswer },
-        // **視認できないスロットを「次に見ろ」と言ってはならない**
-        nextPriority: buildNextPriority(
-            answer.slots,
-            context.tagSlots,
+        nextPriority: buildNextPriority({
+            answerSlots: answer.slots,
+            tagSlots: context.tagSlots,
             byId,
-            intersection,
-            diff.blindSlots as readonly SlotId[],
-        ),
+            current: intersection,
+            // **辞書が正解を含まないスロットを提示しないために渡す**
+            answerCountry,
+            // **視認できないスロットを「次に見ろ」と言ってはならない**
+            exclude: diff.blindSlots as readonly SlotId[],
+        }),
     }
 }
 

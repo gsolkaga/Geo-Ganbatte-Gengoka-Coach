@@ -58,4 +58,34 @@ for (const name of names) {
             : '0 カ国（矛盾）'}`)
     console.log(`  次に見るべき        : ${(j.nextPriority ?? []).slice(0, 4).map((n) => `${n.slot}(${n.resultingSize})`).join(' → ') || '（なし）'}`)
     console.log(`  発見                : ${fmt(j.discoveries)}`)
+
+    /**
+     * **辞書の該当国リストが正解タグと矛盾していないか。**
+     *
+     * 「そこを見れば N カ国に絞れる」と言うとき、**その N カ国に正解が入っていなければ
+     * 助言が学習者を正解から遠ざける。**
+     *
+     * 実測（2026-08-17）で `q-kz-01` の `road_marking` にこれが起きた。
+     * 正解タグは「中央線は黄色の実線」だが、人手辞書の
+     * `road_marking_center_yellow` の 13 カ国に `KZ` が入っていない
+     * （出典がアメリカ大陸と東南アジアの話だったため）。
+     *
+     * **辞書が不完全なのであり、学習者の誤りではない。**
+     * 学習者に見せる情報ではないが、タグ付けする側は知る必要がある。
+     */
+    for (const row of j.nextPriority ?? []) {
+        const tagEntry = question.slots[row.slot]
+        const countries = new Set(
+            (tagEntry?.terms ?? [])
+                .map((id) => glossary.find((t) => t.id === id))
+                .filter((t): t is Term => t !== undefined && t.certainty !== 'unverified')
+                .flatMap((t) => t.countries),
+        )
+        if (countries.size > 0 && !countries.has(question.country)) {
+            console.log(
+                `  **辞書と正解タグの不整合**: ${row.slot} の用語に ${question.country} が含まれない`
+                + `（用語 ${(tagEntry?.terms ?? []).join(' ')}）`,
+            )
+        }
+    }
 }

@@ -35,11 +35,20 @@ import { readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { SLOT_IDS } from '../shared/slots'
 import type { Question, SlotId } from '../shared/types'
+import { resolveBaseUrl } from './lib/base-url'
 
-const BASE_URL = process.env.GGG_BASE_URL ?? 'http://localhost:3000'
 const QUESTIONS_PATH = join('data', 'questions.json')
 
 const dryRun = process.argv.includes('--dry-run')
+
+/**
+ * 接続先。**実行前に 1 回だけ確認する。**
+ *
+ * 決め打ちにしていたため、開発サーバが 3001 に居たときに
+ * `fetch failed` を 10 回並べて終わった（2026-08-17）。
+ * どこへ繋ごうとしたのかも表示していなかった。
+ */
+let BASE_URL = 'http://localhost:3000'
 
 interface NormalizeResponse {
     requestsConsumed: number
@@ -81,6 +90,19 @@ if (dryRun) {
     process.exit(0)
 }
 
+// **消費する処理の前に接続を確認する。** 繋がらなければ 1 件も投げずに終わる
+try {
+    const probed = await resolveBaseUrl()
+    BASE_URL = probed.baseUrl
+    console.log('')
+    console.log(`接続先: ${BASE_URL}（出題 ${probed.questionCount} 件を確認）`)
+}
+catch (error) {
+    console.error('')
+    console.error(error instanceof Error ? error.message : String(error))
+    process.exit(1)
+}
+
 let consumed = 0
 let filled = 0
 const noneSlots: string[] = []
@@ -91,8 +113,20 @@ for (const [index, question] of targets.entries()) {
         result = await normalize(question)
     }
     catch (error) {
-        // **1 件の失敗で全体を止めない。** 消費した枠は戻らない
-        console.log(`[${index + 1}/${targets.length}] ${question.id} 失敗: ${error instanceof Error ? error.message : error}`)
+        const message = error instanceof Error ? error.message : String(error)
+        console.log(`[${index + 1}/${targets.length}] ${question.id} 失敗: ${message}`)
+        /**
+         * **接続が切れたなら残りも失敗する。同じ失敗を並べない。**
+         *
+         * 決め打ちの接続先で `fetch failed` を 10 回出したことがある（2026-08-17）。
+         * 1 件目で止めて、原因を 1 回だけ出す。
+         */
+        if (message.includes('fetch failed') || message.includes('ECONNREFUSED')) {
+            console.error('')
+            console.error(`${BASE_URL} への接続が切れた。開発サーバが落ちていないか確認すること`)
+            break
+        }
+        // 個別の失敗（400 など）は次へ進む。消費した枠は戻らない
         continue
     }
     consumed += result.requestsConsumed

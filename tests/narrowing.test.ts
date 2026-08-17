@@ -130,7 +130,7 @@ describe('buildNextPriority', () => {
             season: seen(['season_snow']),
         })
         const current = buildIntersection(answer, 'BG', byId)
-        const rows = buildNextPriority(answer, tag, byId, current)
+        const rows = buildNextPriority({ answerSlots: answer, tagSlots: tag, byId, current, answerCountry: 'BG' })
         expect(rows).toEqual([
             { slot: 'bollard', resultingSize: 1 },
             { slot: 'season', resultingSize: 8 },
@@ -141,7 +141,8 @@ describe('buildNextPriority', () => {
         const answer = slotsWith({ script: seen(['script_cyrillic']) })
         const tag = slotsWith({ script: seen(['script_cyrillic']) })
         const current = buildIntersection(answer, 'BG', byId)
-        expect(buildNextPriority(answer, tag, byId, current)).toEqual([])
+        expect(buildNextPriority({ answerSlots: answer, tagSlots: tag, byId, current, answerCountry: 'BG' }))
+            .toEqual([])
     })
 
     /** **視認できないスロットを「次に見ろ」と言ってはならない** */
@@ -149,14 +150,16 @@ describe('buildNextPriority', () => {
         const answer = createEmptySlots()
         const tag = slotsWith({ bollard: seen(['bollard_bg']), season: seen(['season_snow']) })
         const current = buildIntersection(answer, 'BG', byId)
-        const rows = buildNextPriority(answer, tag, byId, current, ['bollard'])
+        const rows = buildNextPriority({
+            answerSlots: answer, tagSlots: tag, byId, current, answerCountry: 'BG', exclude: ['bollard'],
+        })
         expect(rows.map((r) => r.slot)).toEqual(['season'])
     })
 
     it('積集合が算出不能なら正解タグの用語の件数をそのまま返す', () => {
         const answer = createEmptySlots()
         const tag = slotsWith({ bollard: seen(['bollard_bg']), script: seen(['script_cyrillic']) })
-        const rows = buildNextPriority(answer, tag, byId, null)
+        const rows = buildNextPriority({ answerSlots: answer, tagSlots: tag, byId, current: null, answerCountry: 'BG' })
         expect(rows).toEqual([
             { slot: 'bollard', resultingSize: 1 },
             { slot: 'script', resultingSize: 8 },
@@ -169,8 +172,123 @@ describe('buildNextPriority', () => {
         const tag = slotsWith({ bollard: seen(['bollard_bg']) })
         const current = buildIntersection(answer, 'BG', byId)
         expect(current!.empty).toBe(true)
-        expect(buildNextPriority(answer, tag, byId, current)).toEqual([
-            { slot: 'bollard', resultingSize: 1 },
-        ])
+        expect(buildNextPriority({ answerSlots: answer, tagSlots: tag, byId, current, answerCountry: 'BG' }))
+            .toEqual([{ slot: 'bollard', resultingSize: 1 }])
+    })
+
+    /**
+     * **辞書が正解を含まないなら提示しない。**
+     *
+     * 実測（2026-08-17）で `nextPriority` が出た 6 件のうち **4 件**が
+     * 正解国を含まない集合だった。`q-kz-01` の `road_marking` は 13 カ国で
+     * **`KZ` が入っていない**（人手辞書の出典がアメリカ大陸と東南アジアの話だったため）。
+     *
+     * そのまま出すと「そこを見ろ」と言われた先に正解が無い。
+     * **助言が学習者を正解から遠ざける。**
+     */
+    it('辞書が正解国を含まないスロットは提示しない', () => {
+        const answer = createEmptySlots()
+        // bollard_bg は BG のみ。正解が KZ なら「見ても KZ に辿り着けない」
+        const tag = slotsWith({ bollard: seen(['bollard_bg']), script: seen(['script_cyrillic']) })
+        const rows = buildNextPriority({
+            answerSlots: answer, tagSlots: tag, byId, current: null, answerCountry: 'KZ',
+        })
+        // script_cyrillic には KZ が含まれる。bollard_bg には含まれない
+        expect(rows).toEqual([{ slot: 'script', resultingSize: 8 }])
+    })
+
+    it('大文字小文字と空白を無視して正解国を比較する', () => {
+        const answer = createEmptySlots()
+        const tag = slotsWith({ bollard: seen(['bollard_bg']) })
+        const rows = buildNextPriority({
+            answerSlots: answer, tagSlots: tag, byId, current: null, answerCountry: ' bg ',
+        })
+        expect(rows).toEqual([{ slot: 'bollard', resultingSize: 1 }])
+    })
+})
+
+/**
+ * AI 生成（`unverified`）の用語を絞り込みに使わない（回帰テスト）。
+ *
+ * ## 実測（2026-08-17）
+ *
+ * 正規化で 71 件の用語 ID が割り当てられ、**64 件が AI 生成だった。**
+ * そして AI 由来の該当国リストは地域が偏っていた。
+ *
+ * ```
+ * ai_road_marking_02「実線（solid line）」 43 カ国
+ *   → すべて欧州＋旧ソ連圏。アメリカ大陸とアジアが 1 カ国も無い
+ *   → modelCount: 1（単独発言）、disputed: true
+ * ```
+ *
+ * タイの出題で実際にこうなった。
+ *
+ * ```
+ * 中央線が黄色（13 カ国、heuristic）  ∩  白線（94、unverified）  → 13
+ *                                    ∩  実線（43、unverified）  → **0**
+ * ```
+ *
+ * さらに `nextPriority` は昇順に並べるため、
+ * **矛盾した 0 カ国が「見れば確定する」として最上位に出た。**
+ */
+describe('unverified な用語を絞り込みに使わない', () => {
+    const aiTerm = (id: string, slot: SlotId, countries: string[]): Term => ({
+        ...term(id, slot, countries),
+        source: 'ai',
+        certainty: 'unverified',
+        modelCount: 1,
+        disputed: true,
+    })
+
+    /** 実測を再現した辞書。欧州のみの「実線」が黄色中央線と矛盾する */
+    const mixed: Term[] = [
+        { ...term('road_marking_center_yellow', 'road_marking', ['US', 'CA', 'TH', 'KH']), certainty: 'heuristic' },
+        aiTerm('ai_road_marking_01', 'road_marking', ['US', 'CA', 'TH', 'KH', 'DE', 'FR']),
+        aiTerm('ai_road_marking_02', 'road_marking', ['DE', 'FR', 'IT']),
+        { ...term('pole_verified', 'pole', ['TH']), certainty: 'verified' },
+    ]
+    const mixedById = indexTerms(mixed)
+
+    it('unverified を混ぜても矛盾しない（無視するため）', () => {
+        const slots = slotsWith({
+            road_marking: seen(['road_marking_center_yellow', 'ai_road_marking_01', 'ai_road_marking_02']),
+        })
+        // 3 つ全部の積集合は 0 カ国になる。**unverified を外せば 4 カ国**
+        expect(buildNarrowingPower(slots, mixedById)).toEqual({ road_marking: 4 })
+    })
+
+    it('unverified しか無いスロットは算出不能（項目を作らない）', () => {
+        const slots = slotsWith({ road_marking: seen(['ai_road_marking_02']) })
+        expect(buildNarrowingPower(slots, mixedById)).toEqual({})
+    })
+
+    it('積集合も unverified を無視する', () => {
+        const slots = slotsWith({
+            road_marking: seen(['road_marking_center_yellow', 'ai_road_marking_02']),
+            pole: seen(['pole_verified']),
+        })
+        const result = buildIntersection(slots, 'TH', mixedById)!
+        expect(result.empty).toBe(false)
+        expect(result.countries).toEqual(['TH'])
+        expect(result.containsAnswer).toBe(true)
+    })
+
+    /** **これが一番危なかった。矛盾を「まずここを見ろ」と言っていた** */
+    it('nextPriority に 0 カ国（矛盾）を出さない', () => {
+        const answer = createEmptySlots()
+        // 正解タグ側が矛盾している状態を作る（verified 同士でも起こりうる）
+        const contradicting: Term[] = [
+            { ...term('a1', 'road_marking', ['US']), certainty: 'verified' },
+            { ...term('a2', 'road_marking', ['DE']), certainty: 'verified' },
+            { ...term('b1', 'pole', ['TH', 'KH']), certainty: 'verified' },
+        ]
+        const byIdLocal = indexTerms(contradicting)
+        const tag = slotsWith({ road_marking: seen(['a1', 'a2']), pole: seen(['b1']) })
+
+        const rows = buildNextPriority({
+            answerSlots: answer, tagSlots: tag, byId: byIdLocal, current: null, answerCountry: 'TH',
+        })
+        // road_marking は 0 カ国なので出さない。pole だけが残る
+        expect(rows).toEqual([{ slot: 'pole', resultingSize: 2 }])
     })
 })

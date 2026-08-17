@@ -47,7 +47,48 @@ export function buildNarrowingPower(
 }
 
 /**
- * 1 スロットの記述が示す国の集合。辞書に載る用語がなければ `null`。
+ * **絞り込みに使える用語か。`unverified`（AI 生成）は使わない。**
+ *
+ * ## なぜ外したか（実測 2026-08-17）
+ *
+ * 正規化で 71 件の用語 ID が割り当てられたが、**64 件が AI 生成（`unverified`）だった。**
+ * 人手記述は 27 語しかなく、実際の観察を吸収しきれない。
+ *
+ * そして AI 由来の該当国リストは**地域が偏っている。**
+ *
+ * ```
+ * ai_road_marking_02「実線（solid line）」  43 カ国
+ *   → すべて欧州＋旧ソ連圏。アメリカ大陸とアジアが 1 カ国も無い
+ *   → modelCount: 1（単独発言）、disputed: true
+ * ```
+ *
+ * 実線は世界中にある。**1 モデルが言っただけの偏ったリストである。**
+ *
+ * これを積集合に入れると壊れる。タイの出題で実際に起きた。
+ *
+ * ```
+ * 中央線が黄色（13 カ国、heuristic）   US CA MX BR ... TH KH
+ * ∩ 白線（94 カ国、unverified）        → 13 カ国（まだ正しい）
+ * ∩ 実線（43 カ国、unverified）        → **0 カ国**
+ * ```
+ *
+ * さらに `nextPriority` は件数の昇順に並べるため、
+ * **矛盾した 0 カ国が「見れば確定する」として最上位に出た。**
+ *
+ * ## 用語の同定と国の絞り込みは別の仕事である
+ *
+ * AI 由来の用語は**語彙の対応づけには使える**（「白い線」→「白線」）。
+ * `narrowingPower` の表示や `vocabulary` の説明には価値がある。
+ *
+ * **国を絞る計算には使わない。** 材料の確かさが結果の確かさを決める。
+ * 除外した結果として算出不能（`null`）になるなら、それが正直な結果である。
+ */
+function usableForNarrowing(term: Term): boolean {
+    return term.certainty !== 'unverified'
+}
+
+/**
+ * 1 スロットの記述が示す国の集合。絞り込みに使える用語がなければ `null`。
  *
  * `null`（算出不能）と空集合（矛盾）を区別する。`CodeJudgement` で
  * `null` と `[]` を区別しているのと同じ規約である。
@@ -60,7 +101,10 @@ function countriesForSlot(
     const entry = slots[slot]
     if (!entry || entry.state !== 'visible') return null
 
-    const terms = entry.terms.map((id) => byId.get(id)).filter((t): t is Term => t !== undefined)
+    const terms = entry.terms
+        .map((id) => byId.get(id))
+        .filter((t): t is Term => t !== undefined)
+        .filter(usableForNarrowing)
     if (terms.length === 0) return null
 
     return intersectAll(terms.map((t) => new Set(t.countries)))
@@ -138,15 +182,24 @@ export function buildIntersection(
  * @param exclude 提示から外すスロット。`blindSlots` を渡す。
  *   **視認できないスロットを「次に見ろ」と言ってはならない。**
  */
+export interface NextPriorityInput {
+    answerSlots: SlotRecord
+    tagSlots: SlotRecord
+    byId: Map<string, Term>
+    current: IntersectionResult | null
+    /** 正解国。**辞書が正解を含まないスロットを提示しないために必要である** */
+    answerCountry: string
+    /** 提示から外すスロット。`blindSlots` を渡す */
+    exclude?: readonly SlotId[]
+}
+
 export function buildNextPriority(
-    answerSlots: SlotRecord,
-    tagSlots: SlotRecord,
-    byId: Map<string, Term>,
-    current: IntersectionResult | null,
-    exclude: readonly SlotId[] = [],
+    input: NextPriorityInput,
 ): { slot: SlotId, resultingSize: number }[] {
+    const { answerSlots, tagSlots, byId, current, answerCountry, exclude = [] } = input
     const excluded = new Set(exclude)
     const base = current && !current.empty ? new Set(current.countries) : null
+    const target = answerCountry.trim().toUpperCase()
 
     const rows: { slot: SlotId, resultingSize: number }[] = []
     for (const slot of SLOT_IDS) {
@@ -160,6 +213,42 @@ export function buildNextPriority(
         const resulting = base === null
             ? tagCountries
             : new Set([...base].filter((c) => tagCountries.has(c)))
+
+        /**
+         * **0 カ国は「見れば確定する」ではない。矛盾である。**
+         *
+         * 並べ替えは件数の昇順なので、**0 を残すと最上位に来る。**
+         * 実測（2026-08-17、タイの出題）で `road_marking(0)` が
+         * 最優先として提示された。矛盾しているスロットを
+         * 「まずここを見ろ」と言うことになる。
+         *
+         * 矛盾は絞り込みの成果ではないので、優先順位から外す。
+         * 原因は辞書側にあり、学習者に見せる情報ではない。
+         */
+        if (resulting.size === 0) continue
+
+        /**
+         * **正解を含まない集合を「そこを見れば絞れる」と言ってはならない。**
+         *
+         * 実測（2026-08-17）で、`nextPriority` が出た 6 件のうち **4 件**が
+         * 正解国を含まない集合だった。
+         *
+         * ```
+         * q-kz-01（正解 KZ）road_marking → 13 カ国。**KZ が入っていない**
+         *   正解タグは「中央線は黄色の実線」だが、人手辞書の
+         *   road_marking_center_yellow の 13 カ国はアメリカ大陸と東南アジアだけ
+         *   （出典がその地域の話だったため）
+         * ```
+         *
+         * **辞書が不完全なのであり、学習者の誤りではない。**
+         * そのまま出すと「そこを見ろ」と言われた先に正解が無い。
+         * **助言が学習者を正解から遠ざける。**
+         *
+         * 正解タグを持っているのだから、この矛盾はコードで検出できる。
+         * 検出できるものを提示してはならない。
+         */
+        if (!resulting.has(target)) continue
+
         rows.push({ slot, resultingSize: resulting.size })
     }
 
