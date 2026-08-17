@@ -2174,7 +2174,7 @@
             "confusableWith": [
                 "ref_bollard_red_rectangle_front_white_back"
             ],
-            "note": "**非常に強い。1 カ国。**スロベニアやモンテネグロと同型に見えるが、**赤い長方形の位置が中心でないのはセルビアである。**",
+            "note": "**強い。1 カ国。**スロベニアやモンテネグロと同型に見えるが、**赤い長方形の位置が中心でないのはセルビアである。****ただしこの軸は薄れつつある。**新しい撮影ではハンガリー型（長方形が中心）に近い設計へ置き換わってきている（プレイヤーの観察、2026-08。出典の記述ではない）。偏ったものもまだ多く残っているため使えるが、**見えなかったことをセルビアの否定に使わない。**",
             "verifiedByHuman": false,
             "disputed": false,
             "kind": "atomic",
@@ -2563,6 +2563,841 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/bollards/"
+            ]
+        },
+        {
+            "id": "ref_pole_holey_to_ground",
+            "slot": "pole",
+            "canonical": "大きな穴が地面まで開いた電柱",
+            "plain": "コンクリートの柱に大きな穴が下まで開いている",
+            "aliases": [
+                "穴あき電柱",
+                "ホーリーポール",
+                "穴が下まで開いた電柱"
+            ],
+            "countries": [
+                "HU",
+                "RO"
+            ],
+            "confusableWith": [
+                "ref_pole_holey_not_to_ground",
+                "ref_pole_metal_large_holes"
+            ],
+            "note": "**強い。2 カ国。**GeoGuessr で \"holey pole\" と呼ばれる。**ポーランドは穴が地面の 50cm ほど上で止まる。**そこで割る。ルーマニアは根元が白く塗られていたり黄色い印が付いていることが多い。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ]
+        },
+        {
+            "id": "ref_pole_holey_not_to_ground",
+            "slot": "pole",
+            "canonical": "穴が地面まで届かない穴あき電柱",
+            "plain": "穴が開いているが、下のほうは塞がっている",
+            "aliases": [
+                "穴が途中で終わる電柱"
+            ],
+            "countries": [
+                "PL"
+            ],
+            "confusableWith": [
+                "ref_pole_holey_to_ground"
+            ],
+            "note": "**非常に強い。1 カ国。**ハンガリーとルーマニアは穴が地面まで届く。**どこまで開いているかを見る。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ]
+        },
+        {
+            "id": "ref_pole_metal_large_holes",
+            "slot": "pole",
+            "canonical": "金属製で大きな穴が開いた電柱",
+            "plain": "金属の柱に大きな穴が開いている",
+            "aliases": [
+                "金属の穴あき電柱"
+            ],
+            "countries": [
+                "TR"
+            ],
+            "confusableWith": [
+                "ref_pole_holey_to_ground"
+            ],
+            "note": "**強い。1 カ国。**ルーマニア・ハンガリー・ポーランドは**コンクリート**である。**素材と穴の大きさで割る。**トルコは電柱の種類が多く、これはその 1 つ。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ]
+        },
+        {
+            "id": "ref_pole_small_holes_vertical",
+            "slot": "pole",
+            "canonical": "小さな穴が縦に並んだ電柱",
+            "plain": "小さな穴がぽつぽつ縦に並んでいる",
+            "aliases": [
+                "小さな穴が並ぶ電柱",
+                "ピンホールの電柱"
+            ],
+            "countries": [
+                "BE",
+                "BR",
+                "CL",
+                "KH",
+                "LK",
+                "TH"
+            ],
+            "confusableWith": [],
+            "note": "**族としては弱い（7 カ国）。他の欄と掛けて使う。**ベルギーは四角い断面。ラオスは非対称な形（片側に松かさ 2 つ、反対に 1 つ）。スリランカは上部に小さな穴の型と、下部が抜けている型の 2 種類。カンボジアも丸い柱に小さな穴の型と梯子型の 2 種類。チリとブラジルは上部に小さな穴があり、下部が梯子状。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ]
+        },
+        {
+            "id": "ref_pole_octagonal",
+            "slot": "pole",
+            "canonical": "八角形の電柱",
+            "plain": "柱の断面が八角形になっている",
+            "aliases": [
+                "八角柱の電柱",
+                "八角形電柱"
+            ],
+            "countries": [
+                "CO",
+                "EC",
+                "MX"
+            ],
+            "confusableWith": [],
+            "note": "**強い。4 カ国。**中南米では**メキシコとコロンビア**（まれにエクアドル）だけ。グアムは大型のコンクリート製八角柱で、**北マリアナ諸島は木製**なので隣同士で割れる。人手ワークシート §11 の「八角形電柱＋家の丸形電気メーター → メキシコ」の第 1 段がこれである。**この用語だけでは 4 カ国までしか落ちない。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ]
+        },
+        {
+            "id": "ref_pole_yellow_black_stripes",
+            "slot": "pole",
+            "canonical": "黄色と黒の縞がある電柱",
+            "plain": "黄色と黒の縞模様が付いている",
+            "aliases": [
+                "黄黒の縞の電柱",
+                "トラ縞の電柱"
+            ],
+            "countries": [
+                "CO",
+                "JP",
+                "KR",
+                "TW"
+            ],
+            "confusableWith": [],
+            "note": "**族としては強い（4 カ国）。縞の向きと範囲で割る。**日本は**縦**の縞。台湾は**斜め**で地面まで届く。韓国は**斜め**だが地面まで届かない。コロンビアにも黄黒の縞がある。（日本の電柱に付く小さなプレートの意匠で地域が分かるが、**リージョンゲスはこのアプリの対象外である。**）",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ]
+        },
+        {
+            "id": "ref_pole_ladder_style",
+            "slot": "pole",
+            "canonical": "下部が梯子のような形の電柱",
+            "plain": "下のほうが梯子みたいに段になっている",
+            "aliases": [
+                "梯子型の電柱",
+                "段になった電柱"
+            ],
+            "countries": [
+                "BR",
+                "CL",
+                "EC",
+                "ES",
+                "FR",
+                "KH",
+                "NG",
+                "SN"
+            ],
+            "confusableWith": [],
+            "note": "**族としては弱い（8 カ国）。他の欄と掛けて使う。**フランスは穴ではなく**へこみ**。セネガルは**旧フランス領**として同型。ブラジルは長い段が下部に走り上部に小さな穴。チリはブラジルに似るがへこみの中の横桟が少ない。エクアドルの梯子型は**中南米ではほぼ固有**。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ]
+        },
+        {
+            "id": "ref_pole_three_upward_bulbs",
+            "slot": "pole",
+            "canonical": "上向きの碍子が3つ（三叉のよう）",
+            "plain": "上に3つの突起が並んでいて、三叉みたいに見える",
+            "aliases": [
+                "三叉の電柱",
+                "上向きの碍子3つ"
+            ],
+            "countries": [
+                "ID",
+                "UY"
+            ],
+            "confusableWith": [],
+            "note": "**強い。2 カ国。**ウルグアイで最も多い型。インドネシアも同型が多く、**上端が揃っているか不揃いか**が地域で違う。インドネシアの鉄柱は黒く塗られ、**赤白の国旗色の縞**が入ることがある。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ]
+        },
+        {
+            "id": "ref_pole_crucifix",
+            "slot": "pole",
+            "canonical": "十字架のような形の電柱",
+            "plain": "十字架みたいな形をしている",
+            "aliases": [
+                "十字の電柱",
+                "クルシフィックス型"
+            ],
+            "countries": [
+                "MX",
+                "PH"
+            ],
+            "confusableWith": [],
+            "note": "**強い。2 カ国。**フィリピンは**木製**の十字型が最も多い。メキシコにも十字型がある。**素材で割る。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ]
+        },
+        {
+            "id": "ref_pole_three_arms",
+            "slot": "pole",
+            "canonical": "腕が3本横に突き出た電柱",
+            "plain": "腕みたいなものが3本横に出ている",
+            "aliases": [
+                "腕3本の電柱"
+            ],
+            "countries": [
+                "PE"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**人手ワークシート §13 の「四角柱の電柱だけではペルーに行けず、タイなど別候補へ飛ぶ」に効く。**腕の本数を数える。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ]
+        },
+        {
+            "id": "ref_pole_eiffel_like",
+            "slot": "pole",
+            "canonical": "エッフェル塔のような鉄塔型の電柱",
+            "plain": "鉄骨を組んだ塔みたいな形",
+            "aliases": [
+                "鉄塔型の電柱",
+                "エッフェル塔型"
+            ],
+            "countries": [
+                "BG"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**ブルガリア全域で見られる。人手ワークシート §13 の「ブルガリアとウクライナで迷う」に効く。**キリル文字の先で割れる軸である。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ]
+        },
+        {
+            "id": "ref_pole_wire_style",
+            "slot": "pole",
+            "canonical": "針金を組んだような金属製の電柱",
+            "plain": "細い金属を組んだような柱",
+            "aliases": [
+                "針金型の電柱"
+            ],
+            "countries": [
+                "TN"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**チュニジアで最も多い型。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ]
+        },
+        {
+            "id": "ref_pole_sharp_spike_top",
+            "slot": "pole",
+            "canonical": "頂部から長く尖った突起が伸びている",
+            "plain": "柱の上から長くとがった棒が突き出ている",
+            "aliases": [
+                "尖った突起の電柱",
+                "上に槍がある電柱"
+            ],
+            "countries": [
+                "KR"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**韓国の電柱の最大の特徴。黄黒の斜め縞（地面まで届かない）と併せて見る。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ]
+        },
+        {
+            "id": "ref_pole_white_painted_base",
+            "slot": "pole",
+            "canonical": "根元が白く塗られた電柱",
+            "plain": "柱の根元だけ白く塗られている",
+            "aliases": [
+                "根元が白い電柱"
+            ],
+            "countries": [
+                "RO",
+                "UA"
+            ],
+            "confusableWith": [],
+            "note": "**中程度。**ウクライナで多い。ルーマニアの穴あき電柱にも見られる。**単独では割れないので穴の有無と併せる。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ]
+        },
+        {
+            "id": "ref_pole_wooden_simple",
+            "slot": "pole",
+            "canonical": "木製で碍子が3つの簡素な電柱",
+            "plain": "木の柱に碍子が3つだけ付いた簡素なもの",
+            "aliases": [
+                "木製の簡素な電柱"
+            ],
+            "countries": [
+                "SZ"
+            ],
+            "confusableWith": [],
+            "note": "**強い。1 カ国。**エスワティニで最も多い型。南部アフリカの他国（南アフリカ・ボツワナ・レソト）との割り方の 1 つになる。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ]
+        },
+        {
+            "id": "ref_pole_metal_wrap",
+            "slot": "pole",
+            "canonical": "金属の帯が1本巻かれた電柱",
+            "plain": "柱に銀色や白の金属の帯が1本巻いてある",
+            "aliases": [
+                "金属の帯が巻かれた電柱"
+            ],
+            "countries": [
+                "NZ"
+            ],
+            "confusableWith": [],
+            "note": "**強い。1 カ国。**ニュージーランドの電柱の多くに見られる。（オーストラリアのタスマニア州には地上 2m ほどにオリーブ色の金属を巻いた電柱があるが、**州単位の話であり国の軸にしない。**）",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ]
+        },
+        {
+            "id": "ref_pole_stobie",
+            "slot": "pole",
+            "canonical": "鋼板2枚の間にコンクリートを挟んだ電柱",
+            "plain": "2枚の鉄板の間にコンクリートが挟まった柱",
+            "aliases": [
+                "ストビーポール",
+                "鉄板でコンクリートを挟んだ電柱"
+            ],
+            "countries": [
+                "AU"
+            ],
+            "confusableWith": [],
+            "note": "**強いが地域限定。**オーストラリアの**南オーストラリア州に固有**。国としてはオーストラリアを指すが、**見えなかったことをオーストラリアの否定に使わない。**北部準州には金属製の穴あき電柱がある。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ]
+        },
+        {
+            "id": "ref_sign_post_black_white_stripes",
+            "slot": "sign",
+            "canonical": "標識のポールが黒白の縞",
+            "plain": "標識を支える柱が黒と白の縞になっている",
+            "aliases": [
+                "黒白の縞のポール",
+                "縞模様の標識柱"
+            ],
+            "countries": [
+                "AE",
+                "JO",
+                "LK",
+                "MY",
+                "PE",
+                "UY"
+            ],
+            "confusableWith": [
+                "ref_sign_post_black_yellow_stripes"
+            ],
+            "note": "**強い。世界的に珍しい配色である。**マレーシア・スリランカ・ペルーで多い。UAE も一部にあり、**ヨルダンはあるが稀。**ウルグアイは信号のポールが黒白か黒黄の縞。ペルーは**コンクリートの台座に立ち、地面より持ち上がっている**ことが多い。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/signposts/"
+            ]
+        },
+        {
+            "id": "ref_sign_post_black_yellow_stripes",
+            "slot": "sign",
+            "canonical": "標識のポールが黒黄の縞",
+            "plain": "標識の柱が黒と黄色の縞になっている",
+            "aliases": [
+                "黒黄の縞のポール"
+            ],
+            "countries": [
+                "BW",
+                "UY"
+            ],
+            "confusableWith": [
+                "ref_sign_post_black_white_stripes"
+            ],
+            "note": "**強い。2 カ国。**ボツワナの標識ポール。ウルグアイは信号のポールで黒白と黒黄の両方がある。**黒白と見分けにくいので、黄色があるかを確かめる。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/signposts/"
+            ]
+        },
+        {
+            "id": "ref_sign_post_wooden",
+            "slot": "sign",
+            "canonical": "標識のポールが木製",
+            "plain": "標識を支えているのが木の柱",
+            "aliases": [
+                "木の標識柱",
+                "木製のポール"
+            ],
+            "countries": [
+                "CA",
+                "TH",
+                "UY"
+            ],
+            "confusableWith": [],
+            "note": "**強い。3 カ国。**カナダは木製で白く塗られることもあり、**アメリカは金属**なので**この 1 点で北米が割れる。**タイは白く塗られ根元が黒い。ウルグアイは太くて白い木製。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/signposts/"
+            ]
+        },
+        {
+            "id": "ref_sign_post_white_black_base",
+            "slot": "sign",
+            "canonical": "白いポールで根元が黒い",
+            "plain": "白い柱の根元だけ黒くなっている",
+            "aliases": [
+                "根元が黒い白いポール"
+            ],
+            "countries": [
+                "RU",
+                "TH"
+            ],
+            "confusableWith": [],
+            "note": "**強い。2 カ国。**ロシアで多く、他国ではあまり見ない。タイも白く塗られた木製で根元が黒い。**素材で割る（ロシアは金属）。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/signposts/"
+            ]
+        },
+        {
+            "id": "ref_sign_post_yellow",
+            "slot": "sign",
+            "canonical": "標識のポールが黄色",
+            "plain": "標識の柱が黄色い",
+            "aliases": [
+                "黄色い標識柱"
+            ],
+            "countries": [
+                "AU"
+            ],
+            "confusableWith": [],
+            "note": "**強いが地域限定。**オーストラリアの**西オーストラリア州**の目印。同国の他の州は主に銀色。**見えなかったことをオーストラリアの否定に使わない。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/signposts/"
+            ]
+        },
+        {
+            "id": "ref_sign_post_very_thin",
+            "slot": "sign",
+            "canonical": "標識のポールが極端に細い",
+            "plain": "標識の柱がとても細い",
+            "aliases": [
+                "細い標識柱",
+                "針みたいな柱"
+            ],
+            "countries": [
+                "CL",
+                "CO"
+            ],
+            "confusableWith": [],
+            "note": "**強い。2 カ国。**チリは細く、**柱の先に切り欠き（スリット）がある。**コロンビアは非常に細く白く塗られる。コロンビアは**標識の裏に十字の補強**が見えることも多い。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/signposts/"
+            ]
+        },
+        {
+            "id": "ref_sign_post_thick_unpainted",
+            "slot": "sign",
+            "canonical": "太くて塗装されていないポール",
+            "plain": "太くて塗っていない柱に標識が付いている",
+            "aliases": [
+                "無塗装の太い柱"
+            ],
+            "countries": [
+                "BO"
+            ],
+            "confusableWith": [
+                "ref_sign_post_black_white_stripes"
+            ],
+            "note": "**強い。1 カ国。**ボリビアの多くの地域で見られる。人手ワークシート §13 の「ペルーやボリビアだと思ったらメキシコだった」で、**ペルーは黒白の縞なので、ポールの見た目で割れる。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/signposts/"
+            ]
+        },
+        {
+            "id": "ref_sign_post_blue_white_wrap",
+            "slot": "sign",
+            "canonical": "ポールの根元に青白の巻きもの",
+            "plain": "柱の根元に青と白の巻きが付いている",
+            "aliases": [
+                "青白の巻きがあるポール"
+            ],
+            "countries": [
+                "EE"
+            ],
+            "confusableWith": [],
+            "note": "**強い。1 カ国。**エストニアの標識ポールに時々見られる。人手ワークシート §13 の「バルト三国だと思ったらドイツだった」で使える軸。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/signposts/"
+            ]
+        },
+        {
+            "id": "ref_arch_circular_electricity_meter",
+            "slot": "architecture",
+            "canonical": "外壁に丸い電気メーター",
+            "plain": "家の外の壁に丸い電気メーターが付いている",
+            "aliases": [
+                "丸い電気メーター",
+                "円形のメーター"
+            ],
+            "countries": [
+                "MX"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**メキシコではほとんどの家の外壁に見られる。**人手ワークシート §11 の判定フローの 2 段目である。**「八角形電柱（`ref_pole_octagonal`、4 カ国）→ 家の電気メーターを見る → **丸形ならメキシコ**」。> **本人が頭の中でやっている順序が、そのまま計算で出る。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/buildings/"
+            ]
+        },
+        {
+            "id": "ref_arch_black_water_tank_on_roof",
+            "slot": "architecture",
+            "canonical": "屋上に大きな黒い貯水タンク",
+            "plain": "屋根の上に大きな黒いタンクが載っている",
+            "aliases": [
+                "黒い貯水タンク",
+                "屋上のタンク"
+            ],
+            "countries": [
+                "MX"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**メキシコの家の屋上によく見られる。丸い電気メーターと**同じ国を指すので、片方だけでも足りる。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/buildings/"
+            ]
+        },
+        {
+            "id": "ref_arch_wooden_house_many_shutters",
+            "slot": "architecture",
+            "canonical": "木造で鎧戸が多い家",
+            "plain": "木の家で窓に木の雨戸がたくさん付いている",
+            "aliases": [
+                "鎧戸の多い家",
+                "シャッターの多い木の家"
+            ],
+            "countries": [
+                "CH"
+            ],
+            "confusableWith": [],
+            "note": "**強い。1 カ国。**スイスは鎧戸の数が多い。木造家屋も多い。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/buildings/"
+            ]
+        },
+        {
+            "id": "ref_arch_grey_stone_multistorey",
+            "slot": "architecture",
+            "canonical": "灰色の石を積んだ多層の建物",
+            "plain": "灰色の石を積んだ何階建てかの建物",
+            "aliases": [
+                "石造りの多層住宅"
+            ],
+            "countries": [
+                "AD"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**アンドラ。裕福そうな見た目になる。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/buildings/"
+            ]
+        },
+        {
+            "id": "ref_arch_stilt_wooden_house",
+            "slot": "architecture",
+            "canonical": "高床式の木造家屋",
+            "plain": "木の家が地面から持ち上がって建っている",
+            "aliases": [
+                "高床の木の家",
+                "高床式住居"
+            ],
+            "countries": [
+                "KH"
+            ],
+            "confusableWith": [],
+            "note": "**強い。1 カ国。**カンボジア。屋根が何段かに分かれ、壁は赤茶・水色・オレンジが多い。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/buildings/"
+            ]
+        },
+        {
+            "id": "ref_arch_vertical_columns_house",
+            "slot": "architecture",
+            "canonical": "垂直の柱が目立つ家",
+            "plain": "家の正面に縦の柱が並んでいる",
+            "aliases": [
+                "縦の柱が並ぶ家"
+            ],
+            "countries": [
+                "MY"
+            ],
+            "confusableWith": [],
+            "note": "**強い。1 カ国。**マレーシアの住宅に多く、他国では珍しい。黒白の縞の標識ポールと**同じ国を指す。組み合わせで確度が上がる。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/buildings/"
+            ]
+        },
+        {
+            "id": "ref_arch_high_walls_around_property",
+            "slot": "architecture",
+            "canonical": "敷地が高い塀で囲まれている",
+            "plain": "家のまわりが高い塀で囲まれている",
+            "aliases": [
+                "高い塀",
+                "塀で囲まれた家"
+            ],
+            "countries": [
+                "RW"
+            ],
+            "confusableWith": [],
+            "note": "**中程度。1 カ国だが他国にもある景観である。**ルワンダで多い。**単独で断定しない。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/buildings/"
+            ]
+        },
+        {
+            "id": "ref_arch_thatched_round_hut",
+            "slot": "architecture",
+            "canonical": "茅葺きの丸い小屋",
+            "plain": "丸い形で屋根が草で葺かれた小屋",
+            "aliases": [
+                "茅葺きの小屋",
+                "丸い小屋"
+            ],
+            "countries": [
+                "LS"
+            ],
+            "confusableWith": [],
+            "note": "**強い。1 カ国。**レソトの伝統的な住居。南部アフリカの他国（南アフリカ・ボツワナ・エスワティニ）との割り方になる。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/buildings/"
+            ]
+        },
+        {
+            "id": "ref_arch_flat_roof_arch_windows_wood",
+            "slot": "architecture",
+            "canonical": "張り出した平屋根＋白壁＋アーチ窓＋木の装飾",
+            "plain": "平らな屋根が壁より外に出ていて、白い壁とアーチ型の窓、木の飾りがある",
+            "aliases": [
+                "アーチ窓と木の装飾の家"
+            ],
+            "countries": [
+                "BT"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**ブータン。装飾が細かい。石の標石（`ref_bollard_stone_marker`）と**同じ国を指す。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/buildings/"
+            ]
+        },
+        {
+            "id": "ref_arch_skyscrapers_background",
+            "slot": "architecture",
+            "canonical": "背景に超高層ビル群",
+            "plain": "すごく高いビルが遠くに見える",
+            "aliases": [
+                "超高層ビル",
+                "高層ビル群"
+            ],
+            "countries": [
+                "AE"
+            ],
+            "confusableWith": [],
+            "note": "**強いが偏りに注意。**UAE の被写域はドバイ周辺に偏っており、**そのため高層ビルが写りやすい。** 建物の性質ではなく被写域の性質である。> **写りやすさは、その国らしさとは別である。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/buildings/"
             ]
         }
     ],

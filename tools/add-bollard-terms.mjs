@@ -60,8 +60,13 @@ const AXES = [
         plain: '赤い四角が真ん中じゃなくて片側に寄っている',
         aliases: ['赤い四角が片寄り', 'ずれた赤い長方形'],
         codes: ['RS'],
-        note: '**非常に強い。1 カ国。**スロベニアやモンテネグロと同型に見えるが、'
-            + '**赤い長方形の位置が中心でないのはセルビアである。**',
+        note: '**強い。1 カ国。**スロベニアやモンテネグロと同型に見えるが、'
+            + '**赤い長方形の位置が中心でないのはセルビアである。**'
+            + '**ただしこの軸は薄れつつある。**新しい撮影では'
+            + 'ハンガリー型（長方形が中心）に近い設計へ置き換わってきている'
+            + '（プレイヤーの観察、2026-08。出典の記述ではない）。'
+            + '偏ったものもまだ多く残っているため使えるが、'
+            + '**見えなかったことをセルビアの否定に使わない。**',
         confusableWith: ['ref_bollard_red_rectangle_front_white_back'],
     },
     {
@@ -240,8 +245,22 @@ for (const axis of AXES) {
     console.log(`  ${String(kept.length).padStart(2)} カ国  ${axis.canonical}`)
     if (dropped.length) console.log(`          seed に無いため除外: ${dropped.join(' ')}`)
 
-    if (terms.some((t) => t.id === axis.id)) {
-        console.log('          既にある')
+    /**
+     * 既にある用語は `note` と `confusableWith` だけを更新する。
+     *
+     * **知見は後から増える。** セルビアの偏った長方形は新しい撮影で
+     * ハンガリー型に寄ってきているという観察が、追加した後に出てきた。
+     * 作り直しではなく**追記できる形にしておく。**
+     *
+     * `countries` は書き換えない。国の集合を静かに変えると、
+     * 過去の記録との突き合わせが壊れる。
+     */
+    const existing = terms.find((t) => t.id === axis.id)
+    if (existing) {
+        const changed = existing.note !== axis.note
+        existing.note = axis.note
+        existing.confusableWith = axis.confusableWith ?? []
+        console.log(changed ? '          note を更新した' : '          既にある')
         continue
     }
     if (kept.length === 0) {
