@@ -151,15 +151,37 @@ export const questionsSchema = z.array(questionSchema)
  */
 export const NONE_TERM_ID = 'none'
 
-export function buildNormalizeSchema(termIds: readonly string[]) {
-    const allowed = new Set<string>([...termIds, NONE_TERM_ID])
+/**
+ * スロット別に許可する用語 ID の対応表。
+ *
+ * **enum をスロットごとに分ける。** 全 78 語を 1 つの enum にすると、
+ * `bollard` の記述に `pole` の用語 ID を選ばせることができてしまう。
+ * `strict: true` は「enum のいずれか」しか保証せず、**どのスロットかは保証しない。**
+ */
+export type AllowedTermsBySlot = Partial<Record<string, readonly string[]>>
+
+export function buildNormalizeSchema(allowedBySlot: AllowedTermsBySlot) {
+    const allowed = new Map<string, Set<string>>(
+        Object.entries(allowedBySlot).map(([slot, ids]) => [
+            slot,
+            new Set<string>([...(ids ?? []), NONE_TERM_ID]),
+        ]),
+    )
     return z.object({
         slots: z.array(
-            z.object({
-                slot: slotIdSchema,
-                /** 辞書外の ID はコード側でも破棄する。AI の遵守に依存しない */
-                terms: z.array(z.string()).transform((ids) => ids.filter((id) => allowed.has(id))),
-            }),
+            z
+                .object({
+                    slot: slotIdSchema,
+                    terms: z.array(z.string()),
+                })
+                /**
+                 * **辞書外の ID と、他スロットの ID はコード側でも破棄する。**
+                 * AI の遵守に依存させない（要件 3-2）。
+                 */
+                .transform((entry) => ({
+                    slot: entry.slot,
+                    terms: entry.terms.filter((id) => allowed.get(entry.slot)?.has(id) ?? false),
+                })),
         ),
     })
 }

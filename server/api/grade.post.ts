@@ -14,17 +14,41 @@
  * **認証がない。** ローカル実行前提のため許容する。公開ホスティングする場合は認証が必要。
  */
 import { gradeRequestSchema, feedbackSchema, MAX_GRADING_MODELS } from '../../shared/schemas'
-import type { Answer, CodeJudgement, Feedback, ModelGrading, RunRecord } from '../../shared/types'
+import { SLOT_IDS } from '../../shared/slots'
+import type { Answer, CodeJudgement, Feedback, ModelGrading, Question, RunRecord, Term } from '../../shared/types'
 import { buildJudgement } from '../utils/grading'
+import type { GradingContext as JudgementContext } from '../utils/grading'
 import {
     GRADING_JSON_SCHEMA,
     GRADING_SYSTEM_PROMPT,
     buildGradingUserPrompt,
 } from '../utils/prompts'
+import type { GradingContext as PromptContext } from '../utils/prompts'
 import { callChatStream, localIsoString, resolveModel } from '../utils/ai'
 import type { StreamProgress } from '../utils/ai'
 import { buildJsonSchemaFormat, extractJson, requestStructured } from '../utils/structured'
-import { readQuestion, saveRun } from '../utils/store'
+import { readGlossary, readQuestion, saveRun } from '../utils/store'
+
+/**
+ * AI に渡す辞書の抜粋。
+ *
+ * **辞書全体（90 語）を渡さない。** 枠を食うだけでなく、
+ * 関係のない用語が並ぶと AI が「学習者が書いていない用語」を持ち出す。
+ *
+ * 渡すのは 3 種類。
+ *   1. 学習者が挙げた用語（語彙の対応づけに必要）
+ *   2. 正解タグに記録された用語（見落としの説明に必要）
+ *   3. 弁別スロットの用語（候補の区別の説明に必要）
+ */
+function selectGlossaryExcerpt(glossary: Term[], answer: Answer, question: Question): Term[] {
+    const wanted = new Set<string>()
+    for (const id of SLOT_IDS) {
+        for (const term of answer.slots[id]?.terms ?? []) wanted.add(term)
+        for (const term of question.slots[id]?.terms ?? []) wanted.add(term)
+    }
+    const decisive = new Set(question.decisiveSlots)
+    return glossary.filter((t) => wanted.has(t.id) || decisive.has(t.slot))
+}
 
 /** 進捗行の間隔。17,000 チャンクをそのまま流すと出力が実質使えない */
 const PROGRESS_INTERVAL_MS = 250
@@ -38,15 +62,6 @@ export default defineEventHandler(async (event) => {
         })
     }
     const body = parsed.data
-
-    if (body.variant === 'v2') {
-        // 正解タグと辞書を差し込む経路はタスク 24。コンテキストなしで v2 を名乗らせない
-        throw createError({
-            statusCode: 501,
-            statusMessage:
-                'v2 経路は未実装である（タスク 24）。コンテキストなしで v2 として記録すると対照実験が無効になる',
-        })
-    }
 
     const question = await readQuestion(body.questionId)
     if (!question) {
@@ -64,8 +79,40 @@ export default defineEventHandler(async (event) => {
         reasoning: body.reasoning,
     }
 
+    // ---- v2 のコンテキストを組み立てる。v1 では null のままにする ----
+    let judgementContext: JudgementContext | null = null
+    let promptContext: PromptContext | null = null
+
+    if (body.variant === 'v2') {
+        /**
+         * **タグ付けが未完了の出題を v2 として採点しない。**
+         *
+         * 全スロットが `unknown` の正解タグを渡しても、差分計算は何も判定できない。
+         * それを v2 として記録すると「v2 でも見落としが出なかった」という
+         * 誤った結論になる。**判定不能を成果に見せない。**
+         */
+        const tagged = SLOT_IDS.filter((id) => question.slots[id]?.state !== 'unknown')
+        if (tagged.length === 0) {
+            throw createError({
+                statusCode: 409,
+                statusMessage:
+                    `出題 ${question.id} は正解タグが未記入である（全スロット unknown）。`
+                    + 'タグなしで v2 として記録すると v1/v2 比較が無効になる。docs/tag-drafts.md から反映すること',
+            })
+        }
+
+        const glossary = await readGlossary()
+        judgementContext = { tagSlots: question.slots, glossary }
+        promptContext = {
+            answerKey: question.slots,
+            decisiveSlots: question.decisiveSlots,
+            // **辞書全体を渡さない。** 90 語を毎回渡すと枠を食い、注意も散る
+            glossaryExcerpt: selectGlossaryExcerpt(glossary, answer, question),
+        }
+    }
+
     // ---- コードによる判定。AI より先に確定させる ----
-    const judgement = buildJudgement(body.variant, answer, question.country)
+    const judgement = buildJudgement(body.variant, answer, question.country, judgementContext)
 
     const models = body.models ?? [resolveModel('grade')]
     if (models.length > MAX_GRADING_MODELS) {
@@ -77,8 +124,8 @@ export default defineEventHandler(async (event) => {
         country: question.country,
         region: question.region,
         judgement,
-        // v1 はコンテキストを渡さない。テンプレートは同一で差し込みの有無だけが違う
-        context: null,
+        // **テンプレートは同一で差し込みの有無だけが違う。** これが対照実験の条件である
+        context: promptContext,
     })
 
     if (!body.stream) {

@@ -168,3 +168,86 @@ describe('観察メモの差し込み', () => {
         expect(lines.length).toBeGreaterThanOrEqual(14)
     })
 })
+
+/**
+ * タスク 24.1 の追加分。**新 3 分類がプロンプトに届いていることを固定する。**
+ *
+ * コードが `blindSlots` を分けて出しても、プロンプトに載らなければ
+ * AI は「見落とし」として説明してしまう。**判定と提示は別に壊れる。**
+ */
+describe('見落としではないものの提示', () => {
+    it('v1 では 3 分類すべてを判定不能と明記する', () => {
+        expect(v1Prompt).toContain('視認できないスロット: 判定していない')
+        expect(v1Prompt).toContain('別のスロットに書かれた観察: 判定していない')
+        expect(v1Prompt).toContain('別ルートで正解したため不要だったスロット: 判定していない')
+        expect(v1Prompt).toContain('達成された絞り込み（積集合）: 判定していない')
+        expect(v1Prompt).toContain('次に見るべきスロット')
+    })
+
+    it('見落としとして扱わないよう system プロンプトで指示する', () => {
+        expect(GRADING_SYSTEM_PROMPT).toContain('見落としと呼んではいけないもの')
+        expect(GRADING_SYSTEM_PROMPT).toContain('あなたの見落としではありません')
+        expect(GRADING_SYSTEM_PROMPT).toContain('訓練しているのは観察であって分類ではありません')
+    })
+
+    /** **0 カ国を達成として褒めさせない** */
+    it('積集合が空のときは矛盾であることを明記する', () => {
+        const prompt = buildGradingUserPrompt({
+            answer,
+            country: 'BG',
+            region: null,
+            judgement: {
+                ...judgement,
+                intersection: { countries: [], containsAnswer: false },
+            },
+            context: null,
+        })
+        expect(prompt).toContain('0 カ国')
+        expect(prompt).toContain('絞り込みの成功ではない')
+    })
+
+    it('v2 では 3 分類の値とスロット名が入る', () => {
+        const prompt = buildGradingUserPrompt({
+            answer,
+            country: 'BG',
+            region: null,
+            judgement: {
+                ...judgement,
+                variant: 'v2',
+                missedSlots: [],
+                wrongAbsentSlots: [],
+                overclaimedSlots: [],
+                blindSlots: ['camera'],
+                filedElsewhere: [{ slot: 'bollard', foundIn: ['road_marking'] }],
+                alternativeRoute: ['pole'],
+                failureModes: [],
+                intersection: { countries: ['BG', 'RS'], containsAnswer: true },
+                nextPriority: [{ slot: 'vehicle', resultingSize: 1 }],
+                discoveries: ['ゴミが落ちていない'],
+            },
+            context: {
+                answerKey: buildAnswerKey(),
+                decisiveSlots: ['bollard'],
+                glossaryExcerpt: glossary,
+            },
+        })
+        expect(prompt).toContain('視認できないスロット: camera')
+        expect(prompt).toContain('別のスロットに書かれた観察: bollard（記述があった欄: road_marking）')
+        expect(prompt).toContain('別ルートで正解したため不要だったスロット: pole')
+        expect(prompt).toContain('2 カ国 [BG RS]')
+        expect(prompt).toContain('vehicle（見れば残り 1 カ国）')
+        expect(prompt).toContain('自力で見つけた名前のない手がかり: ゴミが落ちていない')
+    })
+
+    it('該当なしは「（なし）」として出し、判定不能と区別する', () => {
+        const prompt = buildGradingUserPrompt({
+            answer,
+            country: 'BG',
+            region: null,
+            judgement: { ...judgement, variant: 'v2', blindSlots: [], filedElsewhere: [] },
+            context: null,
+        })
+        expect(prompt).toContain('視認できないスロット: （なし）')
+        expect(prompt).toContain('別のスロットに書かれた観察: （なし）')
+    })
+})

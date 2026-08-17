@@ -34,6 +34,30 @@ export const GRADING_SYSTEM_PROMPT = `あなたはGeoGuessrの上達を支援す
    「見落としの判定はできません」と明示する。推測で補わない。
 6. 学習者を励ますだけの内容を書かない。次に何を見るべきかを必ず具体的に示す。
 
+## 見落としと呼んではいけないもの
+入力には、未観察のスロットのうち**見落としではないもの**が分けて渡されます。
+これらを見落としとして扱わないでください。
+
+1. 「視認できないスロット」
+   写ってはいますが、この学習者には認識できません。
+   **「あなたの見落としではありません」と明示してください。**
+   次に見るべき項目としても挙げないでください。見えないものは見られません。
+
+2. 「別のスロットに書かれた観察」
+   同じものを別の欄に書いただけの可能性があります。どちらの欄が適切かを
+   一言添えてよいですが、**観察できていなかったことにはしないでください。**
+   訓練しているのは観察であって分類ではありません。
+
+3. 「別ルートで正解したスロット」
+   学習者は正解しています。その手がかりは今回必要ありませんでした。
+   知らなかったこと自体を失敗として書かないでください。
+   「次はこれも使えます」という形で示してください。
+
+## 積集合の扱い
+「達成された絞り込み」は、学習者が挙げた用語から計算した候補国の集合です。
+空集合（0 カ国）は**絞り込みの成功ではありません。** 観察か辞書のどちらかが
+矛盾していることを意味します。0 カ国を「完全に絞り込めた」と書かないでください。
+
 ## 語彙の扱い
 学習者は専門用語を知りません。学習者が素人語で書いた表現には、
 正式な用語を添えて説明します。
@@ -251,6 +275,34 @@ function formatNarrowingPower(value: CodeJudgement['narrowingPower']): string {
     return entries.map(([slot, count]) => `${slot}=${count}`).join(', ')
 }
 
+function formatFiledElsewhere(value: CodeJudgement['filedElsewhere']): string {
+    if (value === null) return NOT_JUDGED
+    if (!value.length) return '（なし）'
+    return value.map((f) => `${f.slot}（記述があった欄: ${f.foundIn.join(', ')}）`).join(', ')
+}
+
+/**
+ * 積集合。**空集合を「絞り込み成功」と読ませない。**
+ *
+ * 0 カ国は観察か辞書の矛盾であり、1 カ国の延長ではない。
+ * プロンプト側で明示しないと、AI は件数の少なさを達成として褒める。
+ */
+function formatIntersection(value: CodeJudgement['intersection']): string {
+    if (value === null) return NOT_JUDGED
+    if (!value.countries.length) {
+        return '0 カ国（**矛盾している。絞り込みの成功ではない。** 観察か辞書のどちらかが誤っている）'
+    }
+    return `${value.countries.length} カ国 [${value.countries.join(' ')}] / 正解を含む: ${value.containsAnswer ? 'はい' : 'いいえ'
+        }`
+}
+
+/** 次に見るべきスロット。**コードの計算結果である。AI が並べ替えない** */
+function formatNextPriority(value: CodeJudgement['nextPriority']): string {
+    if (value === null) return NOT_JUDGED
+    if (!value.length) return '（なし）'
+    return value.map((n) => `${n.slot}（見れば残り ${n.resultingSize} カ国）`).join(' → ')
+}
+
 /**
  * ユーザープロンプトを組み立てる。
  *
@@ -283,12 +335,21 @@ export function buildGradingUserPrompt(input: GradingPromptInput): string {
             `見落としたスロット: ${formatList(judgement.missedSlots)}`,
             `誤って「見えない」と判断したスロット: ${formatList(judgement.wrongAbsentSlots)}`,
             `過剰に申告したスロット: ${formatList(judgement.overclaimedSlots)}`,
+            '',
+            '## 見落としではないもの（見落としとして扱わないこと）',
+            `視認できないスロット: ${formatList(judgement.blindSlots)}`,
+            `別のスロットに書かれた観察: ${formatFiledElsewhere(judgement.filedElsewhere)}`,
+            `別ルートで正解したため不要だったスロット: ${formatList(judgement.alternativeRoute)}`,
+            '',
             `失敗モード: ${formatList(judgement.failureModes)}`,
             `併記された国の組: ${judgement.confusionPairs.length
                 ? judgement.confusionPairs.map(([a, b]) => `${a}-${b}`).join(', ')
                 : '（なし）'
             }`,
             `スロット別の絞り込み力（関連国の件数）: ${formatNarrowingPower(judgement.narrowingPower)}`,
+            `達成された絞り込み（積集合）: ${formatIntersection(judgement.intersection)}`,
+            `次に見るべきスロット（コードの計算結果。並べ替えないこと）: ${formatNextPriority(judgement.nextPriority)}`,
+            `自力で見つけた名前のない手がかり: ${formatList(judgement.discoveries)}`,
         ].join('\n'),
     ]
 
