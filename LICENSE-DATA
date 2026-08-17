@@ -37,6 +37,64 @@ Geo-Ganbatte-Gengoka-Coach (gsolkaga), CC BY 4.0
 https://github.com/gsolkaga/Geo-Ganbatte-Gengoka-Coach
 ```
 
+## 出典を参照して編集した部分：CC BY 4.0（参照先も併記する）
+
+用語辞書の項目のうち `source` が `reference` のものは、**公開されている
+GeoGuessr の資料を参照して該当国リストを人手で編集した。**
+
+各項目の `sources` に参照先の URL を記録している。**どこから来た数字かが
+辿れない一覧を作らない。**
+
+```
+data/glossary-human.json の source: "reference" の項目
+```
+
+### 参照した資料
+
+| 資料 | 参照した内容 |
+|---|---|
+| [geohints — Road Lines](https://geohints.com/meta/lines) | 外側線と中央線の色の組み合わせごとの国 |
+| [Geometas — Chevrons](https://geometas.com/metas/categories/chevrons/) | シェブロン標識の配色ごとの国 |
+
+Geometas は自らの出典として [Plonk It](https://www.plonkit.net/) と
+[The Digital Labyrinth](https://somerandomstuff1.wordpress.com/2019/02/08/geoguessr-the-top-tips-tricks-and-techniques/)
+を明記している。**その系譜も併せて記す。**
+
+### 何を取って、何を取っていないか
+
+**取ったもの。** 出題に必要な軸について、該当する国の一覧（地理的な事実）。
+
+**取っていないもの。**
+
+- 本文・解説・画像・見出しの複製、翻訳、要約
+- 資料側のデータセット全体（必要な 4 つの軸の分だけを取った）
+- 分類の体系そのもの（こちらのスロット定義に合わせて言い換えている）
+
+事実に著作権は及ばないが、**一覧の選択・配列には編集の労力がある。**
+必要な範囲に留め、参照先を明記する。それが敬意の形である。
+
+### `human` と `reference` を分けている理由
+
+人手ワークシート（`docs/offline-works/road_marking-human-worksheet.md` §2）には、
+出典と同じ軸が本人の言葉で書かれている。
+
+```
+黄色い外側線＋白い中央線なら、アフリカを考える  ZA BW LS SZ  混同 IE
+中央線が白なら、まずヨーロッパを考える          （国の記載なし）
+```
+
+**軸と混同は本人が持っており、網羅ができていない。**
+同じ軸を出典側は 37 カ国持っている（本人の 4 カ国と混同の `IE` を全部含む）。
+
+ワークシート §17 に「本人が『なんとなく』『勘』と表現しているものを、
+勝手に厳密なルールへ変換しない」と書いてある。**上書きしない。**
+本人の連想は `human` のまま残し、出典由来は別の用語として持つ。
+
+> **連想と網羅は別のものである。**
+
+`certainty` は `heuristic` にしている。**出典を当たっただけであり、
+こちらで現地確認をしていない。**
+
 ## AI が生成した部分：権利を主張しない
 
 ```
@@ -89,12 +147,20 @@ Google および各撮影者に権利がある。**このリポジトリに画�
 Google Maps Platform の規約により pano ID の保存は許容されているが、
 **画像のキャッシュ・再配布は禁止されている。**
 
-### Plonk It
+### Plonk It / geohints / Geometas
 
-https://www.plonkit.net/ © 2021-2026 Plonk It
+```
+Plonk It   https://www.plonkit.net/                © 2021-2026 Plonk It
+geohints   https://geohints.com/
+Geometas    https://geometas.com/                   （OpenGuessr）
+```
 
-**人手検証の一次情報源として参照したのみであり、内容をこのリポジトリに取り込んでいない。**
-本文の複製・翻訳・要約は行っていない。参照した箇所は URL のみを記録している。
+**本文・解説・画像の複製、翻訳、要約は行っていない。**
+
+該当国リストについては、上記「出典を参照して編集した部分」に記したとおり、
+**必要な軸の分だけを参照して人手で編集し、各用語の `sources` に URL を記録している。**
+
+これらの資料の権利は各運営者にある。**このリポジトリのライセンスは及ばない。**
 
 ### GeoGuessr
 

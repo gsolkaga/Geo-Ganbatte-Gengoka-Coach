@@ -108,8 +108,35 @@ export interface Term {
     slot: SlotId
     kind: TermKind
     certainty: TermCertainty
-    /** 由来。記事で区別するため、また AI 由来は断定に使えないため */
-    source: 'human' | 'ai'
+    /**
+     * 由来。記事で区別するため、また AI 由来は断定に使えないため。
+     *
+     * | 値 | 意味 |
+     * |---|---|
+     * | `human` | 本人の実戦の連想・経験則。**軸と混同はここから出る** |
+     * | `reference` | 公開されている GeoGuessr の資料を参照して人手で編集した |
+     * | `ai` | モデルに生成させた。**絞り込みには使わない** |
+     *
+     * ## `human` と `reference` を混ぜない
+     *
+     * 人手ワークシート（`docs/offline-works/road_marking-human-worksheet.md`）には
+     * 「黄色い外側線＋白い中央線なら、アフリカを考える（ZA BW LS SZ、混同 IE）」がある。
+     * **軸と混同は持っているが、網羅はできていない。**
+     *
+     * 同じ軸を出典側は 35 カ国持っている。**上書きしてはならない。**
+     * ワークシート §17 に「本人が『なんとなく』と表現しているものを
+     * 勝手に厳密なルールへ変換しない」と書いてある。
+     *
+     * > **連想と網羅は別のものである。** 両方を、別の用語として持つ。
+     */
+    source: 'human' | 'reference' | 'ai'
+    /**
+     * 該当国リストの出典。`reference` では**必須のつもりで扱う。**
+     *
+     * データを CC BY 4.0 で公開しているため、参照した資料への敬意を形にする。
+     * **どこから来た数字かが辿れない一覧を作らない。**
+     */
+    sources?: string[]
     canonical: string
     plain: string
     aliases: string[]

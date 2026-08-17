@@ -1,6 +1,6 @@
 # 添削の中身の監査（AI 未使用、消費 0）
 
-生成: 2026-08-17T08:18:13.169Z　`node tools/audit-feedback.mjs`
+生成: 2026-08-17T08:35:05.031Z　`node tools/audit-feedback.mjs`
 
 対象: `data/compare/` の 13 件
 

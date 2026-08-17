@@ -37,7 +37,19 @@ Street View の画像・パノラマ
 
 Plonk It  https://www.plonkit.net/
   (c) 2021-2026 Plonk It
-  人手検証の一次情報源として参照したのみ。内容を取り込んでいない。
+  人手検証の一次情報源として参照した。本文・画像は取り込んでいない。
+
+geohints  https://geohints.com/meta/lines
+  路面標示（外側線・中央線の色の組み合わせ）の該当国を参照した。
+  用語の sources に URL を記録している。
+
+Geometas  https://geometas.com/
+  シェブロン標識の配色ごとの該当国を参照した。
+  Geometas 自身は Plonk It と The Digital Labyrinth を出典として明記している。
+
+  いずれも本文・解説・画像の複製、翻訳、要約は行っていない。
+  参照したのは地理的な事実（どの国にどの特徴があるか）のみであり、
+  出題に必要な軸の分だけに留めている。詳細は LICENSE-DATA に記載した。
 
 GeoGuessr
   GeoGuessr AB の商標。本プロジェクトは非公式であり、関係はない。
@@ -60,7 +72,18 @@ Google Maps Platform
 
 用語辞書（data/glossary.json）は certainty で確かさを持つ。
 断定に使えるのは verified のみである。
-heuristic は人間が書いたが検証されていない経験則、unverified は AI 生成である。
+heuristic は人間が書いたが検証されていない経験則、または出典を参照して
+編集したがこちらで現地確認していないもの。unverified は AI 生成である。
+
+由来は source で区別している。
+
+  human      本人の実戦の連想・経験則。軸と混同はここから出る
+  reference  公開資料を参照して人手で編集した。sources に URL がある
+  ai         モデルに生成させた。絞り込み計算には使わない
+
+human と reference を混ぜていない。
+本人の連想（13 カ国）と出典の記載（37 カ国）は別のものであり、
+前者を後者で上書きしていない。
 
 モデル間の一致は正しさを保証しない。
 実測で、4 モデルのうち 3 モデルが同一の誤りをした例がある（ガーナの走行車線）。

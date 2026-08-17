@@ -1,1261 +1,1265 @@
 [
-  {
-    "id": "q-jp-01",
-    "panoId": "flkfISvL09X9SJG2cylZqQ",
-    "fallback": {
-      "lat": 34.39673626454307,
-      "lng": 131.4444564330241,
-      "heading": 0
-    },
-    "country": "JP",
-    "region": "east_asia",
-    "difficulty": 1,
-    "copyright": "© Google",
-    "captureDate": "2013-05",
-    "slots": {
-      "traffic_side": {
-        "state": "visible",
-        "plain": "Googleカーが見えるが中央に居り、左右位置まで特定できない",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "blind"
-      },
-      "road_marking": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "bollard": {
-        "state": "visible",
-        "plain": "黄色いガードレール",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "pole": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "sign": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "script": {
-        "state": "visible",
-        "plain": "カーブミラー「注意」",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "ground": {
-        "state": "visible",
-        "plain": "枯れ葉の隙間から地面を見ようと思えば見えるがほぼ視認不可",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "hard"
-      },
-      "terrain_vegetation": {
-        "state": "visible",
-        "plain": "松や紅葉や竹や杉等、多種多様",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "architecture": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "vehicle": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "pavement": {
-        "state": "visible",
-        "plain": "山の中にしてはアスファルトが整備されている",
-        "terms": [
-          "ai_pavement_01"
+    {
+        "id": "q-jp-01",
+        "panoId": "flkfISvL09X9SJG2cylZqQ",
+        "fallback": {
+            "lat": 34.39673626454307,
+            "lng": 131.4444564330241,
+            "heading": 0
+        },
+        "country": "JP",
+        "region": "east_asia",
+        "difficulty": 1,
+        "copyright": "© Google",
+        "captureDate": "2013-05",
+        "slots": {
+            "traffic_side": {
+                "state": "visible",
+                "plain": "Googleカーが見えるが中央に居り、左右位置まで特定できない",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "blind"
+            },
+            "road_marking": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "bollard": {
+                "state": "visible",
+                "plain": "黄色いガードレール",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "pole": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "sign": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "script": {
+                "state": "visible",
+                "plain": "カーブミラー「注意」",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "ground": {
+                "state": "visible",
+                "plain": "枯れ葉の隙間から地面を見ようと思えば見えるがほぼ視認不可",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "hard"
+            },
+            "terrain_vegetation": {
+                "state": "visible",
+                "plain": "松や紅葉や竹や杉等、多種多様",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "architecture": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "vehicle": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "pavement": {
+                "state": "visible",
+                "plain": "山の中にしてはアスファルトが整備されている",
+                "terms": [
+                    "ai_pavement_01"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "camera": {
+                "state": "visible",
+                "plain": "Gen4",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "hard"
+            },
+            "season": {
+                "state": "visible",
+                "plain": "春～夏？紅葉が赤くないので秋では無さそう、特定不能",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "hard"
+            },
+            "other": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            }
+        },
+        "decisiveSlots": [
+            "script",
+            "bollard"
         ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "camera": {
-        "state": "visible",
-        "plain": "Gen4",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "hard"
-      },
-      "season": {
-        "state": "visible",
-        "plain": "春～夏？紅葉が赤くないので秋では無さそう、特定不能",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "hard"
-      },
-      "other": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      }
+        "note": null,
+        "source": {
+            "draftBy": []
+        }
     },
-    "decisiveSlots": [
-      "script",
-      "bollard"
-    ],
-    "note": null,
-    "source": {
-      "draftBy": []
+    {
+        "id": "q-th-01",
+        "panoId": "UXcOz-mSilIXuAbifqiViA",
+        "fallback": {
+            "lat": 13.76843856388382,
+            "lng": 100.4776209577825,
+            "heading": 0
+        },
+        "country": "TH",
+        "region": "southeast_asia",
+        "difficulty": 1,
+        "copyright": "© Google",
+        "captureDate": "2025-01",
+        "slots": {
+            "traffic_side": {
+                "state": "visible",
+                "plain": "左側通行",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "road_marking": {
+                "state": "visible",
+                "plain": "中央線は黄色の実線、路肩は白い実線、",
+                "terms": [
+                    "road_marking_center_yellow",
+                    "ai_road_marking_01",
+                    "ai_road_marking_02",
+                    "ref_road_marking_center_yellow"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "bollard": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "pole": {
+                "state": "visible",
+                "plain": "四角いコンクリート製の電柱",
+                "terms": [
+                    "pole_square_section",
+                    "ai_pole_03"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "sign": {
+                "state": "visible",
+                "plain": "四角い白い看板に丸い駐車禁止のマークみたいなのが描いてあった",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "script": {
+                "state": "visible",
+                "plain": "タイ語の様な文字",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "ground": {
+                "state": "visible",
+                "plain": "中央分離帯の植物の根部分は見える、白い砂",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "terrain_vegetation": {
+                "state": "visible",
+                "plain": "街路樹にヤシぽいもの",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "architecture": {
+                "state": "visible",
+                "plain": "コンクリート製のビル等が見えた、街の中",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "vehicle": {
+                "state": "visible",
+                "plain": "横長の白いナンバープレートと、長方形の白いナンバープレートが混在して見えた",
+                "terms": [
+                    "ai_vehicle_01",
+                    "ai_vehicle_02"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "pavement": {
+                "state": "visible",
+                "plain": "歩道側の縁石は赤と白の塗装",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "camera": {
+                "state": "visible",
+                "plain": "Gen3",
+                "terms": [],
+                "confirmed": true
+            },
+            "season": {
+                "state": "visible",
+                "plain": "乾季と思われる",
+                "terms": [],
+                "confirmed": true
+            },
+            "other": {
+                "state": "visible",
+                "plain": "頭上に高速道路もあり都心である",
+                "terms": [],
+                "confirmed": true
+            }
+        },
+        "decisiveSlots": [
+            "script",
+            "road_marking"
+        ],
+        "note": null,
+        "source": {
+            "draftBy": []
+        }
+    },
+    {
+        "id": "q-tr-01",
+        "panoId": "bnbZhAX_k3nhJ5xaggZRTA",
+        "fallback": {
+            "lat": 37.85396978251664,
+            "lng": 27.83408744892139,
+            "heading": 0
+        },
+        "country": "TR",
+        "region": "east_europe",
+        "difficulty": 1,
+        "copyright": "© Google",
+        "captureDate": "2024-04",
+        "slots": {
+            "traffic_side": {
+                "state": "visible",
+                "plain": "右側通行",
+                "terms": [
+                    "ai_traffic_side_01",
+                    "ai_traffic_side_03",
+                    "ai_traffic_side_04",
+                    "ai_traffic_side_05"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "road_marking": {
+                "state": "visible",
+                "plain": "太陽の照り返しが強く白飛びしており視認不可",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "blind"
+            },
+            "bollard": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "pole": {
+                "state": "visible",
+                "plain": "遠くに電柱が１～２本あったが遠すぎる",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "blind"
+            },
+            "sign": {
+                "state": "visible",
+                "plain": "青いポールに八角形の赤い標識に白い文字でDURと記載",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "script": {
+                "state": "visible",
+                "plain": "Gの上にチェックマーク、Sの下にヒゲみたいなのが付いている",
+                "terms": [
+                    "ai_script_03"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "ground": {
+                "state": "unknown",
+                "plain": null,
+                "terms": []
+            },
+            "terrain_vegetation": {
+                "state": "visible",
+                "plain": "街路樹は見え全て同じ木、遠くの山に別の木が生えているが視認は難しそう",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "blind"
+            },
+            "architecture": {
+                "state": "visible",
+                "plain": "白いコンクリート製の屋根の平らな家が多い",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "vehicle": {
+                "state": "visible",
+                "plain": "横長い白いナンバープレート、左側が青く見える",
+                "terms": [
+                    "ai_vehicle_01",
+                    "ai_vehicle_02",
+                    "ai_vehicle_05"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "pavement": {
+                "state": "visible",
+                "plain": "規則性のある模様のタイル状の石で出来ている",
+                "terms": [
+                    "pavement_tile_like"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "camera": {
+                "state": "visible",
+                "plain": "Gen4ノーカー",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "blind"
+            },
+            "season": {
+                "state": "visible",
+                "plain": "春～秋、雪は無いがトルコの街中に雪が降るかは不明",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "blind"
+            },
+            "other": {
+                "state": "visible",
+                "plain": "消火栓をココに入れるのか判断できない",
+                "terms": [],
+                "confirmed": true
+            }
+        },
+        "decisiveSlots": [
+            "sign"
+        ],
+        "note": null,
+        "source": {
+            "draftBy": []
+        }
+    },
+    {
+        "id": "q-br-01",
+        "panoId": "pbA-uPWFxFehKtPG1uEutw",
+        "fallback": {
+            "lat": -3.640675856977935,
+            "lng": -45.18617008348726,
+            "heading": 0
+        },
+        "country": "BR",
+        "region": "south_america",
+        "difficulty": 2,
+        "copyright": "© Google",
+        "captureDate": "2019-11",
+        "slots": {
+            "traffic_side": {
+                "state": "visible",
+                "plain": "車の位置だけだと判らないが、隣の道路の標識が右側通行を示唆している",
+                "terms": [
+                    "ai_traffic_side_01"
+                ],
+                "confirmed": true,
+                "recognition": "hard"
+            },
+            "road_marking": {
+                "state": "visible",
+                "plain": "隣の道路の中央線が黄色１本が見えなくはない",
+                "terms": [
+                    "road_marking_center_yellow"
+                ],
+                "confirmed": true,
+                "recognition": "hard"
+            },
+            "bollard": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "pole": {
+                "state": "visible",
+                "plain": "材質までは見えない、白い塗装の電柱に、人間が両手を広げたような街頭が付いている、目の高さに赤く塗装され地面まで緑色で塗装されている。",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "sign": {
+                "state": "visible",
+                "plain": "隣の道路の標識が黄色い四角の標識、中にダイヤ型の黒い枠に凸凹を示唆する黒塗りのピクトグラム、支柱は２本だが１本は細い鉄柱でもう１本は電柱ほど太い木",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "hard"
+            },
+            "script": {
+                "state": "visible",
+                "plain": "Aの上にニョロ、Aの上に黒丸があり、DEやDAという区切り文字がある",
+                "terms": [
+                    "ai_script_03"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "ground": {
+                "state": "visible",
+                "plain": "砂漠のような砂でアスファルトを覆っている、赤いとも言えないが他の国に比べれば赤いとも言える",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "terrain_vegetation": {
+                "state": "visible",
+                "plain": "平ら、街路樹や遠くにもヤシの木が見える",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "architecture": {
+                "state": "visible",
+                "plain": "コンクリート製の家に平らな屋根、屋上に透明なパラボラアンテナがほぼ真上に向いて設置されている",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "vehicle": {
+                "state": "visible",
+                "plain": "白い長方形のナンバープレートの上部が青い帯、タクシー？かは判らないが、赤色に白文字のナンバープレートであった",
+                "terms": [
+                    "ai_vehicle_01",
+                    "ai_vehicle_02",
+                    "ai_vehicle_05"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "pavement": {
+                "state": "visible",
+                "plain": "アスファルト舗装されているが、ほとんど砂で埋もれている。補修はされておらず穴だらけ。",
+                "terms": [
+                    "ai_pavement_01"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "camera": {
+                "state": "visible",
+                "plain": "Gen3",
+                "terms": [],
+                "confirmed": true
+            },
+            "season": {
+                "state": "visible",
+                "plain": "影が無いのでほぼ真上に太陽がある",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "other": {
+                "state": "unknown",
+                "plain": null,
+                "terms": []
+            }
+        },
+        "decisiveSlots": [
+            "ground",
+            "script",
+            "vehicle"
+        ],
+        "note": null,
+        "source": {
+            "draftBy": []
+        }
+    },
+    {
+        "id": "q-au-01",
+        "panoId": "1-ixqV9JfTOAt3TN3_5Qog",
+        "fallback": {
+            "lat": -31.88304959060174,
+            "lng": 116.4678788671725,
+            "heading": 0
+        },
+        "country": "AU",
+        "region": "oceania",
+        "difficulty": 2,
+        "copyright": "© Google",
+        "captureDate": "2025-02",
+        "slots": {
+            "traffic_side": {
+                "state": "visible",
+                "plain": "左側通行",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "road_marking": {
+                "state": "visible",
+                "plain": "中央線２本の間にも凸凹があるのが見える",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "bollard": {
+                "state": "visible",
+                "plain": "白いボラードに黄色い四角い反射板が付いている、裏側は灰色で同じ形の四角い反射板が付いている。",
+                "terms": [
+                    "ai_bollard_01"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "pole": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "sign": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "script": {
+                "state": "visible",
+                "plain": "看板の支柱は２本あり灰色の丸い鉄製だった",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "ground": {
+                "state": "visible",
+                "plain": "乾燥しており黄土色の砂が路肩に堆積している",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "terrain_vegetation": {
+                "state": "visible",
+                "plain": "ユーカリの木だらけ",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "architecture": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "vehicle": {
+                "state": "visible",
+                "plain": "遠くてよく見えないが、白い横長のナンバープレート",
+                "terms": [
+                    "ai_vehicle_01",
+                    "ai_vehicle_02"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "pavement": {
+                "state": "visible",
+                "plain": "アスファルト舗装されており、よくメンテナンスされているが、ザラザラした凸凹に砂が入り込んで白っぽく見えている",
+                "terms": [
+                    "ai_pavement_01",
+                    "ai_pavement_05"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "camera": {
+                "state": "visible",
+                "plain": "Gen4",
+                "terms": [],
+                "confirmed": true
+            },
+            "season": {
+                "state": "visible",
+                "plain": "木の陰が北側に出ている",
+                "terms": [
+                    "ai_season_01"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "other": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            }
+        },
+        "decisiveSlots": [
+            "traffic_side",
+            "season",
+            "terrain_vegetation"
+        ],
+        "note": null,
+        "source": {
+            "draftBy": []
+        }
+    },
+    {
+        "id": "q-is-01",
+        "panoId": "TuKj7NKjbggR_zk7cQg2Ww",
+        "fallback": {
+            "lat": 65.36388167160467,
+            "lng": -13.74608662218572,
+            "heading": 0
+        },
+        "country": "IS",
+        "region": "nordic",
+        "difficulty": 2,
+        "copyright": "© Google",
+        "captureDate": "2024-07",
+        "slots": {
+            "traffic_side": {
+                "state": "visible",
+                "plain": "轍だけが見え、左右判別は不可能",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "blind"
+            },
+            "road_marking": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "bollard": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "pole": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "sign": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "script": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "ground": {
+                "state": "visible",
+                "plain": "茶色っぽい砂と石が散らばっている",
+                "terms": [
+                    "ai_ground_03"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "terrain_vegetation": {
+                "state": "visible",
+                "plain": "背の低い草？苔？が草原のように広がっている 遠くに雪をいただいた山が見えている 湖沿いに見えるが民家どころが人工物が見当たらない",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "architecture": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "vehicle": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "pavement": {
+                "state": "visible",
+                "plain": "砂利道",
+                "terms": [
+                    "ai_pavement_04"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "camera": {
+                "state": "visible",
+                "plain": "Gen4",
+                "terms": [],
+                "confirmed": true
+            },
+            "season": {
+                "state": "visible",
+                "plain": "春～夏、遠くの山に残雪ありだがアイスランドの万年雪では？",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "blind"
+            },
+            "other": {
+                "state": "visible",
+                "plain": "大自然の中だからこそ回答の疑問のとおりになるかと思う",
+                "terms": [],
+                "confirmed": true
+            }
+        },
+        "decisiveSlots": [
+            "terrain_vegetation"
+        ],
+        "note": null,
+        "source": {
+            "draftBy": []
+        }
+    },
+    {
+        "id": "q-bg-01",
+        "panoId": "SMq22qb15SuvD_CuHxiteg",
+        "fallback": {
+            "lat": 42.86695849724168,
+            "lng": 25.32065993109908,
+            "heading": 0
+        },
+        "country": "BG",
+        "region": "east_europe",
+        "difficulty": 2,
+        "copyright": "© Google",
+        "captureDate": "2012-03",
+        "slots": {
+            "traffic_side": {
+                "state": "visible",
+                "plain": "おそらく右側通行、左ハンドル車が見える",
+                "terms": [
+                    "ai_traffic_side_01",
+                    "ai_traffic_side_04"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "road_marking": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "bollard": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "pole": {
+                "state": "visible",
+                "plain": "細い白いポール、街路灯が２つありY字のように分かれてつけられている",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "sign": {
+                "state": "visible",
+                "plain": "交差点に標識が１本あった、裏側であり視認は難しい、上段逆三角形下段丸錆びた丸い鉄ポールでそれぞれ小さな十字架で留めている",
+                "terms": [
+                    "ai_sign_01"
+                ],
+                "confirmed": true,
+                "recognition": "blind"
+            },
+            "script": {
+                "state": "visible",
+                "plain": "キリル文字の看板がある",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "ground": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "terrain_vegetation": {
+                "state": "visible",
+                "plain": "枯れ木に杉の木が少量あるだけ",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "architecture": {
+                "state": "visible",
+                "plain": "材質までは判らないが、中世ヨーロッパを思わせる隙間のない３階～４階建ての建物が連なっている",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "vehicle": {
+                "state": "visible",
+                "plain": "白い横長のナンバープレート、左側が青いのでEUプレート？",
+                "terms": [
+                    "ai_vehicle_01",
+                    "ai_vehicle_02",
+                    "ai_vehicle_05"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "pavement": {
+                "state": "visible",
+                "plain": "アスファルト舗装されているが、メンテが荒くひび割れなどがある",
+                "terms": [
+                    "ai_pavement_01",
+                    "ai_pavement_02"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "camera": {
+                "state": "visible",
+                "plain": "Gen4",
+                "terms": [],
+                "confirmed": true
+            },
+            "season": {
+                "state": "visible",
+                "plain": "木々が枯れており秋～冬を連想する",
+                "terms": [],
+                "confirmed": true
+            },
+            "other": {
+                "state": "visible",
+                "plain": "ゴミ箱がプラスチック製の四角い大きな蓋付きで、黄色と深緑色のがあった。またそれより小さな丸いスチールのゴミ箱もある。",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            }
+        },
+        "decisiveSlots": [
+            "script",
+            "vehicle"
+        ],
+        "note": null,
+        "source": {
+            "draftBy": []
+        }
+    },
+    {
+        "id": "q-ru-01",
+        "panoId": "UCAgH3P7-68ze5fi5PJnDg",
+        "fallback": {
+            "lat": 51.70288885466001,
+            "lng": 39.18163489871121,
+            "heading": 0
+        },
+        "country": "RU",
+        "region": "former_soviet_asia",
+        "difficulty": 3,
+        "copyright": "© Google",
+        "captureDate": "2018-08",
+        "slots": {
+            "traffic_side": {
+                "state": "visible",
+                "plain": "右側通行",
+                "terms": [
+                    "ai_traffic_side_01"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "road_marking": {
+                "state": "visible",
+                "plain": "中央線は白い実線、縁石が白と黒の石、車線が白の短い破線",
+                "terms": [
+                    "road_marking_center_white",
+                    "ai_road_marking_02",
+                    "ai_road_marking_03",
+                    "ai_road_marking_04",
+                    "ref_road_marking_center_white"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "bollard": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "pole": {
+                "state": "visible",
+                "plain": "丸いコンクリート製、ポールトップが街路灯になっており、先が２つに分かれY字になっている",
+                "terms": [
+                    "ai_pole_03"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "sign": {
+                "state": "visible",
+                "plain": "遠くに横断歩道の標識あり、黄色の太枠に囲われているが歩道の本数までは見えない",
+                "terms": [],
+                "confirmed": true
+            },
+            "script": {
+                "state": "visible",
+                "plain": "キリル文字、逆Nの上に弧線が描かれている文字がある。△みたいなギリシャ文字みたいなキリル文字？がある",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "ground": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "terrain_vegetation": {
+                "state": "visible",
+                "plain": "街路樹は少なく、芝生は枯れている",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "architecture": {
+                "state": "visible",
+                "plain": "コンクリート製のマンションのような集合住宅が複数見える",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "vehicle": {
+                "state": "visible",
+                "plain": "横長で白いナンバープレートが見える、バスは同じ大きさの黄色",
+                "terms": [
+                    "ai_vehicle_01",
+                    "ai_vehicle_02"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "pavement": {
+                "state": "visible",
+                "plain": "アスファルト、補修などされておりメンテナンスは良好",
+                "terms": [
+                    "ai_pavement_01",
+                    "ai_pavement_03"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "camera": {
+                "state": "unknown",
+                "plain": null,
+                "terms": []
+            },
+            "season": {
+                "state": "unknown",
+                "plain": null,
+                "terms": []
+            },
+            "other": {
+                "state": "visible",
+                "plain": "電話番号の表記が３桁ー２桁ー２桁となっており、あまり見たことのないパターンに思える",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            }
+        },
+        "decisiveSlots": [
+            "script",
+            "road_marking",
+            "vehicle"
+        ],
+        "note": null,
+        "source": {
+            "draftBy": []
+        }
+    },
+    {
+        "id": "q-kz-01",
+        "panoId": "EODi6zsUibjTqsUN7yv_HQ",
+        "fallback": {
+            "lat": 51.17518275703861,
+            "lng": 71.40596752713459,
+            "heading": 0
+        },
+        "country": "KZ",
+        "region": "former_soviet_asia",
+        "difficulty": 3,
+        "copyright": "© Google",
+        "captureDate": "2022-08",
+        "slots": {
+            "traffic_side": {
+                "state": "visible",
+                "plain": "右側通行",
+                "terms": [
+                    "ai_traffic_side_01"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "road_marking": {
+                "state": "visible",
+                "plain": "中央線は黄色の実線、路肩は線なし、車線は白い破線、横断歩道は縁だけ白い破線で中は何もなし",
+                "terms": [
+                    "road_marking_center_yellow",
+                    "ai_road_marking_02",
+                    "ai_road_marking_03",
+                    "ai_road_marking_05",
+                    "ref_road_marking_center_yellow"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "bollard": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "pole": {
+                "state": "visible",
+                "plain": "信号はアメリカ風に見える、中央分離帯にある街路灯は鉄製ポールで街灯部分がT字よりも少し角度がある",
+                "terms": [
+                    "ai_pole_01"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "sign": {
+                "state": "visible",
+                "plain": "ダイヤ型の看板で、黒枠、白地に黄色のダイヤ型が描かれている",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "script": {
+                "state": "visible",
+                "plain": "キリル文字に見えるが、Kの右下にヒゲが出ている 看板のメールアドレスが「.RU」ドメイン",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "ground": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "terrain_vegetation": {
+                "state": "visible",
+                "plain": "平坦で街の中、街路樹は種類が判らないが寒くはなさそう",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "architecture": {
+                "state": "visible",
+                "plain": "クリーム色や白色の外壁の高層マンションが目立つ",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "vehicle": {
+                "state": "visible",
+                "plain": "白色の横長ナンバープレートが多いが、黄色の横長ナンバープレートも見られる",
+                "terms": [
+                    "ai_vehicle_01",
+                    "ai_vehicle_02"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "pavement": {
+                "state": "visible",
+                "plain": "アスファルト舗装",
+                "terms": [
+                    "ai_pavement_01"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "camera": {
+                "state": "visible",
+                "plain": "白い車が映り込んでいる、短い太いアンテナが見える。",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "season": {
+                "state": "visible",
+                "plain": "秋？街路樹の一部が黄色い葉となっている",
+                "terms": [
+                    "ai_season_04"
+                ],
+                "confirmed": true,
+                "recognition": "hard"
+            },
+            "other": {
+                "state": "visible",
+                "plain": "路肩のガードレールがオシャレな波々の模様を模した柵となっている",
+                "terms": [
+                    "roadside_wavy_fence"
+                ],
+                "confirmed": true,
+                "recognition": "hard"
+            }
+        },
+        "decisiveSlots": [
+            "script",
+            "camera",
+            "vehicle"
+        ],
+        "note": null,
+        "source": {
+            "draftBy": []
+        }
+    },
+    {
+        "id": "q-za-01",
+        "panoId": "H0VXtRXsqHQF_xGnVhSgPw",
+        "fallback": {
+            "lat": -24.5888841590607,
+            "lng": 27.41275016835344,
+            "heading": 0
+        },
+        "country": "ZA",
+        "region": "southern_africa",
+        "difficulty": 3,
+        "copyright": "© Google",
+        "captureDate": "2024-05",
+        "slots": {
+            "traffic_side": {
+                "state": "visible",
+                "plain": "左側通行",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "road_marking": {
+                "state": "visible",
+                "plain": "中央線は白い実線、路肩はなし、停止線も中央線と同様で「STOP」の表記",
+                "terms": [
+                    "road_marking_center_white",
+                    "ai_road_marking_01",
+                    "ai_road_marking_02",
+                    "ai_road_marking_04",
+                    "ref_road_marking_center_white"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "bollard": {
+                "state": "absent",
+                "plain": null,
+                "terms": []
+            },
+            "pole": {
+                "state": "visible",
+                "plain": "街灯が細い鉄柱製かな、ところどころ錆びている",
+                "terms": [
+                    "ai_pole_01"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "sign": {
+                "state": "visible",
+                "plain": "遠くに白地に赤い矢印のシェブロンが見える",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "script": {
+                "state": "visible",
+                "plain": "アルファベットは見えるが英語？かは不明",
+                "terms": [
+                    "ai_script_01"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "ground": {
+                "state": "visible",
+                "plain": "赤茶色の土、乾燥している",
+                "terms": [
+                    "ai_ground_03"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "terrain_vegetation": {
+                "state": "visible",
+                "plain": "細い葉っぱの植物しか生えていない、少し遠くになだらかな山が見え三方を囲まれている",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "architecture": {
+                "state": "visible",
+                "plain": "赤茶色のレンガ作りの店舗が並ぶ",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "vehicle": {
+                "state": "visible",
+                "plain": "白い横長のナンバープレート",
+                "terms": [
+                    "ai_vehicle_01",
+                    "ai_vehicle_02"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "pavement": {
+                "state": "visible",
+                "plain": "アスファルトで舗装はされているが、ボロボロでメンテナンスはあまりされていない",
+                "terms": [
+                    "ai_pavement_01",
+                    "ai_pavement_02"
+                ],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "camera": {
+                "state": "visible",
+                "plain": "Gen4",
+                "terms": [],
+                "confirmed": true
+            },
+            "season": {
+                "state": "visible",
+                "plain": "太陽が北から照っている",
+                "terms": [],
+                "confirmed": true,
+                "recognition": "easy"
+            },
+            "other": {
+                "state": "visible",
+                "plain": "ゴミがあちこち落ちている",
+                "terms": [],
+                "confirmed": true
+            }
+        },
+        "decisiveSlots": [
+            "ground",
+            "traffic_side",
+            "script"
+        ],
+        "note": null,
+        "source": {
+            "draftBy": []
+        }
     }
-  },
-  {
-    "id": "q-th-01",
-    "panoId": "UXcOz-mSilIXuAbifqiViA",
-    "fallback": {
-      "lat": 13.76843856388382,
-      "lng": 100.4776209577825,
-      "heading": 0
-    },
-    "country": "TH",
-    "region": "southeast_asia",
-    "difficulty": 1,
-    "copyright": "© Google",
-    "captureDate": "2025-01",
-    "slots": {
-      "traffic_side": {
-        "state": "visible",
-        "plain": "左側通行",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "road_marking": {
-        "state": "visible",
-        "plain": "中央線は黄色の実線、路肩は白い実線、",
-        "terms": [
-          "road_marking_center_yellow",
-          "ai_road_marking_01",
-          "ai_road_marking_02"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "bollard": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "pole": {
-        "state": "visible",
-        "plain": "四角いコンクリート製の電柱",
-        "terms": [
-          "pole_square_section",
-          "ai_pole_03"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "sign": {
-        "state": "visible",
-        "plain": "四角い白い看板に丸い駐車禁止のマークみたいなのが描いてあった",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "script": {
-        "state": "visible",
-        "plain": "タイ語の様な文字",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "ground": {
-        "state": "visible",
-        "plain": "中央分離帯の植物の根部分は見える、白い砂",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "terrain_vegetation": {
-        "state": "visible",
-        "plain": "街路樹にヤシぽいもの",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "architecture": {
-        "state": "visible",
-        "plain": "コンクリート製のビル等が見えた、街の中",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "vehicle": {
-        "state": "visible",
-        "plain": "横長の白いナンバープレートと、長方形の白いナンバープレートが混在して見えた",
-        "terms": [
-          "ai_vehicle_01",
-          "ai_vehicle_02"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "pavement": {
-        "state": "visible",
-        "plain": "歩道側の縁石は赤と白の塗装",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "camera": {
-        "state": "visible",
-        "plain": "Gen3",
-        "terms": [],
-        "confirmed": true
-      },
-      "season": {
-        "state": "visible",
-        "plain": "乾季と思われる",
-        "terms": [],
-        "confirmed": true
-      },
-      "other": {
-        "state": "visible",
-        "plain": "頭上に高速道路もあり都心である",
-        "terms": [],
-        "confirmed": true
-      }
-    },
-    "decisiveSlots": [
-      "script",
-      "road_marking"
-    ],
-    "note": null,
-    "source": {
-      "draftBy": []
-    }
-  },
-  {
-    "id": "q-tr-01",
-    "panoId": "bnbZhAX_k3nhJ5xaggZRTA",
-    "fallback": {
-      "lat": 37.85396978251664,
-      "lng": 27.83408744892139,
-      "heading": 0
-    },
-    "country": "TR",
-    "region": "east_europe",
-    "difficulty": 1,
-    "copyright": "© Google",
-    "captureDate": "2024-04",
-    "slots": {
-      "traffic_side": {
-        "state": "visible",
-        "plain": "右側通行",
-        "terms": [
-          "ai_traffic_side_01",
-          "ai_traffic_side_03",
-          "ai_traffic_side_04",
-          "ai_traffic_side_05"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "road_marking": {
-        "state": "visible",
-        "plain": "太陽の照り返しが強く白飛びしており視認不可",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "blind"
-      },
-      "bollard": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "pole": {
-        "state": "visible",
-        "plain": "遠くに電柱が１～２本あったが遠すぎる",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "blind"
-      },
-      "sign": {
-        "state": "visible",
-        "plain": "青いポールに八角形の赤い標識に白い文字でDURと記載",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "script": {
-        "state": "visible",
-        "plain": "Gの上にチェックマーク、Sの下にヒゲみたいなのが付いている",
-        "terms": [
-          "ai_script_03"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "ground": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
-      },
-      "terrain_vegetation": {
-        "state": "visible",
-        "plain": "街路樹は見え全て同じ木、遠くの山に別の木が生えているが視認は難しそう",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "blind"
-      },
-      "architecture": {
-        "state": "visible",
-        "plain": "白いコンクリート製の屋根の平らな家が多い",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "vehicle": {
-        "state": "visible",
-        "plain": "横長い白いナンバープレート、左側が青く見える",
-        "terms": [
-          "ai_vehicle_01",
-          "ai_vehicle_02",
-          "ai_vehicle_05"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "pavement": {
-        "state": "visible",
-        "plain": "規則性のある模様のタイル状の石で出来ている",
-        "terms": [
-          "pavement_tile_like"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "camera": {
-        "state": "visible",
-        "plain": "Gen4ノーカー",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "blind"
-      },
-      "season": {
-        "state": "visible",
-        "plain": "春～秋、雪は無いがトルコの街中に雪が降るかは不明",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "blind"
-      },
-      "other": {
-        "state": "visible",
-        "plain": "消火栓をココに入れるのか判断できない",
-        "terms": [],
-        "confirmed": true
-      }
-    },
-    "decisiveSlots": [
-      "sign"
-    ],
-    "note": null,
-    "source": {
-      "draftBy": []
-    }
-  },
-  {
-    "id": "q-br-01",
-    "panoId": "pbA-uPWFxFehKtPG1uEutw",
-    "fallback": {
-      "lat": -3.640675856977935,
-      "lng": -45.18617008348726,
-      "heading": 0
-    },
-    "country": "BR",
-    "region": "south_america",
-    "difficulty": 2,
-    "copyright": "© Google",
-    "captureDate": "2019-11",
-    "slots": {
-      "traffic_side": {
-        "state": "visible",
-        "plain": "車の位置だけだと判らないが、隣の道路の標識が右側通行を示唆している",
-        "terms": [
-          "ai_traffic_side_01"
-        ],
-        "confirmed": true,
-        "recognition": "hard"
-      },
-      "road_marking": {
-        "state": "visible",
-        "plain": "隣の道路の中央線が黄色１本が見えなくはない",
-        "terms": [
-          "road_marking_center_yellow"
-        ],
-        "confirmed": true,
-        "recognition": "hard"
-      },
-      "bollard": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "pole": {
-        "state": "visible",
-        "plain": "材質までは見えない、白い塗装の電柱に、人間が両手を広げたような街頭が付いている、目の高さに赤く塗装され地面まで緑色で塗装されている。",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "sign": {
-        "state": "visible",
-        "plain": "隣の道路の標識が黄色い四角の標識、中にダイヤ型の黒い枠に凸凹を示唆する黒塗りのピクトグラム、支柱は２本だが１本は細い鉄柱でもう１本は電柱ほど太い木",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "hard"
-      },
-      "script": {
-        "state": "visible",
-        "plain": "Aの上にニョロ、Aの上に黒丸があり、DEやDAという区切り文字がある",
-        "terms": [
-          "ai_script_03"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "ground": {
-        "state": "visible",
-        "plain": "砂漠のような砂でアスファルトを覆っている、赤いとも言えないが他の国に比べれば赤いとも言える",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "terrain_vegetation": {
-        "state": "visible",
-        "plain": "平ら、街路樹や遠くにもヤシの木が見える",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "architecture": {
-        "state": "visible",
-        "plain": "コンクリート製の家に平らな屋根、屋上に透明なパラボラアンテナがほぼ真上に向いて設置されている",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "vehicle": {
-        "state": "visible",
-        "plain": "白い長方形のナンバープレートの上部が青い帯、タクシー？かは判らないが、赤色に白文字のナンバープレートであった",
-        "terms": [
-          "ai_vehicle_01",
-          "ai_vehicle_02",
-          "ai_vehicle_05"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "pavement": {
-        "state": "visible",
-        "plain": "アスファルト舗装されているが、ほとんど砂で埋もれている。補修はされておらず穴だらけ。",
-        "terms": [
-          "ai_pavement_01"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "camera": {
-        "state": "visible",
-        "plain": "Gen3",
-        "terms": [],
-        "confirmed": true
-      },
-      "season": {
-        "state": "visible",
-        "plain": "影が無いのでほぼ真上に太陽がある",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "other": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
-      }
-    },
-    "decisiveSlots": [
-      "ground",
-      "script",
-      "vehicle"
-    ],
-    "note": null,
-    "source": {
-      "draftBy": []
-    }
-  },
-  {
-    "id": "q-au-01",
-    "panoId": "1-ixqV9JfTOAt3TN3_5Qog",
-    "fallback": {
-      "lat": -31.88304959060174,
-      "lng": 116.4678788671725,
-      "heading": 0
-    },
-    "country": "AU",
-    "region": "oceania",
-    "difficulty": 2,
-    "copyright": "© Google",
-    "captureDate": "2025-02",
-    "slots": {
-      "traffic_side": {
-        "state": "visible",
-        "plain": "左側通行",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "road_marking": {
-        "state": "visible",
-        "plain": "中央線２本の間にも凸凹があるのが見える",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "bollard": {
-        "state": "visible",
-        "plain": "白いボラードに黄色い四角い反射板が付いている、裏側は灰色で同じ形の四角い反射板が付いている。",
-        "terms": [
-          "ai_bollard_01"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "pole": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "sign": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "script": {
-        "state": "visible",
-        "plain": "看板の支柱は２本あり灰色の丸い鉄製だった",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "ground": {
-        "state": "visible",
-        "plain": "乾燥しており黄土色の砂が路肩に堆積している",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "terrain_vegetation": {
-        "state": "visible",
-        "plain": "ユーカリの木だらけ",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "architecture": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "vehicle": {
-        "state": "visible",
-        "plain": "遠くてよく見えないが、白い横長のナンバープレート",
-        "terms": [
-          "ai_vehicle_01",
-          "ai_vehicle_02"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "pavement": {
-        "state": "visible",
-        "plain": "アスファルト舗装されており、よくメンテナンスされているが、ザラザラした凸凹に砂が入り込んで白っぽく見えている",
-        "terms": [
-          "ai_pavement_01",
-          "ai_pavement_05"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "camera": {
-        "state": "visible",
-        "plain": "Gen4",
-        "terms": [],
-        "confirmed": true
-      },
-      "season": {
-        "state": "visible",
-        "plain": "木の陰が北側に出ている",
-        "terms": [
-          "ai_season_01"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "other": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      }
-    },
-    "decisiveSlots": [
-      "traffic_side",
-      "season",
-      "terrain_vegetation"
-    ],
-    "note": null,
-    "source": {
-      "draftBy": []
-    }
-  },
-  {
-    "id": "q-is-01",
-    "panoId": "TuKj7NKjbggR_zk7cQg2Ww",
-    "fallback": {
-      "lat": 65.36388167160467,
-      "lng": -13.74608662218572,
-      "heading": 0
-    },
-    "country": "IS",
-    "region": "nordic",
-    "difficulty": 2,
-    "copyright": "© Google",
-    "captureDate": "2024-07",
-    "slots": {
-      "traffic_side": {
-        "state": "visible",
-        "plain": "轍だけが見え、左右判別は不可能",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "blind"
-      },
-      "road_marking": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "bollard": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "pole": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "sign": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "script": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "ground": {
-        "state": "visible",
-        "plain": "茶色っぽい砂と石が散らばっている",
-        "terms": [
-          "ai_ground_03"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "terrain_vegetation": {
-        "state": "visible",
-        "plain": "背の低い草？苔？が草原のように広がっている 遠くに雪をいただいた山が見えている 湖沿いに見えるが民家どころが人工物が見当たらない",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "architecture": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "vehicle": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "pavement": {
-        "state": "visible",
-        "plain": "砂利道",
-        "terms": [
-          "ai_pavement_04"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "camera": {
-        "state": "visible",
-        "plain": "Gen4",
-        "terms": [],
-        "confirmed": true
-      },
-      "season": {
-        "state": "visible",
-        "plain": "春～夏、遠くの山に残雪ありだがアイスランドの万年雪では？",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "blind"
-      },
-      "other": {
-        "state": "visible",
-        "plain": "大自然の中だからこそ回答の疑問のとおりになるかと思う",
-        "terms": [],
-        "confirmed": true
-      }
-    },
-    "decisiveSlots": [
-      "terrain_vegetation"
-    ],
-    "note": null,
-    "source": {
-      "draftBy": []
-    }
-  },
-  {
-    "id": "q-bg-01",
-    "panoId": "SMq22qb15SuvD_CuHxiteg",
-    "fallback": {
-      "lat": 42.86695849724168,
-      "lng": 25.32065993109908,
-      "heading": 0
-    },
-    "country": "BG",
-    "region": "east_europe",
-    "difficulty": 2,
-    "copyright": "© Google",
-    "captureDate": "2012-03",
-    "slots": {
-      "traffic_side": {
-        "state": "visible",
-        "plain": "おそらく右側通行、左ハンドル車が見える",
-        "terms": [
-          "ai_traffic_side_01",
-          "ai_traffic_side_04"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "road_marking": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "bollard": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "pole": {
-        "state": "visible",
-        "plain": "細い白いポール、街路灯が２つありY字のように分かれてつけられている",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "sign": {
-        "state": "visible",
-        "plain": "交差点に標識が１本あった、裏側であり視認は難しい、上段逆三角形下段丸錆びた丸い鉄ポールでそれぞれ小さな十字架で留めている",
-        "terms": [
-          "ai_sign_01"
-        ],
-        "confirmed": true,
-        "recognition": "blind"
-      },
-      "script": {
-        "state": "visible",
-        "plain": "キリル文字の看板がある",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "ground": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "terrain_vegetation": {
-        "state": "visible",
-        "plain": "枯れ木に杉の木が少量あるだけ",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "architecture": {
-        "state": "visible",
-        "plain": "材質までは判らないが、中世ヨーロッパを思わせる隙間のない３階～４階建ての建物が連なっている",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "vehicle": {
-        "state": "visible",
-        "plain": "白い横長のナンバープレート、左側が青いのでEUプレート？",
-        "terms": [
-          "ai_vehicle_01",
-          "ai_vehicle_02",
-          "ai_vehicle_05"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "pavement": {
-        "state": "visible",
-        "plain": "アスファルト舗装されているが、メンテが荒くひび割れなどがある",
-        "terms": [
-          "ai_pavement_01",
-          "ai_pavement_02"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "camera": {
-        "state": "visible",
-        "plain": "Gen4",
-        "terms": [],
-        "confirmed": true
-      },
-      "season": {
-        "state": "visible",
-        "plain": "木々が枯れており秋～冬を連想する",
-        "terms": [],
-        "confirmed": true
-      },
-      "other": {
-        "state": "visible",
-        "plain": "ゴミ箱がプラスチック製の四角い大きな蓋付きで、黄色と深緑色のがあった。またそれより小さな丸いスチールのゴミ箱もある。",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      }
-    },
-    "decisiveSlots": [
-      "script",
-      "vehicle"
-    ],
-    "note": null,
-    "source": {
-      "draftBy": []
-    }
-  },
-  {
-    "id": "q-ru-01",
-    "panoId": "UCAgH3P7-68ze5fi5PJnDg",
-    "fallback": {
-      "lat": 51.70288885466001,
-      "lng": 39.18163489871121,
-      "heading": 0
-    },
-    "country": "RU",
-    "region": "former_soviet_asia",
-    "difficulty": 3,
-    "copyright": "© Google",
-    "captureDate": "2018-08",
-    "slots": {
-      "traffic_side": {
-        "state": "visible",
-        "plain": "右側通行",
-        "terms": [
-          "ai_traffic_side_01"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "road_marking": {
-        "state": "visible",
-        "plain": "中央線は白い実線、縁石が白と黒の石、車線が白の短い破線",
-        "terms": [
-          "road_marking_center_white",
-          "ai_road_marking_02",
-          "ai_road_marking_03",
-          "ai_road_marking_04"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "bollard": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "pole": {
-        "state": "visible",
-        "plain": "丸いコンクリート製、ポールトップが街路灯になっており、先が２つに分かれY字になっている",
-        "terms": [
-          "ai_pole_03"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "sign": {
-        "state": "visible",
-        "plain": "遠くに横断歩道の標識あり、黄色の太枠に囲われているが歩道の本数までは見えない",
-        "terms": [],
-        "confirmed": true
-      },
-      "script": {
-        "state": "visible",
-        "plain": "キリル文字、逆Nの上に弧線が描かれている文字がある。△みたいなギリシャ文字みたいなキリル文字？がある",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "ground": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "terrain_vegetation": {
-        "state": "visible",
-        "plain": "街路樹は少なく、芝生は枯れている",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "architecture": {
-        "state": "visible",
-        "plain": "コンクリート製のマンションのような集合住宅が複数見える",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "vehicle": {
-        "state": "visible",
-        "plain": "横長で白いナンバープレートが見える、バスは同じ大きさの黄色",
-        "terms": [
-          "ai_vehicle_01",
-          "ai_vehicle_02"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "pavement": {
-        "state": "visible",
-        "plain": "アスファルト、補修などされておりメンテナンスは良好",
-        "terms": [
-          "ai_pavement_01",
-          "ai_pavement_03"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "camera": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
-      },
-      "season": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
-      },
-      "other": {
-        "state": "visible",
-        "plain": "電話番号の表記が３桁ー２桁ー２桁となっており、あまり見たことのないパターンに思える",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      }
-    },
-    "decisiveSlots": [
-      "script",
-      "road_marking",
-      "vehicle"
-    ],
-    "note": null,
-    "source": {
-      "draftBy": []
-    }
-  },
-  {
-    "id": "q-kz-01",
-    "panoId": "EODi6zsUibjTqsUN7yv_HQ",
-    "fallback": {
-      "lat": 51.17518275703861,
-      "lng": 71.40596752713459,
-      "heading": 0
-    },
-    "country": "KZ",
-    "region": "former_soviet_asia",
-    "difficulty": 3,
-    "copyright": "© Google",
-    "captureDate": "2022-08",
-    "slots": {
-      "traffic_side": {
-        "state": "visible",
-        "plain": "右側通行",
-        "terms": [
-          "ai_traffic_side_01"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "road_marking": {
-        "state": "visible",
-        "plain": "中央線は黄色の実線、路肩は線なし、車線は白い破線、横断歩道は縁だけ白い破線で中は何もなし",
-        "terms": [
-          "road_marking_center_yellow",
-          "ai_road_marking_02",
-          "ai_road_marking_03",
-          "ai_road_marking_05"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "bollard": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "pole": {
-        "state": "visible",
-        "plain": "信号はアメリカ風に見える、中央分離帯にある街路灯は鉄製ポールで街灯部分がT字よりも少し角度がある",
-        "terms": [
-          "ai_pole_01"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "sign": {
-        "state": "visible",
-        "plain": "ダイヤ型の看板で、黒枠、白地に黄色のダイヤ型が描かれている",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "script": {
-        "state": "visible",
-        "plain": "キリル文字に見えるが、Kの右下にヒゲが出ている 看板のメールアドレスが「.RU」ドメイン",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "ground": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "terrain_vegetation": {
-        "state": "visible",
-        "plain": "平坦で街の中、街路樹は種類が判らないが寒くはなさそう",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "architecture": {
-        "state": "visible",
-        "plain": "クリーム色や白色の外壁の高層マンションが目立つ",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "vehicle": {
-        "state": "visible",
-        "plain": "白色の横長ナンバープレートが多いが、黄色の横長ナンバープレートも見られる",
-        "terms": [
-          "ai_vehicle_01",
-          "ai_vehicle_02"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "pavement": {
-        "state": "visible",
-        "plain": "アスファルト舗装",
-        "terms": [
-          "ai_pavement_01"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "camera": {
-        "state": "visible",
-        "plain": "白い車が映り込んでいる、短い太いアンテナが見える。",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "season": {
-        "state": "visible",
-        "plain": "秋？街路樹の一部が黄色い葉となっている",
-        "terms": [
-          "ai_season_04"
-        ],
-        "confirmed": true,
-        "recognition": "hard"
-      },
-      "other": {
-        "state": "visible",
-        "plain": "路肩のガードレールがオシャレな波々の模様を模した柵となっている",
-        "terms": [
-          "roadside_wavy_fence"
-        ],
-        "confirmed": true,
-        "recognition": "hard"
-      }
-    },
-    "decisiveSlots": [
-      "script",
-      "camera",
-      "vehicle"
-    ],
-    "note": null,
-    "source": {
-      "draftBy": []
-    }
-  },
-  {
-    "id": "q-za-01",
-    "panoId": "H0VXtRXsqHQF_xGnVhSgPw",
-    "fallback": {
-      "lat": -24.5888841590607,
-      "lng": 27.41275016835344,
-      "heading": 0
-    },
-    "country": "ZA",
-    "region": "southern_africa",
-    "difficulty": 3,
-    "copyright": "© Google",
-    "captureDate": "2024-05",
-    "slots": {
-      "traffic_side": {
-        "state": "visible",
-        "plain": "左側通行",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "road_marking": {
-        "state": "visible",
-        "plain": "中央線は白い実線、路肩はなし、停止線も中央線と同様で「STOP」の表記",
-        "terms": [
-          "road_marking_center_white",
-          "ai_road_marking_01",
-          "ai_road_marking_02",
-          "ai_road_marking_04"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "bollard": {
-        "state": "absent",
-        "plain": null,
-        "terms": []
-      },
-      "pole": {
-        "state": "visible",
-        "plain": "街灯が細い鉄柱製かな、ところどころ錆びている",
-        "terms": [
-          "ai_pole_01"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "sign": {
-        "state": "visible",
-        "plain": "遠くに白地に赤い矢印のシェブロンが見える",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "script": {
-        "state": "visible",
-        "plain": "アルファベットは見えるが英語？かは不明",
-        "terms": [
-          "ai_script_01"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "ground": {
-        "state": "visible",
-        "plain": "赤茶色の土、乾燥している",
-        "terms": [
-          "ai_ground_03"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "terrain_vegetation": {
-        "state": "visible",
-        "plain": "細い葉っぱの植物しか生えていない、少し遠くになだらかな山が見え三方を囲まれている",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "architecture": {
-        "state": "visible",
-        "plain": "赤茶色のレンガ作りの店舗が並ぶ",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "vehicle": {
-        "state": "visible",
-        "plain": "白い横長のナンバープレート",
-        "terms": [
-          "ai_vehicle_01",
-          "ai_vehicle_02"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "pavement": {
-        "state": "visible",
-        "plain": "アスファルトで舗装はされているが、ボロボロでメンテナンスはあまりされていない",
-        "terms": [
-          "ai_pavement_01",
-          "ai_pavement_02"
-        ],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "camera": {
-        "state": "visible",
-        "plain": "Gen4",
-        "terms": [],
-        "confirmed": true
-      },
-      "season": {
-        "state": "visible",
-        "plain": "太陽が北から照っている",
-        "terms": [],
-        "confirmed": true,
-        "recognition": "easy"
-      },
-      "other": {
-        "state": "visible",
-        "plain": "ゴミがあちこち落ちている",
-        "terms": [],
-        "confirmed": true
-      }
-    },
-    "decisiveSlots": [
-      "ground",
-      "traffic_side",
-      "script"
-    ],
-    "note": null,
-    "source": {
-      "draftBy": []
-    }
-  }
 ]

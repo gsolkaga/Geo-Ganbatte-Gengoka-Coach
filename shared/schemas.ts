@@ -125,7 +125,10 @@ export const termSchema = z.object({
     kind: z.enum(['atomic', 'combination']),
     /** **断定してよいのは verified のみ** */
     certainty: z.enum(['verified', 'heuristic', 'unverified']),
-    source: z.enum(['human', 'ai']),
+    /** `reference` は公開資料を参照して人手で編集したもの。**`human`（本人の連想）と混ぜない** */
+    source: z.enum(['human', 'reference', 'ai']),
+    /** 該当国リストの出典。**どこから来た数字かが辿れない一覧を作らない** */
+    sources: z.array(z.string()).optional(),
     canonical: z.string().min(1),
     plain: z.string(),
     aliases: z.array(z.string()).default([]),
