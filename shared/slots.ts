@@ -142,6 +142,73 @@ export const SLOT_DEFINITION_BY_ID: Readonly<Record<SlotId, SlotDefinition>> =
  * `absent` と `unknown` の違いを画面上でも説明する。
  * 「見えない」は判断の結果であり、「未確認」は観察漏れの候補である。
  */
+/**
+ * 境界が迷いやすいスロットの隣接関係。**対称であること。**
+ *
+ * ## なぜ必要か
+ *
+ * **スロットの境界は入力時に迷う。** とくに路面まわり。
+ * 実測（2026-08-10、v1 の 10 問）で、`bollard` に「ガードレールが黄色い」と
+ * 記入された。ガードレールとボラードは一体化していることがあり
+ * （`data/bollard-axes.json` の `guardrail_relation`）、これは正当な観察である。
+ *
+ * このとき「`bollard` を見落とした」と判定すると**誤りになる。**
+ * 実際には見ていて、別の欄に書いただけである。
+ *
+ * > **訓練しているのは観察であって分類ではない。**
+ *
+ * ## どう使うか
+ *
+ * 正解タグが `visible` なのに学習者が `unknown` のスロットについて、
+ * 隣接スロットに記述があれば `missedSlots` ではなく `filedElsewhere` に入れる。
+ *
+ * **コードは「隣接スロットに記述がある」という事実だけを出す。**
+ * 同じものを指しているかの解釈は AI に渡す。曖昧さの解釈は AI の仕事である。
+ *
+ * ## 網羅を目指していない
+ *
+ * 実測で迷いが確認された組だけを入れる。**推測で増やさない。**
+ * 増やすほど「見落とし」の検出力が落ちるため、根拠のない隣接は害になる。
+ */
+const SLOT_NEIGHBOR_PAIRS: readonly (readonly [SlotId, SlotId])[] = [
+    // 路面まわり。入力時に迷うと明言された範囲
+    ['road_marking', 'pavement'],
+    ['road_marking', 'ground'],
+    ['pavement', 'ground'],
+    // ガードレール一体型のボラードは路面まわりの記述に混ざる（実測）
+    ['bollard', 'road_marking'],
+    ['bollard', 'pavement'],
+    // 縦に立つ人工物。支柱の形状はどちらにも書ける
+    ['pole', 'sign'],
+    // 標識の文字は script にも書かれる
+    ['sign', 'script'],
+    // 地面の状態と植生・季節は連続している
+    ['ground', 'terrain_vegetation'],
+    ['terrain_vegetation', 'season'],
+    // 車体とカメラは同じ「撮影車」の観察として混ざる
+    ['vehicle', 'camera'],
+]
+
+/**
+ * スロットごとの隣接集合。`SLOT_NEIGHBOR_PAIRS` から対称に展開する。
+ *
+ * 対称性は `tests/slot-neighbors.test.ts` で固定している。
+ * 手で書いた隣接表は非対称になりやすく、非対称だと片方向だけ見落とし判定が甘くなる。
+ */
+export const SLOT_NEIGHBORS: Readonly<Record<SlotId, readonly SlotId[]>> = (() => {
+    const sets: Partial<Record<SlotId, Set<SlotId>>> = {}
+    for (const id of SLOT_IDS) sets[id] = new Set<SlotId>()
+
+    for (const [a, b] of SLOT_NEIGHBOR_PAIRS) {
+        sets[a]?.add(b)
+        sets[b]?.add(a)
+    }
+
+    const result: Partial<Record<SlotId, readonly SlotId[]>> = {}
+    for (const id of SLOT_IDS) result[id] = [...(sets[id] ?? [])]
+    return result as Record<SlotId, readonly SlotId[]>
+})()
+
 export const SLOT_STATE_LABELS: Readonly<
     Record<SlotState, { label: string; meaning: string }>
 > = {
