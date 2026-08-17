@@ -100,14 +100,55 @@ interface GradeResponse {
     runFile: string
 }
 
-async function gradeV2(record: RunRecord): Promise<GradeResponse> {
+/**
+ * 学習者の観察メモを正規化する。**v2 の絞り込み計算はこれがないと動かない。**
+ *
+ * v1 は辞書を持たないため正規化していない（`terms` が空）。
+ * その状態で v2 に渡すと絞り込み力・積集合・次に見るべきスロットが
+ * **全部「算出不能」になる**（実測 2026-08-17）。
+ *
+ * **判定は AI を使わない。しかし判定の入力を作るのに AI が必要である。**
+ * 1 レコードにつき 1 リクエスト消費する。
+ *
+ * 失敗しても採点は続ける。正規化なしの v2（正解タグはあるが用語 ID がない）になる。
+ */
+async function normalizeSlots(record: RunRecord): Promise<{
+    slots: RunRecord['answer']['slots']
+    consumed: number
+    ok: boolean
+}> {
+    const response = await fetch(`${BASE_URL}/api/normalize`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ slots: record.answer.slots, questionId: record.questionId }),
+    })
+    if (!response.ok) return { slots: record.answer.slots, consumed: 1, ok: false }
+
+    const body = (await response.json()) as {
+        requestsConsumed: number
+        ok: boolean
+        slots: { slot: keyof RunRecord['answer']['slots'], terms: string[] }[]
+    }
+    if (!body.ok) return { slots: record.answer.slots, consumed: body.requestsConsumed, ok: false }
+
+    const slots = structuredClone(record.answer.slots)
+    for (const entry of body.slots) {
+        if (entry.terms.length) slots[entry.slot].terms = entry.terms
+    }
+    return { slots, consumed: body.requestsConsumed, ok: true }
+}
+
+async function gradeV2(
+    record: RunRecord,
+    slots: RunRecord['answer']['slots'],
+): Promise<GradeResponse> {
     const response = await fetch(`${BASE_URL}/api/grade`, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
             questionId: record.questionId,
             variant: 'v2',
-            slots: record.answer.slots,
+            slots,
             candidates: record.answer.candidates,
             decisiveSlot: record.answer.decisiveSlot,
             reasoning: record.answer.reasoning,
@@ -160,7 +201,15 @@ async function main() {
     }
     console.log('')
     console.log(`モデル ${MODELS.length} 件: ${MODELS.join(', ')}`)
-    console.log(`**消費するリクエスト数: ${targets.length * MODELS.length}**`)
+    console.log('')
+    console.log('| 用途 | 1 件あたり | 合計 |')
+    console.log(`| 観察メモの正規化 | 1 | ${targets.length} |`)
+    console.log(`| v2 の採点 | ${MODELS.length} | ${targets.length * MODELS.length} |`)
+    console.log(`**消費するリクエスト数: ${targets.length * (MODELS.length + 1)}**`)
+    console.log('')
+    console.log('**正規化は省略できない。** v1 は辞書を持たないため terms が空であり、')
+    console.log('そのまま v2 に渡すと絞り込み力・積集合・次に見るべきスロットが全部「算出不能」になる。')
+    console.log('先に npx vite-node scripts/normalize-answer-keys.ts を実行して正解タグ側も埋めること。')
 
     if (dryRun) {
         console.log('')
@@ -177,14 +226,32 @@ async function main() {
 
     const rows: Row[] = []
     let consumed = 0
+    let normalizeFailed = 0
 
     for (const [index, record] of targets.entries()) {
         console.log('')
         console.log(`[${index + 1}/${targets.length}] ${record.questionId}（${record.id}）`)
 
+        // ---- 1. 観察メモの正規化。**絞り込み計算の入力を作る** ----
+        let slots = record.answer.slots
+        try {
+            const normalized = await normalizeSlots(record)
+            consumed += normalized.consumed
+            slots = normalized.slots
+            const filled = Object.entries(slots).filter(([, v]) => v.terms.length).length
+            console.log(`  正規化 ${normalized.ok ? 'ok' : '失敗'} / 用語 ID が入ったスロット ${filled} 件`)
+            if (!normalized.ok) normalizeFailed += 1
+        }
+        catch (error) {
+            // **正規化の失敗で採点まで止めない。** 正解タグはあるので v2 の一部は動く
+            normalizeFailed += 1
+            console.log(`  正規化に失敗した: ${error instanceof Error ? error.message : String(error)}`)
+        }
+
+        // ---- 2. v2 の採点 ----
         let response: GradeResponse
         try {
-            response = await gradeV2(record)
+            response = await gradeV2(record, slots)
         }
         catch (error) {
             // **1 件の失敗で全体を止めない。** 消費した枠は戻らない
@@ -223,7 +290,10 @@ async function main() {
                 {
                     questionId: record.questionId,
                     runId: record.id,
+                    // **v1 の生の回答（terms が空）と正規化後を両方残す。**
+                    // 「v2 が良かった」の原因が正解タグか正規化かを後から切り分けるため
                     answer: record.answer,
+                    normalizedSlots: slots,
                     v1: { judgement: stripModels(record.result), models: record.result.models },
                     v2: { judgement: response.judgement, models: response.models },
                 },
@@ -234,9 +304,10 @@ async function main() {
         )
     }
 
-    await writeReport(rows, consumed, skipped.length)
+    await writeReport(rows, consumed, skipped.length, normalizeFailed)
     console.log('')
     console.log(`消費したリクエスト数: ${consumed}`)
+    if (normalizeFailed) console.log(`**正規化に失敗した記録: ${normalizeFailed} 件**（絞り込み計算が算出不能になる）`)
     console.log(`保存先: ${OUT_DIR}/`)
     console.log(`集計: ${REPORT_PATH}`)
 }
@@ -251,7 +322,12 @@ function stripModels(result: RunRecord['result']) {
 // レポート
 // ============================================================
 
-async function writeReport(rows: Row[], consumed: number, skipped: number) {
+async function writeReport(
+    rows: Row[],
+    consumed: number,
+    skipped: number,
+    normalizeFailed: number,
+) {
     const byModel = new Map<string, Row[]>()
     for (const row of rows) {
         const list = byModel.get(row.model) ?? []
@@ -263,8 +339,23 @@ async function writeReport(rows: Row[], consumed: number, skipped: number) {
         '# v1 / v2 比較（タスク 26）',
         '',
         `生成日時: ${new Date().toISOString()}`,
-        `消費したリクエスト数: ${consumed}（v2 のみ。**v1 は既存のプレイ記録を使い、再実行していない**）`,
+        `消費したリクエスト数: ${consumed}（正規化 + v2 の採点。`
+        + '**v1 は既存のプレイ記録を使い、再実行していない**）',
         skipped ? `タグ未記入で飛ばした記録: ${skipped} 件` : '',
+        normalizeFailed
+            ? `**正規化に失敗した記録: ${normalizeFailed} 件。** 絞り込み計算が算出不能になっている`
+            : '',
+        '',
+        '## 正規化を挟んでいる理由',
+        '',
+        'v2 の目玉は絞り込み力・積集合・次に見るべきスロットである。',
+        'これらはコードが集合演算で計算するが、**入力は用語 ID（`terms`）である。**',
+        '',
+        'v1 は辞書を持たないため正規化していない（`terms` が空）。',
+        'そのまま v2 に渡すと計算結果が全部「算出不能」になる（実測 2026-08-17）。',
+        '',
+        '**判定は AI を使わない。しかし判定の入力を作るのに AI が必要である。**',
+        '責務境界は「AI を使わない」ではなく「AI の出力を判定に使わない」である。',
         '',
         '## 成功率',
         '',

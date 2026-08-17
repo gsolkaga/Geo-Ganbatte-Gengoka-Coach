@@ -1,0 +1,37 @@
+{
+    // Nuxt が生成する tsconfig は app / server / shared / node の 4 つしか見ていない。
+    // **tests / scripts / tools はどれにも入っておらず、型検査の対象外だった**（2026-08-17 に発覚）。
+    //
+    // 意図的に型エラーを入れて確認したところ、vue-tsc は何も言わなかった。
+    // 174 件のテストと 5 本のスクリプトが未検査のまま動いていた。
+    //
+    // **検査の仕組みそのものを検査しないと、検査したことにならない。**
+    "compilerOptions": {
+        "target": "ES2022",
+        "lib": [
+            "ES2023",
+            "DOM"
+        ],
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "strict": true,
+        "noEmit": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "verbatimModuleSyntax": false,
+        "noUncheckedIndexedAccess": true,
+        "types": [
+            "node"
+        ]
+    },
+    "include": [
+        // **ルート直下に置かないこと。** .nuxt/tsconfig.app.json が "../*.d.ts" で
+        // ルート直下の宣言を取り込み、Nuxt 本来の型を上書きしてしまう
+        "tools/types/nuxt-globals.d.ts",
+        "tests/**/*.ts",
+        "scripts/**/*.ts",
+        "tools/**/*.mts",
+        "shared/**/*.ts"
+    ]
+}
