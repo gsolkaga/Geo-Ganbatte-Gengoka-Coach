@@ -39,10 +39,21 @@ export const slotEntrySchema = z
         plain: z.string().nullable().default(null),
         terms: z.array(z.string()).default([]),
         confirmed: z.boolean().optional(),
+        /**
+         * 教材データのみ。**視認可能性。`easy` を既定にしない。**
+         *
+         * ここを省いていたため、`data/questions.json` に書いた `recognition` が
+         * `readQuestion()` の検証で**黙って落ちていた**（2026-08-17 に発覚）。
+         * `blind` が一度も発火せず、視認できないスロットが見落としとして
+         * 提示される状態だった。**スキーマに無いフィールドは存在しないのと同じである。**
+         */
+        recognition: z.enum(['easy', 'hard', 'blind']).optional(),
     })
     .transform((entry) => {
         if (entry.state !== 'visible') {
-            return { ...entry, plain: null, terms: [] }
+            // 写っていないものに視認可能性は無い。記述と用語 ID も意味を持たない
+            const { recognition: _recognition, ...rest } = entry
+            return { ...rest, plain: null, terms: [] }
         }
         const plain = entry.plain?.trim() ?? null
         return { ...entry, plain: plain === '' ? null : plain }

@@ -14,77 +14,96 @@
     "captureDate": "2013-05",
     "slots": {
       "traffic_side": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "Googleカーが見えるが中央に居り、左右位置まで特定できない",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "blind"
       },
       "road_marking": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
       "bollard": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "黄色いガードレール",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "pole": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
       "sign": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
       "script": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "カーブミラー「注意」",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "ground": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "枯れ葉の隙間から地面を見ようと思えば見えるがほぼ視認不可",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "hard"
       },
       "terrain_vegetation": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "松や紅葉や竹や杉等、多種多様",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "architecture": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
       "vehicle": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
       "pavement": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "山の中にしてはアスファルトが整備されている",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "camera": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "Gen4",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "hard"
       },
       "season": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "春～夏？紅葉が赤くないので秋では無さそう、特定不能",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "hard"
       },
       "other": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       }
     },
-    "decisiveSlots": [],
+    "decisiveSlots": [
+      "script",
+      "bollard"
+    ],
     "note": null,
     "source": {
       "draftBy": []
@@ -105,14 +124,18 @@
     "captureDate": "2025-01",
     "slots": {
       "traffic_side": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "左側通行",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "road_marking": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "中央線は黄色の実線、路肩は白い実線、",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "bollard": {
         "state": "unknown",
@@ -120,19 +143,25 @@
         "terms": []
       },
       "pole": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "四角いコンクリート製の電柱",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "sign": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "四角い白い看板に丸い駐車禁止のマークみたいなのが描いてあった",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "script": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "タイ語の様な文字",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "ground": {
         "state": "unknown",
@@ -140,24 +169,32 @@
         "terms": []
       },
       "terrain_vegetation": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "街路樹にヤシぽいもの",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "architecture": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "コンクリート製のビル等が見えた、街の中",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "vehicle": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "横長の白いナンバープレートと、長方形の白いナンバープレートが混在して見えた",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "pavement": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "アスファルト舗装、少し乾燥しているのか荒れている、縁石ブロックに白黒の塗装",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "camera": {
         "state": "unknown",
@@ -196,34 +233,44 @@
     "captureDate": "2024-04",
     "slots": {
       "traffic_side": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "右側通行",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "road_marking": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "太陽の照り返しが強く白飛びしており視認不可",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "blind"
       },
       "bollard": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
       "pole": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "遠くに電柱が１～２本あったが遠すぎる",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "blind"
       },
       "sign": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "青いポールに八角形の赤い標識に白い文字でDURと記載",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "script": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "Gの上にチェックマーク、Sの下にヒゲみたいなのが付いている",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "ground": {
         "state": "unknown",
@@ -231,42 +278,57 @@
         "terms": []
       },
       "terrain_vegetation": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "街路樹は見え全て同じ木、遠くの山に別の木が生えているが視認は難しそう",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "blind"
       },
       "architecture": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "白いコンクリート製の屋根の平らな家が多い",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "vehicle": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "横長い白いナンバープレート、左側が青く見える",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "pavement": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "規則性のある模様のタイル状の石で出来ている",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "camera": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "Gen4ノーカー",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "blind"
       },
       "season": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "春～秋、雪は無いがトルコの街中に雪が降るかは不明",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "blind"
       },
       "other": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "消火栓をココに入れるのか判断できない",
+        "terms": [],
+        "confirmed": true
       }
     },
-    "decisiveSlots": [],
+    "decisiveSlots": [
+      "sign"
+    ],
     "note": null,
     "source": {
       "draftBy": []
@@ -287,69 +349,92 @@
     "captureDate": "2019-11",
     "slots": {
       "traffic_side": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "車の位置だけだと判らないが、隣の道路の標識が右側通行を示唆している",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "hard"
       },
       "road_marking": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "隣の道路の中央線が黄色１本が見えなくはない",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "hard"
       },
       "bollard": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
       "pole": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "材質までは見えない、白い塗装の電柱に、人間が両手を広げたような街頭が付いている、目の高さに赤く塗装され地面まで緑色で塗装されている。",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "sign": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "隣の道路の標識が黄色い四角の標識、中にダイヤ型の黒い枠に凸凹を示唆する黒塗りのピクトグラム、支柱は２本だが１本は細い鉄柱でもう１本は電柱ほど太い木",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "hard"
       },
       "script": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "Aの上にニョロ、Aの上に黒丸があり、DEやDAという区切り文字がある",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "ground": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "砂漠のような砂でアスファルトを覆っている、赤いとも言えないが他の国に比べれば赤いとも言える",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "terrain_vegetation": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "平ら、街路樹や遠くにもヤシの木が見える",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "architecture": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "コンクリート製の家に平らな屋根、屋上に透明なパラボラアンテナがほぼ真上に向いて設置されている",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "vehicle": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "白い長方形のナンバープレートの上部が青い帯、タクシー？かは判らないが、赤色に白文字のナンバープレートであった",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "pavement": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "アスファルト舗装されているが、ほとんど砂で埋もれている。補修はされておらず穴だらけ。",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "camera": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "Gen3",
+        "terms": [],
+        "confirmed": true
       },
       "season": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "影が無いのでほぼ真上に太陽がある",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "other": {
         "state": "unknown",
@@ -357,7 +442,11 @@
         "terms": []
       }
     },
-    "decisiveSlots": [],
+    "decisiveSlots": [
+      "ground",
+      "script",
+      "vehicle"
+    ],
     "note": null,
     "source": {
       "draftBy": []
@@ -378,77 +467,100 @@
     "captureDate": "2025-02",
     "slots": {
       "traffic_side": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "左側通行",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "road_marking": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "中央線２本の間にも凸凹があるのが見える",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "bollard": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "白いボラードに黄色い四角い反射板が付いている、裏側は灰色で同じ形の四角い反射板が付いている。",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "pole": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
       "sign": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
       "script": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "看板の支柱は２本あり灰色の丸い鉄製だった",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "ground": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "乾燥しており黄土色の砂が路肩に堆積している",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "terrain_vegetation": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "ユーカリの木だらけ",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "architecture": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
       "vehicle": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "遠くてよく見えないが、白い横長のナンバープレート",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "pavement": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "アスファルト舗装されており、よくメンテナンスされているが、ザラザラした凸凹に砂が入り込んで白っぽく見えている",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "camera": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "Gen4",
+        "terms": [],
+        "confirmed": true
       },
       "season": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "木の陰が北側に出ている",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "other": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       }
     },
-    "decisiveSlots": [],
+    "decisiveSlots": [
+      "traffic_side",
+      "season",
+      "terrain_vegetation"
+    ],
     "note": null,
     "source": {
       "draftBy": []
@@ -469,77 +581,91 @@
     "captureDate": "2024-07",
     "slots": {
       "traffic_side": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "轍だけが見え、左右判別は不可能",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "blind"
       },
       "road_marking": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
       "bollard": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
       "pole": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
       "sign": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
       "script": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
       "ground": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "茶色っぽい砂と石が散らばっている",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "terrain_vegetation": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "背の低い草？苔？が草原のように広がっている 遠くに雪をいただいた山が見えている 湖沿いに見えるが民家どころが人工物が見当たらない",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "architecture": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
       "vehicle": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
       "pavement": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "砂利道",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "camera": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "Gen4",
+        "terms": [],
+        "confirmed": true
       },
       "season": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "春～夏、遠くの山に残雪ありだがアイスランドの万年雪では？",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "blind"
       },
       "other": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "大自然の中だからこそ回答の疑問のとおりになるかと思う",
+        "terms": [],
+        "confirmed": true
       }
     },
-    "decisiveSlots": [],
+    "decisiveSlots": [
+      "terrain_vegetation"
+    ],
     "note": null,
     "source": {
       "draftBy": []
@@ -560,77 +686,101 @@
     "captureDate": "2012-03",
     "slots": {
       "traffic_side": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "おそらく右側通行、左ハンドル車が見える",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "road_marking": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
       "bollard": {
-        "state": "unknown",
+        "state": "absent",
         "plain": null,
         "terms": []
       },
       "pole": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "細い白いポール、街路灯が２つありY字のように分かれてつけられている",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "sign": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "交差点に標識が１本あった、裏側であり視認は難しい、上段逆三角形下段丸錆びた丸い鉄ポールでそれぞれ小さな十字架で留めている",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "blind"
       },
       "script": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "キリル文字の看板がある",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "ground": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "舗装されており視認不可",
+        "terms": [],
+        "confirmed": true
       },
       "terrain_vegetation": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "枯れ木に杉の木が少量あるだけ",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "architecture": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "材質までは判らないが、中世ヨーロッパを思わせる隙間のない３階～４階建ての建物が連なっている",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "vehicle": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "白い横長のナンバープレート、左側が青いのでEUプレート？",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "pavement": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "アスファルト舗装されているが、メンテが荒くひび割れなどがある",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "camera": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "Gen4",
+        "terms": [],
+        "confirmed": true
       },
       "season": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "木々が枯れており秋～冬を連想する",
+        "terms": [],
+        "confirmed": true
       },
       "other": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "ゴミ箱がプラスチック製の四角い大きな蓋付きで、黄色と深緑色のがあった。またそれより小さな丸いスチールのゴミ箱もある。",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       }
     },
-    "decisiveSlots": [],
+    "decisiveSlots": [
+      "script",
+      "vehicle"
+    ],
     "note": null,
     "source": {
       "draftBy": []
@@ -651,14 +801,18 @@
     "captureDate": "2018-08",
     "slots": {
       "traffic_side": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "右側通行",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "road_marking": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "中央線は白い実線、縁石が白と黒の石、車線が白の短い破線",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "bollard": {
         "state": "unknown",
@@ -666,9 +820,11 @@
         "terms": []
       },
       "pole": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "丸いコンクリート製、ポールトップが街路灯になっており、先が２つに分かれY字になっている",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "sign": {
         "state": "unknown",
@@ -676,9 +832,11 @@
         "terms": []
       },
       "script": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "キリル文字、逆Nの上に弧線が描かれている文字がある。△みたいなギリシャ文字みたいなキリル文字？がある",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "ground": {
         "state": "unknown",
@@ -686,24 +844,32 @@
         "terms": []
       },
       "terrain_vegetation": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "街路樹は少なく、芝生は枯れている",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "architecture": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "コンクリート製のマンションのような集合住宅が複数見える",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "vehicle": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "横長で白いナンバープレートが見える、バスは同じ大きさの黄色",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "pavement": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "アスファルト、補修などされておりメンテナンスは良好",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "camera": {
         "state": "unknown",
@@ -716,9 +882,11 @@
         "terms": []
       },
       "other": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "電話番号の表記が３桁ー２桁ー２桁となっており、あまり見たことのないパターンに思える",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       }
     },
     "decisiveSlots": [],
@@ -742,14 +910,18 @@
     "captureDate": "2022-08",
     "slots": {
       "traffic_side": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "右側通行",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "road_marking": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "中央線は黄色の実線、路肩は線なし、車線は白い破線、横断歩道は縁だけ白い破線で中は何もなし",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "bollard": {
         "state": "unknown",
@@ -757,19 +929,25 @@
         "terms": []
       },
       "pole": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "信号はアメリカ風に見える、中央分離帯にある街路灯は鉄製ポールで街灯部分がT字よりも少し角度がある",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "sign": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "ダイヤ型の看板で、黒枠、白地に黄色のダイヤ型が描かれている",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "script": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "キリル文字に見えるが、Kの右下にヒゲが出ている 看板のメールアドレスが「.RU」ドメイン",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "ground": {
         "state": "unknown",
@@ -777,29 +955,39 @@
         "terms": []
       },
       "terrain_vegetation": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "平坦で街の中、街路樹は種類が判らないが寒くはなさそう",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "architecture": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "クリーム色や白色の外壁の高層マンションが目立つ",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "vehicle": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "白色の横長ナンバープレートが多いが、黄色の横長ナンバープレートも見られる",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "pavement": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "アスファルト舗装",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "camera": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "白い車が映り込んでいる、短い太いアンテナが見える。",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "season": {
         "state": "unknown",
@@ -833,14 +1021,18 @@
     "captureDate": "2024-05",
     "slots": {
       "traffic_side": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "左側通行",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "road_marking": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "中央線は白い実線、路肩はなし、停止線も中央線と同様で「STOP」の表記",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "bollard": {
         "state": "unknown",
@@ -848,44 +1040,60 @@
         "terms": []
       },
       "pole": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "街灯が細い鉄柱製かな、ところどころ錆びている",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "sign": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "遠くに白地に赤い矢印のシェブロンが見える",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "script": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "アルファベットは見えるが英語？かは不明",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "ground": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "赤茶色の土、乾燥している",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "terrain_vegetation": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "細い葉っぱの植物しか生えていない、少し遠くになだらかな山が見え三方を囲まれている",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "architecture": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "赤茶色のレンガ作りの店舗が並ぶ",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "vehicle": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "白い横長のナンバープレート",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "pavement": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "アスファルトで舗装はされているが、ボロボロでメンテナンスはあまりされていない",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "camera": {
         "state": "unknown",
@@ -893,9 +1101,11 @@
         "terms": []
       },
       "season": {
-        "state": "unknown",
-        "plain": null,
-        "terms": []
+        "state": "visible",
+        "plain": "太陽が北から照っている",
+        "terms": [],
+        "confirmed": true,
+        "recognition": "easy"
       },
       "other": {
         "state": "unknown",
