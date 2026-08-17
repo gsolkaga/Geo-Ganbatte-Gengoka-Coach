@@ -155,20 +155,29 @@ export interface Answer {
   reasoning: string | null
 }
 
-/** 用語辞書の 1 項目 */
+/** 用語辞書の 1 項目。data/glossary.json は scripts/build-glossary.mjs が生成する */
 export interface Term {
   id: string
   slot: SlotId
+  /** **正規化の enum に使えるのは atomic のみ** */
+  kind: 'atomic' | 'combination'
+  /** **断定してよいのは verified のみ** */
+  certainty: 'verified' | 'heuristic' | 'unverified'
+  /** 由来。AI 由来は断定に使えないため UI での扱いが変わる */
+  source: 'human' | 'ai'
   canonical: string
   plain: string
   aliases: string[]
   /** 同一の手がかりを共有する国。件数が絞り込み力になる */
   countries: string[]
   confusableWith: string[]
+  /** この用語が成り立つ前提となる別スロットの観察。combination で使う */
+  requires: { slot: SlotId; what: string }[] | null
   note: string | null
-  verifiedByHuman: boolean
   /** 生成時にモデル間で不一致があった項目 */
   disputed: boolean
+  /** AI 由来のみ。同じ概念を挙げたモデル数。1 なら単独発言 */
+  modelCount?: number
 }
 
 export type FailureMode =
@@ -471,6 +480,35 @@ GeoGuessr のメタ知識は、既に整理された資料が存在する（[Plo
 4. 収束する前に置かざるを得ず、相手より悪い場所に置いて負ける
 
 **したがって知識量の増加が、時間制約下では性能低下につながりうる。**
+
+### 由来と確かさを別に持つ
+
+当初 `Term` は `verifiedByHuman: boolean` の 1 つで済ませていた。**足りなかった。**
+
+人手記述 27 語のうち **18 語が経験則である**（`data/glossary-human.json`）。出典自身が「連想する」「そう感じる」と書いており、正確な国別メタとは限らない。それらは人間が書いたが、検証されていない。
+
+`verifiedByHuman: true` はこれを **「確認済み」に見せてしまう。**
+
+> **人間が書いたことは、正しいことを意味しない。**
+
+そこで 2 つの軸に分けた。
+
+| 軸 | 値 | 意味 |
+|---|---|---|
+| `source` | `human` / `ai` | **誰が書いたか。** 記事で区別するため |
+| `certainty` | `verified` / `heuristic` / `unverified` | **どれだけ確かか。** 断定できるのは `verified` のみ |
+
+`heuristic` は `source: 'human'` かつ検証なしである。1 つの真偽値では表現できない組み合わせだった。
+
+**boolean で足りないと気づいた時点で分ける。** 名前を付け直すのは後から効かない。
+
+### 粒度を型で持つ（`kind`）
+
+`combination`（「白い本体＋黒い帯＋赤い反射板」のように複数の観察を束ねたもの）を**正規化の enum に入れてはならない。**
+
+1 スロットの選択肢として提示すると、**まだ見ていない部分まで見たことにしてしまう。** 学習者が「黒い帯」しか見ていないのに、赤い反射板の観察が記録される。
+
+`kind` で機械的に排除する。90 語のうち enum に入るのは `atomic` の 78 語である。
 
 ### 用語は GeoGuessr コミュニティの語彙に合わせる
 
@@ -794,11 +832,35 @@ GeoGuessr は Street View 上のあらゆる情報を用いて場所を推測す
 
 | 条件 | 判定 |
 |---|---|
-| 正解タグにある手がかりが `unknown` | `observation_miss` |
+| `missedSlots` が空でない | `observation_miss` |
 | 正解が候補集合に含まれず、最高確信度が `high` | `confident_error`（最優先で提示） |
 | 正解が候補集合に含まれ、確信度が `medium` または `low` | `discrimination_fail` |
 | 正解が候補集合に含まれず、全候補が `low` | `aware_of_gap` |
 | スロット記述が正確かつ正解が候補集合に含まれない | `knowledge_gap` |
+
+##### `observation_miss` の入力を訂正した
+
+当初この表の 1 行目は「**正解タグにある手がかりが `unknown`**」だった。**誤りである。**
+
+生の `unknown` を数えると、以下がすべて観察漏れになる。
+
+- 写っているが学習者には認識できないもの（`blindSlots`）
+- 隣接スロットに書いたもの（`filedElsewhere`）
+- 別ルートで正解したため必要なかったもの（`alternativeRoute`）
+
+**正解した人に「見落とし」と言うことになる。** それは診断ではなく誤診である。
+
+判定の入力を `diff.missedSlots`（3 段の除外を通したあと）に変更した。除外の順序は `server/utils/slot-diff.ts` が決めている。
+
+**指標の定義は、指標を使う場所ではなく、指標を作る場所で守る。**
+
+##### 積集合が空になるのは絞り込みの成功ではない
+
+`intersection` が空集合になるのは、**辞書か観察のどちらかが間違っている**ことを意味する。
+
+「8 カ国 → 3 カ国 → 1 カ国」の延長として 0 カ国を扱うと、**最も情報のない状態が最も強い絞り込みに見える。** `IntersectionResult.empty` を別に持って区別する。
+
+同じ理由で、辞書に載る用語が 1 つもない場合は `null` を返す。全 195 カ国を返すと「絞り込めていない」が「候補が全部ある」という達成に化ける。
 
 #### フィードバック生成の入力
 

@@ -14,6 +14,20 @@ export interface SlotEntry {
     terms: string[]
     /** 教材データでのみ使用。人手確認済みか */
     confirmed?: boolean
+    /**
+     * 教材データでのみ使用。**この学習者が視認できるか。**
+     *
+     *   easy   見ればすぐ分かる
+     *   hard   意識して探せば見える
+     *   blind  写っているが認識できない。**見落としに数えない**
+     *
+     * 絞り込み力（該当国数）とメタの強さ（件数と地理的散らばり）は計算できるが、
+     * **視認可能性は計算できない。** 人手でタグに記録する。
+     *
+     * 未記録は `undefined`。**`easy` を既定にしない。**
+     * 既定を置くと「確認していない」が「見えるはず」に変わってしまう。
+     */
+    recognition?: 'easy' | 'hard' | 'blind'
 }
 
 export type SlotRecord = Record<SlotId, SlotEntry>
@@ -67,20 +81,48 @@ export interface AnswerDraft {
     reasoning: string | null
 }
 
-/** 用語辞書の 1 項目 */
+/**
+ * 用語の粒度。**正規化の enum に使えるのは `atomic` のみ。**
+ *
+ * `combination` は複数の観察を束ねたもの（「白い本体＋黒い帯＋赤い反射板」）であり、
+ * 1 スロットの記述に対する選択肢として提示すると、
+ * **まだ見ていない部分まで見たことにしてしまう。**
+ */
+export type TermKind = 'atomic' | 'combination'
+
+/**
+ * 主張の確かさ。**断定してよいのは `verified` のみ。**
+ *
+ *   verified    人間が一次情報で確認した
+ *   heuristic   実戦中の連想・経験則。出典自身が「連想する」と書いている
+ *   unverified  AI 生成で人手検証を経ていない
+ *
+ * `heuristic` が 18 語ある（`data/glossary-human.json`）。
+ * **人間が書いたことは、正しいことを意味しない。** 由来（`source`）と確かさを別に持つ。
+ */
+export type TermCertainty = 'verified' | 'heuristic' | 'unverified'
+
+/** 用語辞書の 1 項目。`data/glossary.json` は `scripts/build-glossary.mjs` が生成する */
 export interface Term {
     id: string
     slot: SlotId
+    kind: TermKind
+    certainty: TermCertainty
+    /** 由来。記事で区別するため、また AI 由来は断定に使えないため */
+    source: 'human' | 'ai'
     canonical: string
     plain: string
     aliases: string[]
     /** 同一の手がかりを共有する国。件数が絞り込み力になる */
     countries: string[]
     confusableWith: string[]
+    /** この用語が成り立つ前提となる別スロットの観察。`combination` で使う */
+    requires: { slot: SlotId, what: string }[] | null
     note: string | null
-    verifiedByHuman: boolean
     /** 生成時にモデル間で不一致があった項目 */
     disputed: boolean
+    /** AI 由来のみ。同じ概念を挙げたモデル数。1 なら単独発言であり根拠が弱い */
+    modelCount?: number
 }
 
 export type FailureMode =
@@ -129,6 +171,37 @@ export interface CodeJudgement {
     missedSlots: SlotId[] | null
     wrongAbsentSlots: SlotId[] | null
     overclaimedSlots: SlotId[] | null
+    /**
+     * 隣接スロットに記述があったもの。**見落としに数えない。**
+     *
+     * スロットの境界は入力時に迷う（実測 2026-08-10）。`bollard` に
+     * 「ガードレールが黄色い」と書かれた例がある。ガードレールとボラードは
+     * 一体化することがあり、正当な観察である。
+     *
+     * **訓練しているのは観察であって分類ではない。**
+     *
+     * コードが出すのは「隣接スロットに記述がある」という事実だけである。
+     * 同じものを指しているかの解釈は AI に渡す。
+     */
+    filedElsewhere: { slot: SlotId, foundIn: SlotId[] }[] | null
+    /**
+     * 写っているが学習者には認識できないとタグに記録されたもの。**見落としに数えない。**
+     *
+     * 実戦記録（`docs/offline-works/`）より。カタールのカーメタのアンテナは
+     * 完璧な弁別子だが本人には認識できない。トルコの路面標示は
+     * 太陽の照り返しで白飛びして読めない。
+     *
+     * **国を特定できることと、学習者が視認できることは別である。**
+     * 視認できないものを見落としとして提示するのは、指標が目的と逆を向いている。
+     */
+    blindSlots: SlotId[] | null
+    /**
+     * 正解したときの未観察スロット。**失敗ではない。**
+     *
+     * 知らないメタがあっても別ルートで正解できた経験を、失敗として数えない。
+     * `hit === true` のときだけ値が入る。
+     */
+    alternativeRoute: SlotId[] | null
     /**
      * 失敗モードの分類。v1 では算出できないため null。
      *

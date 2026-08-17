@@ -54,7 +54,13 @@ Google Maps Platform
 ================================================================
 
 用語辞書と国定数テーブルは AI が生成したものを含む。
-verifiedByHuman が false の項目は人手検証を経ていない。
+
+国定数テーブル（data/countries-merged.json）は verifiedByHuman が false の項目が
+人手検証を経ていない。
+
+用語辞書（data/glossary.json）は certainty で確かさを持つ。
+断定に使えるのは verified のみである。
+heuristic は人間が書いたが検証されていない経験則、unverified は AI 生成である。
 
 モデル間の一致は正しさを保証しない。
 実測で、4 モデルのうち 3 モデルが同一の誤りをした例がある（ガーナの走行車線）。

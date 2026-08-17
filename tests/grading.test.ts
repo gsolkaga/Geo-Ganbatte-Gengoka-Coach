@@ -113,7 +113,16 @@ describe('buildJudgement', () => {
         expect(first).toEqual(second)
     })
 
-    it('variant を反映する', () => {
-        expect(buildJudgement('v2', buildAnswer([{ country: 'JP', confidence: 'high' }]), 'JP').variant).toBe('v2')
+    it('v1 を指定すれば v1 判定を返す', () => {
+        expect(buildJudgement('v1', buildAnswer([{ country: 'JP', confidence: 'high' }]), 'JP').variant).toBe('v1')
+    })
+
+    /**
+     * **黙って v1 相当を返してはならない。**
+     * コンテキストなしの結果が v2 として記録されると、タスク 26 の対照実験が無効になる。
+     */
+    it('v2 でコンテキストを渡さなければ例外にする', () => {
+        expect(() => buildJudgement('v2', buildAnswer([{ country: 'JP', confidence: 'high' }]), 'JP'))
+            .toThrow(/正解タグと用語辞書が必要/)
     })
 })

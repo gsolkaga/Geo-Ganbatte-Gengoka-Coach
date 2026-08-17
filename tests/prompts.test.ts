@@ -45,13 +45,16 @@ const glossary: Term[] = [
     {
         id: 'bollard_black_top',
         slot: 'bollard',
+        kind: 'atomic',
+        certainty: 'verified',
+        source: 'human',
         canonical: '黒帯ボラード',
         plain: '上が黒い杭',
         aliases: [],
         countries: ['BG', 'RS'],
         confusableWith: [],
+        requires: null,
         note: null,
-        verifiedByHuman: true,
         disputed: false,
     },
 ]

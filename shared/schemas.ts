@@ -110,17 +110,35 @@ export const questionSchema = z.object({
 export const termSchema = z.object({
     id: z.string().min(1),
     slot: slotIdSchema,
+    /** **enum に入れられるのは atomic のみ**（`shared/types.ts` の TermKind 参照） */
+    kind: z.enum(['atomic', 'combination']),
+    /** **断定してよいのは verified のみ** */
+    certainty: z.enum(['verified', 'heuristic', 'unverified']),
+    source: z.enum(['human', 'ai']),
     canonical: z.string().min(1),
     plain: z.string(),
     aliases: z.array(z.string()).default([]),
     countries: z.array(countryCodeSchema).default([]),
     confusableWith: z.array(z.string()).default([]),
+    requires: z
+        .array(z.object({ slot: slotIdSchema, what: z.string() }))
+        .nullable()
+        .default(null),
     note: z.string().nullable().default(null),
-    verifiedByHuman: z.boolean().default(false),
     disputed: z.boolean().default(false),
+    modelCount: z.number().int().optional(),
 })
 
-export const glossarySchema = z.array(termSchema)
+/**
+ * `data/glossary.json` は `{ _comment, generatedAt, terms }` の形で生成される
+ * （`scripts/build-glossary.mjs`）。**生成物の形をスキーマに合わせる。**
+ *
+ * 裸の配列も受ける。テストのフィクスチャと、手で書いた抜粋を通すため。
+ */
+export const glossarySchema = z.union([
+    z.object({ terms: z.array(termSchema) }).transform((v) => v.terms),
+    z.array(termSchema),
+])
 export const questionsSchema = z.array(questionSchema)
 
 /**

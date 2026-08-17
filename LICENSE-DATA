@@ -69,7 +69,12 @@ data/countries-merged.json         上記から機械的に生成したもの
 再利用する場合は自分で最新の条件を確認すること。
 
 出力は無保証である。**内容の正しさは保証されない。**
-`verifiedByHuman` が `false` の項目は人手検証を経ていない。
+
+人手検証を経ていない項目の見分け方。
+
+- 国定数テーブル（`data/countries-merged.json`）は `verifiedByHuman` が `false` のもの
+- 用語辞書（`data/glossary.json`）は `certainty` が `verified` 以外のもの
+  （`heuristic` は人間が書いたが検証されていない経験則、`unverified` は AI 生成）
 
 ## この範囲に含まれないもの
 

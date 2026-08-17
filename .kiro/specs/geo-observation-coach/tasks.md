@@ -339,19 +339,37 @@ v1 は正解タグと用語辞書を持たないため、見落とし判定（`g
   - AI が辞書外の ID を返すケースをモックし、出力に現れないことを検証する
   - _Requirements: 3.2, 3.5_
 
-- [ ] 23. 採点ロジック
+- [x] 23. 採点ロジック
   - `server/utils/grading.ts` を実装する
-  - 見落とし判定を正解タグとの差分計算のみで実装する（AI を使用しない）
+  - 見落とし判定を正解タグとの差分計算のみで実装する（AI を使用しない）→ `server/utils/slot-diff.ts`
   - `unknown` を `missedSlots`、`absent` を `wrongAbsentSlots`、過剰申告を `overclaimedSlots` に分類する
   - 失敗モードを判定表に従って分類する。複数該当を配列で保持する
   - 併記された国の組を `confusionPairs` に記録する
+  - 絞り込み力・積集合・次に見るべきスロットを計算する → `server/utils/narrowing.ts`
+  - **`observation_miss` の入力を生の `unknown` から `diff.missedSlots` に訂正した。**
+    生の `unknown` では `blindSlots` / `filedElsewhere` / `alternativeRoute` まで
+    観察漏れになる（`design.md` に記録）
+  - **`buildJudgement` は v2 でコンテキストなしなら例外にする。**
+    黙って v1 相当を返すとタスク 26 の対照実験が無効になる
   - _Requirements: 4.1, 4.2, 4.3, 4.4, 5.8, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6_
 
-- [ ] 23.1 採点ロジックの単体テスト
-  - 見落とし判定を 3 状態 × 正解タグの有無で網羅する
-  - 失敗モード判定表の各行に対応するケースを検証する
+- [x] 23.1 採点ロジックの単体テスト
+  - 見落とし判定を 3 状態 × 正解タグの有無で網羅する → `tests/slot-diff.test.ts`（16 件）
+  - 失敗モード判定表の各行に対応するケースを検証する → `tests/failure-modes.test.ts`（15 件）
   - `absent` と `unknown` が入れ替わらないことを検証する
+  - 絞り込み計算を検証する → `tests/narrowing.test.ts`（13 件）
   - _Requirements: 4.1, 4.2, 4.3, 6.1_
+
+- [x] 23.2 用語辞書の型を生成物に合わせる（タスク 23 の実施中に発覚）
+  - **`readGlossary()` が必ず例外になっていた。** `data/glossary.json` は
+    `{ _comment, generatedAt, terms }` の形で生成されるのに、`glossarySchema` は
+    `verifiedByHuman` を持つ裸の配列を期待していた。タスク 22 / 23 / 24 が全部この辞書を使う
+  - `Term` に `kind` / `certainty` / `source` / `requires` / `modelCount` を追加した
+  - **`verifiedByHuman: boolean` を `certainty` の 3 値に置き換えた。**
+    人手記述 27 語のうち 18 語が経験則であり、真偽値 1 つでは
+    「人間が書いたが検証されていない」を表現できなかった
+  - `README.md` / `NOTICE` / `LICENSE-DATA` / `design.md` の記述を追随させた
+  - _Requirements: 3.2, 8.3_
 
 - [ ] 24. 採点エンドポイントの v2 経路
   - `variant: 'v2'` で正解タグと辞書抜粋をコンテキストに含める
