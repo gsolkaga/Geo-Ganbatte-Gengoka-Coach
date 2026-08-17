@@ -17,6 +17,8 @@
         "test": "vitest --run",
         "measure:concurrency": "node tools/measure-concurrency.mjs",
         "usage:report": "node tools/usage-report.mjs",
+        "usage:reconcile": "node tools/usage-reconcile.mjs",
+        "usage:dates": "node tools/usage-dates.mjs",
         "inspect:run": "node tools/inspect-run.mjs",
         "add:question": "node tools/add-question.mjs",
         "tag:apply": "node scripts/apply-tag-drafts.mjs",
