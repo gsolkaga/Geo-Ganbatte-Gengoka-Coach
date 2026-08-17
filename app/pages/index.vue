@@ -16,6 +16,8 @@
  */
 import { createEmptySlots } from '#shared/slots'
 import { MAX_GRADING_MODELS } from '#shared/schemas'
+// **画面の中にロジックを書かない。** 書くと型検査もテストも届かない
+import { emptyAnswerDraft, hasFormInput, runToFormState } from '#shared/run-form'
 import type { AnswerDraft, SlotRecord } from '#shared/types'
 
 /**
@@ -48,11 +50,7 @@ const questions = ref<
 const currentIndex = ref(0)
 const current = computed(() => questions.value[currentIndex.value] ?? null)
 
-const emptyAnswer = (): AnswerDraft => ({
-    candidates: [{ country: '', confidence: 'medium' }],
-    decisiveSlot: null,
-    reasoning: null,
-})
+const emptyAnswer = (): AnswerDraft => emptyAnswerDraft()
 
 const slots = ref<SlotRecord>(createEmptySlots())
 const answer = ref<AnswerDraft>(emptyAnswer())
@@ -129,17 +127,16 @@ const runOptions = computed(() => {
 })
 
 /** 現在のフォームに何か書かれているか。上書きの確認を出すかどうかの判断に使う */
-const hasInput = computed(() =>
-    Object.values(slots.value).some((e) => e.state !== 'unknown' || Boolean(e.plain?.trim()))
-    || answer.value.candidates.some((c) => c.country !== '')
-    || Boolean(answer.value.reasoning?.trim()),
-)
+const hasInput = computed(() => hasFormInput(slots.value, answer.value))
 
 const runLabel = (r: RunSummary) => {
     const when = r.ts.slice(0, 16).replace('T', ' ')
     const picks = r.candidates.map((c) => `${c.country}(${c.confidence})`).join(' ') || '候補なし'
     return `${r.questionId}　${when}　${r.variant}　記述 ${r.describedSlots}/14　${picks}${r.normalized ? '　用語ID済' : ''}`
 }
+
+/** 読み込みが失敗したときに画面へ出す。**コンソールだけに出して黙らない** */
+const loadRunError = ref<string | null>(null)
 
 /**
  * 記録をフォームへ戻す。
@@ -149,10 +146,19 @@ const runLabel = (r: RunSummary) => {
  *
  * 記録が別の問題のものなら、その問題へ移動してから流し込む。
  * 移動を先にしないと、`goToQuestion` の復元処理が流し込んだ値を上書きする。
+ *
+ * 変換は `#shared/run-form` に切り出してある。
+ * **画面の中に書いていたら検査もテストもされない。**
+ * 実際に `structuredClone` がリアクティブプロキシで例外になり、
+ * **画面には何も起きずコンソールにだけエラーが出る**状態を作った。
  */
 function loadRun() {
+    loadRunError.value = null
     const record = runs.value.find((r) => r.file === selectedRunFile.value)
-    if (!record) return
+    if (!record) {
+        loadRunError.value = '記録が見つからない。一覧を選び直す'
+        return
+    }
 
     if (hasInput.value
         // eslint-disable-next-line no-alert
@@ -160,27 +166,28 @@ function loadRun() {
         return
     }
 
-    const index = questions.value.findIndex((q) => q.id === record.questionId)
-    if (index >= 0 && index !== currentIndex.value) goToQuestion(index)
+    try {
+        const index = questions.value.findIndex((q) => q.id === record.questionId)
+        if (index >= 0 && index !== currentIndex.value) goToQuestion(index)
 
-    // **構造を共有しない。** 記録の配列をそのまま入れるとフォームの編集が一覧側にも及ぶ
-    slots.value = structuredClone(record.answer.slots)
-    answer.value = {
-        candidates: record.answer.candidates.length
-            ? structuredClone(record.answer.candidates)
-            : emptyAnswer().candidates,
-        decisiveSlot: record.answer.decisiveSlot,
-        reasoning: record.answer.reasoning,
+        // **構造を共有しない。** 記録をそのまま入れるとフォームの編集が一覧側にも及ぶ
+        const state = runToFormState(record.answer)
+        slots.value = state.slots
+        answer.value = state.answer
+
+        // 問題ごとの保持側にも反映する。移動して戻ってきたときに消えないため
+        if (current.value) {
+            slotsByQuestion.value[current.value.id] = slots.value
+            answerByQuestion.value[current.value.id] = answer.value
+        }
+
+        loadedFrom.value = record.file
+        phase.value = 'input'
     }
-
-    // 問題ごとの保持側にも反映する。移動して戻ってきたときに消えないため
-    if (current.value) {
-        slotsByQuestion.value[current.value.id] = slots.value
-        answerByQuestion.value[current.value.id] = answer.value
+    catch (error) {
+        // **例外を握り潰さない。** 握り潰すと「押しても何も起きない」になる
+        loadRunError.value = `読み込みに失敗した: ${error instanceof Error ? error.message : String(error)}`
     }
-
-    loadedFrom.value = record.file
-    phase.value = 'input'
 }
 
 /** フォームを空にする。**読み込みと同じく確認を出す** */
@@ -190,6 +197,7 @@ function clearInput() {
     slots.value = createEmptySlots()
     answer.value = emptyAnswer()
     loadedFrom.value = null
+    loadRunError.value = null
     if (current.value) {
         slotsByQuestion.value[current.value.id] = slots.value
         answerByQuestion.value[current.value.id] = answer.value
@@ -389,7 +397,11 @@ function nextQuestion() {
                 >
                     入力を空にする
                 </button>
-                <span v-if="loadedFrom" class="text-xs text-emerald-700">
+                <!-- **失敗を黙らせない。** コンソールにだけ出すと「押しても何も起きない」になる -->
+                <span v-if="loadRunError" role="alert" class="text-xs font-medium text-rose-700">
+                    {{ loadRunError }}
+                </span>
+                <span v-else-if="loadedFrom" class="text-xs text-emerald-700">
                     読み込み済み。編集して再採点できる
                 </span>
                 <!-- **正解は出さない。** 記録の判定結果とフィードバックは取得していない -->
