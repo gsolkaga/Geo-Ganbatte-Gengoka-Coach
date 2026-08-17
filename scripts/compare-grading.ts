@@ -8,12 +8,23 @@
  *
  * したがってこのスクリプトが投げるのは **v2 だけ**である。
  *
- * ## 出題ごとに 1 件しか投げない（既定）
+ * ## 同じ入力の反復は無駄ではない（既定は全件）
  *
- * 同じ出題の記録が複数ある（やり直した分、機能確認で増えた分）。
- * 全件投げると**同じ入力に枠を二重に使う。** 出題ごとに最新の 1 件を採る。
+ * 同じ出題の記録が複数ある。当初これを「同じ入力に枠を二重に使う」と考えて
+ * 出題ごとに 1 件へ絞った。**判断が逆だった。**
  *
- * 10 問 × （正規化 1 + モデル 4）= **50 リクエスト**である。
+ * この記事の実測は**すべて 1 問 1 モデル 1 回**である。
+ * 「4 モデルが 7 種類の壊れ方をした」と書いたが、それが
+ * **モデルの性質なのか、その 1 回の揺れなのか区別できていない。**
+ *
+ * 同じ入力を 2 回投げれば、そこだけは区別できる。
+ * `q-jp-01` と `q-kz-01` は過去の回答を読み込む機能で再投入したため
+ * **入力が完全に同一の記録が 2 件ずつある。** 反復として使える。
+ *
+ * > **枠を節約して n=1 のままにするより、使って n=2 にする方が価値がある。**
+ *
+ * 記録 13 件 × （正規化 1 + モデル 4）= **65 リクエスト**である。
+ * `--unique` で出題ごとに 1 件（50）に絞れる。
  *
  * ## 転送方式を揃える
  *
@@ -29,11 +40,11 @@
  * 3. `data/questions.json` に正解タグが入っていること
  *    （全スロット `unknown` の出題は API が 409 で拒否する）
  *
- * 使い方（**必ず `--dry-run` で消費数を見てから実行する**）:
+ * 使い方（`--dry-run` で消費数を先に見る）:
  *   npm run compare -- --dry-run                消費数だけ表示する
- *   npm run compare                             出題ごとに 1 件（10 問 = 50）
+ *   npm run compare                             全件（記録 13 件 = 65）
+ *   npm run compare -- --unique                 出題ごとに 1 件（10 問 = 50）
  *   npm run compare -- --skip-graded            v2 済みの出題を飛ばす
- *   npm run compare -- --all                    重複を含む全件（記録ごとの揺れを見る）
  *
  * 読むのは `npm run read:v2`（消費 0）。`docs/v2-feedback-read.md` に書き出す。
  */
@@ -64,18 +75,13 @@ const MODELS = [
 
 const dryRun = process.argv.includes('--dry-run')
 /**
- * **既定は出題ごとに 1 件である。**
+ * **既定は全件である。同じ入力の反復を残す。**
  *
- * `data/runs/` には同じ出題の記録が複数ある（同じ地点をやり直した分、
- * 過去の回答を読み込む機能の確認で増えた分）。全部投げると
- * **同じ入力に同じ枠を二重に使う。**
- *
- * 記録 13 件のうち 3 件が重複で、既定を全件にしていると 65 消費のうち
- * **15 が重複分だった。** 出題ごとに最新の 1 件を採る。
- *
- * `--all` で全件に戻せる（記録ごとの揺れを見たいときのため）。
+ * `--unique` を付けると出題ごとに最新の 1 件へ絞る（10 問 = 50 リクエスト）。
+ * 枠が足りないときのための逃げ道であり、**既定にすべきではない。**
+ * 反復が無いと「モデルの性質」と「その 1 回の揺れ」を区別できない。
  */
-const useAll = process.argv.includes('--all')
+const useAll = !process.argv.includes('--unique')
 /** 既に v2 で採点した出題を飛ばす。やり直しで枠を使わないため */
 const skipGraded = process.argv.includes('--skip-graded')
 
@@ -228,9 +234,27 @@ async function gradeV2(
 // 集計
 // ============================================================
 
+/**
+ * 入力の指紋。**「同じ入力を 2 回投げた」と言うには、同じであることを確かめる必要がある。**
+ *
+ * `q-is-01` の 2 件は 2 分差の別プレイであり、入力が同一とは限らない。
+ * 一方 `q-jp-01` と `q-kz-01` は過去の回答を読み込んで再投入したので同一である。
+ * **区別せずに並べると、揺れと入力差を混ぜてしまう。**
+ */
+function answerFingerprint(record: RunRecord): string {
+    return JSON.stringify({
+        slots: record.answer.slots,
+        candidates: record.answer.candidates,
+        decisiveSlot: record.answer.decisiveSlot,
+        reasoning: record.answer.reasoning,
+    })
+}
+
 interface Row {
     questionId: string
     runId: string
+    /** 入力の指紋。同一なら反復として扱える */
+    inputKey: string
     model: string
     v1Status: string
     v1FinishReason: string | null
@@ -264,9 +288,20 @@ async function main() {
     console.log('')
     console.log(`v1 の記録 ${allRuns.length} 件`)
     if (deduped > 0) {
-        console.log(`  **同じ出題の重複を外した: ${deduped} 件**（出題ごとに最新の 1 件を採る。--all で全件）`)
+        console.log(`  **--unique のため同じ出題の重複を外した: ${deduped} 件**（反復が無いと揺れを測れない）`)
     }
-    if (useAll) console.log('  --all のため重複を含む全件を対象にする')
+    if (useAll) {
+        const repeats = new Map<string, RunRecord[]>()
+        for (const r of allRuns) repeats.set(r.questionId, [...(repeats.get(r.questionId) ?? []), r])
+        const repeated = [...repeats.entries()].filter(([, list]) => list.length > 1)
+        if (repeated.length) {
+            console.log('  同じ出題を複数回投げる（**入力が同一の組だけが反復として使える**）')
+            for (const [id, list] of repeated) {
+                const same = new Set(list.map(answerFingerprint)).size === 1
+                console.log(`    ${id}×${list.length}  入力: ${same ? '同一 → 反復として使える' : '**ちがう** → 別プレイ。揺れの測定には使えない'}`)
+            }
+        }
+    }
     if (alreadyGraded.length) {
         console.log(`  **既に v2 で採点済みのため飛ばす: ${alreadyGraded.length} 件**`)
         for (const r of alreadyGraded) console.log(`    ${r.questionId}`)
@@ -359,6 +394,7 @@ async function main() {
             rows.push({
                 questionId: record.questionId,
                 runId: record.id,
+                inputKey: answerFingerprint(record),
                 model: v2Model.model,
                 v1Status: v1Model?.status ?? '記録なし',
                 v1FinishReason: v1Model?.finishReason ?? null,
@@ -485,6 +521,87 @@ async function writeReport(
         lines.push(
             `| ${row.questionId} | ${row.model} | ${show(row.v1JudgmentUnavailable)} | ${num(row.v1MissedCluesCount)
             } | ${show(row.v2JudgmentUnavailable)} | ${num(row.v2MissedCluesCount)} |`,
+        )
+    }
+
+    /**
+     * **同じ入力を 2 回投げたときに同じ結果になったか。**
+     *
+     * この記事の実測はすべて 1 問 1 モデル 1 回だった。
+     * 「4 モデルが 7 種類の壊れ方をした」と書いたが、それが
+     * **モデルの性質なのか、その 1 回の揺れなのか区別できていない。**
+     *
+     * `q-jp-01` と `q-kz-01` は過去の回答を読み込む機能で再投入したため
+     * 入力が完全に同一の記録が 2 件ずつある。**そこだけは区別できる。**
+     */
+    const byPair = new Map<string, Row[]>()
+    for (const row of rows) {
+        const key = `${row.questionId}\u0000${row.model}`
+        const list = byPair.get(key) ?? []
+        list.push(row)
+        byPair.set(key, list)
+    }
+    const repeated = [...byPair.entries()].filter(([, list]) => list.length > 1)
+
+    if (repeated.length) {
+        lines.push(
+            '',
+            '## 同じ入力を 2 回投げた結果（再現性）',
+            '',
+            '**この記事の実測はすべて 1 問 1 モデル 1 回である。**',
+            '「4 モデルが 7 種類の壊れ方をした」と書いたが、それが',
+            '**モデルの性質なのか、その 1 回の揺れなのか区別できていない。**',
+            '',
+            '`data/runs/` に入力が完全に同一の記録が複数ある（過去の回答を読み込む機能で再投入した分）。',
+            'それを両方投げた。**ここだけは区別できる。**',
+            '',
+            '**入力が同一の組だけが反復である。** 別プレイの記録は入力が違うため、',
+            '結果の差が「モデルの揺れ」なのか「入力の差」なのか分けられない。**混ぜない。**',
+            '',
+            '| 問 | モデル | 回数 | 入力 | status | 見落とし件数 | 一致 |',
+            '|---|---|---|---|---|---|---|',
+        )
+        let statusDiffer = 0
+        let countDiffer = 0
+        let trueRepeats = 0
+        for (const [key, list] of repeated) {
+            const [questionId, model] = key.split('\u0000')
+            const statuses = list.map((r) => r.v2Status)
+            const counts = list.map((r) => r.v2MissedCluesCount)
+            const sameInput = new Set(list.map((r) => r.inputKey)).size === 1
+            const sameStatus = new Set(statuses).size === 1
+            const sameCount = new Set(counts.map((c) => String(c))).size === 1
+            if (sameInput) {
+                trueRepeats += 1
+                if (!sameStatus) statusDiffer += 1
+                if (!sameCount) countDiffer += 1
+            }
+            lines.push(
+                `| ${questionId} | ${model} | ${list.length} `
+                + `| ${sameInput ? '同一' : '**ちがう**'} | ${statuses.join(' / ')} `
+                + `| ${counts.map((c) => (c === null ? '—' : c)).join(' / ')} `
+                + `| ${sameInput ? (sameStatus && sameCount ? '一致' : '**ちがう**') : '—（反復ではない）'} |`,
+            )
+        }
+        lines.push(
+            '',
+            `**入力が同一の組: ${trueRepeats} / ${repeated.length}**`,
+            '',
+            trueRepeats === 0
+                ? '**入力が同一の組が無い。再現性については何も言えない。**'
+                : `**status がちがった組: ${statusDiffer} / ${trueRepeats}**　`
+                + `**見落とし件数がちがった組: ${countDiffer} / ${trueRepeats}**`,
+            '',
+            trueRepeats === 0
+                ? ''
+                : statusDiffer + countDiffer === 0
+                    ? 'すべて一致した。**この範囲では、壊れ方はモデルごとに再現する。**'
+                    : '**一致しなかった組がある。** その組については、'
+                    + '「このモデルはこう壊れる」と書けない。**同じ入力で結果が変わる。**',
+            '',
+            '> **n=1 の観測を性質として書いてはならない。**',
+            '> 反復できる範囲だけが、性質と呼べる。',
+            '',
         )
     }
 
