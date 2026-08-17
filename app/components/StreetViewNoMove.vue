@@ -64,20 +64,40 @@ let panorama: google.maps.StreetViewPanorama | null = null
  */
 function loadMapsApi(key: string): Promise<void> {
   if (typeof window === 'undefined') return Promise.resolve()
-  const w = window as unknown as { __ggg_maps_promise?: Promise<void> }
+  const w = window as unknown as {
+    __ggg_maps_promise?: Promise<void>
+    __ggg_maps_ready?: () => void
+  }
   if (w.__ggg_maps_promise) return w.__ggg_maps_promise
 
   w.__ggg_maps_promise = new Promise<void>((resolve, reject) => {
+    /**
+     * **`callback` を必ず指定する。**
+     *
+     * `loading=async` を付けた `maps/api/js` は、`script.onload` の時点では
+     * `google.maps` が未完成のスタブである。実測で 2 通りの症状が出た。
+     *
+     *   `google.maps.StreetViewPanorama is not a constructor`
+     *   `google.maps.importLibrary is not a function`
+     *
+     * **同じ原因の別の症状である。** 初期化の完了は `callback` でしか分からない。
+     * `onload` は「スクリプトを取得した」を意味するだけで「使える」を意味しない。
+     */
+    w.__ggg_maps_ready = () => resolve()
+
     const script = document.createElement('script')
     const url = new URL('https://maps.googleapis.com/maps/api/js')
     url.searchParams.set('key', key)
     url.searchParams.set('v', 'weekly')
     url.searchParams.set('loading', 'async')
+    url.searchParams.set('callback', '__ggg_maps_ready')
     script.src = url.toString()
     script.async = true
-    script.onload = () => resolve()
     script.onerror = () => reject(new Error('Maps JavaScript API の読み込みに失敗した'))
     document.head.append(script)
+
+    // callback が来ないまま終わるケースを検出する。無言で待ち続けない
+    setTimeout(() => reject(new Error('Maps JavaScript API の初期化が 20 秒以内に完了しなかった')), 20_000)
   })
   return w.__ggg_maps_promise
 }
@@ -100,10 +120,28 @@ function loadMapsApi(key: string): Promise<void> {
 async function render(): Promise<void> {
   if (!host.value || !props.panoId) return
 
-  // ブートストラップの onload では足りない。ライブラリの読み込みを待つ
-  const { StreetViewPanorama } = (await google.maps.importLibrary(
-    'streetView',
-  )) as google.maps.StreetViewLibrary
+  /**
+   * `importLibrary` があれば使い、無ければ直接参照する。
+   *
+   * **どちらが使えるかは読み込み方式とバージョンで変わる。**
+   * `importLibrary` は動的ライブラリ読み込みの入口であり、常に存在するとは限らない。
+   * 一方 `callback` の完了後は `google.maps.StreetViewPanorama` が直接使える。
+   *
+   * 片方に賭けると片方の環境で壊れる。**存在を確かめてから使う。**
+   */
+  const maps = google.maps as typeof google.maps & {
+    importLibrary?: (name: string) => Promise<unknown>
+  }
+
+  let StreetViewPanorama = maps.StreetViewPanorama
+  if (typeof maps.importLibrary === 'function') {
+    const lib = (await maps.importLibrary('streetView')) as Partial<google.maps.StreetViewLibrary>
+    if (lib?.StreetViewPanorama) StreetViewPanorama = lib.StreetViewPanorama
+  }
+
+  if (typeof StreetViewPanorama !== 'function') {
+    throw new Error('StreetViewPanorama を取得できなかった（Maps JavaScript API の初期化が未完了）')
+  }
 
   panorama = new StreetViewPanorama(host.value, {
     pano: props.panoId,

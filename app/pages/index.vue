@@ -48,12 +48,45 @@ const questions = ref<
 const currentIndex = ref(0)
 const current = computed(() => questions.value[currentIndex.value] ?? null)
 
-const slots = ref<SlotRecord>(createEmptySlots())
-const answer = ref<AnswerDraft>({
+const emptyAnswer = (): AnswerDraft => ({
     candidates: [{ country: '', confidence: 'medium' }],
     decisiveSlot: null,
     reasoning: null,
 })
+
+const slots = ref<SlotRecord>(createEmptySlots())
+const answer = ref<AnswerDraft>(emptyAnswer())
+
+/**
+ * 問題ごとの入力を保持する。**行き来しても消えない。**
+ *
+ * 正解タグ付けのために Street View だけ見て回りたい、という用途がある。
+ * そのとき入力が消えると、書いたものを失うのが怖くて移動できなくなる。
+ */
+const slotsByQuestion = ref<Record<string, SlotRecord>>({})
+const answerByQuestion = ref<Record<string, AnswerDraft>>({})
+
+/**
+ * 問題を移動する。**採点しない。**
+ * 現在の入力を保存してから、移動先の入力を復元する。
+ */
+function goToQuestion(index: number) {
+    const target = questions.value[index]
+    if (!target) return
+
+    const from = current.value
+    if (from) {
+        slotsByQuestion.value[from.id] = slots.value
+        answerByQuestion.value[from.id] = answer.value
+    }
+
+    currentIndex.value = index
+    slots.value = slotsByQuestion.value[target.id] ?? createEmptySlots()
+    answer.value = answerByQuestion.value[target.id] ?? emptyAnswer()
+
+    // 採点結果は前の問題のものなので隠す。消しはしない
+    phase.value = 'input'
+}
 
 const countryOptions = ref<{ code: string, name: string }[]>([])
 const countryNameByCode = computed(
@@ -112,10 +145,7 @@ async function regrade(models: string[]) {
 }
 
 function nextQuestion() {
-    if (currentIndex.value + 1 < questions.value.length) currentIndex.value += 1
-    slots.value = createEmptySlots()
-    answer.value = { candidates: [{ country: '', confidence: 'medium' }], decisiveSlot: null, reasoning: null }
-    phase.value = 'input'
+    goToQuestion(currentIndex.value + 1)
 }
 </script>
 
@@ -167,9 +197,45 @@ function nextQuestion() {
         </section>
 
         <template v-else-if="current">
-            <p class="shrink-0 text-sm text-slate-600">
-                問題 {{ currentIndex + 1 }} / {{ questions.length }}（難易度 {{ current.difficulty }}）
-            </p>
+            <!--
+                回答せずに問題を移動できる。正解タグ付けのために風景だけ見て回る用途がある。
+                入力は問題ごとに保持されるので、行き来しても消えない。
+            -->
+            <div class="shrink-0 flex flex-wrap items-center gap-2 text-sm text-slate-600">
+                <button
+                    type="button"
+                    :disabled="currentIndex === 0 || grading.running.value"
+                    class="rounded border border-slate-400 px-2 py-1 text-xs hover:bg-slate-50 disabled:opacity-30"
+                    @click="goToQuestion(currentIndex - 1)"
+                >
+                    ← 前の問題
+                </button>
+
+                <select
+                    :value="currentIndex"
+                    :disabled="grading.running.value"
+                    class="rounded border border-slate-400 px-2 py-1 text-xs"
+                    aria-label="問題を選ぶ"
+                    @change="goToQuestion(Number(($event.target as HTMLSelectElement).value))"
+                >
+                    <option v-for="(q, i) in questions" :key="q.id" :value="i">
+                        {{ i + 1 }} / {{ questions.length }}　{{ q.id }}（難易度 {{ q.difficulty }}）
+                    </option>
+                </select>
+
+                <button
+                    type="button"
+                    :disabled="currentIndex + 1 >= questions.length || grading.running.value"
+                    class="rounded border border-slate-400 px-2 py-1 text-xs hover:bg-slate-50 disabled:opacity-30"
+                    @click="goToQuestion(currentIndex + 1)"
+                >
+                    次の問題 →
+                </button>
+
+                <span class="text-xs text-slate-500">
+                    採点せずに移動できる。入力は問題ごとに保持される
+                </span>
+            </div>
 
             <!--
                 3 ペイン。左上に風景（大きく）、左下に回答、右列すべてに観察欄。

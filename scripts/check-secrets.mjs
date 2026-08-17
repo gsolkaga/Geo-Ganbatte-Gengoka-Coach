@@ -16,6 +16,7 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
+import { spawnSync } from 'node:child_process'
 
 const SKIP_DIR = new Set(['node_modules', '.git', '.nuxt', '.output', 'dist'])
 
@@ -33,10 +34,21 @@ const IMG = /\.(png|jpe?g|gif|webp|bmp|tiff|ico|svg)$/i
 const BIN = /\.(zip|gz|7z|exe|dll|pdf|mp4|mov|woff2?|ttf)$/i
 
 const hits = []
+/** git が無視しているファイルでの検出。危険ではない */
+const ignoredHits = []
 const images = []
 const large = []
 let files = 0
 let bytes = 0
+
+/**
+ * git が無視しているかを判定する。
+ * `git check-ignore` は無視されていれば終了コード 0 を返す。
+ */
+function isGitIgnored(filePath) {
+    const result = spawnSync('git', ['check-ignore', '-q', filePath], { stdio: 'ignore' })
+    return result.status === 0
+}
 
 const walk = (d) => {
     for (const e of fs.readdirSync(d, { withFileTypes: true })) {
@@ -64,7 +76,17 @@ const walk = (d) => {
             if (!m) continue
             // .env.example のプレースホルダは除外
             if (/^0{8}-0{4}-0{4}-0{4}-0{12}:x+$/.test(m[0])) continue
-            hits.push(`${p.name}  ${q}\n    ${m[0].slice(0, 60)}`)
+
+            /**
+             * git が無視しているファイルは分けて報告する。
+             *
+             * `.env` に本物のキーがあるのは**正常**である。危険なのは追跡されている場合だけ。
+             * 一緒に並べると、毎回警告が出て**本物の混入を見逃すようになる。**
+             * 「いつも赤い警告」は警告として機能しない。
+             */
+            const entry = `${p.name}  ${q}\n    ${m[0].slice(0, 8)}…（値は表示しない）`
+            if (isGitIgnored(q)) ignoredHits.push(entry)
+            else hits.push(entry)
         }
     }
 }
@@ -73,9 +95,16 @@ walk('.')
 
 console.log(`ファイル ${files} 件 / 合計 ${Math.round(bytes / 1024)}KB`)
 console.log('')
-console.log('=== 資格情報の疑い ===')
+console.log('=== 資格情報の疑い（★これが出たら公開前に必ず対処する） ===')
 console.log(hits.length ? hits.join('\n') : '  なし')
 console.log('')
+
+if (ignoredHits.length) {
+    console.log('--- git が無視しているファイルでの検出（危険ではない） ---')
+    console.log(ignoredHits.join('\n'))
+    console.log('  ↑ .env に本物のキーがあるのは正常。追跡されていないため公開されない。')
+    console.log('')
+}
 console.log('=== 画像ファイル ===')
 console.log(images.length ? images.join('\n') : '  なし')
 console.log('')
