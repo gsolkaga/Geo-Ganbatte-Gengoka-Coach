@@ -93,6 +93,109 @@ const countryNameByCode = computed(
     () => new Map(countryOptions.value.map((c) => [c.code, c.name])),
 )
 
+// ---- 過去の回答の読み込み（打ち直しをさせない） ----
+
+/**
+ * **14 スロットを埋める労力に対し、採点 1 回で使い捨てるのは不経済である。**
+ * 保存済みの観察メモをフォームに戻す。
+ *
+ * 応答には `result` が含まれない（`server/api/runs.get.ts` で外している）。
+ * **フィードバック本文には正解国が書かれているため、読み込み経路では返さない。**
+ */
+interface RunSummary {
+    file: string
+    id: string
+    ts: string
+    variant: 'v1' | 'v2'
+    questionId: string
+    describedSlots: number
+    normalized: boolean
+    candidates: AnswerDraft['candidates']
+    answer: { slots: SlotRecord } & AnswerDraft
+}
+
+const runs = ref<RunSummary[]>([])
+const selectedRunFile = ref<string>('')
+const loadedFrom = ref<string | null>(null)
+
+/** 現在の問題の記録を上に出す。他の問題の記録も選べるが、選ぶと移動する */
+const runOptions = computed(() => {
+    const id = current.value?.id
+    return [...runs.value].sort((a, b) => {
+        const ai = a.questionId === id ? 0 : 1
+        const bi = b.questionId === id ? 0 : 1
+        return ai - bi || b.ts.localeCompare(a.ts)
+    })
+})
+
+/** 現在のフォームに何か書かれているか。上書きの確認を出すかどうかの判断に使う */
+const hasInput = computed(() =>
+    Object.values(slots.value).some((e) => e.state !== 'unknown' || Boolean(e.plain?.trim()))
+    || answer.value.candidates.some((c) => c.country !== '')
+    || Boolean(answer.value.reasoning?.trim()),
+)
+
+const runLabel = (r: RunSummary) => {
+    const when = r.ts.slice(0, 16).replace('T', ' ')
+    const picks = r.candidates.map((c) => `${c.country}(${c.confidence})`).join(' ') || '候補なし'
+    return `${r.questionId}　${when}　${r.variant}　記述 ${r.describedSlots}/14　${picks}${r.normalized ? '　用語ID済' : ''}`
+}
+
+/**
+ * 記録をフォームへ戻す。
+ *
+ * **上書きの確認を出す。** 書きかけの観察メモを黙って消すと、
+ * 14 スロット分の入力が一度で失われる。取り消しは用意していない。
+ *
+ * 記録が別の問題のものなら、その問題へ移動してから流し込む。
+ * 移動を先にしないと、`goToQuestion` の復元処理が流し込んだ値を上書きする。
+ */
+function loadRun() {
+    const record = runs.value.find((r) => r.file === selectedRunFile.value)
+    if (!record) return
+
+    if (hasInput.value
+        // eslint-disable-next-line no-alert
+        && !confirm('いま入力している観察メモと回答を、選んだ記録で置き換える。取り消せない。続けるか？')) {
+        return
+    }
+
+    const index = questions.value.findIndex((q) => q.id === record.questionId)
+    if (index >= 0 && index !== currentIndex.value) goToQuestion(index)
+
+    // **構造を共有しない。** 記録の配列をそのまま入れるとフォームの編集が一覧側にも及ぶ
+    slots.value = structuredClone(record.answer.slots)
+    answer.value = {
+        candidates: record.answer.candidates.length
+            ? structuredClone(record.answer.candidates)
+            : emptyAnswer().candidates,
+        decisiveSlot: record.answer.decisiveSlot,
+        reasoning: record.answer.reasoning,
+    }
+
+    // 問題ごとの保持側にも反映する。移動して戻ってきたときに消えないため
+    if (current.value) {
+        slotsByQuestion.value[current.value.id] = slots.value
+        answerByQuestion.value[current.value.id] = answer.value
+    }
+
+    loadedFrom.value = record.file
+    phase.value = 'input'
+}
+
+/** フォームを空にする。**読み込みと同じく確認を出す** */
+function clearInput() {
+    // eslint-disable-next-line no-alert
+    if (hasInput.value && !confirm('入力を空にする。取り消せない。続けるか？')) return
+    slots.value = createEmptySlots()
+    answer.value = emptyAnswer()
+    loadedFrom.value = null
+    if (current.value) {
+        slotsByQuestion.value[current.value.id] = slots.value
+        answerByQuestion.value[current.value.id] = answer.value
+    }
+}
+
 /** 同時採点は副機能。既定は 1 モデル */
 const multiModel = ref(false)
 const selectedModels = computed(() =>
@@ -110,6 +213,14 @@ onMounted(async () => {
         questions.value = questionResponse.questions
         countryOptions.value = countryResponse.countries
         phase.value = questions.value.length ? 'input' : 'empty'
+
+        // 記録の一覧は失敗しても出題の表示を止めない。**副機能である**
+        try {
+            runs.value = (await $fetch<{ runs: RunSummary[] }>('/api/runs')).runs
+        }
+        catch {
+            runs.value = []
+        }
     }
     catch (error) {
         loadError.value = error instanceof Error ? error.message : String(error)
@@ -234,6 +345,56 @@ function nextQuestion() {
 
                 <span class="text-xs text-slate-500">
                     採点せずに移動できる。入力は問題ごとに保持される
+                </span>
+            </div>
+
+            <!--
+                過去の回答をフォームへ戻す。
+                **14 スロットを埋める労力に対し、採点 1 回で使い捨てるのは不経済である。**
+                モデルや variant を変えて再採点するときに打ち直しをさせない。
+            -->
+            <div
+                v-if="runs.length"
+                class="shrink-0 flex flex-wrap items-center gap-2 rounded border border-slate-300 bg-slate-50 px-2 py-1.5"
+            >
+                <label for="run-select" class="text-xs font-medium text-slate-700">
+                    過去の回答を読み込む
+                </label>
+                <select
+                    id="run-select"
+                    v-model="selectedRunFile"
+                    :disabled="grading.running.value"
+                    class="min-w-0 flex-1 rounded border border-slate-400 px-2 py-1 text-xs"
+                >
+                    <option value="">
+                        選択してください（{{ runs.length }} 件）
+                    </option>
+                    <option v-for="r in runOptions" :key="r.file" :value="r.file">
+                        {{ runLabel(r) }}
+                    </option>
+                </select>
+                <button
+                    type="button"
+                    :disabled="!selectedRunFile || grading.running.value"
+                    class="rounded border border-slate-500 bg-white px-2 py-1 text-xs font-medium hover:bg-slate-100 disabled:opacity-30"
+                    @click="loadRun"
+                >
+                    フォームに入れる
+                </button>
+                <button
+                    type="button"
+                    :disabled="grading.running.value"
+                    class="rounded border border-slate-400 px-2 py-1 text-xs hover:bg-slate-100 disabled:opacity-30"
+                    @click="clearInput"
+                >
+                    入力を空にする
+                </button>
+                <span v-if="loadedFrom" class="text-xs text-emerald-700">
+                    読み込み済み。編集して再採点できる
+                </span>
+                <!-- **正解は出さない。** 記録の判定結果とフィードバックは取得していない -->
+                <span v-else class="text-xs text-slate-500">
+                    選んだ記録の問題へ移動して流し込む。上書き前に確認する
                 </span>
             </div>
 

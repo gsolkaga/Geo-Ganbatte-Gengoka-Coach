@@ -17,7 +17,8 @@ import { gradeRequestSchema, feedbackSchema, MAX_GRADING_MODELS } from '../../sh
 import { SLOT_IDS } from '../../shared/slots'
 import type { Answer, CodeJudgement, Feedback, ModelGrading, Question, RunRecord, Term } from '../../shared/types'
 import { buildJudgement } from '../utils/grading'
-import type { GradingContext as JudgementContext } from '../utils/grading'
+// **同名を避ける。** Nuxt の自動 import は同名の型を片方だけ採用し、警告しか出さない
+import type { JudgementContext } from '../utils/grading'
 import {
     GRADING_JSON_SCHEMA,
     GRADING_SYSTEM_PROMPT,

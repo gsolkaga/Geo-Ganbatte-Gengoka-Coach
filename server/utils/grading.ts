@@ -41,7 +41,7 @@ import {
 } from './narrowing'
 
 /** v2 の判定に必要なデータ。v1 では渡さない */
-export interface GradingContext {
+export interface JudgementContext {
     /** 正解タグのスロット */
     tagSlots: SlotRecord
     /** 用語辞書。`data/glossary.json` */
@@ -230,7 +230,7 @@ export function buildV1Judgement(answer: Answer, answerCountry: string): CodeJud
 export function buildV2Judgement(
     answer: Answer,
     answerCountry: string,
-    context: GradingContext,
+    context: JudgementContext,
 ): CodeJudgement {
     const { hit, hitConfidence } = judgeHit(answer.candidates, answerCountry)
     // **`hit` ではなく「本命として到達したか」を渡す。** 低確信度で並べただけの候補を
@@ -279,7 +279,7 @@ export function buildJudgement(
     variant: Variant,
     answer: Answer,
     answerCountry: string,
-    context: GradingContext | null = null,
+    context: JudgementContext | null = null,
 ): CodeJudgement {
     if (variant === 'v2') {
         if (context === null) {
