@@ -17,7 +17,13 @@
  */
 import { describe, expect, it } from 'vitest'
 import { ref } from 'vue'
-import { deepCopy, hasFormInput, runToFormState } from '../shared/run-form'
+import {
+    countNormalizedSlots,
+    deepCopy,
+    hasFormInput,
+    mergeNormalizedTerms,
+    runToFormState,
+} from '../shared/run-form'
 import { SLOT_IDS, createEmptySlots } from '../shared/slots'
 import type { Answer, SlotRecord } from '../shared/types'
 
@@ -157,5 +163,88 @@ describe('hasFormInput', () => {
             decisiveSlot: 'script',
             reasoning: null,
         })).toBe(true)
+    })
+})
+
+/**
+ * 正規化結果の合成。
+ *
+ * **v2 の絞り込み計算はこれがないと全部「算出不能」になる**（実測 2026-08-17）。
+ * 判定は AI を使わないが、判定の入力を作るのに AI が必要である。
+ */
+describe('mergeNormalizedTerms', () => {
+    const withScript = (): SlotRecord => {
+        const slots = createEmptySlots() as SlotRecord
+        slots.script = { state: 'visible', plain: 'ハングルっぽい文字', terms: [] }
+        slots.bollard = { state: 'absent', plain: null, terms: [] }
+        return slots
+    }
+
+    it('用語 ID を入れる', () => {
+        const merged = mergeNormalizedTerms(withScript(), [
+            { slot: 'script', terms: ['script_hangul'], none: false },
+        ])
+        expect(merged.script.terms).toEqual(['script_hangul'])
+    })
+
+    /** **学習者が書いた言葉を書き換えない** */
+    it('元の記述を変えない', () => {
+        const merged = mergeNormalizedTerms(withScript(), [
+            { slot: 'script', terms: ['script_hangul'], none: false },
+        ])
+        expect(merged.script.plain).toBe('ハングルっぽい文字')
+    })
+
+    /** **辞書に無いと分かっただけである。以前の ID を捨てる理由がない** */
+    it('該当なしでは既存の terms を消さない', () => {
+        const slots = withScript()
+        slots.script.terms = ['script_hangul']
+        const merged = mergeNormalizedTerms(slots, [{ slot: 'script', terms: [], none: true }])
+        expect(merged.script.terms).toEqual(['script_hangul'])
+    })
+
+    it('visible 以外のスロットには入れない', () => {
+        const merged = mergeNormalizedTerms(withScript(), [
+            { slot: 'bollard', terms: ['bollard_all_yellow'], none: false },
+        ])
+        expect(merged.bollard.terms).toEqual([])
+    })
+
+    it('知らないスロット ID を無視する', () => {
+        expect(() => mergeNormalizedTerms(withScript(), [
+            { slot: 'street_light', terms: ['x'], none: false },
+        ])).not.toThrow()
+    })
+
+    it('重複した ID を除く', () => {
+        const merged = mergeNormalizedTerms(withScript(), [
+            { slot: 'script', terms: ['a', 'a', 'b'], none: false },
+        ])
+        expect(merged.script.terms).toEqual(['a', 'b'])
+    })
+
+    /** **元を書き換えない。** 書き換えると再採点のたびに入力が変質する */
+    it('引数を破壊しない', () => {
+        const slots = withScript()
+        mergeNormalizedTerms(slots, [{ slot: 'script', terms: ['script_hangul'], none: false }])
+        expect(slots.script.terms).toEqual([])
+    })
+
+    it('リアクティブな値でも通る', () => {
+        const holder = ref(withScript())
+        const merged = mergeNormalizedTerms(holder.value, [
+            { slot: 'script', terms: ['script_hangul'], none: false },
+        ])
+        expect(merged.script.terms).toEqual(['script_hangul'])
+    })
+})
+
+describe('countNormalizedSlots', () => {
+    it('用語 ID が入っているスロット数を数える', () => {
+        const slots = createEmptySlots() as SlotRecord
+        expect(countNormalizedSlots(slots)).toBe(0)
+        slots.script = { state: 'visible', plain: 'x', terms: ['a'] }
+        slots.pole = { state: 'visible', plain: 'y', terms: ['b', 'c'] }
+        expect(countNormalizedSlots(slots)).toBe(2)
     })
 })

@@ -17,8 +17,14 @@
 import { createEmptySlots } from '#shared/slots'
 import { MAX_GRADING_MODELS } from '#shared/schemas'
 // **画面の中にロジックを書かない。** 書くと型検査もテストも届かない
-import { emptyAnswerDraft, hasFormInput, runToFormState } from '#shared/run-form'
-import type { AnswerDraft, SlotRecord } from '#shared/types'
+import {
+    countNormalizedSlots,
+    emptyAnswerDraft,
+    hasFormInput,
+    mergeNormalizedTerms,
+    runToFormState,
+} from '#shared/run-form'
+import type { AnswerDraft, SlotRecord, Variant } from '#shared/types'
 
 /**
  * `observe` と `answer` を `input` に統合した。**観察と回答は同じ画面で行う。**
@@ -210,7 +216,60 @@ const selectedModels = computed(() =>
     multiModel.value ? [...COMPARISON_MODELS].slice(0, MAX_GRADING_MODELS) : [COMPARISON_MODELS[0]],
 )
 
+/**
+ * v1 / v2 の切り替え。**既定は v1。**
+ *
+ * v2 は正解タグと用語辞書を渡す。**同じ画面・同じプロンプト骨格で、
+ * 渡す情報だけを変える**のが対照実験の条件である（要件 9-3）。
+ *
+ * v2 では採点の前に観察メモを正規化する（1 リクエスト追加）。
+ * 絞り込み力・積集合・次に見るべきスロットは**用語 ID の集合演算**で計算するため、
+ * 正規化しないと全部「算出不能」になる（実測 2026-08-17）。
+ */
+const variant = ref<Variant>('v1')
+
+/** 実行前に消費数を出す（要件 26.1）。**押す前に分かること** */
+const requestCost = computed(() => selectedModels.value.length + (variant.value === 'v2' ? 1 : 0))
+
+const normalizeNote = ref<string | null>(null)
+
 const grading = useGrading()
+
+/**
+ * v2 の前処理。観察メモを用語 ID に正規化する。
+ *
+ * **失敗しても採点は続ける。** 正規化は補助であり、
+ * 落ちたときは正解タグだけの v2（絞り込みは算出不能）になる。
+ * ただし**成功したことにしない。** 画面に結果を出す。
+ */
+async function normalizeBeforeGrading(): Promise<number> {
+    normalizeNote.value = null
+    if (!current.value) return 0
+    try {
+        const response = await $fetch<{
+            requestsConsumed: number
+            ok: boolean
+            slots: { slot: string, terms: string[], none: boolean }[]
+        }>('/api/normalize', {
+            method: 'POST',
+            body: { slots: slots.value, questionId: current.value.id },
+        })
+        if (!response.ok) {
+            normalizeNote.value = '正規化に失敗した。絞り込み力と積集合は算出不能になる'
+            return response.requestsConsumed
+        }
+        slots.value = mergeNormalizedTerms(slots.value, response.slots)
+        const filled = countNormalizedSlots(slots.value)
+        const none = response.slots.filter((s) => s.none).length
+        normalizeNote.value = `正規化: 用語 ID が入ったスロット ${filled} 件`
+            + (none ? ` / 辞書に無かった記述 ${none} 件（追加候補として記録した）` : '')
+        return response.requestsConsumed
+    }
+    catch (error) {
+        normalizeNote.value = `正規化に失敗した: ${error instanceof Error ? error.message : String(error)}`
+        return 0
+    }
+}
 
 onMounted(async () => {
     try {
@@ -241,9 +300,11 @@ const answerPanel = ref<{ valid: boolean } | null>(null)
 async function submit() {
     if (!current.value) return
     phase.value = 'grading'
+    // **v2 は正規化を先に通す。** 用語 ID がないと絞り込みが算出不能になる
+    if (variant.value === 'v2') await normalizeBeforeGrading()
     await grading.grade({
         questionId: current.value.id,
-        variant: 'v1',
+        variant: variant.value,
         slots: slots.value,
         answer: answer.value,
         models: selectedModels.value,
@@ -251,12 +312,17 @@ async function submit() {
     phase.value = 'result'
 }
 
-/** 再採点は人間が押す。自動で再実行しない */
+/**
+ * 再採点は人間が押す。自動で再実行しない。
+ *
+ * **正規化はやり直さない。** 同じ記述に同じ用語 ID が付くだけで、
+ * 1 リクエストを無駄に消費する。既に `slots` に入っている。
+ */
 async function regrade(models: string[]) {
     if (!current.value) return
     await grading.grade({
         questionId: current.value.id,
-        variant: 'v1',
+        variant: variant.value,
         slots: slots.value,
         answer: answer.value,
         models,
@@ -455,6 +521,37 @@ function nextQuestion() {
                         <fieldset :disabled="phase !== 'input'" class="grid min-w-0 gap-3">
                             <AnswerPanel ref="answerPanel" v-model="answer" :country-options="countryOptions" />
 
+                            <!--
+                                v1 / v2 の切り替え。**画面もプロンプト骨格も同一で、渡す情報だけが違う。**
+                                UI を分けると対照実験（要件 9-3）が無効になる。
+                            -->
+                            <div class="rounded border border-slate-300 p-3">
+                                <p class="text-sm font-medium text-slate-900">
+                                    採点に渡す情報
+                                </p>
+                                <div class="mt-1 grid gap-1 text-sm text-slate-800">
+                                    <label class="flex items-start gap-2">
+                                        <input v-model="variant" type="radio" value="v1" class="mt-1 size-4">
+                                        <span>
+                                            <strong>v1</strong>：観察メモと回答だけを渡す
+                                            <span class="block text-xs text-slate-600">
+                                                正解タグも用語辞書も渡さない。見落としの判定はできない
+                                            </span>
+                                        </span>
+                                    </label>
+                                    <label class="flex items-start gap-2">
+                                        <input v-model="variant" type="radio" value="v2" class="mt-1 size-4">
+                                        <span>
+                                            <strong>v2</strong>：正解タグと用語辞書も渡す
+                                            <span class="block text-xs text-slate-600">
+                                                採点の前に観察メモを用語 ID へ正規化する（<strong>+1 リクエスト</strong>）。
+                                                絞り込み力と積集合はここで初めて計算できる
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+
                             <div class="rounded border border-slate-300 p-3">
                                 <p class="text-sm font-medium text-slate-900">
                                     採点に使うモデル
@@ -465,18 +562,23 @@ function nextQuestion() {
                                 </label>
                                 <p class="mt-1 text-xs text-slate-600">
                                     既定は 1 モデル。同時採点は解釈のばらつきを見るための副機能である。
-                                    <strong>消費: {{ selectedModels.length }} リクエスト</strong>
                                 </p>
                             </div>
 
+                            <!-- **押す前に消費数が分かること。** 実行後に知らせても遅い -->
                             <button
                                 type="button"
                                 :disabled="answerPanel?.valid === false"
                                 class="justify-self-start rounded bg-slate-900 px-4 py-2 text-sm text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-40"
                                 @click="submit"
                             >
-                                採点する（{{ selectedModels.length }} リクエスト）
+                                {{ variant }} で採点する（{{ requestCost }} リクエスト）
                             </button>
+
+                            <!-- 正規化の結果を隠さない。**失敗しても採点は続けるが、成功したことにしない** -->
+                            <p v-if="normalizeNote" class="text-xs text-slate-700">
+                                {{ normalizeNote }}
+                            </p>
                         </fieldset>
                     </div>
                 </div>
