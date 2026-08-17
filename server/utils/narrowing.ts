@@ -99,7 +99,23 @@ function usableForNarrowing(term: Term): boolean {
      *
      * 埋めたら `disputed` を `false` に戻す。それが再開の手続きである。
      */
-    return term.disputed !== true
+    if (term.disputed === true) return false
+    /**
+     * **連想は積集合に入れない。** 入れると連想が主張になる。
+     *
+     * 人手ワークシート §9 の「道路のすぐ横に木々があると、
+     * ブラジル・インドネシア・フィリピンを連想する」を積集合に入れたところ、
+     * **オーストラリアの出題で積集合が 1 カ国（インドネシア）になった**
+     * （実測 2026-08-17）。数字の上では絞れているが、正解ではない。
+     *
+     * > **1 カ国に絞れたことは、正解が分かったことではない。**
+     *
+     * `source` で `human` と `reference` を分けても、
+     * **使い方を分けなければ意味がなかった。**
+     *
+     * `exhaustive` が無い古い項目は網羅として扱う（`undefined` を `false` と読まない）。
+     */
+    return term.exhaustive !== false
 }
 
 /**

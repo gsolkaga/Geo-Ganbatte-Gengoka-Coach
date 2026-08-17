@@ -266,9 +266,10 @@
             "confusableWith": [
                 "road_marking_center_white"
             ],
-            "note": "**補助メタ。単独では大陸すら決まらない。** 13 カ国・3 大陸にまたがる。組み合わせの材料として使う。出典では VE も挙がっているが対象国リストに無いため除いた。",
+            "note": "**連想である。網羅ではない。**「中央線が黄色なら、まず北米・南米・アジアを連想する」。出典による網羅は `ref_road_marking_center_yellow`（37 カ国）にある。**本人の連想 13 カ国と出典の記載 37 カ国は別のものである。**どちらも残し、**絞り込みには網羅の方だけを使う。**",
             "verifiedByHuman": true,
-            "disputed": false
+            "disputed": false,
+            "exhaustive": false
         },
         {
             "id": "road_marking_center_white",
@@ -286,9 +287,10 @@
             "confusableWith": [
                 "road_marking_center_yellow"
             ],
-            "note": "**出典は「まずヨーロッパを考える」だが具体的な国が挙がっていない。** 唯一明示されたのがチリ（南米だが白いことがある）。ヨーロッパ側の国は未記載のため入れていない。**この用語は現状ほぼ機能しない。** 欧州の国を埋めるまで保留。",
+            "note": "**連想である。網羅ではない。**「中央線が白なら、まずヨーロッパを考える」。国を挙げられていない（チリだけが書けた）ことが、連想である証拠である。出典による網羅は `ref_road_marking_center_white`（85 カ国）にある。",
             "verifiedByHuman": true,
-            "disputed": true
+            "disputed": true,
+            "exhaustive": false
         },
         {
             "id": "road_marking_edge_yellow",
@@ -362,9 +364,10 @@
                 "UY"
             ],
             "confusableWith": [],
-            "note": "**経験則。** 出典が「連想する」と書いている。断定に使わない。",
+            "note": "**連想である。網羅ではない。**「タイルっぽい路面ならウルグアイを連想する」。**タイル状の路面がウルグアイだけということではない。**トルコの出題でこれが 1 カ国の絞り込みとして働いてしまっていた。",
             "verifiedByHuman": true,
-            "disputed": false
+            "disputed": false,
+            "exhaustive": false
         },
         {
             "id": "roadside_stone_wall",
@@ -473,9 +476,10 @@
             "confusableWith": [
                 "trees_far_from_road"
             ],
-            "note": "**3 カ国・2 大陸なので補助メタ。** 熱帯域の候補生成に使う。",
+            "note": "**連想である。網羅ではない。**人手ワークシート §9 の「道路のすぐ横に木々があると、ブラジル・インドネシア・フィリピンを連想する」。**木が道路の近くにある国がこの 3 つだけということではない。**積集合に入れたため、オーストラリアの出題で積集合が**1 カ国（インドネシア）になった**（実測 2026-08-17）。絞り込み計算からは外し、**語彙の対応づけと「次にどこを考えるか」には使う。**",
             "verifiedByHuman": true,
-            "disputed": false
+            "disputed": false,
+            "exhaustive": false
         },
         {
             "id": "trees_far_from_road",
@@ -1652,10 +1656,11 @@
                 "RO",
                 "SE",
                 "SI",
-                "SK"
+                "SK",
+                "TR"
             ],
             "confusableWith": [],
-            "note": "**単独では絞れない（EU 加盟国はこの型である）。**価値は**無いことが分かったとき**にある。欧州の景観で青い帯が無ければ、スイス・アイスランド・アンドラ・ロシア・ウクライナなどへ寄る。> **強いのは、あることではなく無いことである。**",
+            "note": "**「あること」では絞れない。「無いこと」で消すために使う。**EU 加盟国とトルコのプレートは左端に青い縦帯を持つ。**当初 EU 加盟国の一覧だけで作り、トルコが漏れていた**（実測 2026-08-17）。「左端に青い帯があるか」という事実で作るべきところを、**EU 加盟国という近い別のもので代用していた。**欧州の景観で青い帯が無ければ、スイス・アイスランド・アンドラ・ロシア・イギリスなどへ寄る。マルタは混在する。**非加盟国が独自の青い帯を持つ場合があるため、この一覧は網羅を保証しない。**",
             "verifiedByHuman": false,
             "disputed": false,
             "kind": "atomic",
@@ -1663,7 +1668,8 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/license_plate/"
-            ]
+            ],
+            "exhaustive": false
         },
         {
             "id": "ref_plate_black_background",

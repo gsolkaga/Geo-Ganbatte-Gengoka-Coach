@@ -57,7 +57,11 @@ const byId = new Map(glossary.map((t) => [t.id, t]))
  * `narrowing.ts` が `Term` 型を要求するためである。**揃っていることをテストで固定する**
  * （`tests/narrowing.test.ts` の `disputed` の describe）。
  */
-const usable = (t) => t !== undefined && t.certainty !== 'unverified' && t.disputed !== true
+const usable = (t) => t !== undefined
+    && t.certainty !== 'unverified'
+    && t.disputed !== true
+    // **連想は絞り込みに使わない**（`shared/types.ts` の `exhaustive` に経緯がある）
+    && t.exhaustive !== false
 
 const gaps = []
 const missingIds = []

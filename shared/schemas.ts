@@ -140,6 +140,11 @@ export const termSchema = z.object({
         .default(null),
     note: z.string().nullable().default(null),
     disputed: z.boolean().default(false),
+    /**
+     * `countries` が網羅か連想か。**既定は網羅。**
+     * 連想（`false`）は絞り込み計算に使わない（`shared/types.ts` に経緯がある）。
+     */
+    exhaustive: z.boolean().optional(),
     modelCount: z.number().int().optional(),
 })
 

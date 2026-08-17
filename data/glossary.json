@@ -18,14 +18,11 @@
         "AI 由来の confusableWith は捨てた。国コードが入っておりスキーマの誤用だった。",
         "AI 由来の id は振り直した。全ファイルが coarse-01 から始まり衝突するため。"
     ],
-    "generatedAt": "2026-08-17T09:15:44.071Z",
+    "generatedAt": "2026-08-17T09:38:52.459Z",
     "terms": [
         {
             "id": "bollard_all_yellow",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "verified",
-            "source": "human",
             "canonical": "全体が黄色のボラード",
             "plain": "棒ぜんぶが黄色い",
             "aliases": [
@@ -41,16 +38,16 @@
                 "bollard_white_yellow_reflector_plain",
                 "bollard_yellow_with_black"
             ],
-            "requires": null,
             "note": "本体そのものが黄色。反射板だけが黄色のものとは別。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "verified",
+            "source": "human",
+            "requires": null
         },
         {
             "id": "bollard_white_yellow_reflector_banded",
             "slot": "bollard",
-            "kind": "combination",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "白本体・黄色の反射板・帯あり",
             "plain": "白い棒に黄色い反射板、横に帯がある",
             "aliases": [
@@ -63,16 +60,16 @@
                 "bollard_white_yellow_reflector_plain",
                 "bollard_all_yellow"
             ],
-            "requires": null,
             "note": "帯の有無だけでベルギーと分かれる。",
-            "disputed": false
+            "disputed": false,
+            "kind": "combination",
+            "certainty": "heuristic",
+            "source": "human",
+            "requires": null
         },
         {
             "id": "bollard_white_yellow_reflector_plain",
             "slot": "bollard",
-            "kind": "combination",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "白本体・黄色の反射板・帯なし",
             "plain": "白い棒に黄色い反射板だけ",
             "aliases": [
@@ -85,16 +82,16 @@
                 "bollard_white_yellow_reflector_banded",
                 "bollard_all_yellow"
             ],
-            "requires": null,
             "note": "帯の有無だけでデンマークと分かれる。",
-            "disputed": false
+            "disputed": false,
+            "kind": "combination",
+            "certainty": "heuristic",
+            "source": "human",
+            "requires": null
         },
         {
             "id": "bollard_yellow_with_black",
             "slot": "bollard",
-            "kind": "combination",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "黄色の周囲に黒がある",
             "plain": "黄色の周りが黒くなっている",
             "aliases": [
@@ -109,16 +106,16 @@
             "confusableWith": [
                 "bollard_all_yellow"
             ],
-            "requires": null,
             "note": "3 カ国に絞れる。さらに他の要素との組み合わせが必要。",
-            "disputed": false
+            "disputed": false,
+            "kind": "combination",
+            "certainty": "heuristic",
+            "source": "human",
+            "requires": null
         },
         {
             "id": "bollard_red_white_thick_round",
             "slot": "bollard",
-            "kind": "combination",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "赤白・太くて丸い棒",
             "plain": "赤と白で、太くて丸い棒",
             "aliases": [
@@ -131,16 +128,16 @@
                 "bollard_red_white_square_concrete",
                 "bollard_red_white_stripe"
             ],
-            "requires": null,
             "note": "赤白でも形状で国が分かれる。太さと断面が決め手。",
-            "disputed": false
+            "disputed": false,
+            "kind": "combination",
+            "certainty": "heuristic",
+            "source": "human",
+            "requires": null
         },
         {
             "id": "bollard_red_white_square_concrete",
             "slot": "bollard",
-            "kind": "combination",
-            "certainty": "verified",
-            "source": "human",
             "canonical": "赤白・四角いコンクリート",
             "plain": "赤白の四角いコンクリの杭",
             "aliases": [
@@ -153,16 +150,16 @@
             "confusableWith": [
                 "bollard_red_white_thick_round"
             ],
-            "requires": null,
             "note": "東南アジア。フランス式の丸い棒とは形状で分かれる。",
-            "disputed": false
+            "disputed": false,
+            "kind": "combination",
+            "certainty": "verified",
+            "source": "human",
+            "requires": null
         },
         {
             "id": "bollard_red_white_stripe",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "赤白のストライプ",
             "plain": "赤と白のしましま",
             "aliases": [
@@ -174,16 +171,16 @@
             "confusableWith": [
                 "bollard_red_white_thick_round"
             ],
-            "requires": null,
             "note": "",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "requires": null
         },
         {
             "id": "bollard_red_diagonal_reflector",
             "slot": "bollard",
-            "kind": "combination",
-            "certainty": "verified",
-            "source": "human",
             "canonical": "反射板部分が斜めに赤い",
             "plain": "反射板のところが斜めに赤い",
             "aliases": [
@@ -195,16 +192,16 @@
             "confusableWith": [
                 "bollard_red_both_sides"
             ],
-            "requires": null,
             "note": "赤の入る角度が決め手。",
-            "disputed": false
+            "disputed": false,
+            "kind": "combination",
+            "certainty": "verified",
+            "source": "human",
+            "requires": null
         },
         {
             "id": "bollard_red_both_sides",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "裏面まで赤い",
             "plain": "裏側まで赤い",
             "aliases": [
@@ -216,16 +213,16 @@
             "confusableWith": [
                 "bollard_red_diagonal_reflector"
             ],
-            "requires": null,
             "note": "裏面を確認する必要がある。正面だけ見ていると判別できない。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "requires": null
         },
         {
             "id": "bollard_turkey_shape",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "トルコ固有の形状のボラード",
             "plain": "キングジムのバインダーみたいな形",
             "aliases": [
@@ -235,16 +232,18 @@
                 "TR"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "「キングジムみたい」は日本のプレイヤー間の表現。UI では形状そのものの説明に置き換える必要がある（要記述）。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "human",
+            "requires": null
         },
         {
             "id": "road_marking_center_yellow",
             "slot": "road_marking",
             "kind": "atomic",
             "certainty": "heuristic",
-            "source": "human",
             "canonical": "中央線が黄色",
             "plain": "中央線が黄色",
             "aliases": [
@@ -269,16 +268,17 @@
             "confusableWith": [
                 "road_marking_center_white"
             ],
-            "requires": null,
-            "note": "**補助メタ。単独では大陸すら決まらない。** 13 カ国・3 大陸にまたがる。組み合わせの材料として使う。出典では VE も挙がっているが対象国リストに無いため除いた。",
-            "disputed": false
+            "note": "**連想である。網羅ではない。**「中央線が黄色なら、まず北米・南米・アジアを連想する」。出典による網羅は `ref_road_marking_center_yellow`（37 カ国）にある。**本人の連想 13 カ国と出典の記載 37 カ国は別のものである。**どちらも残し、**絞り込みには網羅の方だけを使う。**",
+            "disputed": false,
+            "exhaustive": false,
+            "source": "human",
+            "requires": null
         },
         {
             "id": "road_marking_center_white",
             "slot": "road_marking",
             "kind": "atomic",
             "certainty": "heuristic",
-            "source": "human",
             "canonical": "中央線が白",
             "plain": "中央線が白い",
             "aliases": [
@@ -290,16 +290,17 @@
             "confusableWith": [
                 "road_marking_center_yellow"
             ],
-            "requires": null,
-            "note": "**出典は「まずヨーロッパを考える」だが具体的な国が挙がっていない。** 唯一明示されたのがチリ（南米だが白いことがある）。ヨーロッパ側の国は未記載のため入れていない。**この用語は現状ほぼ機能しない。** 欧州の国を埋めるまで保留。",
-            "disputed": true
+            "note": "**連想である。網羅ではない。**「中央線が白なら、まずヨーロッパを考える」。国を挙げられていない（チリだけが書けた）ことが、連想である証拠である。出典による網羅は `ref_road_marking_center_white`（85 カ国）にある。",
+            "disputed": true,
+            "exhaustive": false,
+            "source": "human",
+            "requires": null
         },
         {
             "id": "road_marking_edge_yellow",
             "slot": "road_marking",
             "kind": "atomic",
             "certainty": "heuristic",
-            "source": "human",
             "canonical": "外側線が黄色",
             "plain": "路肩の線が黄色い",
             "aliases": [
@@ -315,16 +316,16 @@
             "confusableWith": [
                 "road_marking_center_yellow_edge_white"
             ],
-            "requires": null,
             "note": "南部アフリカ 4 カ国。**同一地域なので良メタ。** 出典では混同先に IE が挙がっている。アラビア語が見当たらない場合にアフリカを考えるという条件付き。",
-            "disputed": false
+            "disputed": false,
+            "source": "human",
+            "requires": null
         },
         {
             "id": "road_marking_center_yellow_edge_white",
             "slot": "road_marking",
             "kind": "combination",
             "certainty": "heuristic",
-            "source": "human",
             "canonical": "中央線が黄色・外側線が白",
             "plain": "中央が黄色で外側が白",
             "aliases": [],
@@ -351,14 +352,14 @@
                 }
             ],
             "note": "**黄色が中央か外側かを区別することが要点。** 外側が黄色なら南部アフリカ（road_marking_edge_yellow）。同一スロット内の組み合わせ。",
-            "disputed": false
+            "disputed": false,
+            "source": "human"
         },
         {
             "id": "pavement_tile_like",
             "slot": "pavement",
             "kind": "atomic",
             "certainty": "heuristic",
-            "source": "human",
             "canonical": "タイル状の路面",
             "plain": "路面がタイルっぽい",
             "aliases": [
@@ -368,16 +369,17 @@
                 "UY"
             ],
             "confusableWith": [],
-            "requires": null,
-            "note": "**経験則。** 出典が「連想する」と書いている。断定に使わない。",
-            "disputed": false
+            "note": "**連想である。網羅ではない。**「タイルっぽい路面ならウルグアイを連想する」。**タイル状の路面がウルグアイだけということではない。**トルコの出題でこれが 1 カ国の絞り込みとして働いてしまっていた。",
+            "disputed": false,
+            "exhaustive": false,
+            "source": "human",
+            "requires": null
         },
         {
             "id": "roadside_stone_wall",
             "slot": "terrain_vegetation",
             "kind": "atomic",
             "certainty": "heuristic",
-            "source": "human",
             "canonical": "道路脇の石垣",
             "plain": "道の横に石垣がある",
             "aliases": [
@@ -391,16 +393,16 @@
             "confusableWith": [
                 "roadside_low_stone_wall_narrow_lane"
             ],
-            "requires": null,
             "note": "**3 カ国だが 2 大陸にまたがるため良メタではない。** 補助メタとして扱い、道路幅・石垣の高さと組み合わせる。",
-            "disputed": false
+            "disputed": false,
+            "source": "human",
+            "requires": null
         },
         {
             "id": "roadside_low_stone_wall_narrow_lane",
             "slot": "terrain_vegetation",
             "kind": "combination",
             "certainty": "heuristic",
-            "source": "human",
             "canonical": "両側に低い石垣がある狭い田舎道",
             "plain": "細い田舎道の両側に低めの石垣",
             "aliases": [],
@@ -418,14 +420,14 @@
                 }
             ],
             "note": "**石垣単独では 3 カ国。道路幅と石垣の高さを足して 1 カ国になる。** 弱いメタの組み合わせが強くなる典型例。",
-            "disputed": false
+            "disputed": false,
+            "source": "human"
         },
         {
             "id": "kerb_on_narrow_lane",
             "slot": "road_marking",
             "kind": "combination",
             "certainty": "heuristic",
-            "source": "human",
             "canonical": "狭い田舎道に縁石がある",
             "plain": "細い田舎道なのに縁石がある",
             "aliases": [],
@@ -444,14 +446,14 @@
                 }
             ],
             "note": "**強メタ（2 カ国・近接）。** 縁石そのものは欧州全般を示すが、狭い田舎道と組み合わせると 2 カ国に絞れる。",
-            "disputed": false
+            "disputed": false,
+            "source": "human"
         },
         {
             "id": "kerb_large",
             "slot": "road_marking",
             "kind": "atomic",
             "certainty": "heuristic",
-            "source": "human",
             "canonical": "大きな縁石",
             "plain": "縁石が大きい",
             "aliases": [],
@@ -461,16 +463,16 @@
             "confusableWith": [
                 "kerb_on_narrow_lane"
             ],
-            "requires": null,
             "note": "**経験則。** 出典は「ネパールやチベットを連想することがある」。チベットは国コードを持たないため NP のみ。**根拠が弱い。**",
-            "disputed": true
+            "disputed": true,
+            "source": "human",
+            "requires": null
         },
         {
             "id": "trees_close_to_road",
             "slot": "terrain_vegetation",
             "kind": "atomic",
             "certainty": "heuristic",
-            "source": "human",
             "canonical": "道路のすぐ横に木々",
             "plain": "道路のすぐ横に木が迫っている",
             "aliases": [],
@@ -482,16 +484,17 @@
             "confusableWith": [
                 "trees_far_from_road"
             ],
-            "requires": null,
-            "note": "**3 カ国・2 大陸なので補助メタ。** 熱帯域の候補生成に使う。",
-            "disputed": false
+            "note": "**連想である。網羅ではない。**人手ワークシート §9 の「道路のすぐ横に木々があると、ブラジル・インドネシア・フィリピンを連想する」。**木が道路の近くにある国がこの 3 つだけということではない。**積集合に入れたため、オーストラリアの出題で積集合が**1 カ国（インドネシア）になった**（実測 2026-08-17）。絞り込み計算からは外し、**語彙の対応づけと「次にどこを考えるか」には使う。**",
+            "disputed": false,
+            "exhaustive": false,
+            "source": "human",
+            "requires": null
         },
         {
             "id": "trees_far_from_road",
             "slot": "terrain_vegetation",
             "kind": "atomic",
             "certainty": "heuristic",
-            "source": "human",
             "canonical": "道路から離れて木々",
             "plain": "道路から離れたところに木がある",
             "aliases": [],
@@ -502,16 +505,16 @@
             "confusableWith": [
                 "trees_close_to_road"
             ],
-            "requires": null,
             "note": "**経験則。** 出典は「積雪などによる寒さを連想している」。除雪のための離隔という解釈。**因果は未検証。**",
-            "disputed": false
+            "disputed": false,
+            "source": "human",
+            "requires": null
         },
         {
             "id": "pole_harp_shaped",
             "slot": "pole",
             "kind": "atomic",
             "certainty": "verified",
-            "source": "human",
             "canonical": "ハープ型の電柱",
             "plain": "電柱がハープみたいな形",
             "aliases": [
@@ -521,16 +524,16 @@
                 "GR"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**最強メタ。** 出典が「数少ない海外の電柱メタの中で覚えているもの」として強いと明記している。",
-            "disputed": false
+            "disputed": false,
+            "source": "human",
+            "requires": null
         },
         {
             "id": "pole_octagonal_with_round_meter",
             "slot": "pole",
             "kind": "combination",
             "certainty": "verified",
-            "source": "human",
             "canonical": "八角形の電柱＋丸形の電気メーター",
             "plain": "八角形の電柱で、家の電気メーターが丸い",
             "aliases": [],
@@ -547,14 +550,14 @@
                 }
             ],
             "note": "**八角形の電柱だけでは国を確定できない。** 電気メーターの形を足して 1 カ国になる。出典が明示的に「単独ではなく組み合わせで記憶している」と述べている。",
-            "disputed": false
+            "disputed": false,
+            "source": "human"
         },
         {
             "id": "pole_octagonal_with_box_meter",
             "slot": "pole",
             "kind": "combination",
             "certainty": "verified",
-            "source": "human",
             "canonical": "八角形の電柱＋箱型で横長の覗き窓がある電気メーター",
             "plain": "八角形の電柱で、電気メーターが箱型で横長の窓が1〜3個",
             "aliases": [],
@@ -572,14 +575,14 @@
                 }
             ],
             "note": "上と同じ八角形の電柱から、電気メーターの形で分岐する。**次に何を見るかまで含めて記憶している例。**",
-            "disputed": false
+            "disputed": false,
+            "source": "human"
         },
         {
             "id": "pole_square_section",
             "slot": "pole",
             "kind": "atomic",
             "certainty": "verified",
-            "source": "human",
             "canonical": "四角柱の電柱",
             "plain": "電柱が四角い柱",
             "aliases": [
@@ -592,16 +595,16 @@
             "confusableWith": [
                 "pole_octagonal_with_box_meter"
             ],
-            "requires": null,
             "note": "**単独では決められないと出典が明記している。** 「四角柱の電柱だけを見てもペルーと回答できず、タイなど別候補へ行くことがある」。八角形との区別もパッと見では難しく、複数本見て比較する必要がある。",
-            "disputed": false
+            "disputed": false,
+            "source": "human",
+            "requires": null
         },
         {
             "id": "sign_awas",
             "slot": "sign",
             "kind": "atomic",
             "certainty": "verified",
-            "source": "human",
             "canonical": "AWAS の標識",
             "plain": "AWAS と書かれた看板",
             "aliases": [
@@ -611,16 +614,16 @@
                 "MY"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**最強メタ。** 出典が「看板で国がかなり確定する」として非常に強いと明記している。マレー語の「注意」。",
-            "disputed": false
+            "disputed": false,
+            "source": "human",
+            "requires": null
         },
         {
             "id": "sign_tobacco_ad_with_rp",
             "slot": "sign",
             "kind": "combination",
             "certainty": "verified",
-            "source": "human",
             "canonical": "タバコ広告＋Rp 通貨表記",
             "plain": "タバコの広告に Rp と書かれた価格がある",
             "aliases": [
@@ -630,16 +633,16 @@
                 "ID"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**最強メタ。** 出典が「看板が出れば一気に確信度が上がる」と明記している。Rp はインドネシアルピア。同一スロット内の組み合わせ。",
-            "disputed": false
+            "disputed": false,
+            "source": "human",
+            "requires": null
         },
         {
             "id": "roadside_wavy_fence",
             "slot": "other",
             "kind": "atomic",
             "certainty": "heuristic",
-            "source": "human",
             "canonical": "波形模様の路肩柵",
             "plain": "ガードレールが波々の模様になっている柵",
             "aliases": [
@@ -654,16 +657,14 @@
                 "UA"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**補助メタ。カザフスタン固有ではない。** 旧ソ連圏で広く見られ、UZ・KG・UA にもある（BY も該当するが対象国リストに無いため除いた）。v2 の実測で AI が「KZ で頻出し他の候補国と区別する重要な手がかり」と**誤って断定した**ため追加した。**該当国を渡さない手がかりについて、AI は該当国を作る。**",
-            "disputed": false
+            "disputed": false,
+            "source": "human",
+            "requires": null
         },
         {
             "id": "ref_road_marking_center_white",
             "slot": "road_marking",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "中央線が白（出典）",
             "plain": "中央線が白い",
             "aliases": [
@@ -758,16 +759,19 @@
                 "ZA"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**単独では非常に弱い。** 内側の線に白を含む国の和であり、人手の note に「現状ほぼ機能しない」と書いてあったのは量として正しかった。積集合の材料としては使える。軸は本人のワークシート（中央線が白ならまず欧州）に由来し、網羅は出典に由来する。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geohints.com/meta/lines"
+            ],
+            "requires": null
         },
         {
             "id": "ref_road_marking_center_yellow",
             "slot": "road_marking",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "中央線が黄色（出典）",
             "plain": "中央線が黄色い",
             "aliases": [
@@ -814,16 +818,19 @@
                 "VN"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**`KZ` を含まない。** 人手の road_marking_center_yellow（13 カ国）は本人の連想であり、こちらは記載である。上書きせず別に持つ。出典が独立に「黄色い中央線はカザフスタンを示さない」という診断と一致した。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geohints.com/meta/lines"
+            ],
+            "requires": null
         },
         {
             "id": "ref_road_marking_side_yellow",
             "slot": "road_marking",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "外側線が黄色（出典）",
             "plain": "路肩の線が黄色い",
             "aliases": [
@@ -870,16 +877,19 @@
                 "ZA"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "中央線の色より強い。人手ワークシート §2 の「黄色い外側線＋白い中央線ならアフリカを考える（ZA BW LS SZ、混同 IE）」と同じ軸で、**本人が挙げた 4 カ国と混同の IE を全部含む。** 現在の 10 問には当てはまらない（路肩の記述が「なし」か白）。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geohints.com/meta/lines"
+            ],
+            "requires": null
         },
         {
             "id": "ref_chevron_red_on_white",
             "slot": "sign",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "白地に赤い矢印のシェブロン（出典）",
             "plain": "白い板に赤い矢印が並んだカーブの標識",
             "aliases": [
@@ -892,16 +902,19 @@
                 "ZA"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**エストニアは逆（赤地に白矢印）なので含めない。** ブラジルは黄地に黒、スウェーデンは黄と青、オーストラリアは黄地に黒（枠なし）。Kimi が q-za-01 の添削でこの用語を挙げ、監査が「辞書に無い」として落とした。**指摘は正しく、辞書に無かっただけである。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/chevrons/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_traffic_side_left",
             "slot": "traffic_side",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "左側通行",
             "plain": "車が左側を走っている",
             "aliases": [
@@ -936,16 +949,19 @@
                 "ZA"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**世界の約 4 分の 1 しかない。分かれば強い。**車の向き、ハンドル位置、路上駐車の向き、標識の設置側から読む。「右側通行ではない」と分かった時点で候補が大きく減る。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/Left-_and_right-hand_traffic"
+            ],
+            "requires": null
         },
         {
             "id": "ref_traffic_side_right",
             "slot": "traffic_side",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "右側通行",
             "plain": "車が右側を走っている",
             "aliases": [
@@ -1033,16 +1049,19 @@
                 "XK"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**世界の約 4 分の 3。単独では絞り込めない。**それでも記録する意味は 2 つある。(1) 左側通行の可能性を消せる。(2) 他の欄との積集合には効く。**弱いことと、掛けて効かないことは別である。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/Left-_and_right-hand_traffic"
+            ],
+            "requires": null
         },
         {
             "id": "ref_script_latin",
             "slot": "script",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "ラテン文字",
             "plain": "アルファベット（英語と同じ字形）",
             "aliases": [
@@ -1144,16 +1163,19 @@
                 "ZA"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**単独では絞れない。** 他の欄との積集合で効く。国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ],
+            "requires": null
         },
         {
             "id": "ref_script_cyrillic",
             "slot": "script",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "キリル文字",
             "plain": "ロシア語みたいな文字",
             "aliases": [
@@ -1175,16 +1197,19 @@
                 "XK"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**見えれば候補が一気に減る。強い軸である。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ],
+            "requires": null
         },
         {
             "id": "ref_script_greek",
             "slot": "script",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "ギリシャ文字",
             "plain": "ギリシャ語の文字",
             "aliases": [
@@ -1195,16 +1220,19 @@
                 "GR"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ],
+            "requires": null
         },
         {
             "id": "ref_script_georgian",
             "slot": "script",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "ジョージア文字",
             "plain": "丸みのある独特な文字",
             "aliases": [
@@ -1214,16 +1242,19 @@
                 "GE"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ],
+            "requires": null
         },
         {
             "id": "ref_script_arabic",
             "slot": "script",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "アラビア文字",
             "plain": "右から左に流れる曲線的な文字",
             "aliases": [
@@ -1239,16 +1270,19 @@
                 "TN"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**見えれば候補が一気に減る。強い軸である。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ],
+            "requires": null
         },
         {
             "id": "ref_script_hebrew",
             "slot": "script",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "ヘブライ文字",
             "plain": "四角っぽい独特な文字",
             "aliases": [
@@ -1258,16 +1292,19 @@
                 "IL"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ],
+            "requires": null
         },
         {
             "id": "ref_script_devanagari",
             "slot": "script",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "デーヴァナーガリー",
             "plain": "上に横棒がつながる文字",
             "aliases": [
@@ -1279,16 +1316,19 @@
                 "NP"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ],
+            "requires": null
         },
         {
             "id": "ref_script_sinhala",
             "slot": "script",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "シンハラ文字",
             "plain": "丸が多い文字",
             "aliases": [
@@ -1298,16 +1338,19 @@
                 "LK"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ],
+            "requires": null
         },
         {
             "id": "ref_script_tamil",
             "slot": "script",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "タミル文字",
             "plain": "丸みのある南インドの文字",
             "aliases": [
@@ -1317,16 +1360,19 @@
                 "LK"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ],
+            "requires": null
         },
         {
             "id": "ref_script_bengali",
             "slot": "script",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "ベンガル文字",
             "plain": "上に横棒がつながる文字（ベンガル）",
             "aliases": [
@@ -1336,16 +1382,19 @@
                 "BD"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ],
+            "requires": null
         },
         {
             "id": "ref_script_tibetan",
             "slot": "script",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "チベット文字",
             "plain": "チベット語の文字",
             "aliases": [
@@ -1355,16 +1404,19 @@
                 "BT"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ],
+            "requires": null
         },
         {
             "id": "ref_script_thai",
             "slot": "script",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "タイ文字",
             "plain": "丸まった線が上下に伸びる文字",
             "aliases": [
@@ -1374,16 +1426,19 @@
                 "TH"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ],
+            "requires": null
         },
         {
             "id": "ref_script_khmer",
             "slot": "script",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "クメール文字",
             "plain": "カンボジアの文字",
             "aliases": [
@@ -1393,16 +1448,19 @@
                 "KH"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ],
+            "requires": null
         },
         {
             "id": "ref_script_chinese_traditional",
             "slot": "script",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "繁体字",
             "plain": "画数の多い漢字",
             "aliases": [
@@ -1414,16 +1472,19 @@
                 "TW"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ],
+            "requires": null
         },
         {
             "id": "ref_script_korean_hangul",
             "slot": "script",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "ハングル",
             "plain": "丸と四角を組み合わせた文字",
             "aliases": [
@@ -1433,16 +1494,19 @@
                 "KR"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ],
+            "requires": null
         },
         {
             "id": "ref_script_japanese_kana_kanji",
             "slot": "script",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "かな・漢字",
             "plain": "ひらがなカタカナと漢字",
             "aliases": [
@@ -1452,16 +1516,19 @@
                 "JP"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ],
+            "requires": null
         },
         {
             "id": "ref_plate_yellow_front_and_rear",
             "slot": "vehicle",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "前も後ろも黄色いナンバープレート",
             "plain": "車の前も後ろもナンバーが黄色い",
             "aliases": [
@@ -1476,16 +1543,19 @@
             "confusableWith": [
                 "ref_plate_yellow_rear_only"
             ],
-            "requires": null,
             "note": "**強い。** 前後とも黄色い国は少ない。後ろだけ黄色い国（イギリス・香港・ケニアなど）と混同しないよう、**前を見たかどうかを確認する。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/license_plate/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_plate_yellow_rear_only",
             "slot": "vehicle",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "後ろだけ黄色いナンバープレート",
             "plain": "後ろのナンバーが黄色く、前は白い",
             "aliases": [
@@ -1503,16 +1573,19 @@
             "confusableWith": [
                 "ref_plate_yellow_front_and_rear"
             ],
-            "requires": null,
             "note": "**強い。** 香港はほぼ正方形、ケニアは後ろが四角、スリランカとルワンダとウガンダは前が白で後ろが黄色。**前後の色が違うこと自体が手がかりである。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/license_plate/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_plate_blue_stripes_both_sides",
             "slot": "vehicle",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "左右両端に青い縦帯",
             "plain": "ナンバーの左と右の両方に青い縦線がある",
             "aliases": [
@@ -1526,16 +1599,19 @@
             "confusableWith": [
                 "ref_plate_eu_blue_band"
             ],
-            "requires": null,
             "note": "**非常に強い。2 カ国しかない。**EU 標準は左端だけなので、**右端にもあるかを見る。**アルバニアには左端が赤い別の型もある。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/license_plate/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_plate_white_elongated_no_band",
             "slot": "vehicle",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "青い帯のない細長い白プレート",
             "plain": "横に長くて真っ白なナンバー（青い線がない）",
             "aliases": [
@@ -1548,16 +1624,19 @@
                 "RU"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**欧州では珍しく、強い。**ロシアの識別法として最も確実なものの 1 つ。アイスランドも青い帯がない。クロアチアは 2016 年に EU 型へ変えたが、**Street View の撮影年が古い区間では旧型の白い長いプレートが残る。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/license_plate/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_plate_eu_blue_band",
             "slot": "vehicle",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "EU 式の青い縦帯（左端）",
             "plain": "ナンバーの左端に青い縦の帯がある",
             "aliases": [
@@ -1592,19 +1671,24 @@
                 "RO",
                 "SE",
                 "SI",
-                "SK"
+                "SK",
+                "TR"
             ],
             "confusableWith": [],
-            "requires": null,
-            "note": "**単独では絞れない（EU 加盟国はこの型である）。**価値は**無いことが分かったとき**にある。欧州の景観で青い帯が無ければ、スイス・アイスランド・アンドラ・ロシア・ウクライナなどへ寄る。> **強いのは、あることではなく無いことである。**",
-            "disputed": false
+            "note": "**「あること」では絞れない。「無いこと」で消すために使う。**EU 加盟国とトルコのプレートは左端に青い縦帯を持つ。**当初 EU 加盟国の一覧だけで作り、トルコが漏れていた**（実測 2026-08-17）。「左端に青い帯があるか」という事実で作るべきところを、**EU 加盟国という近い別のもので代用していた。**欧州の景観で青い帯が無ければ、スイス・アイスランド・アンドラ・ロシア・イギリスなどへ寄る。マルタは混在する。**非加盟国が独自の青い帯を持つ場合があるため、この一覧は網羅を保証しない。**",
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/license_plate/"
+            ],
+            "exhaustive": false,
+            "requires": null
         },
         {
             "id": "ref_plate_black_background",
             "slot": "vehicle",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "黒地に白文字のナンバープレート",
             "plain": "ナンバーが黒くて文字が白い",
             "aliases": [
@@ -1617,16 +1701,19 @@
                 "TN"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。** マレーシアは白い文字の塊が 2 つ、インドネシアは黒い区切りで**3 つ**に分かれる。**塊の数で分かれる。**チュニジアは細長い黒プレート。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/license_plate/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_plate_blue_strip_top",
             "slot": "vehicle",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "上端に青い帯（白プレート）",
             "plain": "白いナンバーの上のほうに青い帯がある",
             "aliases": [
@@ -1637,16 +1724,19 @@
                 "BR"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**非常に強い。1 カ国。**2018 年より前のブラジルは真っ白なので、**古い区間では出ない。**商用車は赤いプレートで、これも同じ国を示す。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/license_plate/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_plate_red_stripe_left",
             "slot": "vehicle",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "左端に赤い縦帯",
             "plain": "ナンバーの左端に赤い縦線がある",
             "aliases": [
@@ -1657,16 +1747,19 @@
                 "KG"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。** キルギスの標準型。アルバニアは 2 番目に多い型がこれで、最も多い型は左右が青い。マン島は後ろが黄色いうえに左端が赤い。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/license_plate/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_plate_yellow_stripe_right",
             "slot": "vehicle",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "右端に黄色い縦帯（左端は青）",
             "plain": "ナンバーの右端が黄色く、左端が青い",
             "aliases": [
@@ -1676,16 +1769,19 @@
                 "PT"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**非常に強い。1 カ国。** EU 式の青い帯に加えて右端が黄色い。**両端の色が違うことを見る。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/license_plate/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_plate_no_front_plate",
             "slot": "vehicle",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "前ナンバーが無い",
             "plain": "車の前にナンバープレートが付いていない",
             "aliases": [
@@ -1696,16 +1792,19 @@
                 "US"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**アメリカでも地域による。** 南東部からミシガン、南部を横切ってアリゾナまでの州で見られる。**国全体の性質ではないので、これだけで州を決めない。**プエルトリコも前ナンバーが無い。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/license_plate/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_camera_snorkel",
             "slot": "camera",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "前部にスノーケル（吸気管）",
             "plain": "車の前に太いパイプが立っている",
             "aliases": [
@@ -1718,16 +1817,19 @@
                 "MN"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**非常に強い。2 カ国。** **撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。ケニアは 2022 年以降の被写域で車両が変わり、**スノーケルあり・アンテナあり・両方・両方なし**の 4 通りがある。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/google_car/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_camera_no_antenna_eastern_europe",
             "slot": "camera",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "アンテナが無い（東欧で）",
             "plain": "東欧っぽい景色なのに車にアンテナが見えない",
             "aliases": [
@@ -1739,16 +1841,19 @@
                 "RS"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**無いことが手がかりである。** 東欧の多くの国ではアンテナが見えるため、見えないこと自体が北マケドニアとセルビアを示す。**撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。> **強いのは、あることではなく無いことである。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/google_car/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_camera_red_car_long_antenna",
             "slot": "camera",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "赤い車体＋長いアンテナ",
             "plain": "下を向くと赤い車で、長いアンテナが立っている",
             "aliases": [
@@ -1759,16 +1864,19 @@
                 "UA"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**非常に強い。1 カ国。**ウクライナの大部分。**撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/google_car/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_camera_stubby_antenna",
             "slot": "camera",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "短くて太いアンテナ",
             "plain": "短くて太いアンテナが見える",
             "aliases": [
@@ -1781,16 +1889,19 @@
                 "EC"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。** エクアドルは白い車＋短く太いアンテナ。**撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。コロンビアは Gen 3 で黒・白・灰の車に短く太いアンテナ、Gen 4 では白か銀の車が多い。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/google_car/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_camera_unique_antenna_panama",
             "slot": "camera",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "他に例のない形のアンテナ",
             "plain": "見たことのない形のアンテナが付いている",
             "aliases": [
@@ -1800,16 +1911,19 @@
                 "PA"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**非常に強い。1 カ国。**世界の他のどこにも無い形とされる。**撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。下を向いても常にはっきり見えるわけではない。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/google_car/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_camera_white_truck_below",
             "slot": "camera",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "下に白いトラックの車体",
             "plain": "下を向くと白いトラックの荷台や運転席が見える",
             "aliases": [
@@ -1824,16 +1938,19 @@
             "confusableWith": [
                 "ref_camera_black_car_below"
             ],
-            "requires": null,
             "note": "**強い。** **撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。セネガルは Gen 4 で銀か白のトラック。UAE は白、**ヨルダンは黒**なので、色で分かれる。UAE の Gen 4 のトラックはドバイとシャルジャだけに出る。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/google_car/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_camera_black_car_below",
             "slot": "camera",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "下に黒い車体",
             "plain": "下を向くと黒い車体がぼんやり見える",
             "aliases": [
@@ -1848,16 +1965,19 @@
             "confusableWith": [
                 "ref_camera_white_truck_below"
             ],
-            "requires": null,
             "note": "**強い。** **撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。ヨルダンは黒（**UAE の白と対になる**）。アルゼンチンとウルグアイは車の前部が黒くぼんやり写る。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/google_car/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_camera_bars_visible",
             "slot": "camera",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "車体下のバー（骨組み）が見える",
             "plain": "下を向くと棒みたいな枠が見える",
             "aliases": [
@@ -1873,16 +1993,19 @@
                 "RE"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**中程度。複数の国で出る。**単独では絞れないので**組み合わせで使う。****撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。モンゴルは赤いサイドミラーやキャンプ道具のような荷物が一緒に見える。キルギスは白黒のサイドミラー、グアテマラは黒いミラー。ラオスは首都では見えない。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/google_car/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_camera_motorbike",
             "slot": "camera",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "バイクで撮影されている",
             "plain": "下を向くとバイクかヘルメットが見える",
             "aliases": [
@@ -1894,16 +2017,19 @@
                 "VN"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**非常に強い。1 カ国。**ベトナムはバイクで撮影されている。**撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。バイク本体、ぼかされた輪郭、ヘルメットのいずれかが見える。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/google_car/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_camera_trekker",
             "slot": "camera",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "人が担いで撮影している",
             "plain": "車ではなく人が持って歩いて撮っている",
             "aliases": [
@@ -1915,16 +2041,19 @@
                 "MG"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**単独では絞れない。**徒歩撮影は世界の多くの国に部分的に存在する。パキスタンは被写域の全体が徒歩撮影という点が特徴である。**撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/google_car/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_camera_gen2_halo",
             "slot": "camera",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "空にハロー・下に円形のぼかし（Gen 2）",
             "plain": "空に輪っかが見える、下に丸いぼかしがある",
             "aliases": [
@@ -1937,16 +2066,19 @@
                 "ZA"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。**第 2 世代のカメラで撮影された被写域に出る。**撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。**古い被写域ほど残っている。** 更新されると消える軸の代表である。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/google_car/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_camera_lowcam",
             "slot": "camera",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "視点が低い（ローカム）",
             "plain": "目線が低くて道が広く見える",
             "aliases": [
@@ -1958,16 +2090,19 @@
                 "LK"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。**スリランカの Gen 4。**撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。周囲が低い位置から見え、道が広く見え、車が大きく丸くぼかされる。**Gen 3 では青・白・赤の縞（フランス国旗のよう）だった。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/google_car/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_camera_roof_rack",
             "slot": "camera",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "ルーフラックが見える",
             "plain": "屋根の荷台の枠が見える",
             "aliases": [
@@ -1980,16 +2115,19 @@
                 "SN"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**組み合わせで使う。****撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。ナイジェリアは Gen 3 で**黄と黒**の縞模様のラックが出ることがあり、これは固有。ガーナは前のバーの右端に黒いテープ。フェロー諸島は無地の灰色。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/google_car/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_camera_following_car",
             "slot": "camera",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "同じ車がずっと後ろを走っている",
             "plain": "同じ車が何枚も後ろについてくる",
             "aliases": [
@@ -2000,16 +2138,19 @@
                 "TN"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**非常に強い。1 カ国。**チュニジアは伴走車が写り続ける。**撮影世代に依存する。** 新しい被写域（Gen 4）へ更新されると消えることがある。**北部（ハンマメット以北）は明るい緑、中南部は濃い緑**で車種も違う。地域の切り分けにも使える。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/google_car/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_bollard_red_rectangle_front_white_back",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "正面に赤い長方形・裏は白い長方形",
             "plain": "前から見ると赤い四角、後ろから見ると白い四角",
             "aliases": [
@@ -2029,16 +2170,19 @@
             "confusableWith": [
                 "ref_bollard_red_rectangle_offset"
             ],
-            "requires": null,
             "note": "**族としては中程度（8 カ国）。細部で割る。**セルビアは赤い長方形が**中心からずれている。**ウクライナは長方形が**他より横に広く、傷んでいることが多い。**> **族で候補を作り、細部で割る。** それが観察の順序である。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/bollards/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_bollard_red_rectangle_offset",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "赤い長方形が中心からずれている",
             "plain": "赤い四角が真ん中じゃなくて片側に寄っている",
             "aliases": [
@@ -2051,16 +2195,19 @@
             "confusableWith": [
                 "ref_bollard_red_rectangle_front_white_back"
             ],
-            "requires": null,
             "note": "**強い。1 カ国。**スロベニアやモンテネグロと同型に見えるが、**赤い長方形の位置が中心でないのはセルビアである。****ただしこの軸は薄れつつある。**新しい撮影ではハンガリー型（長方形が中心）に近い設計へ置き換わってきている（プレイヤーの観察、2026-08。出典の記述ではない）。偏ったものもまだ多く残っているため使えるが、**見えなかったことをセルビアの否定に使わない。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/bollards/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_bollard_fluoro_orange_stripes",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "黒い部分に蛍光オレンジの縞",
             "plain": "黒いところに光るオレンジの線が入っている",
             "aliases": [
@@ -2072,16 +2219,19 @@
                 "SK"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**非常に強い。2 カ国。**この蛍光オレンジは他に無い。**チェコとスロバキアはこの特徴では割れない。** 人手ワークシート §13 の「チェコとスロバキアで迷う」がここに対応する。割るには別の欄（ナンバープレート・標識・言語）へ移る。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/bollards/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_bollard_vertical_red_in_black_diagonal",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "黒い斜め帯の中に縦長の赤い長方形",
             "plain": "黒い斜めの帯があって、その中に縦長の赤い四角がある",
             "aliases": [
@@ -2093,16 +2243,19 @@
                 "IT"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**非常に強い。2 カ国。**縦長の赤い長方形はボラードでは珍しい。黒い部分が**頂部まで伸びる**のも特徴。裏は白い長方形。人手ワークシート §13 の「イタリアだと思ったらアルバニアだった」がここである。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/bollards/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_bollard_dark_reflector_black_top",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "黒っぽい反射板＋黒い頭",
             "plain": "反射板が黒っぽくて、頭のところも黒い",
             "aliases": [
@@ -2113,16 +2266,19 @@
                 "AT"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**非常に強い。1 カ国。**反射板が黒か暗い赤で、かつ頂部が黒い。**この 2 つを併せ持つ国は他に無い。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/bollards/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_bollard_cylindrical",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "円柱形（正面から見て丸い）",
             "plain": "正面から見ると丸い筒みたいな形",
             "aliases": [
@@ -2135,16 +2291,19 @@
                 "FI"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。3 カ国。**フィンランドは**北欧では唯一**この形である（人手ワークシート §13 の「ノルウェーとスウェーデンで迷う」の外側にある）。スイスは湾曲した円柱形。エストニアは正面に長方形、裏に丸 2 つ。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/bollards/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_bollard_red_diagonal_wrap",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "赤い斜めの帯が巻き付いている",
             "plain": "赤い線が斜めにぐるっと巻いている",
             "aliases": [
@@ -2154,16 +2313,19 @@
                 "PL"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**非常に強い。1 カ国。**帯が巻き付く形は他に無い。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/bollards/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_bollard_white_vertical_strip",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "正面に白い縦帯・裏に白い丸2つ",
             "plain": "前に白い縦線、後ろに白い丸が2つ",
             "aliases": [
@@ -2175,16 +2337,19 @@
             "confusableWith": [
                 "ref_bollard_thin_white_rectangle"
             ],
-            "requires": null,
             "note": "**非常に強い。1 カ国。**人手ワークシート §13 の「バルト三国だと思ったらドイツだった」に効く。ラトビアは正面が**白い長方形**で縦帯ではない。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/bollards/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_bollard_thin_white_rectangle",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "細身・正面に白い長方形・裏に白い丸2つ",
             "plain": "細い杭で、前に白い四角、後ろに白い丸が2つ",
             "aliases": [
@@ -2196,16 +2361,19 @@
             "confusableWith": [
                 "ref_bollard_white_vertical_strip"
             ],
-            "requires": null,
             "note": "**非常に強い。1 カ国。**ドイツの縦帯と混同しやすい。**縦帯か長方形かを見る。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/bollards/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_bollard_wedge_shape",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "くさび形（上が斜めに切られた形）",
             "plain": "上が斜めに切られたような形",
             "aliases": [
@@ -2220,16 +2388,19 @@
                 "SE"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**族としては中程度（5 カ国）。反射板の色で割る。**ギリシャは正面が赤・裏が白。スペインは正面がオレンジ・裏に白い丸 2 つ（中空）。リトアニアは正面がオレンジ・裏が白。ルクセンブルクは正面が灰色・裏に丸 2 つ。スウェーデンは黒白でくさび形以外の形もある。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/bollards/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_bollard_cigarette_shape",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "タバコのような白い細長い形",
             "plain": "白くて細長い、タバコみたいな形",
             "aliases": [
@@ -2241,16 +2412,19 @@
                 "PE"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。2 カ国。**メキシコは根元近くが黒く、裏側が黄色。ペルーは黒い縞がある場合と無い場合がある。人手ワークシート §13 の「ペルーやボリビアだと思ったらメキシコだった」に効く。**根元の黒と裏の黄色があればメキシコである。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/bollards/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_bollard_red_white_alternating",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "赤と白が交互",
             "plain": "赤と白が交互に塗られている",
             "aliases": [
@@ -2262,16 +2436,19 @@
                 "KH"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。2 カ国。**バングラデシュは**煙突のような形**で赤白の区画が交互。短いものは区画が少ない。カンボジアは縞か、上下 2 区画に分かれる。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/bollards/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_bollard_black_white_square",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "黒と白が交互・断面が四角",
             "plain": "黒と白が交互で、四角い柱",
             "aliases": [
@@ -2283,16 +2460,19 @@
             "confusableWith": [
                 "ref_bollard_wedge_shape"
             ],
-            "requires": null,
             "note": "**非常に強い。1 カ国。**断面が四角いのが特徴。スウェーデンも黒白だが形が違う（くさび形・丸・細く湾曲）。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/bollards/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_bollard_stone_marker",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "石でできた小さな標石",
             "plain": "コンクリートや石の小さな標識みたいなもの",
             "aliases": [
@@ -2304,16 +2484,19 @@
                 "LK"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。2 カ国。**スリランカは白と黒の小さな石。ブータンは白と黄色で、**次の集落までの距離が書かれている**（裏は反対方向）。石板が長く並ぶ光景もブータンで見られる。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/bollards/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_bollard_white_red_front_grey_back",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "白い本体・正面に赤い反射板・裏は灰色",
             "plain": "白い杭で、前が赤くて後ろが灰色",
             "aliases": [
@@ -2325,16 +2508,19 @@
                 "TR"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**族としては強い（3 カ国）。****トルコは長方形がやや太い。** そこで割る。人手ワークシート §13 の「オーストラリアだと思ったら南アフリカだった」は別の軸（南アフリカは細い赤白のシェブロン）で割る。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/bollards/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_bollard_red_band_upper",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "上のほうに赤い帯が巻いている",
             "plain": "上のあたりに赤い帯が一周している",
             "aliases": [
@@ -2346,16 +2532,19 @@
             "confusableWith": [
                 "ref_bollard_white_red_front_grey_back"
             ],
-            "requires": null,
             "note": "**非常に強い。1 カ国。**オーストラリアは正面の赤い反射板で、帯ではない。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/bollards/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_bollard_black_white_red_top",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "黒白の区画＋上部に大きな赤い長方形",
             "plain": "黒と白に分かれていて、上に大きな赤い四角",
             "aliases": [
@@ -2365,16 +2554,19 @@
                 "GB"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**非常に強い。1 カ国。****イギリスではボラード自体が少ない**（欧州の他国に比べて）。あれば強いが、無いことを手がかりにしない。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/bollards/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_bollard_yellow_front_only",
             "slot": "bollard",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "正面だけ黄色い区画がある",
             "plain": "前だけ黄色い部分があって、後ろには無い",
             "aliases": [
@@ -2384,16 +2576,19 @@
                 "DK"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**非常に強い。1 カ国。**デンマークは国中にボラードが多い。**アイスランドは全体が黄色**なので別である（人手記述 `bollard_all_yellow`）。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/bollards/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_pole_holey_to_ground",
             "slot": "pole",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "大きな穴が地面まで開いた電柱",
             "plain": "コンクリートの柱に大きな穴が下まで開いている",
             "aliases": [
@@ -2409,16 +2604,19 @@
                 "ref_pole_holey_not_to_ground",
                 "ref_pole_metal_large_holes"
             ],
-            "requires": null,
             "note": "**強い。2 カ国。**GeoGuessr で \"holey pole\" と呼ばれる。**ポーランドは穴が地面の 50cm ほど上で止まる。**そこで割る。ルーマニアは根元が白く塗られていたり黄色い印が付いていることが多い。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_pole_holey_not_to_ground",
             "slot": "pole",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "穴が地面まで届かない穴あき電柱",
             "plain": "穴が開いているが、下のほうは塞がっている",
             "aliases": [
@@ -2430,16 +2628,19 @@
             "confusableWith": [
                 "ref_pole_holey_to_ground"
             ],
-            "requires": null,
             "note": "**非常に強い。1 カ国。**ハンガリーとルーマニアは穴が地面まで届く。**どこまで開いているかを見る。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_pole_metal_large_holes",
             "slot": "pole",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "金属製で大きな穴が開いた電柱",
             "plain": "金属の柱に大きな穴が開いている",
             "aliases": [
@@ -2451,16 +2652,19 @@
             "confusableWith": [
                 "ref_pole_holey_to_ground"
             ],
-            "requires": null,
             "note": "**強い。1 カ国。**ルーマニア・ハンガリー・ポーランドは**コンクリート**である。**素材と穴の大きさで割る。**トルコは電柱の種類が多く、これはその 1 つ。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_pole_small_holes_vertical",
             "slot": "pole",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "小さな穴が縦に並んだ電柱",
             "plain": "小さな穴がぽつぽつ縦に並んでいる",
             "aliases": [
@@ -2476,16 +2680,19 @@
                 "TH"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**族としては弱い（7 カ国）。他の欄と掛けて使う。**ベルギーは四角い断面。ラオスは非対称な形（片側に松かさ 2 つ、反対に 1 つ）。スリランカは上部に小さな穴の型と、下部が抜けている型の 2 種類。カンボジアも丸い柱に小さな穴の型と梯子型の 2 種類。チリとブラジルは上部に小さな穴があり、下部が梯子状。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_pole_octagonal",
             "slot": "pole",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "八角形の電柱",
             "plain": "柱の断面が八角形になっている",
             "aliases": [
@@ -2498,16 +2705,19 @@
                 "MX"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。4 カ国。**中南米では**メキシコとコロンビア**（まれにエクアドル）だけ。グアムは大型のコンクリート製八角柱で、**北マリアナ諸島は木製**なので隣同士で割れる。人手ワークシート §11 の「八角形電柱＋家の丸形電気メーター → メキシコ」の第 1 段がこれである。**この用語だけでは 4 カ国までしか落ちない。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_pole_yellow_black_stripes",
             "slot": "pole",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "黄色と黒の縞がある電柱",
             "plain": "黄色と黒の縞模様が付いている",
             "aliases": [
@@ -2521,16 +2731,19 @@
                 "TW"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**族としては強い（4 カ国）。縞の向きと範囲で割る。**日本は**縦**の縞。台湾は**斜め**で地面まで届く。韓国は**斜め**だが地面まで届かない。コロンビアにも黄黒の縞がある。（日本の電柱に付く小さなプレートの意匠で地域が分かるが、**リージョンゲスはこのアプリの対象外である。**）",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_pole_ladder_style",
             "slot": "pole",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "下部が梯子のような形の電柱",
             "plain": "下のほうが梯子みたいに段になっている",
             "aliases": [
@@ -2548,16 +2761,19 @@
                 "SN"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**族としては弱い（8 カ国）。他の欄と掛けて使う。**フランスは穴ではなく**へこみ**。セネガルは**旧フランス領**として同型。ブラジルは長い段が下部に走り上部に小さな穴。チリはブラジルに似るがへこみの中の横桟が少ない。エクアドルの梯子型は**中南米ではほぼ固有**。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_pole_three_upward_bulbs",
             "slot": "pole",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "上向きの碍子が3つ（三叉のよう）",
             "plain": "上に3つの突起が並んでいて、三叉みたいに見える",
             "aliases": [
@@ -2569,16 +2785,19 @@
                 "UY"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。2 カ国。**ウルグアイで最も多い型。インドネシアも同型が多く、**上端が揃っているか不揃いか**が地域で違う。インドネシアの鉄柱は黒く塗られ、**赤白の国旗色の縞**が入ることがある。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_pole_crucifix",
             "slot": "pole",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "十字架のような形の電柱",
             "plain": "十字架みたいな形をしている",
             "aliases": [
@@ -2590,16 +2809,19 @@
                 "PH"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。2 カ国。**フィリピンは**木製**の十字型が最も多い。メキシコにも十字型がある。**素材で割る。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_pole_three_arms",
             "slot": "pole",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "腕が3本横に突き出た電柱",
             "plain": "腕みたいなものが3本横に出ている",
             "aliases": [
@@ -2609,16 +2831,19 @@
                 "PE"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**非常に強い。1 カ国。**人手ワークシート §13 の「四角柱の電柱だけではペルーに行けず、タイなど別候補へ飛ぶ」に効く。**腕の本数を数える。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_pole_eiffel_like",
             "slot": "pole",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "エッフェル塔のような鉄塔型の電柱",
             "plain": "鉄骨を組んだ塔みたいな形",
             "aliases": [
@@ -2629,16 +2854,19 @@
                 "BG"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**非常に強い。1 カ国。**ブルガリア全域で見られる。人手ワークシート §13 の「ブルガリアとウクライナで迷う」に効く。**キリル文字の先で割れる軸である。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_pole_wire_style",
             "slot": "pole",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "針金を組んだような金属製の電柱",
             "plain": "細い金属を組んだような柱",
             "aliases": [
@@ -2648,16 +2876,19 @@
                 "TN"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**非常に強い。1 カ国。**チュニジアで最も多い型。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_pole_sharp_spike_top",
             "slot": "pole",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "頂部から長く尖った突起が伸びている",
             "plain": "柱の上から長くとがった棒が突き出ている",
             "aliases": [
@@ -2668,16 +2899,19 @@
                 "KR"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**非常に強い。1 カ国。**韓国の電柱の最大の特徴。黄黒の斜め縞（地面まで届かない）と併せて見る。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_pole_white_painted_base",
             "slot": "pole",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "根元が白く塗られた電柱",
             "plain": "柱の根元だけ白く塗られている",
             "aliases": [
@@ -2688,16 +2922,19 @@
                 "UA"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**中程度。**ウクライナで多い。ルーマニアの穴あき電柱にも見られる。**単独では割れないので穴の有無と併せる。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_pole_wooden_simple",
             "slot": "pole",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "木製で碍子が3つの簡素な電柱",
             "plain": "木の柱に碍子が3つだけ付いた簡素なもの",
             "aliases": [
@@ -2707,16 +2944,19 @@
                 "SZ"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。1 カ国。**エスワティニで最も多い型。南部アフリカの他国（南アフリカ・ボツワナ・レソト）との割り方の 1 つになる。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_pole_metal_wrap",
             "slot": "pole",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "金属の帯が1本巻かれた電柱",
             "plain": "柱に銀色や白の金属の帯が1本巻いてある",
             "aliases": [
@@ -2726,16 +2966,19 @@
                 "NZ"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。1 カ国。**ニュージーランドの電柱の多くに見られる。（オーストラリアのタスマニア州には地上 2m ほどにオリーブ色の金属を巻いた電柱があるが、**州単位の話であり国の軸にしない。**）",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_pole_stobie",
             "slot": "pole",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "鋼板2枚の間にコンクリートを挟んだ電柱",
             "plain": "2枚の鉄板の間にコンクリートが挟まった柱",
             "aliases": [
@@ -2746,16 +2989,19 @@
                 "AU"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強いが地域限定。**オーストラリアの**南オーストラリア州に固有**。国としてはオーストラリアを指すが、**見えなかったことをオーストラリアの否定に使わない。**北部準州には金属製の穴あき電柱がある。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/poles/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_sign_post_black_white_stripes",
             "slot": "sign",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "標識のポールが黒白の縞",
             "plain": "標識を支える柱が黒と白の縞になっている",
             "aliases": [
@@ -2773,16 +3019,19 @@
             "confusableWith": [
                 "ref_sign_post_black_yellow_stripes"
             ],
-            "requires": null,
             "note": "**強い。世界的に珍しい配色である。**マレーシア・スリランカ・ペルーで多い。UAE も一部にあり、**ヨルダンはあるが稀。**ウルグアイは信号のポールが黒白か黒黄の縞。ペルーは**コンクリートの台座に立ち、地面より持ち上がっている**ことが多い。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/signposts/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_sign_post_black_yellow_stripes",
             "slot": "sign",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "標識のポールが黒黄の縞",
             "plain": "標識の柱が黒と黄色の縞になっている",
             "aliases": [
@@ -2795,16 +3044,19 @@
             "confusableWith": [
                 "ref_sign_post_black_white_stripes"
             ],
-            "requires": null,
             "note": "**強い。2 カ国。**ボツワナの標識ポール。ウルグアイは信号のポールで黒白と黒黄の両方がある。**黒白と見分けにくいので、黄色があるかを確かめる。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/signposts/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_sign_post_wooden",
             "slot": "sign",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "標識のポールが木製",
             "plain": "標識を支えているのが木の柱",
             "aliases": [
@@ -2817,16 +3069,19 @@
                 "UY"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。3 カ国。**カナダは木製で白く塗られることもあり、**アメリカは金属**なので**この 1 点で北米が割れる。**タイは白く塗られ根元が黒い。ウルグアイは太くて白い木製。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/signposts/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_sign_post_white_black_base",
             "slot": "sign",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "白いポールで根元が黒い",
             "plain": "白い柱の根元だけ黒くなっている",
             "aliases": [
@@ -2837,16 +3092,19 @@
                 "TH"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。2 カ国。**ロシアで多く、他国ではあまり見ない。タイも白く塗られた木製で根元が黒い。**素材で割る（ロシアは金属）。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/signposts/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_sign_post_yellow",
             "slot": "sign",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "標識のポールが黄色",
             "plain": "標識の柱が黄色い",
             "aliases": [
@@ -2856,16 +3114,19 @@
                 "AU"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強いが地域限定。**オーストラリアの**西オーストラリア州**の目印。同国の他の州は主に銀色。**見えなかったことをオーストラリアの否定に使わない。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/signposts/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_sign_post_very_thin",
             "slot": "sign",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "標識のポールが極端に細い",
             "plain": "標識の柱がとても細い",
             "aliases": [
@@ -2877,16 +3138,19 @@
                 "CO"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。2 カ国。**チリは細く、**柱の先に切り欠き（スリット）がある。**コロンビアは非常に細く白く塗られる。コロンビアは**標識の裏に十字の補強**が見えることも多い。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/signposts/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_sign_post_thick_unpainted",
             "slot": "sign",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "太くて塗装されていないポール",
             "plain": "太くて塗っていない柱に標識が付いている",
             "aliases": [
@@ -2898,16 +3162,19 @@
             "confusableWith": [
                 "ref_sign_post_black_white_stripes"
             ],
-            "requires": null,
             "note": "**強い。1 カ国。**ボリビアの多くの地域で見られる。人手ワークシート §13 の「ペルーやボリビアだと思ったらメキシコだった」で、**ペルーは黒白の縞なので、ポールの見た目で割れる。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/signposts/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_sign_post_blue_white_wrap",
             "slot": "sign",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "ポールの根元に青白の巻きもの",
             "plain": "柱の根元に青と白の巻きが付いている",
             "aliases": [
@@ -2917,16 +3184,19 @@
                 "EE"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。1 カ国。**エストニアの標識ポールに時々見られる。人手ワークシート §13 の「バルト三国だと思ったらドイツだった」で使える軸。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/signposts/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_arch_circular_electricity_meter",
             "slot": "architecture",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "外壁に丸い電気メーター",
             "plain": "家の外の壁に丸い電気メーターが付いている",
             "aliases": [
@@ -2937,16 +3207,19 @@
                 "MX"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**非常に強い。1 カ国。**メキシコではほとんどの家の外壁に見られる。**人手ワークシート §11 の判定フローの 2 段目である。**「八角形電柱（`ref_pole_octagonal`、4 カ国）→ 家の電気メーターを見る → **丸形ならメキシコ**」。> **本人が頭の中でやっている順序が、そのまま計算で出る。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/buildings/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_arch_black_water_tank_on_roof",
             "slot": "architecture",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "屋上に大きな黒い貯水タンク",
             "plain": "屋根の上に大きな黒いタンクが載っている",
             "aliases": [
@@ -2957,16 +3230,19 @@
                 "MX"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**非常に強い。1 カ国。**メキシコの家の屋上によく見られる。丸い電気メーターと**同じ国を指すので、片方だけでも足りる。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/buildings/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_arch_wooden_house_many_shutters",
             "slot": "architecture",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "木造で鎧戸が多い家",
             "plain": "木の家で窓に木の雨戸がたくさん付いている",
             "aliases": [
@@ -2977,16 +3253,19 @@
                 "CH"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。1 カ国。**スイスは鎧戸の数が多い。木造家屋も多い。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/buildings/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_arch_grey_stone_multistorey",
             "slot": "architecture",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "灰色の石を積んだ多層の建物",
             "plain": "灰色の石を積んだ何階建てかの建物",
             "aliases": [
@@ -2996,16 +3275,19 @@
                 "AD"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**非常に強い。1 カ国。**アンドラ。裕福そうな見た目になる。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/buildings/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_arch_stilt_wooden_house",
             "slot": "architecture",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "高床式の木造家屋",
             "plain": "木の家が地面から持ち上がって建っている",
             "aliases": [
@@ -3016,16 +3298,19 @@
                 "KH"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。1 カ国。**カンボジア。屋根が何段かに分かれ、壁は赤茶・水色・オレンジが多い。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/buildings/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_arch_vertical_columns_house",
             "slot": "architecture",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "垂直の柱が目立つ家",
             "plain": "家の正面に縦の柱が並んでいる",
             "aliases": [
@@ -3035,16 +3320,19 @@
                 "MY"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。1 カ国。**マレーシアの住宅に多く、他国では珍しい。黒白の縞の標識ポールと**同じ国を指す。組み合わせで確度が上がる。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/buildings/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_arch_high_walls_around_property",
             "slot": "architecture",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "敷地が高い塀で囲まれている",
             "plain": "家のまわりが高い塀で囲まれている",
             "aliases": [
@@ -3055,16 +3343,19 @@
                 "RW"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**中程度。1 カ国だが他国にもある景観である。**ルワンダで多い。**単独で断定しない。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/buildings/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_arch_thatched_round_hut",
             "slot": "architecture",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "茅葺きの丸い小屋",
             "plain": "丸い形で屋根が草で葺かれた小屋",
             "aliases": [
@@ -3075,16 +3366,19 @@
                 "LS"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強い。1 カ国。**レソトの伝統的な住居。南部アフリカの他国（南アフリカ・ボツワナ・エスワティニ）との割り方になる。",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/buildings/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_arch_flat_roof_arch_windows_wood",
             "slot": "architecture",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "張り出した平屋根＋白壁＋アーチ窓＋木の装飾",
             "plain": "平らな屋根が壁より外に出ていて、白い壁とアーチ型の窓、木の飾りがある",
             "aliases": [
@@ -3094,16 +3388,19 @@
                 "BT"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**非常に強い。1 カ国。**ブータン。装飾が細かい。石の標石（`ref_bollard_stone_marker`）と**同じ国を指す。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/buildings/"
+            ],
+            "requires": null
         },
         {
             "id": "ref_arch_skyscrapers_background",
             "slot": "architecture",
-            "kind": "atomic",
-            "certainty": "heuristic",
-            "source": "human",
             "canonical": "背景に超高層ビル群",
             "plain": "すごく高いビルが遠くに見える",
             "aliases": [
@@ -3114,9 +3411,15 @@
                 "AE"
             ],
             "confusableWith": [],
-            "requires": null,
             "note": "**強いが偏りに注意。**UAE の被写域はドバイ周辺に偏っており、**そのため高層ビルが写りやすい。** 建物の性質ではなく被写域の性質である。> **写りやすさは、その国らしさとは別である。**",
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/buildings/"
+            ],
+            "requires": null
         },
         {
             "id": "ai_architecture_01",

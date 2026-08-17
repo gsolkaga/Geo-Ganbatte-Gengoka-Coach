@@ -94,7 +94,9 @@ for (const name of names) {
                 // `server/utils/narrowing.ts` の `usableForNarrowing` と同じ条件にする。
                 // ここを揃え忘れると、検査だけが古い実態を報告する
                 .filter((t): t is Term => t !== undefined
-                    && t.certainty !== 'unverified' && t.disputed !== true)
+                    && t.certainty !== 'unverified'
+                    && t.disputed !== true
+                    && t.exhaustive !== false)
                 .flatMap((t) => t.countries),
         )
         if (countries.size > 0 && !countries.has(question.country)) {

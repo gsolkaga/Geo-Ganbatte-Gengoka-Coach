@@ -66,21 +66,34 @@ const normaliseKey = (s) =>
 // 人手記述をそのまま採る
 // ============================================================
 
+/**
+ * **項目を書き写す形にしていたため、後から足した項目が落ちていた。**
+ *
+ * 実測（2026-08-17）。`source: 'reference'`、出典 URL（`sources`）、
+ * 網羅か連想かの印（`exhaustive`）を人手辞書に足したが、
+ * **ここが `source: 'human'` を固定していたため生成物に載らなかった。**
+ *
+ * その結果、
+ *
+ * - 被覆の集計が `reference` を 0 件と表示した
+ * - 絞り込み計算が連想（`exhaustive: false`）を網羅として扱い続けた
+ *   （オーストラリアの出題で積集合が 1 カ国（インドネシア）になった）
+ *
+ * > **書き写す形にすると、書き足したものは落ちる。**
+ *
+ * 既定値を与えたい項目だけを明示し、**残りはそのまま通す。**
+ */
 const terms = human.terms.map((t) => ({
-    id: t.id,
-    slot: t.slot,
-    kind: t.kind,
-    /** verified | heuristic | unverified */
-    certainty: t.certainty,
-    source: 'human',
-    canonical: t.canonical,
-    plain: t.plain,
+    ...t,
+    /** 由来。人手辞書が `reference` と書いていればそれを尊重する */
+    source: t.source ?? 'human',
     aliases: t.aliases ?? [],
-    countries: t.countries,
     confusableWith: t.confusableWith ?? [],
     requires: t.requires ?? null,
     note: t.note ?? '',
     disputed: t.disputed ?? false,
+    // 生成物には持ち込まない。人手辞書だけの覚え書きである
+    verifiedByHuman: undefined,
 }))
 
 const humanKeys = new Set(terms.map((t) => normaliseKey(t.canonical)))
@@ -249,7 +262,12 @@ console.log(`ファイル ${stats.files} 件（パース成功 ${stats.parsed}�
 console.log('')
 console.log('| 由来 | 件数 |')
 console.log(`| human | ${count('source', 'human')} |`)
+// **`reference` を出さないと、出典由来が human に見える。** 由来は分けて数える
+console.log(`| reference | ${count('source', 'reference')} |`)
 console.log(`| ai    | ${count('source', 'ai')} |`)
+// 網羅か連想かも数える。**連想は絞り込み計算に使わない**
+const associative = terms.filter((t) => t.exhaustive === false).length
+console.log(`| うち連想（exhaustive: false）| ${associative} |`)
 console.log('')
 console.log('| certainty | 件数 |')
 for (const c of ['verified', 'heuristic', 'unverified']) console.log(`| ${c.padEnd(10)} | ${count('certainty', c)} |`)

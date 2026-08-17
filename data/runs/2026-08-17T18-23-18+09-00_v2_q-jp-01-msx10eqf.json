@@ -1,6 +1,8 @@
 {
+  "id": "q-jp-01-msx10eqf",
+  "ts": "2026-08-17T18:23:18+09:00",
+  "variant": "v2",
   "questionId": "q-jp-01",
-  "runId": "q-jp-01-msmki3fl",
   "answer": {
     "questionId": "q-jp-01",
     "slots": {
@@ -32,7 +34,9 @@
       "script": {
         "state": "visible",
         "plain": "カーブミラーに日本語で注意と記載されていた",
-        "terms": []
+        "terms": [
+          "ref_script_japanese_kana_kanji"
+        ]
       },
       "ground": {
         "state": "visible",
@@ -42,7 +46,9 @@
       "terrain_vegetation": {
         "state": "visible",
         "plain": "山の中の道、植物は豊富",
-        "terms": []
+        "terms": [
+          "ai_terrain_vegetation_01"
+        ]
       },
       "architecture": {
         "state": "absent",
@@ -57,7 +63,9 @@
       "pavement": {
         "state": "visible",
         "plain": "山の中にしてはアスファルトが整備されている",
-        "terms": []
+        "terms": [
+          "ai_pavement_01"
+        ]
       },
       "camera": {
         "state": "absent",
@@ -84,278 +92,40 @@
     "decisiveSlot": "script",
     "reasoning": "日本語で書かれていたため"
   },
-  "normalizedSlots": {
-    "traffic_side": {
-      "state": "absent",
-      "plain": null,
-      "terms": []
-    },
-    "road_marking": {
-      "state": "absent",
-      "plain": null,
-      "terms": []
-    },
-    "bollard": {
-      "state": "visible",
-      "plain": "ガードレールが黄色い",
-      "terms": []
-    },
-    "pole": {
-      "state": "absent",
-      "plain": null,
-      "terms": []
-    },
-    "sign": {
-      "state": "absent",
-      "plain": null,
-      "terms": []
-    },
-    "script": {
-      "state": "visible",
-      "plain": "カーブミラーに日本語で注意と記載されていた",
-      "terms": [
-        "ref_script_japanese_kana_kanji"
-      ]
-    },
-    "ground": {
-      "state": "visible",
-      "plain": "枯れ葉が落ちており、地面の色までは見えなかった",
-      "terms": []
-    },
-    "terrain_vegetation": {
-      "state": "visible",
-      "plain": "山の中の道、植物は豊富",
-      "terms": [
-        "ai_terrain_vegetation_01"
-      ]
-    },
-    "architecture": {
-      "state": "absent",
-      "plain": null,
-      "terms": []
-    },
-    "vehicle": {
-      "state": "absent",
-      "plain": null,
-      "terms": []
-    },
-    "pavement": {
-      "state": "visible",
-      "plain": "山の中にしてはアスファルトが整備されている",
-      "terms": [
-        "ai_pavement_01"
-      ]
-    },
-    "camera": {
-      "state": "absent",
-      "plain": null,
-      "terms": []
-    },
-    "season": {
-      "state": "unknown",
-      "plain": null,
-      "terms": []
-    },
-    "other": {
-      "state": "absent",
-      "plain": null,
-      "terms": []
-    }
-  },
-  "v1": {
-    "judgement": {
-      "variant": "v1",
-      "hit": true,
-      "hitConfidence": "high",
-      "confusionPairs": [],
-      "discoveries": null,
-      "missedSlots": null,
-      "wrongAbsentSlots": null,
-      "overclaimedSlots": null,
-      "failureModes": null,
-      "narrowingPower": null,
-      "intersection": null,
-      "nextPriority": null
-    },
-    "models": [
+  "result": {
+    "variant": "v2",
+    "hit": true,
+    "hitConfidence": "high",
+    "confusionPairs": [],
+    "discoveries": [],
+    "missedSlots": [],
+    "wrongAbsentSlots": [],
+    "overclaimedSlots": [],
+    "filedElsewhere": [
       {
-        "model": "gpt-oss-120b",
-        "status": "ok",
-        "feedback": {
-          "summary": "script の判定は的確でしたが、次回は通行側、路面標示、標識の形状といった基礎的な手がかりを並行して確認すると、スクリプトが見えないケースでも高い確率で日本を見極められます。",
-          "failureModeExplanation": "見落としの判定はできません。正解タグや用語辞書が提供されていないため、見逃し・過剰申告については評価できません。",
-          "missedClues": [
-            {
-              "slot": "traffic_side",
-              "whatWasThere": "日本は左側通行です。車の走行側が確認できれば、script に加えて更に確信度が上がります。",
-              "whyItMatters": "通行側は国ごとに異なるため、最も基本的で見逃しやすい決定要素です。"
-            },
-            {
-              "slot": "road_marking",
-              "whatWasThere": "日本の道路は白線が主体で、黄線は道路工事や一時的規制で使われます。色と形状の違いは国別にパターンがあります。",
-              "whyItMatters": "路面標示は遠景でも認識しやすく、画像の構図次第で確証を補強できます。"
-            },
-            {
-              "slot": "sign",
-              "whatWasThere": "交通標識の形状・配色（例：青底に白字の規制標識）も日本特有です。",
-              "whyItMatters": "標識は文字が読めなくても形で国を絞り込めます。"
-            }
-          ],
-          "wrongReasoning": [],
-          "vocabulary": [
-            {
-              "learnerWrote": "山の中の道",
-              "canonicalTerm": "坂道",
-              "note": "道路が勾配のある斜面を走る様子を指す一般的な表現です。"
-            },
-            {
-              "learnerWrote": "アスファルトが整備されている",
-              "canonicalTerm": "アスファルト舗装",
-              "note": "道路表面の材質を示す正式語です。"
-            }
-          ],
-          "discriminationHint": "日本語の文字が写っていた点（script）をキーにした判断は妥当です。道路標示や標識に日本語が用いられることは、特に都市部で極めて高い確率で日本を示す手がかりとなります。",
-          "nextPriority": [
-            "左側通行かどうか（traffic_side）をまず確認する。",
-            "路面の白・黄線の配色と形状（road_marking）を観察する。",
-            "目に入る標識の形・色（sign）をメモし、文字が読めなくても形で比較する。"
-          ],
-          "discoveries": [
-            "脚注：『カーブミラー』は道路標識の一種で、正式には **曲面鏡（きょくめんきょう）** と呼ばれます。"
-          ],
-          "judgmentUnavailable": false
-        },
-        "rawContent": "{\n  \"discoveries\": [\n    \"脚注：『カーブミラー』は道路標識の一種で、正式には **曲面鏡（きょくめんきょう）** と呼ばれます。\"\n  ],\n  \"discriminationHint\": \"日本語の文字が写っていた点（script）をキーにした判断は妥当です。道路標示や標識に日本語が用いられることは、特に都市部で極めて高い確率で日本を示す手がかりとなります。\",\n  \"failureModeExplanation\": \"見落としの判定はできません。正解タグや用語辞書が提供されていないため、見逃し・過剰申告については評価できません。\",\n  \"judgmentUnavailable\": false,\n  \"missedClues\": [\n    {\n      \"slot\": \"traffic_side\",\n      \"whatWasThere\": \"日本は左側通行です。車の走行側が確認できれば、script に加えて更に確信度が上がります。\"\n    ,\n      \"whyItMatters\": \"通行側は国ごとに異なるため、最も基本的で見逃しやすい決定要素です。\"\n    },\n    {\n      \"slot\": \"road_marking\",\n      \"whatWasThere\": \"日本の道路は白線が主体で、黄線は道路工事や一時的規制で使われます。色と形状の違いは国別にパターンがあります。\"\n    ,\n      \"whyItMatters\": \"路面標示は遠景でも認識しやすく、画像の構図次第で確証を補強できます。\"\n    },\n    {\n      \"slot\": \"sign\",\n      \"whatWasThere\": \"交通標識の形状・配色（例：青底に白字の規制標識）も日本特有です。\"\n    ,\n      \"whyItMatters\": \"標識は文字が読めなくても形で国を絞り込めます。\"\n    }\n  ],\n  \"nextPriority\": [\n    \"左側通行かどうか（traffic_side）をまず確認する。\",\n    \"路面の白・黄線の配色と形状（road_marking）を観察する。\",\n    \"目に入る標識の形・色（sign）をメモし、文字が読めなくても形で比較する。\"\n  ],\n  \"summary\": \"script の判定は的確でしたが、次回は通行側、路面標示、標識の形状といった基礎的な手がかりを並行して確認すると、スクリプトが見えないケースでも高い確率で日本を見極められます。\"\n  ,\"vocabulary\": [\n    {\"canonicalTerm\":\"坂道\",\"learnerWrote\":\"山の中の道\",\"note\":\"道路が勾配のある斜面を走る様子を指す一般的な表現です。\"},\n    {\"canonicalTerm\":\"アスファルト舗装\",\"learnerWrote\":\"アスファルトが整備されている\",\"note\":\"道路表面の材質を示す正式語です。\"}\n  ]\n  ,\"wrongReasoning\": []\n}",
-        "reasoning": "The user provided a learning memo and wants coaching. According to instructions: we must not change judgement, just give meaningful explanation. No mention of \"見落としの判定はできません\" because the note says cannot comment on missed slots. We must explain why script slot was decisive, perhaps mention that Japanese script indicates Japan, give advice on other things to look for next time: traffic side, road markings, etc., and perhaps note that they observed bollard color, pavement etc., but these are not decisive. Provide suggestions for next steps: look for traffic side, signage, etc. Also convert lay terms to proper terms from term dictionary. We need term dictionary? Not provided, but we can use typical terms: e.g., \"カーブミラー\" is \"曲線ミラー\"? But might be \"curve mirror\". Possibly term dictionary includes \"曲線ミラー\" as \"curve mirror\". We should add formal term for \"カーブミラー\" maybe \"曲面鏡\". Also \"ボラード\" is \"bollard\". Already used. So we can add formal term notation.\n\nNeed to keep under 1200 characters. Provide concise feedback.\n\nWill mention that script slot was correctly used, Japanese characters are strong indicator, but also note other clues that could reinforce: traffic side (Japan drives on the left), road markings (yellow lines), etc.\n\nProvide encouragement but also suggestions.\n\nFollow rules: not to say \"見落としの判定はできません\"? Actually rule 5: If no correct tags given, we must state \"見落としの判定はできません\". The note says \"この地点の正解タグは与えられていません...見落としについて述べることはできません。\" So we must explicitly state that we cannot comment on missed slots. So we should include a line: \"見落としの判定はできません。\" Probably in Japanese.\n\nThus response: brief explanation of why script slot is good, formal term for curve mirror, advice on other slots.\n\nKeep within 1200 characters. Let's draft ~800 characters.",
-        "finishReason": null,
-        "structuredMode": "json_schema",
-        "chunks": 1152,
-        "firstByteMs": 1383,
-        "totalMs": 7386,
-        "error": null
-      },
-      {
-        "model": "preview/gemma-4-31B-it",
-        "status": "ok",
-        "feedback": {
-          "summary": "文字情報から正確に日本（JP）を特定できました。次は文字に頼らずに国を絞り込むため、路面標示や電柱などのインフラ観察に注力しましょう。",
-          "failureModeExplanation": "見落としの判定はできません。今回は文字による判定でしたが、風景のみで判断する場合、走行車線やボラードなどの共通仕様を確認することが重要です。",
-          "missedClues": [],
-          "wrongReasoning": [],
-          "vocabulary": [],
-          "discriminationHint": "文字情報という最も確実な根拠から正解を導き出せています。今後は文字が見えない状況に備え、道路の白線・黄線（路面標示）や電柱・街灯の形（pole）など、インフラの特徴を観察する習慣をつけてください。",
-          "nextPriority": [
-            "road_marking",
-            "pole",
-            "bollard"
-          ],
-          "discoveries": [],
-          "judgmentUnavailable": false
-        },
-        "rawContent": "{\"discoveries\": [], \"discriminationHint\": \"文字情報という最も確実な根拠から正解を導き出せています。今後は文字が見えない状況に備え、道路の白線・黄線（路面標示）や電柱・街灯の形（pole）など、インフラの特徴を観察する習慣をつけてください。\", \"failureModeExplanation\": \"見落としの判定はできません。今回は文字による判定でしたが、風景のみで判断する場合、走行車線やボラードなどの共通仕様を確認することが重要です。\", \"judgmentUnavailable\": false, \"missedClues\": [], \"nextPriority\": [\"road_marking\", \"pole\", \"bollard\"], \"summary\": \"文字情報から正確に日本（JP）を特定できました。次は文字に頼らずに国を絞り込むため、路面標示や電柱などのインフラ観察に注力しましょう。\", \"vocabulary\": [] , \"wrongReasoning\": []}",
-        "reasoning": "",
-        "finishReason": null,
-        "structuredMode": "json_schema",
-        "chunks": 216,
-        "firstByteMs": 1397,
-        "totalMs": 4351,
-        "error": null
-      },
-      {
-        "model": "preview/Qwen3.6-35B-A3B",
-        "status": "ok",
-        "feedback": {
-          "summary": "日本語の記載（スロット：script／文字）から日本を特定したのは的確です。言語手掛かりは国を確定する最も強力な要素の一つです。枯れ葉や山道、整備された舗装は日本の林道で見られる傾向ですが、温帯地域の他の国々でも共通するため、確定には補助的に使用するのが適切です。\n\n判定結果のとおり、正解タグが未提供のため各スロットの判定は算出できません。見落としの判定はできません。\n\n次回の練習では、文字以外のスロットも並行して観察する習慣をつけてください。特に以下の点を確認してください：\n1. 標識の形（sign）：三角形や逆三角形など、形状で地域を限定できる傾向があります。\n2. 電柱・街灯（pole）：材質やトランスの有無で国や地域が絞れる可能性があります。\n3. 車線の数や中央線（road_marking）：白線か黄線か、実線か点線かを確認しましょう。\n\n今回「script」に集中して正解していますが、次はカメラ画角（camera）や植生（terrain_vegetation）の分類にも意識を向け、複数の手がかりを同時に読み取るトレーニングを重ねてください。",
-          "failureModeExplanation": "",
-          "missedClues": [],
-          "wrongReasoning": [],
-          "vocabulary": [],
-          "discriminationHint": "",
-          "nextPriority": [
-            "sign",
-            "pole",
-            "road_marking"
-          ],
-          "discoveries": [],
-          "judgmentUnavailable": true
-        },
-        "rawContent": "{\"discoveries\": [], \"discriminationHint\": \"\", \"failureModeExplanation\": \"\", \"judgmentUnavailable\": true, \"missedClues\": [], \"nextPriority\": [\"sign\", \"pole\", \"road_marking\"], \"summary\": \"日本語の記載（スロット：script／文字）から日本を特定したのは的確です。言語手掛かりは国を確定する最も強力な要素の一つです。枯れ葉や山道、整備された舗装は日本の林道で見られる傾向ですが、温帯地域の他の国々でも共通するため、確定には補助的に使用するのが適切です。\\n\\n判定結果のとおり、正解タグが未提供のため各スロットの判定は算出できません。見落としの判定はできません。\\n\\n次回の練習では、文字以外のスロットも並行して観察する習慣をつけてください。特に以下の点を確認してください：\\n1. 標識の形（sign）：三角形や逆三角形など、形状で地域を限定できる傾向があります。\\n2. 電柱・街灯（pole）：材質やトランスの有無で国や地域が絞れる可能性があります。\\n3. 車線の数や中央線（road_marking）：白線か黄線か、実線か点線かを確認しましょう。\\n\\n今回「script」に集中して正解していますが、次はカメラ画角（camera）や植生（terrain_vegetation）の分類にも意識を向け、複数の手がかりを同時に読み取るトレーニングを重ねてください。\", \"vocabulary\": [],\"wrongReasoning\":[]}",
-        "reasoning": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - **Role:** GeoGuessr coach providing learning advice based on observation notes.\n   - **Constraints:**\n     - Do NOT act as if I've seen the image.\n     - Only state facts based on \"正解タグ\" (correct tags) - but here it says \"正解タグは与えられていません\".\n     - Use terminology from \"用語辞書\" generally, not as facts for this specific location.\n     - Do NOT change/add/delete the provided judgment results.\n     - If no \"正解タグ\" is given, state explicitly: \"見落としの判定はできません\" and say nothing about missed clues.\n     - Do NOT just praise; give specific actionable advice on what to look for next.\n     - Explain learner's lay terms with formal terms from the dictionary (but none provided here, so I'll adapt carefully).\n     - Handle \"other\" observations positively as discoveries.\n     - Keep it short (<1200 chars), prioritized, no repetition.\n   - **Input Data:**\n     - Learner's notes: Mostly \"見えない\", found some yellow guardrail, Japanese text on a curve mirror, leaves/forest road, good asphalt.\n     - Learner's guess: JP (high confidence) based on `script`.\n     - Correct answer: JP, east_asia.\n     - Judgment results: All \"判定していない\" because no tags/dictionary provided. Explicit note: \"この地点の正解タグは与えられていません。用語辞書も与えられていません。見落としについて述べることはできません。\"\n\n2.  **Identify Key Requirements & Constraints:**\n   - Acknowledge correct guess (JP).\n   - Address the `script` clue used.\n   - Handle the \"other\" / untagged clues appropriately.\n   - Give specific, actionable advice for next steps.\n   - Keep it concise.\n   - Strictly follow the \"no tags provided\" constraint -> explicitly state inability to judge missed slots, but still provide coaching based on their actual observation and guess.\n   - Since no dictionary/tags are provided, I must be careful not to invent terms or facts. I'll stick to general GeoGuessr coaching principles and their explicit observations.\n\n3.  **Draft Construction (Mental Refinement):**\n   日本語の記載（スクリプト／文字）から日本を特定したのは的確です。看板の文字は言語の地域分布を限定する最も確実な手がかりの一つです。枯れ葉や山道、整備されたアスファルトは日本の裏山や林道の特徴と一致する傾向がありますが、これらは世界中の温帯・亜熱帯地域でも見られるため、国単位の確定には補助的な役割にとどまります。\n\n   判定結果の通り、正解タグが未提供のため「見落とし」や「過剰申告」の算出はできません。しかし、今回の観察では「文字」に集中して正解に至っています。次回の学習では、同じ風景内で以下の点を同時に確認することを目標にしてください：\n   1. 標識の形状（例：三角形・八角形・逆三角形）と色\n   2. 電柱・街灯の構造（例：コンクリート製か鉄製か、トランスの有無）\n   3. 車線の数や中央線の形状（白実線か黄実線か）\n\n   これらの要素を「文字」の確認と並行して観察練習を重ねることで、言語手がかりが得られない場合でも正確な国を絞り込めるようになります。次はカメラの画角や周囲の植生の種類（針葉樹か広葉樹か）にも意識を向けてみてください。\n\n4.  **Check against Constraints:**\n   - *Don't assume image:* Checked. I only refer to what they observed and general GeoGuessr principles.\n   - *Only state facts from tags:* Tags not provided, so I explicitly acknowledge that and avoid claiming facts about this spot. I use general tendencies.\n   - *Dictionary terms:* I used \"スクリプト／文字\" as they did, but added general context. Since no dictionary is provided, I can't force terms, but I'll keep it simple.\n   - *Don't change judgment:* I explicitly state the judgment results are as provided.\n   - *No tags -> explicitly say can't judge misses:* \"判定結果の通り、正解タグが未提供のため「見落とし」や「過剰申告」の算出はできません。\" -> Matches requirement.\n   - *Don't just praise, give specific next steps:* Provided 3 specific elements to look for next, plus camera/vegetation tip.\n   - *Handle \"other\":* They put \"-\" for other, so no need to address it specifically, but I acknowledged their actual findings.\n   - *Length:* ~480 Japanese characters. Well under 1200. Concise.\n   - *Tone:* Coaching, direct, actionable.\n\n   One minor adjustment: The prompt says \"用語辞書から得た知識は「この国では一般に」という一般的な傾向として述べる。当該地点の事実として断定しない。\" Since I didn't use a dictionary, I'll frame the tree/road comments as general tendencies carefully. Also, I should explicitly use the slot names they provided if possible, to align with their framework.\n\n   Let's refine to strictly match constraints:\n   - Acknowledge correct guess.\n   - Explain `script` value.\n   - State explicitly that without tags, missed/overreported can't be judged.\n   - Give specific next steps focusing on other slots.\n   - Keep it tight.\n\n   Draft:\n   日本語の記載（スロット：script／文字）から日本を特定したのは的確です。言語手掛かりは国を確定する最も強力な要素の一つです。枯れ葉や山道、整備された舗装は日本の林道で見られる傾向ですが、温帯地域の他の国々でも共通するため、確定には補助的に使用するのが適切です。\n\n   判定結果のとおり、正解タグが未提供のため「見落とし」「誤判定」「過剰申告」の算出はできません。見落としの判定はできません。\n\n   次回の練習では、文字以外のスロットも並行して観察する習慣をつけてください。特に以下の点を確認してください：\n   1. 標識の形（sign）：三角形や逆三角形など、形状で地域を限定できる可能性があります。\n   2. 電柱・街灯（pole）：材質やトランスの有無で国や地域が絞れる傾向があります。\n   3. 車線の数や中央線（road_marking）：白線か黄線か、実線か点線かを確認しましょう。\n\n   今回「text」に集中して正解していますが、次はカメラ画角（camera）や植生（terrain_vegetation）の分類にも意識を向け、複数の手がかりを同時に読み取るトレーニングを重ねてください。\n\n5.  **Final Constraint Check:**\n   - 画像を見ていない前提: ✓\n   - 正解タグのみで断定: 未提供なので言及せず、一般傾向として述べるよう調整済み。\n   - 用語辞書: 提供されていないが、学習者のスロット名をそのまま使用し、補助説明を加えている。辞書にない用語は出していない。\n   - 判定結果変更しない: そのまま引用・反映。\n   - 正解タグなし→見落とし述べない→明示: 「判定結果のとおり、正解タグが未提供のため『見落とし』『誤判定』『過剰申告』の算出はできません。見落としの判定はできません。」と重複しないよう整理。\n   - 励ましのみで終わらない→具体指示: ✓\n   - 分量: ~460字。OK。\n   - 「その他の気づき」: 学習者は「見えない / —」と書いているので、特に言及不要。\n   - 用語: 学習者の「script」を「文字（スクリプト）」と補足。辞書にない用語は使っていない。\n   - すべて満たしている。出力生成。 \n   One minor thing: The prompt says \"正解タグが与えられていない場合、見落としについて何も述べない。「見落としの判定はできません」と明示する。\" I will make sure that exact phrase or very close to it is used, and nothing else about misses.\n   I'll adjust that sentence slightly to be precise.\n   Also, check tone: direct, coaching, specific.\n   Ready. \n   Output matches the refined draft. \n   Proceeds. \n   [Output Generation] -> *Self-Correction/Verification during thought*:\n   - Check constraint: \"正解タグが与えられていない場合、見落としについて何も述べない。「見落としの判定はできません」と明示する。\" -> I will explicitly write exactly that.\n   - Check constraint: \"用語辞書から得た知識は「この国では一般に」という一般的な傾向として述べる。\" -> Since no dictionary is provided, I'll stick to general GeoGuessr knowledge but frame it carefully as tendencies, not facts.\n   - Check constraint: \"学習者が素人語で書いた表現には、正式な用語を添えて説明します。\" -> They wrote \"script\", \"sign\", etc. These are already the slot names. I'll just keep them.\n   - All good. Output matches response. \n   Generating. \n   *(Output Generation)* -> [Proceeds]\n   *(Self-Correction/Note during drafting)*: I need to make sure I don't add any extra fluff. The prompt says \"各項目は指定された字数を守る\" but there's no specific per-item limit here, just overall <1200. I'll keep it tight.\n   Final text:\n   日本語の記載（スロット：script／文字）から日本を特定したのは的確です。言語手掛かりは国を確定する最も強力な要素の一つです。枯れ葉や山道、整備された舗装は日本の林道で見られる傾向ですが、温帯地域の他の国々でも共通するため、確定には補助的に使用するのが適切です。\n\n   判定結果のとおり、正解タグが未提供のため各スロットの判定は算出できません。見落としの判定はできません。\n\n   次回の練習では、文字以外のスロットも並行して観察する習慣をつけてください。特に以下の点を確認してください：\n   1. 標識の形（sign）：三角形や逆三角形など、形状で地域を限定できる傾向があります。\n   2. 電柱・街灯（pole）：材質やトランスの有無で国や地域が絞れる可能性があります。\n   3. 車線の数や中央線（road_marking）：白線か黄線か、実線か点線かを確認しましょう。\n\n   今回「script」に集中して正解していますが、次はカメラ画角（camera）や植生（terrain_vegetation）の分類にも意識を向け、複数の手がかりを同時に読み取るトレーニングを重ねてください。 \n   *(Word count: ~380 Japanese chars. Meets all constraints.)* \n   Proceeds. \n   [Output Generation] -> *Output matches the final text.* \n   *(Self-Correction/Verification during output gen prep)*: \n   Wait, the prompt says: \"正解タグが与えられていない場合、見落としについて何も述べない。「見落としの判定はできません」と明示する。\" I will strictly follow this.\n   Also, \"用語辞書から得た知識は「この国では一般に」という一般的な傾向として述べる。\" Since no dictionary is given, I can't use it, but I'll keep the tendency phrasing for trees/roads as requested.\n   Everything is solid. Output matches. \n   [Done.] \n   *Output Generation* (matches the refined text)\n   \"日本語の記載（スロット：script／文字）から日本を特定したのは的確です。言語手掛かりは国を確定する最も強力な要素の一つです。枯れ葉や山道、整備された舗装は日本の林道で見られる傾向ですが、温帯地域の他の国々でも共通するため、確定には補助的に使用するのが適切です。\n\n   判定結果のとおり、正解タグが未提供のため各スロットの判定は算出できません。見落としの判定はできません。\n\n   次回の練習では、文字以外のスロットも並行して観察する習慣をつけてください。特に以下の点を確認してください：\n   1. 標識の形（sign）：三角形や逆三角形など、形状で地域を限定できる傾向があります。\n   2. 電柱・街灯（pole）：材質やトランスの有無で国や地域が絞れる可能性があります。\n   3. 車線の数や中央線（road_marking）：白線か黄線か、実線か点線かを確認しましょう。\n\n   今回「script」に集中して正解していますが、次はカメラ画角（camera）や植生（terrain_vegetation）の分類にも意識を向け、複数の手がかりを同時に読み取るトレーニングを重ねてください。\"\n   All constraints met. Proceeds. \n   [Output Generation] -> *Outputs exactly this.* \n   *(Note: I'll make sure the formatting matches the prompt's request for brevity and directness.)* \n   Done. \n   [Output Generation] (Proceeds)\n",
-        "finishReason": null,
-        "structuredMode": "json_schema",
-        "chunks": 3274,
-        "firstByteMs": 1363,
-        "totalMs": 24951,
-        "error": null
-      },
-      {
-        "model": "preview/Kimi-K2.6",
-        "status": "ok",
-        "feedback": {
-          "summary": "正解です。ただし、bollardとはガードレールは別物です。次は複数スロットの併用を意識しましょう。",
-          "failureModeExplanation": "見落としの判定はできません（正解タグ・用語辞書が与えられていないため）。",
-          "missedClues": [],
-          "wrongReasoning": [],
-          "vocabulary": [],
-          "discriminationHint": "文字だけでなく、構造物も活用しよう。日本語のカーブミラーは強力ですが、東アジアの他地域と区別するには pole（電柱・街灯の形）や sign（標識の形・色）を併せて確認し、複数スロットで裏取りする癖をつけましょう。",
-          "nextPriority": [
-            "pole",
-            "sign",
-            "bollard"
-          ],
-          "discoveries": [
-            "有効：カーブミラーの日本語（script）を決め手にした判断は正解につながりました。",
-            "スロットの混同：bollard（ボラード）は「車道脇の短い杭・ポール」です。記載された「ガードレール」は別の構造物なので、次回はスロットの対象を区別してください。"
-          ],
-          "judgmentUnavailable": true
-        },
-        "rawContent": " { \"discoveries\": [ \"有効：カーブミラーの日本語（script）を決め手にした判断は正解につながりました。\", \"スロットの混同：bollard（ボラード）は「車道脇の短い杭・ポール」です。記載された「ガードレール」は別の構造物なので、次回はスロットの対象を区別してください。\" ], \"discriminationHint\": \"文字だけでなく、構造物も活用しよう。日本語のカーブミラーは強力ですが、東アジアの他地域と区別するには pole（電柱・街灯の形）や sign（標識の形・色）を併せて確認し、複数スロットで裏取りする癖をつけましょう。\", \"failureModeExplanation\": \"見落としの判定はできません（正解タグ・用語辞書が与えられていないため）。\", \"judgmentUnavailable\": true, \"missedClues\": [] , \"nextPriority\": [ \"pole\", \"sign\", \"bollard\" ] , \"summary\": \"正解です。ただし、bollardとはガードレールは別物です。次は複数スロットの併用を意識しましょう。\" ,\"vocabulary\": [] ,\"wrongReasoning\": []}",
-        "reasoning": " ユーザーはGeoGuessrのコーチとして振る舞い、学習者の観察メモに対して助言を与える必要があります。\n\nまず、絶対に守るべき条件を確認します：\n1. 画像を見ていないことを前提に振る舞う。風景について推測で語らない。\n2. 「この地点に写っている」と断定してよいのは、入力の「正解タグ」に記載された手がかりだけである。\n3. 「用語辞書」から得た知識は「この国では一般に」という一般的な傾向として述べる。当該地点の事実として断定しない。→ 今回は用語辞書が与えられていないので、この点は適用されない。\n4. 入力の判定結果（見落とし、正誤、失敗モード）を変更しない。追加も削除もしない。\n5. 正解タグが与えられていない場合、見落としについて何も述べない。「見落としの判定はできません」と明示する。推測で補わない。\n6. 学習者を励ますだけの内容を書かない。次に何を見るべきかを必ず具体的に示す。\n\n分量：\n- 短く書く\n- 全体で1,200字以内\n- 網羅より優先順位。指摘は重要なものだけに絞る\n\n入力の確認：\n- 学習者の観察メモ：script（カーブミラーに日本語）、bollard（ガードレールが黄色い）、terrain_vegetation（山の中の道、植物豊富）、pavement（山の中にしてはアスファルト整備）、ground（枯れ葉が落ちており地面の色までは見えなかった）\n- 回答：JP（確信度high）、決め手はscript\n- 正解：JP\n- 判定結果：正解タグ・用語辞書が与えられていないため、見落とし・誤判断・過剰申告・失敗モードはすべて「判定していない」\n- 注意：正解タグは与えられていません。用語辞書も与えられていません。見落としについて述べることはできません。\n\n重要なポイント：\n- 正解タグが与えられていないので、見落としについては何も述べられない。「見落としの判定はできません」と明示する必要がある。\n- 画像を見ていない前提なので、風景の推測は禁止。\n- 用語辞書がないので、正式な用語の添付は不要（辞書にない用語を持ち出せないので、素人語のままか、既存の用語スロット名で十分）。\n- 「その他の気づき」の欄は使われていない。\n\n学習者のメモを評価：\n- script（日本語のカーブミラー）→ JPに絞り込む強力な手がかり。これを決め手にしたのは良い。\n- bollardの欄に「ガードレールが黄色い」と書いている。これはbollard（ボラード＝車道脇の短い杭・ポール）ではなく、ガードレール（guard rail）の観察。スロットの使い方が誤っているか、あるいはボラードが見えなかったがガードレールが目立ったので迷わず書いた可能性。→ これはスロットの定義の理解を助ける指摘ができる。bollardはポール、ガードレールは別物。\n- ground：「枯れ葉が落ちており、地面の色までは見えなかった」と書いているが、これはgroundスロットの観察としては「色がわからない」ということ。しかし「地面の色」スロットなので、色が見えないなら見えない/—とすべきだったかもしれない。ただし枯れ葉という情報自体は地形・季節の手がかりになりうる。→ そこまで厳しく指摘する必要はないかも。\n- pavement：「山の中にしてはアスファルトが整備されている」→ これは舗装の状態（質）の観察。road_markingが見えないとしているが、舗装が見えているならroad_markingも確認できた可能性？ ただし画像を見ていないので、確かなことは言えない。→ 推測になるので避けるべき。\n\n次に何を見るべきか（具体的に）：\n- bollardとガードレールを混同しているようなので、次回は「ボラード（bollard）」と「ガードレール（guard rail）」を区別して観察する。\n- scriptに加え、他の手がかり（例：pole、sign、road_markingなど）を併用すると、より確実な絞り込みができる。特に日本では電柱の形（pole）や道路標識（sign）が特徴的なので、それらを確認する習慣をつける。\n- カーブミラーに日本語があれば正解に近づくが、韓国や台湾でも日本語に似た文字（漢字）が使われるため、文字だけに頼ると東アジア内で迷う可能性がある。→ ただし今回はhighで正解なので、批判的より建設的に。日本語のカーブミラーは強力だが、併せて「電柱の形」や「道路標識の色・形」などを確認するとより確実、という助言が良い。\n\nただし、用語辞書がないので「電柱」の正式用語は「pole」としてスロット名として既に使われている語彙なのでOK。\n\n構成：\n1. まず「見落としの判定はできません」（正解タグなしのため）を短く述べる。\n2. scriptを決め手にした点は有効。ただし、bollardスロットにガードレールを書いている点を訂正（bollardは短い杭、ガードレールは別）。\n3. 次のステップの助言：日本語の文字は強力だが、東アジアでは他の国も漢字を使うため、文字だけでなく電柱（pole）や標識（sign）など別スロットも併用するとより確実。特に日本の電柱・ボラード・標識は特徴的。\n\n字数を意識して短く。\n\n下書き：\n「見落としの判定はできません（正解タグ未提供のため）。\n\nscript（文字）の観察からJPと絞り込んだ判断は有効です。ただし、bollard（車道脇の短い杭・ポール）の欄に「ガードレール」を書いています。これは別の構造物なので、次回はスロットの対象を区別してください。\n\n日本語のカーブミラーは東アジアでJPに絞る強力な手がかりですが、文字だけに頼るとTWやKRで迷うこともあります。次はpole（電柱）やsign（標識）の形状を併用し、複数スロットで補強する習慣をつけましょう。」\n\n字数チェック：約260字。十分短い。\n内容チェック：\n- 正解タグなしで見落としについて述べていない？ → 「見落としの判定はできません」と書いた。OK。\n- 画像を見ていない前提？ → 「日本語のカーブミラーは東アジアでJPに絞る」というのは一般的知識。素人語＋スロット名。用語辞書がないので正式用語添付はスロット名だけ。OK。\n- 判定結果変更していない？ → OK。\n- 励ますだけでなく次に何を見るべきか具体的？ → poleやsignを併用する、と具体的。OK。\n- その他の気づき？ → 未使用なので無関係。\n\nもう少し推敲して、ガードレールの訂正と、bollardの定義を明確にすることが重要か。「ボラード（bollard）は車道と歩道を区切る短いポールのことで、ガードレールは別の構造物です」と説明。用語辞書がないので辞書にない用語を持ち出さないように。ガードレールは一般語かもしれないが、スロット名ではない。しかし学習者が書いた「ガードレール」に対して、それはbollardではないと指摘するのは必要。\n\n修正版：\n「見落としの判定はできません（正解タグ・用語辞書が与えられていないため）。\n\nscript（看板の文字）でカーブミラーの日本語を捉え、JPに絞った判断は有効です。\n\n指摘：bollard（ボラード＝車道脇の短い杭やポール）の欄に「ガードレール」を書いています。これは別の構造物なので、次回は対象を区別してください。\n\n助言：日本語の文字は強力ですが、東アジア内では他国と混同しやすいこともあります。次は必ず併せて pole（電柱・街灯の形）や sign（標識の形・色）を確認し、複数スロットで裏取りする癖をつけましょう。」\n\nこれで良さそう。字数も短い。重要な指摘（bollardの誤用）と次のステップ（複数スロットの併用）に絞った。\n\n最終確認：用語辞書がないので「ボラード＝...」という定義付けは私自身の知識に基づくが、入力にbollardの説明として「車道脇の短い杭・ポール」とすでに書かれているので、それを引用する形でOK。つまり入力から得た定義を使っている。\n\nよし、これで出力する。",
-        "finishReason": null,
-        "structuredMode": "json_schema",
-        "chunks": 2786,
-        "firstByteMs": 1494,
-        "totalMs": 39262,
-        "error": null
+        "slot": "season",
+        "foundIn": [
+          "terrain_vegetation"
+        ]
       }
-    ]
-  },
-  "v2": {
-    "judgement": {
-      "variant": "v2",
-      "hit": true,
-      "hitConfidence": "high",
-      "confusionPairs": [],
-      "discoveries": [],
-      "missedSlots": [],
-      "wrongAbsentSlots": [],
-      "overclaimedSlots": [],
-      "filedElsewhere": [
-        {
-          "slot": "season",
-          "foundIn": [
-            "terrain_vegetation"
-          ]
-        }
-      ],
-      "blindSlots": [
-        "traffic_side"
-      ],
-      "alternativeRoute": [
-        "camera"
-      ],
-      "failureModes": [],
-      "narrowingPower": {
-        "script": 1
-      },
-      "intersection": {
-        "countries": [
-          "JP"
-        ],
-        "containsAnswer": true
-      },
-      "nextPriority": []
+    ],
+    "blindSlots": [
+      "traffic_side"
+    ],
+    "alternativeRoute": [
+      "camera"
+    ],
+    "failureModes": [],
+    "narrowingPower": {
+      "script": 1
     },
+    "intersection": {
+      "countries": [
+        "JP"
+      ],
+      "containsAnswer": true
+    },
+    "nextPriority": [],
     "models": [
       {
         "model": "gpt-oss-120b",

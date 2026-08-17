@@ -1,6 +1,6 @@
 # 正解タグと用語辞書の不整合
 
-生成: 2026-08-17T08:54:54.826Z　
+生成: 2026-08-17T09:37:56.257Z　
 `node scripts/validate-answer-keys.mjs` が算出した。**AI を使っていない。リクエスト消費 0。**
 
 ## これはタグ付けの誤りではない
@@ -41,32 +41,38 @@ note に「**この用語は現状ほぼ機能しない。** 欧州の国を埋�
 
 (b) では積集合が正解を含まないことが**正しい診断**である。`.RU` ドメインと同じ誤誘導である。
 
-## 検出: 2 件
+## 検出: 3 件
 
 | 問 | 正解 | スロット | 種類 | 残り | 用語（該当国数） | 見立て |
 |---|---|---|---|---|---|---|
-| q-tr-01 | TR | `pavement` | 正解を含まない | 1 | pavement_tile_like(1) | (b) 観察が誤誘導の可能性（用語は正しく、手がかりが国を示さない） |
-| q-kz-01 | KZ | `road_marking` | 正解を含まない | 12 | road_marking_center_yellow(13) + ref_road_marking_center_yellow(37) | (b) 観察が誤誘導の可能性（用語は正しく、手がかりが国を示さない） |
+| q-br-01 | BR | `sign` | 正解を含まない | 3 | ref_sign_post_wooden(3) | (b) 観察が誤誘導の可能性（用語は正しく、手がかりが国を示さない） |
+| q-kz-01 | KZ | `road_marking` | 正解を含まない | 37 | ref_road_marking_center_yellow(37) | (b) 観察が誤誘導の可能性（用語は正しく、手がかりが国を示さない） |
+| q-kz-01 | KZ | `camera` | 矛盾 | 0 | ref_camera_stubby_antenna(2) + ref_camera_white_truck_below(3) | — |
 
 ## 対応の候補
 
 **見立ては機械的な推定である。** `note` に「保留」「機能しない」と
 書いてあるかどうかで分けているだけなので、最終判断は人間が行う。
 
-### q-tr-01 / `pavement`（正解 TR、残り 1 カ国）
+### q-br-01 / `sign`（正解 BR、残り 3 カ国）
 
-- 用語: pavement_tile_like(1)
+- 用語: ref_sign_post_wooden(3)
 - 見立て: (b) 観察が誤誘導の可能性（用語は正しく、手がかりが国を示さない）
-- 対応: 用語が正しければ直す必要はない。**その手がかりが TR を示さないことが正しい診断である**
-- note — pavement_tile_like: 経験則。 出典が「連想する」と書いている。断定に使わない。
+- 対応: 用語が正しければ直す必要はない。**その手がかりが BR を示さないことが正しい診断である**
+- note — ref_sign_post_wooden: 強い。3 カ国。カナダは木製で白く塗られることもあり、アメリカは金属なのでこの 1 点で北米が割れる。タイは白く塗られ根元が黒い。ウルグアイは太くて白い木製。
 
-### q-kz-01 / `road_marking`（正解 KZ、残り 12 カ国）
+### q-kz-01 / `road_marking`（正解 KZ、残り 37 カ国）
 
-- 用語: road_marking_center_yellow(13) + ref_road_marking_center_yellow(37)
+- 用語: ref_road_marking_center_yellow(37)
 - 見立て: (b) 観察が誤誘導の可能性（用語は正しく、手がかりが国を示さない）
 - 対応: 用語が正しければ直す必要はない。**その手がかりが KZ を示さないことが正しい診断である**
-- note — road_marking_center_yellow: 補助メタ。単独では大陸すら決まらない。 13 カ国・3 大陸にまたがる。組み合わせの材料として使う。出典では VE も挙がっているが対象国リストに無いため除いた。
 - note — ref_road_marking_center_yellow: `KZ` を含まない。 人手の road_marking_center_yellow（13 カ国）は本人の連想であり、こちらは記載である。上書きせず別に持つ。出典が独立に「黄色い中央線はカザフスタンを示さない」という診断と一致した。
+
+### q-kz-01 / `camera`（正解 KZ、残り 0 カ国）
+
+- 用語: ref_camera_stubby_antenna(2) + ref_camera_white_truck_below(3)
+- 見立て: —
+- 対応: 同一スロット内の用語の積集合が空。用語のどれかの該当国が偏っている
 
 ## 保留中の用語（`disputed`）: 2 件
 
@@ -83,9 +89,9 @@ note に「**この用語は現状ほぼ機能しない。** 欧州の国を埋�
 | q-ru-01 | RU | `road_marking` | `road_marking_center_white` | 1 |
 | q-za-01 | ZA | `road_marking` | `road_marking_center_white` | 1 |
 
-- `road_marking_center_white` — 出典は「まずヨーロッパを考える」だが具体的な国が挙がっていない。 唯一明示されたのがチリ（南米だが白いことがある）。ヨーロッパ側の国は未記載のため入れていない。この用語は現状ほぼ機能しない。 欧州の国を埋めるまで保留。
+- `road_marking_center_white` — 連想である。網羅ではない。「中央線が白なら、まずヨーロッパを考える」。国を挙げられていない（チリだけが書けた）ことが、連想である証拠である。出典による網羅は `ref_road_marking_center_white`（85 カ国）にある。
 
-## 絞り込みに使える用語が無いスロット: 33 件
+## 絞り込みに使える用語が無いスロット: 29 件
 
 正解タグには用語が割り当てられているが、**すべて `unverified` か `disputed`** である。
 「次に見るべきスロット」として提示されない。
@@ -95,46 +101,35 @@ note に「**この用語は現状ほぼ機能しない。** 欧州の国を埋�
 
 | 問 | 正解 | スロット | 割り当てられている用語 |
 |---|---|---|---|
+| q-jp-01 | JP | `terrain_vegetation` | ai_terrain_vegetation_01(unverified, disputed) |
 | q-jp-01 | JP | `pavement` | ai_pavement_01(unverified, disputed) |
 | q-th-01 | TH | `vehicle` | ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) |
-| q-tr-01 | TR | `traffic_side` | ai_traffic_side_01(unverified, disputed) + ai_traffic_side_03(unverified, disputed) + ai_traffic_side_04(unverified, disputed) + ai_traffic_side_05(unverified, disputed) |
-| q-tr-01 | TR | `script` | ai_script_03(辞書に無い) |
-| q-tr-01 | TR | `vehicle` | ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) + ai_vehicle_05(unverified, disputed) |
-| q-br-01 | BR | `traffic_side` | ai_traffic_side_01(unverified, disputed) |
-| q-br-01 | BR | `script` | ai_script_03(辞書に無い) |
-| q-br-01 | BR | `vehicle` | ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) + ai_vehicle_05(unverified, disputed) |
+| q-tr-01 | TR | `script` | ai_script_02(unverified, disputed) |
+| q-tr-01 | TR | `vehicle` | ref_plate_eu_blue_band(heuristic) + ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) |
+| q-tr-01 | TR | `pavement` | pavement_tile_like(heuristic) |
 | q-br-01 | BR | `pavement` | ai_pavement_01(unverified, disputed) |
 | q-au-01 | AU | `bollard` | ai_bollard_01(unverified, disputed) |
+| q-au-01 | AU | `ground` | ai_ground_03(unverified, disputed) |
+| q-au-01 | AU | `terrain_vegetation` | trees_close_to_road(heuristic) |
 | q-au-01 | AU | `vehicle` | ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) |
 | q-au-01 | AU | `pavement` | ai_pavement_01(unverified, disputed) + ai_pavement_05(unverified, disputed) |
 | q-au-01 | AU | `season` | ai_season_01(unverified, disputed) |
 | q-is-01 | IS | `ground` | ai_ground_03(unverified, disputed) |
 | q-is-01 | IS | `pavement` | ai_pavement_04(unverified, disputed) |
-| q-bg-01 | BG | `traffic_side` | ai_traffic_side_01(unverified, disputed) + ai_traffic_side_04(unverified, disputed) |
 | q-bg-01 | BG | `sign` | ai_sign_01(unverified, disputed) |
-| q-bg-01 | BG | `vehicle` | ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) + ai_vehicle_05(unverified, disputed) |
+| q-bg-01 | BG | `vehicle` | ref_plate_eu_blue_band(heuristic) + ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) + ai_vehicle_05(unverified, disputed) |
 | q-bg-01 | BG | `pavement` | ai_pavement_01(unverified, disputed) + ai_pavement_02(unverified, disputed) |
-| q-ru-01 | RU | `traffic_side` | ai_traffic_side_01(unverified, disputed) |
 | q-ru-01 | RU | `pole` | ai_pole_03(unverified) |
 | q-ru-01 | RU | `vehicle` | ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) |
 | q-ru-01 | RU | `pavement` | ai_pavement_01(unverified, disputed) + ai_pavement_03(unverified, disputed) |
-| q-kz-01 | KZ | `traffic_side` | ai_traffic_side_01(unverified, disputed) |
 | q-kz-01 | KZ | `pole` | ai_pole_01(unverified, disputed) |
 | q-kz-01 | KZ | `vehicle` | ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) |
 | q-kz-01 | KZ | `pavement` | ai_pavement_01(unverified, disputed) |
 | q-kz-01 | KZ | `season` | ai_season_04(unverified, disputed) |
 | q-za-01 | ZA | `pole` | ai_pole_01(unverified, disputed) |
-| q-za-01 | ZA | `script` | ai_script_01(unverified, disputed) |
 | q-za-01 | ZA | `ground` | ai_ground_03(unverified, disputed) |
 | q-za-01 | ZA | `vehicle` | ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) |
 | q-za-01 | ZA | `pavement` | ai_pavement_01(unverified, disputed) + ai_pavement_02(unverified, disputed) |
-
-## 辞書に存在しない用語 ID
-
-**辞書を再生成したときに ID が変わった可能性がある。**
-
-- q-tr-01 / `script`: `ai_script_03`
-- q-br-01 / `script`: `ai_script_03`
 
 ## 影響
 
