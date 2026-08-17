@@ -21,6 +21,8 @@
         "add:question": "node tools/add-question.mjs",
         "tag:apply": "node scripts/apply-tag-drafts.mjs",
         "validate:keys": "node scripts/validate-answer-keys.mjs",
+        "list:disputed": "node tools/list-disputed.mjs",
+        "read:v2": "node tools/read-v2-feedback.mjs",
         "combos": "node scripts/extract-combos.mjs",
         "preview:v2": "vite-node tools/preview-v2-judgement.mts",
         "normalize:keys": "vite-node scripts/normalize-answer-keys.ts",

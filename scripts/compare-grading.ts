@@ -3,12 +3,17 @@
  *
  * ## v1 は再実行しない
  *
- * `data/runs/` に**実際にプレイした v1 の記録が既にある**（2026-08-07〜08-10、
- * 10 問・記録 11 件 × 4 モデル = 44 リクエスト）。同じ入力で v1 をもう一度投げても
- * 同じ条件の再現にしかならず、**枠を 44 消費して得るものがない。**
+ * `data/runs/` に**実際にプレイした v1 の記録が既にある**（2026-08-07〜08-10）。
+ * 同じ入力で v1 をもう一度投げても同じ条件の再現にしかならず、**得るものがない。**
  *
  * したがってこのスクリプトが投げるのは **v2 だけ**である。
- * 記録 11 件 × 4 モデル = 44 リクエストを消費する。
+ *
+ * ## 出題ごとに 1 件しか投げない（既定）
+ *
+ * 同じ出題の記録が複数ある（やり直した分、機能確認で増えた分）。
+ * 全件投げると**同じ入力に枠を二重に使う。** 出題ごとに最新の 1 件を採る。
+ *
+ * 10 問 × （正規化 1 + モデル 4）= **50 リクエスト**である。
  *
  * ## 転送方式を揃える
  *
@@ -24,9 +29,13 @@
  * 3. `data/questions.json` に正解タグが入っていること
  *    （全スロット `unknown` の出題は API が 409 で拒否する）
  *
- * 使い方:
- *   npx vite-node scripts/compare-grading.ts -- --dry-run   消費数だけ表示する
- *   npx vite-node scripts/compare-grading.ts                 実行する
+ * 使い方（**必ず `--dry-run` で消費数を見てから実行する**）:
+ *   npm run compare -- --dry-run                消費数だけ表示する
+ *   npm run compare                             出題ごとに 1 件（10 問 = 50）
+ *   npm run compare -- --skip-graded            v2 済みの出題を飛ばす
+ *   npm run compare -- --all                    重複を含む全件（記録ごとの揺れを見る）
+ *
+ * 読むのは `npm run read:v2`（消費 0）。`docs/v2-feedback-read.md` に書き出す。
  */
 import { readFile, readdir, mkdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
@@ -54,6 +63,21 @@ const MODELS = [
 ]
 
 const dryRun = process.argv.includes('--dry-run')
+/**
+ * **既定は出題ごとに 1 件である。**
+ *
+ * `data/runs/` には同じ出題の記録が複数ある（同じ地点をやり直した分、
+ * 過去の回答を読み込む機能の確認で増えた分）。全部投げると
+ * **同じ入力に同じ枠を二重に使う。**
+ *
+ * 記録 13 件のうち 3 件が重複で、既定を全件にしていると 65 消費のうち
+ * **15 が重複分だった。** 出題ごとに最新の 1 件を採る。
+ *
+ * `--all` で全件に戻せる（記録ごとの揺れを見たいときのため）。
+ */
+const useAll = process.argv.includes('--all')
+/** 既に v2 で採点した出題を飛ばす。やり直しで枠を使わないため */
+const skipGraded = process.argv.includes('--skip-graded')
 
 // ============================================================
 // v1 の記録を読む
@@ -75,6 +99,35 @@ async function loadV1Runs(): Promise<RunRecord[]> {
         runs.push(record)
     }
     return runs
+}
+
+/** 既に v2 で採点した出題 ID。**同じ入力に二度枠を使わない** */
+async function loadV2Graded(): Promise<Set<string>> {
+    const graded = new Set<string>()
+    let names: string[]
+    try {
+        names = (await readdir(RUNS_DIR)).filter((n) => n.endsWith('.json'))
+    }
+    catch {
+        return graded
+    }
+    for (const name of names) {
+        const record = JSON.parse(await readFile(join(RUNS_DIR, name), 'utf8')) as RunRecord
+        if (record.variant === 'v2') graded.add(record.questionId)
+    }
+    return graded
+}
+
+/**
+ * 出題ごとに 1 件へ絞る。**同じ入力に枠を二重に使わない。**
+ *
+ * `sort()` した名前順（= 時刻順）に読んでいるので、後に来たものが新しい。
+ * **新しい方を採る**（やり直した記録の方が入力が整っている）。
+ */
+function dedupeByQuestion(runs: RunRecord[]): RunRecord[] {
+    const latest = new Map<string, RunRecord>()
+    for (const run of runs) latest.set(run.questionId, run)
+    return [...latest.values()]
 }
 
 async function loadQuestions(): Promise<Map<string, Question>> {
@@ -194,16 +247,33 @@ function countArray(value: unknown): number | null {
 }
 
 async function main() {
-    const runs = await loadV1Runs()
+    const allRuns = await loadV1Runs()
     const questions = await loadQuestions()
+    const graded = await loadV2Graded()
 
-    const targets = runs.filter((r) => isTagged(questions.get(r.questionId)))
+    const runs = useAll ? allRuns : dedupeByQuestion(allRuns)
+    const deduped = allRuns.length - runs.length
+
+    const tagged = runs.filter((r) => isTagged(questions.get(r.questionId)))
     const skipped = runs.filter((r) => !isTagged(questions.get(r.questionId)))
+    const alreadyGraded = skipGraded ? tagged.filter((r) => graded.has(r.questionId)) : []
+    const targets = skipGraded ? tagged.filter((r) => !graded.has(r.questionId)) : tagged
 
     // **開発サーバの API を呼ぶ。** 止めた状態では動かない
     console.log('**`npm run dev` を起動したまま、別のターミナルで実行する。**')
     console.log('')
-    console.log(`v1 の記録 ${runs.length} 件`)
+    console.log(`v1 の記録 ${allRuns.length} 件`)
+    if (deduped > 0) {
+        console.log(`  **同じ出題の重複を外した: ${deduped} 件**（出題ごとに最新の 1 件を採る。--all で全件）`)
+    }
+    if (useAll) console.log('  --all のため重複を含む全件を対象にする')
+    if (alreadyGraded.length) {
+        console.log(`  **既に v2 で採点済みのため飛ばす: ${alreadyGraded.length} 件**`)
+        for (const r of alreadyGraded) console.log(`    ${r.questionId}`)
+    }
+    else if (!skipGraded && graded.size) {
+        console.log(`  （v2 済みの出題が ${graded.size} 件ある。飛ばすなら --skip-graded）`)
+    }
     console.log(`  タグ済みで v2 を投げられる: ${targets.length} 件`)
     if (skipped.length) {
         console.log(`  **タグ未記入のため飛ばす: ${skipped.length} 件**`)
