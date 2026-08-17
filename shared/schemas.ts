@@ -236,11 +236,58 @@ export const feedbackSchema = z.object({
             }),
         )
         .default([]),
-    discriminationHint: z.string().default(''),
-    nextPriority: z.array(z.string()).max(3).default([]),
+    /**
+     * **文字列 `"null"` を空として扱う。**
+     *
+     * 実測（2026-08-17、Kimi-K2.6）で `"discriminationHint": "null"` が返った。
+     * JSON の `null` ではなく **4 文字の文字列**である。
+     * スキーマは `string` を要求しているので通り、Zod も通り、画面に「null」と出た。
+     *
+     * `strict: true` は型を守らせたが意味は守らせなかった。3 回目である
+     * （1 回目は件数、2 回目は `confusableWith` に国コード）。
+     * **意味の検証はコードの仕事である。**
+     */
+    discriminationHint: z
+        .string()
+        .default('')
+        .transform((v) => (isNullLike(v) ? '' : v)),
+    /**
+     * 次に見るべきスロット。**スロット ID に限る。**
+     *
+     * 実測で 4 モデルの形式が揃わなかった。
+     *   Qwen     ["traffic_side", "road_marking", "sign"]   ← 想定どおり
+     *   gpt-oss  ["traffic_side（走行側）――日本は左側通行なので…"]
+     *   Kimi     ["次の地点ではtraffic_side、road_marking…を優先的に確認…"]
+     *   gemma    []
+     *
+     * 自由文字列にしていたため全部通っていた。**選択肢は 14 個しかない。**
+     * ID として解釈できないものは捨てる。文章は `discriminationHint` に書かせる。
+     *
+     * なお v2 では `nextPriority` を**コードが計算して渡している**
+     * （`server/utils/narrowing.ts`）。AI の出力は表示に使わない。
+     */
+    nextPriority: z
+        .array(z.string())
+        .default([])
+        // **判定と同じ形に正規化してから残す。** 判定だけ trim すると空白付きが素通りする
+        .transform((list) => [...new Set(list.map((v) => v.trim()).filter(isSlotId))].slice(0, 3)),
     discoveries: z.array(z.string()).default([]),
     judgmentUnavailable: z.boolean(),
 })
+
+/** 「値が無い」を文字列で書いてきた場合。**空として扱い、画面に出さない** */
+function isNullLike(value: string): boolean {
+    const v = value.trim().toLowerCase()
+    return v === '' || v === 'null' || v === 'undefined' || v === 'none' || v === 'n/a'
+}
+
+/**
+ * 文章ではなくスロット ID かどうか。`"traffic_side（走行側）――…"` は ID ではない。
+ * **呼び出し側で trim 済みの値を渡すこと。** ここでは正規化しない
+ */
+function isSlotId(value: string): value is SlotId {
+    return (SLOT_IDS as readonly string[]).includes(value)
+}
 
 /** 同時採点で受け付けるモデル数の上限。比較対象は 4 モデルである */
 export const MAX_GRADING_MODELS = 4

@@ -172,12 +172,24 @@ export const GRADING_JSON_SCHEMA: Record<string, unknown> = {
             description:
                 '候補が複数ある場合、どのスロットを見れば区別できるか。候補が1つなら空文字列。150字以内',
         },
+        /**
+         * **enum にした。** 自由文字列だと 4 モデルで形式が揃わなかった（実測 2026-08-17）。
+         *
+         *   Qwen     ["traffic_side", "road_marking", "sign"]  ← 想定どおり
+         *   gpt-oss  ["traffic_side（走行側）――日本は左側通行なので…"]
+         *   Kimi     ["次の地点ではtraffic_side、road_marking…を優先的に確認…"]
+         *   gemma    []
+         *
+         * 選択肢は 14 個しかない。**自由記述にする理由がなかった。**
+         * 理由の説明は `discriminationHint` に書かせる。
+         */
         nextPriority: {
             type: 'array',
-            description: '次に注目すべきスロットを優先順に最大3件',
+            description:
+                '次に注目すべきスロットのIDを優先順に最大3件。**IDのみを書く。説明を混ぜない。**理由は discriminationHint に書く',
             minItems: 0,
             maxItems: 3,
-            items: { type: 'string' },
+            items: { type: 'string', enum: [...SLOT_IDS] },
         },
         discoveries: {
             type: 'array',
