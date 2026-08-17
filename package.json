@@ -30,7 +30,8 @@
         "normalize:keys": "vite-node scripts/normalize-answer-keys.ts",
         "compare": "vite-node scripts/compare-grading.ts",
         "audit:feedback": "node tools/audit-feedback.mjs",
-        "inspect:whitespace": "node tools/inspect-whitespace.mjs"
+        "inspect:whitespace": "node tools/inspect-whitespace.mjs",
+        "coverage": "node tools/coverage-report.mjs"
     },
     "dependencies": {
         "nuxt": "4.5.2",

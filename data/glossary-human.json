@@ -892,6 +892,620 @@
             "sources": [
                 "https://geometas.com/metas/categories/chevrons/"
             ]
+        },
+        {
+            "id": "ref_traffic_side_left",
+            "slot": "traffic_side",
+            "canonical": "左側通行",
+            "plain": "車が左側を走っている",
+            "aliases": [
+                "左側走行",
+                "左ハンドルではなく右ハンドル",
+                "対向車が右から来る"
+            ],
+            "countries": [
+                "AU",
+                "BD",
+                "BT",
+                "BW",
+                "CY",
+                "GB",
+                "HK",
+                "ID",
+                "IE",
+                "IN",
+                "JP",
+                "KE",
+                "LK",
+                "LS",
+                "MT",
+                "MY",
+                "NA",
+                "NP",
+                "NZ",
+                "SG",
+                "SZ",
+                "TH",
+                "UG",
+                "ZA"
+            ],
+            "confusableWith": [],
+            "note": "**世界の約 4 分の 1 しかない。分かれば強い。**車の向き、ハンドル位置、路上駐車の向き、標識の設置側から読む。「右側通行ではない」と分かった時点で候補が大きく減る。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/Left-_and_right-hand_traffic"
+            ]
+        },
+        {
+            "id": "ref_traffic_side_right",
+            "slot": "traffic_side",
+            "canonical": "右側通行",
+            "plain": "車が右側を走っている",
+            "aliases": [
+                "右側走行",
+                "対向車が左から来る"
+            ],
+            "countries": [
+                "AD",
+                "AE",
+                "AL",
+                "AR",
+                "AT",
+                "BA",
+                "BE",
+                "BG",
+                "BO",
+                "BR",
+                "CA",
+                "CH",
+                "CL",
+                "CO",
+                "CR",
+                "CZ",
+                "DE",
+                "DK",
+                "DO",
+                "EC",
+                "EE",
+                "ES",
+                "FI",
+                "FR",
+                "GE",
+                "GH",
+                "GR",
+                "GT",
+                "HR",
+                "HU",
+                "IL",
+                "IS",
+                "IT",
+                "JO",
+                "KG",
+                "KH",
+                "KR",
+                "KZ",
+                "LB",
+                "LT",
+                "LU",
+                "LV",
+                "ME",
+                "MG",
+                "MK",
+                "MN",
+                "MX",
+                "NG",
+                "NL",
+                "NO",
+                "OM",
+                "PA",
+                "PE",
+                "PH",
+                "PL",
+                "PR",
+                "PT",
+                "PY",
+                "QA",
+                "RE",
+                "RO",
+                "RS",
+                "RU",
+                "RW",
+                "SE",
+                "SI",
+                "SK",
+                "SN",
+                "ST",
+                "TN",
+                "TR",
+                "TW",
+                "UA",
+                "US",
+                "UY",
+                "UZ",
+                "VN",
+                "XK"
+            ],
+            "confusableWith": [],
+            "note": "**世界の約 4 分の 3。単独では絞り込めない。**それでも記録する意味は 2 つある。(1) 左側通行の可能性を消せる。(2) 他の欄との積集合には効く。**弱いことと、掛けて効かないことは別である。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/Left-_and_right-hand_traffic"
+            ]
+        },
+        {
+            "id": "ref_script_latin",
+            "slot": "script",
+            "canonical": "ラテン文字",
+            "plain": "アルファベット（英語と同じ字形）",
+            "aliases": [
+                "英字",
+                "ローマ字",
+                "アルファベット"
+            ],
+            "countries": [
+                "AD",
+                "AE",
+                "AL",
+                "AR",
+                "AT",
+                "AU",
+                "BA",
+                "BD",
+                "BE",
+                "BO",
+                "BR",
+                "BT",
+                "BW",
+                "CA",
+                "CH",
+                "CL",
+                "CO",
+                "CR",
+                "CY",
+                "CZ",
+                "DE",
+                "DK",
+                "DO",
+                "EC",
+                "EE",
+                "ES",
+                "FI",
+                "FR",
+                "GB",
+                "GH",
+                "GT",
+                "HK",
+                "HR",
+                "HU",
+                "ID",
+                "IE",
+                "IL",
+                "IN",
+                "IS",
+                "IT",
+                "JP",
+                "KE",
+                "KH",
+                "KR",
+                "KZ",
+                "LB",
+                "LK",
+                "LS",
+                "LT",
+                "LU",
+                "LV",
+                "ME",
+                "MG",
+                "MT",
+                "MX",
+                "MY",
+                "NA",
+                "NG",
+                "NL",
+                "NO",
+                "NP",
+                "NZ",
+                "PA",
+                "PE",
+                "PH",
+                "PL",
+                "PR",
+                "PT",
+                "PY",
+                "RE",
+                "RO",
+                "RS",
+                "RW",
+                "SE",
+                "SG",
+                "SI",
+                "SK",
+                "SN",
+                "ST",
+                "SZ",
+                "TH",
+                "TN",
+                "TR",
+                "TW",
+                "UG",
+                "US",
+                "UY",
+                "UZ",
+                "VN",
+                "XK",
+                "ZA"
+            ],
+            "confusableWith": [],
+            "note": "**単独では絞れない。** 他の欄との積集合で効く。国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ]
+        },
+        {
+            "id": "ref_script_cyrillic",
+            "slot": "script",
+            "canonical": "キリル文字",
+            "plain": "ロシア語みたいな文字",
+            "aliases": [
+                "ロシア文字",
+                "キリル",
+                "Кみたいな文字"
+            ],
+            "countries": [
+                "BA",
+                "BG",
+                "KG",
+                "KZ",
+                "MK",
+                "MN",
+                "RS",
+                "RU",
+                "UA",
+                "UZ",
+                "XK"
+            ],
+            "confusableWith": [],
+            "note": "**見えれば候補が一気に減る。強い軸である。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ]
+        },
+        {
+            "id": "ref_script_greek",
+            "slot": "script",
+            "canonical": "ギリシャ文字",
+            "plain": "ギリシャ語の文字",
+            "aliases": [
+                "ギリシャ語"
+            ],
+            "countries": [
+                "CY",
+                "GR"
+            ],
+            "confusableWith": [],
+            "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ]
+        },
+        {
+            "id": "ref_script_georgian",
+            "slot": "script",
+            "canonical": "ジョージア文字",
+            "plain": "丸みのある独特な文字",
+            "aliases": [
+                "グルジア文字"
+            ],
+            "countries": [
+                "GE"
+            ],
+            "confusableWith": [],
+            "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ]
+        },
+        {
+            "id": "ref_script_arabic",
+            "slot": "script",
+            "canonical": "アラビア文字",
+            "plain": "右から左に流れる曲線的な文字",
+            "aliases": [
+                "アラビア語"
+            ],
+            "countries": [
+                "AE",
+                "IL",
+                "JO",
+                "LB",
+                "OM",
+                "QA",
+                "TN"
+            ],
+            "confusableWith": [],
+            "note": "**見えれば候補が一気に減る。強い軸である。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ]
+        },
+        {
+            "id": "ref_script_hebrew",
+            "slot": "script",
+            "canonical": "ヘブライ文字",
+            "plain": "四角っぽい独特な文字",
+            "aliases": [
+                "ヘブライ語"
+            ],
+            "countries": [
+                "IL"
+            ],
+            "confusableWith": [],
+            "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ]
+        },
+        {
+            "id": "ref_script_devanagari",
+            "slot": "script",
+            "canonical": "デーヴァナーガリー",
+            "plain": "上に横棒がつながる文字",
+            "aliases": [
+                "ヒンディー語の文字",
+                "インドの文字"
+            ],
+            "countries": [
+                "IN",
+                "NP"
+            ],
+            "confusableWith": [],
+            "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ]
+        },
+        {
+            "id": "ref_script_sinhala",
+            "slot": "script",
+            "canonical": "シンハラ文字",
+            "plain": "丸が多い文字",
+            "aliases": [
+                "スリランカの文字"
+            ],
+            "countries": [
+                "LK"
+            ],
+            "confusableWith": [],
+            "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ]
+        },
+        {
+            "id": "ref_script_tamil",
+            "slot": "script",
+            "canonical": "タミル文字",
+            "plain": "丸みのある南インドの文字",
+            "aliases": [
+                "タミル語"
+            ],
+            "countries": [
+                "LK"
+            ],
+            "confusableWith": [],
+            "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ]
+        },
+        {
+            "id": "ref_script_bengali",
+            "slot": "script",
+            "canonical": "ベンガル文字",
+            "plain": "上に横棒がつながる文字（ベンガル）",
+            "aliases": [
+                "ベンガル語"
+            ],
+            "countries": [
+                "BD"
+            ],
+            "confusableWith": [],
+            "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ]
+        },
+        {
+            "id": "ref_script_tibetan",
+            "slot": "script",
+            "canonical": "チベット文字",
+            "plain": "チベット語の文字",
+            "aliases": [
+                "ゾンカ語の文字"
+            ],
+            "countries": [
+                "BT"
+            ],
+            "confusableWith": [],
+            "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ]
+        },
+        {
+            "id": "ref_script_thai",
+            "slot": "script",
+            "canonical": "タイ文字",
+            "plain": "丸まった線が上下に伸びる文字",
+            "aliases": [
+                "タイ語"
+            ],
+            "countries": [
+                "TH"
+            ],
+            "confusableWith": [],
+            "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ]
+        },
+        {
+            "id": "ref_script_khmer",
+            "slot": "script",
+            "canonical": "クメール文字",
+            "plain": "カンボジアの文字",
+            "aliases": [
+                "カンボジア語"
+            ],
+            "countries": [
+                "KH"
+            ],
+            "confusableWith": [],
+            "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ]
+        },
+        {
+            "id": "ref_script_chinese_traditional",
+            "slot": "script",
+            "canonical": "繁体字",
+            "plain": "画数の多い漢字",
+            "aliases": [
+                "中国語の文字",
+                "漢字（繁体）"
+            ],
+            "countries": [
+                "HK",
+                "TW"
+            ],
+            "confusableWith": [],
+            "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ]
+        },
+        {
+            "id": "ref_script_korean_hangul",
+            "slot": "script",
+            "canonical": "ハングル",
+            "plain": "丸と四角を組み合わせた文字",
+            "aliases": [
+                "韓国語の文字"
+            ],
+            "countries": [
+                "KR"
+            ],
+            "confusableWith": [],
+            "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ]
+        },
+        {
+            "id": "ref_script_japanese_kana_kanji",
+            "slot": "script",
+            "canonical": "かな・漢字",
+            "plain": "ひらがなカタカナと漢字",
+            "aliases": [
+                "日本語"
+            ],
+            "countries": [
+                "JP"
+            ],
+            "confusableWith": [],
+            "note": "**これが見えればほぼ確定に近い。**国定数テーブルの `scripts` から作った。**`disputed` の国も含めている。**`disputed` は「生成時にモデルが食い違った」印であり「事実が不確か」ではない（除外するとキリル文字から KZ が落ちた）。併記される言語がある国は複数の文字体系に登場する。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/List_of_writing_systems"
+            ]
         }
     ],
     "_unconvertible": [

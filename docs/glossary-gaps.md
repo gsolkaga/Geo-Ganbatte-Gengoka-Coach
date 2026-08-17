@@ -1,6 +1,6 @@
 # 正解タグと用語辞書の不整合
 
-生成: 2026-08-17T08:32:57.640Z　
+生成: 2026-08-17T08:43:59.048Z　
 `node scripts/validate-answer-keys.mjs` が算出した。**AI を使っていない。リクエスト消費 0。**
 
 ## これはタグ付けの誤りではない
@@ -97,11 +97,11 @@ note に「**この用語は現状ほぼ機能しない。** 欧州の国を埋�
 |---|---|---|---|
 | q-jp-01 | JP | `pavement` | ai_pavement_01(unverified, disputed) |
 | q-th-01 | TH | `vehicle` | ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) |
-| q-tr-01 | TR | `traffic_side` | ai_traffic_side_01(unverified) + ai_traffic_side_03(unverified, disputed) + ai_traffic_side_04(unverified, disputed) + ai_traffic_side_05(unverified, disputed) |
-| q-tr-01 | TR | `script` | ai_script_03(unverified, disputed) |
+| q-tr-01 | TR | `traffic_side` | ai_traffic_side_01(unverified, disputed) + ai_traffic_side_03(unverified, disputed) + ai_traffic_side_04(unverified, disputed) + ai_traffic_side_05(unverified, disputed) |
+| q-tr-01 | TR | `script` | ai_script_03(辞書に無い) |
 | q-tr-01 | TR | `vehicle` | ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) + ai_vehicle_05(unverified, disputed) |
-| q-br-01 | BR | `traffic_side` | ai_traffic_side_01(unverified) |
-| q-br-01 | BR | `script` | ai_script_03(unverified, disputed) |
+| q-br-01 | BR | `traffic_side` | ai_traffic_side_01(unverified, disputed) |
+| q-br-01 | BR | `script` | ai_script_03(辞書に無い) |
 | q-br-01 | BR | `vehicle` | ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) + ai_vehicle_05(unverified, disputed) |
 | q-br-01 | BR | `pavement` | ai_pavement_01(unverified, disputed) |
 | q-au-01 | AU | `bollard` | ai_bollard_01(unverified, disputed) |
@@ -110,15 +110,15 @@ note に「**この用語は現状ほぼ機能しない。** 欧州の国を埋�
 | q-au-01 | AU | `season` | ai_season_01(unverified, disputed) |
 | q-is-01 | IS | `ground` | ai_ground_03(unverified, disputed) |
 | q-is-01 | IS | `pavement` | ai_pavement_04(unverified, disputed) |
-| q-bg-01 | BG | `traffic_side` | ai_traffic_side_01(unverified) + ai_traffic_side_04(unverified, disputed) |
+| q-bg-01 | BG | `traffic_side` | ai_traffic_side_01(unverified, disputed) + ai_traffic_side_04(unverified, disputed) |
 | q-bg-01 | BG | `sign` | ai_sign_01(unverified, disputed) |
 | q-bg-01 | BG | `vehicle` | ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) + ai_vehicle_05(unverified, disputed) |
 | q-bg-01 | BG | `pavement` | ai_pavement_01(unverified, disputed) + ai_pavement_02(unverified, disputed) |
-| q-ru-01 | RU | `traffic_side` | ai_traffic_side_01(unverified) |
+| q-ru-01 | RU | `traffic_side` | ai_traffic_side_01(unverified, disputed) |
 | q-ru-01 | RU | `pole` | ai_pole_03(unverified) |
 | q-ru-01 | RU | `vehicle` | ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) |
 | q-ru-01 | RU | `pavement` | ai_pavement_01(unverified, disputed) + ai_pavement_03(unverified, disputed) |
-| q-kz-01 | KZ | `traffic_side` | ai_traffic_side_01(unverified) |
+| q-kz-01 | KZ | `traffic_side` | ai_traffic_side_01(unverified, disputed) |
 | q-kz-01 | KZ | `pole` | ai_pole_01(unverified, disputed) |
 | q-kz-01 | KZ | `vehicle` | ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) |
 | q-kz-01 | KZ | `pavement` | ai_pavement_01(unverified, disputed) |
@@ -128,6 +128,13 @@ note に「**この用語は現状ほぼ機能しない。** 欧州の国を埋�
 | q-za-01 | ZA | `ground` | ai_ground_03(unverified, disputed) |
 | q-za-01 | ZA | `vehicle` | ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) |
 | q-za-01 | ZA | `pavement` | ai_pavement_01(unverified, disputed) + ai_pavement_02(unverified, disputed) |
+
+## 辞書に存在しない用語 ID
+
+**辞書を再生成したときに ID が変わった可能性がある。**
+
+- q-tr-01 / `script`: `ai_script_03`
+- q-br-01 / `script`: `ai_script_03`
 
 ## 影響
 
