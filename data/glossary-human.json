@@ -8,6 +8,25 @@
         "出典は GeoGuessr プレイヤー（最高到達 Master 4）の知識による。",
         "Plonk It で裏付けを取れるものは reference に URL を記録する。"
     ],
+    "_schema": [
+        "kind: atomic | combination",
+        "  atomic       1 スロット内で完結する観察。**正規化の enum に使えるのはこれだけ。**",
+        "  combination  複数の観察の組み合わせ。正規化には使わず、学習リストに使う。",
+        "               学習者の記述は個々のスロットに分かれて入るため、組み合わせ用語では一致しない。",
+        "",
+        "certainty: verified | heuristic",
+        "  verified   人間が一次情報で確認した。断定してよい",
+        "  heuristic  **実戦中の連想・経験則。正確な国別メタとは限らない。**",
+        "             出典（road_marking-human-worksheet.md §17）が明示的に警告している。",
+        "             『なんとなく』『勘』『雰囲気』を厳密なルールへ変換してはならない。",
+        "             UI では「この国ならこう見えるはず」という期待として提示し、断定しない。",
+        "",
+        "requires: combination のとき、同時に必要な観察を書く（スロットと内容）",
+        "",
+        "countries が空の項目は入れない。**絞り込み力は countries.length であり、",
+        "空だと積集合が空になって全候補を誤って除外する。**",
+        "観察手順（『外側線の色を見る』）や弱点の記録は用語ではないため、辞書に入れない。"
+    ],
     "terms": [
         {
             "id": "bollard_all_yellow",
@@ -29,7 +48,9 @@
             ],
             "note": "本体そのものが黄色。反射板だけが黄色のものとは別。",
             "verifiedByHuman": true,
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "verified"
         },
         {
             "id": "bollard_white_yellow_reflector_banded",
@@ -43,11 +64,14 @@
                 "DK"
             ],
             "confusableWith": [
-                "bollard_white_yellow_reflector_plain"
+                "bollard_white_yellow_reflector_plain",
+                "bollard_all_yellow"
             ],
             "note": "帯の有無だけでベルギーと分かれる。",
             "verifiedByHuman": true,
-            "disputed": false
+            "disputed": false,
+            "kind": "combination",
+            "certainty": "heuristic"
         },
         {
             "id": "bollard_white_yellow_reflector_plain",
@@ -61,11 +85,14 @@
                 "BE"
             ],
             "confusableWith": [
-                "bollard_white_yellow_reflector_banded"
+                "bollard_white_yellow_reflector_banded",
+                "bollard_all_yellow"
             ],
             "note": "帯の有無だけでデンマークと分かれる。",
             "verifiedByHuman": true,
-            "disputed": false
+            "disputed": false,
+            "kind": "combination",
+            "certainty": "heuristic"
         },
         {
             "id": "bollard_yellow_with_black",
@@ -86,7 +113,9 @@
             ],
             "note": "3 カ国に絞れる。さらに他の要素との組み合わせが必要。",
             "verifiedByHuman": true,
-            "disputed": false
+            "disputed": false,
+            "kind": "combination",
+            "certainty": "heuristic"
         },
         {
             "id": "bollard_red_white_thick_round",
@@ -105,7 +134,9 @@
             ],
             "note": "赤白でも形状で国が分かれる。太さと断面が決め手。",
             "verifiedByHuman": true,
-            "disputed": false
+            "disputed": false,
+            "kind": "combination",
+            "certainty": "heuristic"
         },
         {
             "id": "bollard_red_white_square_concrete",
@@ -124,7 +155,9 @@
             ],
             "note": "東南アジア。フランス式の丸い棒とは形状で分かれる。",
             "verifiedByHuman": true,
-            "disputed": false
+            "disputed": false,
+            "kind": "combination",
+            "certainty": "verified"
         },
         {
             "id": "bollard_red_white_stripe",
@@ -142,7 +175,9 @@
             ],
             "note": "",
             "verifiedByHuman": true,
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic"
         },
         {
             "id": "bollard_red_diagonal_reflector",
@@ -160,7 +195,9 @@
             ],
             "note": "赤の入る角度が決め手。",
             "verifiedByHuman": true,
-            "disputed": false
+            "disputed": false,
+            "kind": "combination",
+            "certainty": "verified"
         },
         {
             "id": "bollard_red_both_sides",
@@ -178,7 +215,9 @@
             ],
             "note": "裏面を確認する必要がある。正面だけ見ていると判別できない。",
             "verifiedByHuman": true,
-            "disputed": false
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic"
         },
         {
             "id": "bollard_turkey_shape",
@@ -194,7 +233,416 @@
             "confusableWith": [],
             "note": "「キングジムみたい」は日本のプレイヤー間の表現。UI では形状そのものの説明に置き換える必要がある（要記述）。",
             "verifiedByHuman": true,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic"
+        },
+        {
+            "id": "road_marking_center_yellow",
+            "slot": "road_marking",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "canonical": "中央線が黄色",
+            "plain": "中央線が黄色",
+            "aliases": [
+                "センターラインが黄色",
+                "真ん中の線が黄色い"
+            ],
+            "countries": [
+                "US",
+                "CA",
+                "MX",
+                "BR",
+                "AR",
+                "UY",
+                "PE",
+                "BO",
+                "PY",
+                "CO",
+                "EC",
+                "TH",
+                "KH"
+            ],
+            "confusableWith": [
+                "road_marking_center_white"
+            ],
+            "note": "**補助メタ。単独では大陸すら決まらない。** 13 カ国・3 大陸にまたがる。組み合わせの材料として使う。出典では VE も挙がっているが対象国リストに無いため除いた。",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "road_marking_center_white",
+            "slot": "road_marking",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "canonical": "中央線が白",
+            "plain": "中央線が白い",
+            "aliases": [
+                "センターラインが白"
+            ],
+            "countries": [
+                "CL"
+            ],
+            "confusableWith": [
+                "road_marking_center_yellow"
+            ],
+            "note": "**出典は「まずヨーロッパを考える」だが具体的な国が挙がっていない。** 唯一明示されたのがチリ（南米だが白いことがある）。ヨーロッパ側の国は未記載のため入れていない。**この用語は現状ほぼ機能しない。** 欧州の国を埋めるまで保留。",
+            "verifiedByHuman": true,
+            "disputed": true
+        },
+        {
+            "id": "road_marking_edge_yellow",
+            "slot": "road_marking",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "canonical": "外側線が黄色",
+            "plain": "路肩の線が黄色い",
+            "aliases": [
+                "外側線が黄色",
+                "端の線が黄色"
+            ],
+            "countries": [
+                "ZA",
+                "BW",
+                "LS",
+                "SZ"
+            ],
+            "confusableWith": [
+                "road_marking_center_yellow_edge_white"
+            ],
+            "note": "南部アフリカ 4 カ国。**同一地域なので良メタ。** 出典では混同先に IE が挙がっている。アラビア語が見当たらない場合にアフリカを考えるという条件付き。",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "road_marking_center_yellow_edge_white",
+            "slot": "road_marking",
+            "kind": "combination",
+            "certainty": "heuristic",
+            "canonical": "中央線が黄色・外側線が白",
+            "plain": "中央が黄色で外側が白",
+            "aliases": [],
+            "countries": [
+                "US",
+                "CA",
+                "MX",
+                "BR",
+                "AR",
+                "UY",
+                "PE",
+                "BO",
+                "PY",
+                "CO",
+                "EC"
+            ],
+            "confusableWith": [
+                "road_marking_edge_yellow"
+            ],
+            "requires": [
+                {
+                    "slot": "road_marking",
+                    "what": "外側線が白"
+                }
+            ],
+            "note": "**黄色が中央か外側かを区別することが要点。** 外側が黄色なら南部アフリカ（road_marking_edge_yellow）。同一スロット内の組み合わせ。",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "pavement_tile_like",
+            "slot": "pavement",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "canonical": "タイル状の路面",
+            "plain": "路面がタイルっぽい",
+            "aliases": [
+                "ブロック舗装っぽい"
+            ],
+            "countries": [
+                "UY"
+            ],
+            "confusableWith": [],
+            "note": "**経験則。** 出典が「連想する」と書いている。断定に使わない。",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "roadside_stone_wall",
+            "slot": "terrain_vegetation",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "canonical": "道路脇の石垣",
+            "plain": "道の横に石垣がある",
+            "aliases": [
+                "石積みの塀"
+            ],
+            "countries": [
+                "GB",
+                "PE",
+                "EC"
+            ],
+            "confusableWith": [
+                "roadside_low_stone_wall_narrow_lane"
+            ],
+            "note": "**3 カ国だが 2 大陸にまたがるため良メタではない。** 補助メタとして扱い、道路幅・石垣の高さと組み合わせる。",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "roadside_low_stone_wall_narrow_lane",
+            "slot": "terrain_vegetation",
+            "kind": "combination",
+            "certainty": "heuristic",
+            "canonical": "両側に低い石垣がある狭い田舎道",
+            "plain": "細い田舎道の両側に低めの石垣",
+            "aliases": [],
+            "countries": [
+                "GB"
+            ],
+            "confusableWith": [
+                "roadside_stone_wall",
+                "kerb_on_narrow_lane"
+            ],
+            "requires": [
+                {
+                    "slot": "road_marking",
+                    "what": "狭い田舎道"
+                }
+            ],
+            "note": "**石垣単独では 3 カ国。道路幅と石垣の高さを足して 1 カ国になる。** 弱いメタの組み合わせが強くなる典型例。",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "kerb_on_narrow_lane",
+            "slot": "road_marking",
+            "kind": "combination",
+            "certainty": "heuristic",
+            "canonical": "狭い田舎道に縁石がある",
+            "plain": "細い田舎道なのに縁石がある",
+            "aliases": [],
+            "countries": [
+                "GB",
+                "IE"
+            ],
+            "confusableWith": [
+                "roadside_low_stone_wall_narrow_lane",
+                "kerb_large"
+            ],
+            "requires": [
+                {
+                    "slot": "road_marking",
+                    "what": "狭い田舎道"
+                }
+            ],
+            "note": "**強メタ（2 カ国・近接）。** 縁石そのものは欧州全般を示すが、狭い田舎道と組み合わせると 2 カ国に絞れる。",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "kerb_large",
+            "slot": "road_marking",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "canonical": "大きな縁石",
+            "plain": "縁石が大きい",
+            "aliases": [],
+            "countries": [
+                "NP"
+            ],
+            "confusableWith": [
+                "kerb_on_narrow_lane"
+            ],
+            "note": "**経験則。** 出典は「ネパールやチベットを連想することがある」。チベットは国コードを持たないため NP のみ。**根拠が弱い。**",
+            "verifiedByHuman": true,
+            "disputed": true
+        },
+        {
+            "id": "trees_close_to_road",
+            "slot": "terrain_vegetation",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "canonical": "道路のすぐ横に木々",
+            "plain": "道路のすぐ横に木が迫っている",
+            "aliases": [],
+            "countries": [
+                "BR",
+                "ID",
+                "PH"
+            ],
+            "confusableWith": [
+                "trees_far_from_road"
+            ],
+            "note": "**3 カ国・2 大陸なので補助メタ。** 熱帯域の候補生成に使う。",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "trees_far_from_road",
+            "slot": "terrain_vegetation",
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "canonical": "道路から離れて木々",
+            "plain": "道路から離れたところに木がある",
+            "aliases": [],
+            "countries": [
+                "RU",
+                "CA"
+            ],
+            "confusableWith": [
+                "trees_close_to_road"
+            ],
+            "note": "**経験則。** 出典は「積雪などによる寒さを連想している」。除雪のための離隔という解釈。**因果は未検証。**",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "pole_harp_shaped",
+            "slot": "pole",
+            "kind": "atomic",
+            "certainty": "verified",
+            "canonical": "ハープ型の電柱",
+            "plain": "電柱がハープみたいな形",
+            "aliases": [
+                "竪琴型の電柱"
+            ],
+            "countries": [
+                "GR"
+            ],
+            "confusableWith": [],
+            "note": "**最強メタ。** 出典が「数少ない海外の電柱メタの中で覚えているもの」として強いと明記している。",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "pole_octagonal_with_round_meter",
+            "slot": "pole",
+            "kind": "combination",
+            "certainty": "verified",
+            "canonical": "八角形の電柱＋丸形の電気メーター",
+            "plain": "八角形の電柱で、家の電気メーターが丸い",
+            "aliases": [],
+            "countries": [
+                "MX"
+            ],
+            "confusableWith": [
+                "pole_octagonal_with_box_meter"
+            ],
+            "requires": [
+                {
+                    "slot": "architecture",
+                    "what": "家の電気メーターが丸形"
+                }
+            ],
+            "note": "**八角形の電柱だけでは国を確定できない。** 電気メーターの形を足して 1 カ国になる。出典が明示的に「単独ではなく組み合わせで記憶している」と述べている。",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "pole_octagonal_with_box_meter",
+            "slot": "pole",
+            "kind": "combination",
+            "certainty": "verified",
+            "canonical": "八角形の電柱＋箱型で横長の覗き窓がある電気メーター",
+            "plain": "八角形の電柱で、電気メーターが箱型で横長の窓が1〜3個",
+            "aliases": [],
+            "countries": [
+                "PE"
+            ],
+            "confusableWith": [
+                "pole_octagonal_with_round_meter",
+                "pole_square_section"
+            ],
+            "requires": [
+                {
+                    "slot": "architecture",
+                    "what": "箱型で横長の覗き窓が 1〜3 個ある電気メーター"
+                }
+            ],
+            "note": "上と同じ八角形の電柱から、電気メーターの形で分岐する。**次に何を見るかまで含めて記憶している例。**",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "pole_square_section",
+            "slot": "pole",
+            "kind": "atomic",
+            "certainty": "verified",
+            "canonical": "四角柱の電柱",
+            "plain": "電柱が四角い柱",
+            "aliases": [
+                "角柱の電柱"
+            ],
+            "countries": [
+                "PE",
+                "TH"
+            ],
+            "confusableWith": [
+                "pole_octagonal_with_box_meter"
+            ],
+            "note": "**単独では決められないと出典が明記している。** 「四角柱の電柱だけを見てもペルーと回答できず、タイなど別候補へ行くことがある」。八角形との区別もパッと見では難しく、複数本見て比較する必要がある。",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "sign_awas",
+            "slot": "sign",
+            "kind": "atomic",
+            "certainty": "verified",
+            "canonical": "AWAS の標識",
+            "plain": "AWAS と書かれた看板",
+            "aliases": [
+                "AWAS"
+            ],
+            "countries": [
+                "MY"
+            ],
+            "confusableWith": [],
+            "note": "**最強メタ。** 出典が「看板で国がかなり確定する」として非常に強いと明記している。マレー語の「注意」。",
+            "verifiedByHuman": true,
+            "disputed": false
+        },
+        {
+            "id": "sign_tobacco_ad_with_rp",
+            "slot": "sign",
+            "kind": "combination",
+            "certainty": "verified",
+            "canonical": "タバコ広告＋Rp 通貨表記",
+            "plain": "タバコの広告に Rp と書かれた価格がある",
+            "aliases": [
+                "Rp 表記"
+            ],
+            "countries": [
+                "ID"
+            ],
+            "confusableWith": [],
+            "note": "**最強メタ。** 出典が「看板が出れば一気に確信度が上がる」と明記している。Rp はインドネシアルピア。同一スロット内の組み合わせ。",
+            "verifiedByHuman": true,
             "disputed": false
         }
+    ],
+    "_unconvertible": [
+        "以下は用語辞書に入れていない。**countries が空、または用語ではないため。**",
+        "",
+        "1. 観察手順（『外側線があるか、何色か、何本かを見る』など）",
+        "   → 用語ではなく手順。スロットの hint に反映すべきもの",
+        "",
+        "2. 国が特定されていない連想（『中央線が白ならまずヨーロッパ』）",
+        "   → 具体的な国が挙がっていないため絞り込み力を計算できない",
+        "",
+        "3. 豊かさ・雰囲気の推測（『アスファルトの粒が荒いと豊かではない国』）",
+        "   → 出典自身が『国別の確定メタとしては扱わない』と書いている",
+        "",
+        "4. 弱点の記録（『中央線が2本ある場合の意味は苦手』『カーメタはほぼ認知できない』）",
+        "   → 用語ではなく**視認可能性のデータ**。design.md の recognition 軸に対応する",
+        "",
+        "5. Lookalike のペア（PE BO ↔ MX、CZ ↔ SK など 11 組）",
+        "   → 用語ではなく**国どうしの混同関係**。別ファイルで持つべきもの",
+        "",
+        "6. 日本の電力会社判定（JP）",
+        "   → リージョンゲスの手法であり、国判定には寄与しない（対象外と決めた領域）",
+        "",
+        "**捨てていない。** 出典の Markdown をそのまま docs/offline-works/ に残している。",
+        "機械が使えないだけであり、人間が読む価値は失われていない。"
     ]
 }
