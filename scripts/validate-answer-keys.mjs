@@ -75,11 +75,45 @@ for (const question of questions) {
             continue
         }
         if (!acc.has(question.country)) {
+            /**
+             * **2 種類を混ぜてはならない。**
+             *
+             * 当初は全部「辞書の穴」として報告した。**誤りだった。**
+             * v2 の実測（2026-08-17）で 3 モデルが違いを説明した。
+             *
+             *   (a) **辞書が不完全**  該当国リストが埋まっていない
+             *       例: road_marking_center_white は CL のみ。
+             *           note に「欧州の国を埋めるまで保留」と書いてある
+             *
+             *   (b) **観察が誤誘導**  用語は正しく、その手がかりが国を示さない
+             *       例: road_marking_center_yellow の 13 カ国は
+             *           メタとして正しい。旧ソ連圏は「黄色い中央線の国」ではない。
+             *           学習者が見た黄色い実線はその地点の事実だが、
+             *           **国を示す手がかりではない**
+             *
+             * > **観察が事実として正しいことと、その観察が国を示すことは別である。**
+             *
+             * (b) なら積集合が正解を含まないのは**正しい診断**であり、直す必要はない。
+             * 区別は人間が判断する。**判断の材料として `note` を出す。**
+             */
+            const notes = used
+                .filter((t) => t.note)
+                .map((t) => `${t.id}: ${String(t.note).replace(/\*\*/g, '').slice(0, 120)}`)
+            const suspectIncomplete = used.some(
+                (t) => t.disputed === true || /保留|機能しない|未記載|埋める/.test(String(t.note ?? '')),
+            )
             gaps.push({
                 question: question.id, country: question.country, slot,
                 kind: '正解を含まない', size: acc.size,
                 terms: used.map((t) => `${t.id}(${t.countries.length})`).join(' + '),
-                detail: `${question.country} を該当国に追加するか、この用語の割り当てを見直す`,
+                // **どちらかを断定しない。** 材料を出して人間が決める
+                classification: suspectIncomplete
+                    ? '**(a) 辞書が不完全の疑い**（note に保留と書いてある）'
+                    : '(b) 観察が誤誘導の可能性（用語は正しく、手がかりが国を示さない）',
+                notes,
+                detail: suspectIncomplete
+                    ? `${question.country} を該当国に追加するか検討する`
+                    : `用語が正しければ直す必要はない。**その手がかりが ${question.country} を示さないことが正しい診断である**`,
             })
         }
     }
@@ -96,35 +130,64 @@ const lines = [
     'タグは「この地点に何が写っているか」を書くものであり、',
     '一般的な GeoGuessr プレイヤーの知識に基づいて作る。**それは正しい。**',
     '',
-    '問題は**用語が「見た目の名前」と「該当国の主張」を 1 つに束ねている**ことである。',
+    '用語が「見た目の名前」と「該当国の主張」を 1 つに束ねているため、',
+    '正規化すると名前だけでなく主張まで輸入される。',
     '',
     '```',
-    '観察           「中央線は黄色の実線」                ← 正しい',
+    '観察           「中央線は黄色の実線」                ← その地点の事実として正しい',
     '用語 ID         road_marking_center_yellow          ← 文字面としては正しい対応',
-    '用語が持つ主張  US CA MX BR AR UY PE BO PY CO EC TH KH  ← **KZ が無い**',
+    '用語が持つ主張  US CA MX BR AR UY PE BO PY CO EC TH KH  ← KZ が無い',
     '```',
     '',
     '> **用語は観察の名前ではなく、主張である。**',
-    '> 正規化すると、名前だけでなく主張まで輸入される。',
     '',
-    'したがって直すのは **`data/glossary-human.json` の該当国リスト**である。',
-    '人間の作業であり、**これが Plonk It が何年もかけていることである。**',
+    '## 不整合には 2 種類ある。混ぜてはならない',
+    '',
+    '当初この一覧は全部を「辞書の穴」として報告した。**誤りだった。**',
+    'v2 の実測（2026-08-17、`docs/v2-kz.md`）で 3 モデルが違いを説明した。',
+    '',
+    '| 種類 | 意味 | 直すか |',
+    '|---|---|---|',
+    '| **(a) 辞書が不完全** | 該当国リストが埋まっていない | **直す**（`data/glossary-human.json`） |',
+    '| **(b) 観察が誤誘導** | 用語は正しく、その手がかりが国を示さない | **直さない。正しい診断である** |',
+    '',
+    '(a) の例。`road_marking_center_white` は該当国が `CL` の 1 件しかなく、',
+    'note に「**この用語は現状ほぼ機能しない。** 欧州の国を埋めるまで保留」と書いてある。',
+    '白い中央線は欧州の標準であり、ロシアも南アフリカも該当する。**埋めるべきである。**',
+    '',
+    '(b) の例。`road_marking_center_yellow` の 13 カ国は**メタとして正しい。**',
+    '旧ソ連圏は「黄色い中央線の国」ではない。学習者が見た黄色い実線は',
+    'その地点の事実だが、**国を示す手がかりではない。**',
+    '',
+    '> **観察が事実として正しいことと、その観察が国を示すことは別である。**',
+    '',
+    '(b) では積集合が正解を含まないことが**正しい診断**である。`.RU` ドメインと同じ誤誘導である。',
     '',
     `## 検出: ${gaps.length} 件`,
     '',
-    gaps.length ? '| 問 | 正解 | スロット | 種類 | 残り | 用語（該当国数） |' : '（なし）',
-    gaps.length ? '|---|---|---|---|---|---|' : '',
+    gaps.length ? '| 問 | 正解 | スロット | 種類 | 残り | 用語（該当国数） | 見立て |' : '（なし）',
+    gaps.length ? '|---|---|---|---|---|---|---|' : '',
     ...gaps.map((g) =>
-        `| ${g.question} | ${g.country} | \`${g.slot}\` | **${g.kind}** | ${g.size} | ${g.terms} |`),
+        `| ${g.question} | ${g.country} | \`${g.slot}\` | ${g.kind} | ${g.size} | ${g.terms} | ${g.classification ?? '—'} |`),
     '',
 ]
 
 if (gaps.length) {
-    lines.push('## 対応の候補', '')
+    lines.push(
+        '## 対応の候補',
+        '',
+        '**見立ては機械的な推定である。** `note` に「保留」「機能しない」と',
+        '書いてあるかどうかで分けているだけなので、最終判断は人間が行う。',
+        '',
+    )
     for (const g of gaps) {
-        lines.push(`- **${g.question} / \`${g.slot}\`**（${g.kind}）: ${g.detail}`)
+        lines.push(`### ${g.question} / \`${g.slot}\`（正解 ${g.country}、残り ${g.size} カ国）`, '')
+        lines.push(`- 用語: ${g.terms}`)
+        lines.push(`- 見立て: ${g.classification ?? '—'}`)
+        lines.push(`- 対応: ${g.detail}`)
+        for (const note of g.notes ?? []) lines.push(`- note — ${note}`)
+        lines.push('')
     }
-    lines.push('')
 }
 
 if (missingIds.length) {
