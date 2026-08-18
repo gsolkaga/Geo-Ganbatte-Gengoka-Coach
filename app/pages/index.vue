@@ -490,17 +490,18 @@ function nextQuestion() {
 
 <template>
     <!--
-        入力中はページを画面高さに固定し、ペインだけを内部スクロールさせる。
-        **高さをマジックナンバーで引き算しない。** ヘッダーの実高さと合わず、
-        ページ全体が画面より高くなって外側のスクロールバーと余白が出る。
-        flex で残りを埋めさせれば計算不要になる。
+        ページの高さを固定しない。
 
-        採点後は結果を下に積むためページのスクロールを許す。
+        以前は入力中だけ `xl:h-dvh xl:overflow-hidden` で画面高さに固定し、
+        ペインに残りを埋めさせていた。計算は不要になるが、
+        **風景の縦横比が窓の形に引きずられた。**
+
+        いまは風景が幅から 16:9 で高さを決めるので、固定する必要がない。
+        高さは内容が決め、足りなければページがスクロールする。
+
+        > **形を保ちたいものがあるなら、そこを基準にして周りを従わせる。**
     -->
-    <div
-        class="mx-auto flex max-w-7xl flex-col gap-4 p-4"
-        :class="phase === 'input' ? 'xl:h-dvh xl:overflow-hidden' : ''"
-    >
+    <div class="mx-auto flex max-w-7xl flex-col gap-4 p-4">
         <header class="shrink-0 flex flex-wrap items-baseline justify-between gap-2">
             <div>
                 <h1 class="text-xl font-bold text-slate-900">
@@ -623,39 +624,52 @@ function nextQuestion() {
             </div>
 
             <!--
-                3 ペイン。左上に風景（大きく）、左下に回答、右列すべてに観察欄。
-                左列の縦比は 7:3。
+                2 列。左が風景（回答は上に被せる）、右が観察欄。横は 7 : 3。
 
-                **観察と回答を同じ画面に置く。** 決め手スロットは観察欄を見ながら選ぶ。
+                **観察と回答を同じ画面に置く。** 決め手の欄は観察欄を見ながら選ぶ。
                 画面を分けると、選ぶ時点で自分が何を書いたか見えなくなる。
 
-                高さを固定して各ペインを内部スクロールさせる。
-                こうしないと 14 スロットの縦長さに引きずられて回答欄が画面外に出る。
-            -->
-            <!--
-                採点後もペインの高さを保つ。**外すと崩れる。**
-                右列（14 スロット）が全高に伸びて 2,000px を超え、左列は短いので
-                巨大な空白ができる。内部スクロールを維持したまま、結果は下に積む。
+                ## 高さをビューポートで決めるのをやめた
 
-                入力中は flex-1 で画面の残りを埋める（ページを固定しているため計算不要）。
-                採点後はページ固定を外すので、比率で高さを与えて fr 行を解決させる。
+                以前は「画面の残りを埋める」形だった（`xl:flex-1` とページの `h-dvh`）。
+                そのため**窓の大きさで風景の縦横比が大きく変わった。**
+                細長い窓では縦に伸び、横長の窓では潰れる。
+                同じ地点でも**見えている範囲が変わるので、観察の練習にならない。**
+
+                > **見る対象の形は、窓の形で決まってはならない。**
+
+                いまは幅から 16:9 で高さを出す（`aspect-video`）。
+                行の高さは左列が決め、右列はそれに従う。
             -->
-            <div
-                class="grid gap-4 xl:min-h-0 xl:grid-cols-[7fr_3fr]"
-                :class="phase === 'input' ? 'xl:flex-1' : 'xl:h-[60dvh]'"
-            >
+            <div class="grid gap-4 xl:grid-cols-[7fr_3fr]">
                 <!--
                     左列：風景。**回答欄は上に被せる**（`AnswerSheet`）。
                     上下に割っていたときは、回答する瞬間に観察欄（右列）が細くて
                     読み返せなかった。風景は回答の瞬間には要らない。
                 -->
-                <div class="flex min-h-0 flex-col gap-1">
+                <div class="flex min-w-0 flex-col gap-1">
                     <!--
                         既定は Embed（無料・無制限）。`NUXT_PUBLIC_STREETVIEW_MODE=nomove` で
                         JavaScript API に切り替わり移動を止められるが、Pro SKU で課金対象になる。
                     -->
-                    <!-- 被せ板の基準にするため `relative` を持つ -->
-                    <div class="relative min-h-0 flex-1 overflow-hidden rounded">
+                    <!--
+                        **幅から高さを決める。** `aspect-video`（16:9）で比率を固定する。
+
+                        高さが伸びすぎないように上限を置くが、**上限は高さに掛けない。**
+                        `max-height` で止めると、幅はそのままなので**比率が崩れる**
+                        （`aspect-ratio` は幅と高さの両方が拘束されると無視される）。
+
+                        代わりに**幅の上限を高さから逆算する**。
+                        `max-w-[calc(72dvh*16/9)]` なら高さは 72dvh を超えず、
+                        **比率は常に正確である。** 上限に当たったときは中央に寄せる。
+
+                        > **比率を保ちたいなら、拘束するのは片側だけにする。**
+
+                        被せ板の基準にするため `relative` を持つ。
+                        `aspect-ratio` は確定した高さを与えるので、
+                        板の `max-h-[85%]` も解決する。
+                    -->
+                    <div class="relative mx-auto aspect-video w-full max-w-[calc(72dvh*16/9)] overflow-hidden rounded">
                         <StreetViewNoMove v-if="noMove" :pano-id="current.panoId" fill />
                         <StreetViewFrame v-else :pano-id="current.panoId" fill />
 
@@ -784,7 +798,8 @@ function nextQuestion() {
                     採点後も入力した値を残す。消さない。
                     自分が何を書いたかを見ながら講評を読めないと、指摘の意味が分からない。
                 -->
-                <div class="ggg-scroll min-h-0 overflow-y-scroll pr-1">
+                <div class="relative min-h-0 min-w-0">
+                <div class="ggg-scroll absolute inset-0 overflow-y-scroll pr-1">
                     <!--
                         過去の回答をフォームへ戻す。**書く場所の真上に置く。**
 
@@ -845,6 +860,7 @@ function nextQuestion() {
                     <fieldset :disabled="phase !== 'input'" class="min-w-0">
                         <SlotForm v-model="slots" mode="learn" />
                     </fieldset>
+                </div>
                 </div>
             </div>
 
