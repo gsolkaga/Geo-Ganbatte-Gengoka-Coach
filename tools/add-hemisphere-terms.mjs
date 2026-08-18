@@ -64,7 +64,8 @@ const NEW = [
         plain: '真昼の影が南に伸びている。太陽が北の空にある',
         aliases: ['太陽が北から照っている', '影が南に出ている', '南半球の日差し'],
         countries: [...TEMPERATE_SOUTH, ...TROPICAL].sort(),
-        confusableWith: [],
+        // **鏡像の相手を宣言しておく。** 両方が同じ欄に入ったら正規化が迷った印である
+        confusableWith: ['ref_sun_shadow_to_north'],
         note: '**天文の事実であり出典を要しない。** 温帯の南半球では正午の太陽が必ず北側にある。'
             + `温帯の北半球 ${TEMPERATE_NORTH.length} カ国を一度に消せる。` + NOTE_TAIL,
         verifiedByHuman: true,
@@ -84,7 +85,7 @@ const NEW = [
         plain: '真昼の影が北に伸びている。太陽が南の空にある',
         aliases: ['太陽が南から照っている', '影が北に出ている', '木の陰が北側に出ている'],
         countries: [...TEMPERATE_NORTH, ...TROPICAL].sort(),
-        confusableWith: [],
+        confusableWith: ['ref_sun_shadow_to_south'],
         note: '**98 / 102 カ国に該当し、単独では絞り込みに使えない。**'
             + 'それが正しい結果である。北半球の方が国の数が多いため、'
             + '「影が北」は「影が南」ほど情報を持たない。'

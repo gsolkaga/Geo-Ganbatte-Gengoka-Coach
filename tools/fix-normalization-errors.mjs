@@ -104,6 +104,84 @@ const glossary = JSON.parse(fs.readFileSync(path.join('data', 'glossary.json'), 
 const gById = new Map(glossary.map((t) => [t.id, t]))
 const questions = JSON.parse(fs.readFileSync(QUESTIONS_PATH, 'utf8'))
 
+// ============================================================
+// 1.5 正解国を消す用語は、強さに関係なく誤りである
+// ============================================================
+
+/**
+ * ## 鏡像の用語は取り違えられる
+ *
+ * 半球の 3 語（`tools/add-hemisphere-terms.mjs`）を足したとき、
+ * **文字列がほぼ同じで南北だけが逆の用語**ができた。
+ *
+ * ```
+ * ref_sun_shadow_to_south  真昼の影が南に伸びている。太陽が北の空にある
+ * ref_sun_shadow_to_north  真昼の影が北に伸びている。太陽が南の空にある
+ * ```
+ *
+ * カザフ語 `Қ`「K の右下にヒゲ」とトルコ語 `ş ç`「下にヒゲ」が衝突したのと
+ * **同じ構造である。** 素人語に寄せるほど、用語同士は似てくる。
+ *
+ * ## 取り違えは弱い誤りではない
+ *
+ * `STRONG_LIMIT` の判定（該当国 8 以下）では捕まえられない。
+ * `ref_sun_shadow_to_south` は 46 カ国あるためである。
+ *
+ * しかしこれらは `excludes` を持つ。取り違えると**正解国が消える。**
+ * 積集合が算出不能でも引き算は効くので、**助言が学習者を正解から遠ざける。**
+ *
+ * この矛盾には閾値が要らない。論理として成り立たない。
+ *
+ * > **正解国を消す用語が正解タグに付いているのは、強さに関係なく誤りである。**
+ */
+const excludeErrors = []
+for (const q of questions) {
+    for (const [slot, entry] of Object.entries(q.slots ?? {})) {
+        for (const id of entry.terms ?? []) {
+            const t = gById.get(id)
+            if (!t?.excludes?.includes(q.country)) continue
+            excludeErrors.push({ q: q.id, country: q.country, slot, id, canonical: t.canonical })
+        }
+    }
+}
+
+console.log(`## 正解国を消す用語（強さに関係なく誤り）: ${excludeErrors.length} 件`)
+for (const e of excludeErrors) {
+    console.log(`  ${e.q}（正解 ${e.country}）/ ${e.slot.padEnd(19)} ${e.id}`)
+    console.log(`      ${e.canonical}`)
+    console.log(`      **この用語の excludes が正解国 ${e.country} を消す**`)
+}
+if (!excludeErrors.length) console.log('  なし')
+console.log('')
+
+/**
+ * ## 互いに紛らわしいと宣言した用語が、同じ欄に両方入っている
+ *
+ * 1 枚の写真で影が南にも北にも伸びることはない。
+ * `confusableWith` に相手を挙げてある用語が同じ欄に並んだら、
+ * **正規化がどちらか分からなかった印である。**
+ *
+ * 誤りとは断定しない（同じ欄に複数の観察が正当に並ぶことはある）。
+ * **人間が見る対象として出す。**
+ */
+console.log('## 互いに紛らわしい用語が同じ欄に両方入っている')
+let confusableHits = 0
+for (const q of questions) {
+    for (const [slot, entry] of Object.entries(q.slots ?? {})) {
+        const ids = entry.terms ?? []
+        for (const id of ids) {
+            const t = gById.get(id)
+            for (const other of t?.confusableWith ?? []) {
+                if (!ids.includes(other) || id >= other) continue
+                console.log(`  ${q.id} / ${slot}: ${id} ＋ ${other}`)
+                confusableHits++
+            }
+        }
+    }
+}
+if (!confusableHits) console.log('  なし')
+console.log('')
+
 const errors = []
 const diagnoses = []
 
@@ -135,18 +213,25 @@ for (const d of diagnoses) {
 console.log('')
 console.log('**弱い用語が正解を含まないのは診断である。強い用語が含まないのは誤りである。**')
 
+console.log('')
+console.log(`外す候補の合計: ${errors.length + excludeErrors.length} 件`
+    + `（強い用語が正解を含まない ${errors.length} / 正解国を消す ${excludeErrors.length}）`)
+
 if (!apply) {
     console.log('')
     console.log('--apply を付けると、誤りの方だけを正解タグから外す')
     process.exit(0)
 }
 
+// **正解国を消す用語も一緒に外す。** 閾値の判定とは別の理由で誤りである
+const toRemove = [...errors, ...excludeErrors]
+
 let removed = 0
 for (const q of questions) {
     for (const [slot, entry] of Object.entries(q.slots ?? {})) {
         const before = entry.terms?.length ?? 0
         entry.terms = (entry.terms ?? []).filter(
-            (id) => !errors.some((e) => e.q === q.id && e.slot === slot && e.id === id),
+            (id) => !toRemove.some((e) => e.q === q.id && e.slot === slot && e.id === id),
         )
         removed += before - entry.terms.length
     }
