@@ -20,3 +20,10 @@ dist
 # 一時ファイル
 .scratch/
 *.log
+
+# データセット取り込みの控え。**取り消せる操作にするために作る**
+.backup/
+
+# 利用者ごとの状態。**索引はディレクトリから復元できるのでコミットしない**
+data/library.json
+data/progress.json

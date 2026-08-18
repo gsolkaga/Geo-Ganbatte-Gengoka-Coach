@@ -33,7 +33,8 @@
         "inspect:whitespace": "node tools/inspect-whitespace.mjs",
         "coverage": "node tools/coverage-report.mjs",
         "combo": "node tools/combo-report.mjs",
-        "crosscheck": "node tools/crosscheck-human-terms.mjs"
+        "crosscheck": "node tools/crosscheck-human-terms.mjs",
+        "dataset": "vite-node scripts/dataset.mts"
     },
     "dependencies": {
         "nuxt": "4.5.2",

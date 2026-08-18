@@ -71,8 +71,28 @@ const walk = (d) => {
         } catch {
             continue
         }
+        /**
+         * **行単位で見て、明示的に許可された行だけを飛ばす。**
+         *
+         * `shared/dataset.ts` の資格情報検出器には**検体が必要**である。
+         * 「API キーらしい文字列を弾く」ことをテストするには、
+         * API キーらしい文字列をテストに書かねばならない。
+         *
+         * パスで免除すると、そのファイル全体が検査から外れる。
+         * **テストファイルに本物が混ざったときに見逃す。**
+         *
+         * だから行に印を書かせる。`grep` で全部の免除を数えられる。
+         *
+         * > **免除はファイル単位ではなく行単位にする。数えられる形にする。**
+         */
+        const lines = text.split(/\r?\n/)
         for (const p of PATTERNS) {
-            const m = text.match(p.re)
+            let m = null
+            for (const line of lines) {
+                if (line.includes('check-secrets:allow')) continue
+                const hit = line.match(p.re)
+                if (hit) { m = hit; break }
+            }
             if (!m) continue
             // .env.example のプレースホルダは除外
             if (/^0{8}-0{4}-0{4}-0{4}-0{12}:x+$/.test(m[0])) continue

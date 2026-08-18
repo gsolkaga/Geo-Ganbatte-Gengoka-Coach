@@ -282,6 +282,157 @@ API の制限             : Street View Static API のみ
 `data/runs/` と `data/usage.jsonl` には自分の観察メモと API 呼び出しの記録が残る。
 フォークして使う場合、**これらをコミットすると自分の記述が公開される。** 不要なら `.gitignore` に追加する。
 
+## 学習用データセットの配布と取り込み
+
+**問題セットと用語辞書を 1 つのファイルにまとめて配れる。** 受け取った人は自分の
+API キーで、**自分のさくらの AI Engine にコーチさせる。**
+
+```bash
+# 配る側
+npm run dataset -- export --name "Standard 10"           dist/ggg-dataset.json へ
+npm run dataset -- export --questions q-jp-01,q-th-01    出題を選ぶ
+npm run dataset -- export --used-terms-only              出題が使う用語だけ
+
+# 受け取る側
+npm run dataset -- install ggg-dataset.json              何が入るか見るだけ
+npm run dataset -- install ggg-dataset.json --apply      ライブラリに入れる
+npm run dataset -- list                                  持っているものと進捗
+npm run dataset -- use gsolkaga__standard-10 --apply     アクティブを切り替える
+npm run combo                                            到達を測る（消費 0）
+npm run dev                                              自分の API キーで採点
+
+# 回答ログを公開する
+npm run dataset -- log --anonymize                       記述を落として書き出す
+npm run dataset -- log                                   記述を含めて書き出す
+```
+
+**すべて AI を使わない。消費 0。**
+
+### 複数のデータセットを持てる
+
+**アクティブとライブラリを分けている。**
+
+```
+data/datasets/<id>/dataset.json   ライブラリ（取り込んだもの。読むだけ）
+data/questions.json               アクティブ（道具が全部これを見る）
+data/glossary.json                アクティブ
+data/library.json                 一覧と、いま何が選ばれているか
+data/progress.json                データセットごとの進捗
+```
+
+全部を `data/questions.json` に混ぜるのが最も安易な実装だが、それをやると 2 つ壊れる。
+
+```
+1. どのデータセットの何問目なのかが言えなくなる
+2. 出典表示が混ざる。CC BY は作成者ごとに要る
+```
+
+**道具（`combo` / `coverage` / `normalize:keys` / `compare`）を書き換えないため**に
+アクティブの置き場所は変えていない。切り替えはライブラリからアクティブへの複製である。
+
+> **既にあるものを壊さずに層を足す。**
+
+`npm run dataset -- list` はこう出る。
+
+```
+| | id | 名前 | 作成者 | 出題 | 用語 | 進捗 |
+|---|---|---|---|---|---|---|
+| **→** | `gsolkaga__standard-10` | Standard 10 | gsolkaga | 10 | 262 | 3 / 10 |
+
+次に出るのは **4 / 10 問目**（`q-br-01`）
+```
+
+出題の並びは**固定する。** 毎回並べ替えると「3 問目」が別の問題になる。
+1 周したら `null` を返して**先頭に戻さない**（1 周したことが分からなくなる）。
+
+データセット ID は作成者と名前から決める。**同じ名前のデータセットが別人から来ることがある**ため。
+日本語の名前でも決定的な ID になる（ディレクトリ名と URL に使うので ASCII に限っている）。
+
+### 回答ログを公開できる
+
+**どのデータセットの何問目に何を書いたか**を配布形式で書き出せる。
+
+入れていないもの。
+
+| 入れない | 理由 |
+|---|---|
+| 画像 | 元々持っていない |
+| AI の生の応答（`rawContent`） | 数十 KB あり、配って読むものではない |
+| API キー | 記録に入れていない。**それでも検査している** |
+
+`plain`（素人語の原文）は**本人が書いた文章**である。これが入っていることに価値があるが、
+`--anonymize` で落とせる。落とすと用語 ID と判定だけが残る。
+
+> **公開の既定を「全部入り」にしない。**
+
+記述を含めて書き出すと警告が出る。`API` キーらしい文字列と画像が混ざっていれば**書き出さない。**
+
+### 配るのは正解データではなく、直せる土台である
+
+用語辞書は 262 語あるが、**間違っている。** 完璧にはならない。出典から埋めた項目でも、
+撮影世代が変われば合わなくなる（カーメタは新しい撮影への更新で使えなくなっていく）。
+
+だから配るべきものは「正しいデータ」ではない。
+
+> **間違いを見つけて直せる土台を配る。**
+
+同梱している検証ツールは全部**消費 0** である。
+
+| コマンド | 何が分かるか |
+|---|---|
+| `npm run combo` | 観察を掛け合わせて正解に届くか。**辞書の本当の指標** |
+| `npm run coverage` | 欄ごとの被覆率 |
+| `npm run crosscheck` | 人手記述と出典の食い違い |
+| `npm run validate:keys` | 正解タグの整合性 |
+| `node tools/fix-normalization-errors.mjs` | 誤った用語割り当ての検出 |
+
+辞書を直したいときは `data/glossary-human.json` を編集して
+`node scripts/build-glossary.mjs` を回す。**直せば応答が変わる**
+（実測: [docs/normalization-recurrence.md](docs/normalization-recurrence.md)）。
+
+### 上書きしない
+
+同じ ID のデータセットが既にあるとき、**黙って上書きしない。** 両方の件数と作成時刻を見せて止まる。
+上書きするなら `--force`、別物として入れるなら `--id <別名>` を明示する。
+
+自分で直した辞書が他人のデータで戻ると、直せることが売りなのに意味が無くなる。
+
+> **上書きは人間が決める。**
+
+アクティブを切り替える前に `.backup/<日時>/` へ控えを取る。**取り消せない操作にしない。**
+
+検証で `error` が 1 件でも出たら **1 件も入れない。**
+半分入った状態は、どちらのデータなのか分からなくなる。
+
+### 画像が入らないことを、規約ではなくコードで守る
+
+Street View の画像はキャッシュ・保存が禁止で、**保存してよいのは pano ID だけ**である。
+配布形式には画像を入れる欄が無い。**それだけでは足りない。**
+
+`note` や `plain` に `data:` URL を書けば入ってしまう。だから書き出しと取り込みの
+両方で**中身を走査して弾く**（`shared/dataset.ts`）。
+
+```
+data: URL の画像 / 画像ファイルへの参照 / Street View 画像 API の URL
+base64 らしい長い文字列（512 文字以上）
+```
+
+**書き出し側で通す意味が大きい。** 配る人が規約を破らないための仕組みである。
+
+> **規約は読めば分かる。守られているかはコードで確かめる。**
+
+### 出典表示
+
+データは **CC BY 4.0** である。取り込み時に表示される `attribution` をそのまま使える。
+
+```
+Geo-Ganbatte-Gengoka-Coach 標準データセット (gsolkaga), CC BY 4.0
+https://github.com/gsolkaga/Geo-Ganbatte-Gengoka-Coach
+```
+
+用語の `sources` を集約して `meta.sources` に載せているので、**参照元も辿れる。**
+詳細は [LICENSE-DATA](LICENSE-DATA) と [NOTICE](NOTICE) を参照。
+
 ## ディレクトリ
 
 ```
