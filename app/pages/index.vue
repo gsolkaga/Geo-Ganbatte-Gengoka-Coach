@@ -162,11 +162,22 @@ const runOptions = computed(() => {
 /** 現在のフォームに何か書かれているか。上書きの確認を出すかどうかの判断に使う */
 const hasInput = computed(() => hasFormInput(slots.value, answer.value))
 
-const runLabel = (r: RunSummary) => {
-    const when = r.ts.slice(0, 16).replace('T', ' ')
-    const picks = r.candidates.map((c) => `${c.country}(${c.confidence})`).join(' ') || '候補なし'
-    return `${r.questionId}　${when}　${r.variant}　記述 ${r.describedSlots}/14　${picks}${r.normalized ? '　用語ID済' : ''}`
-}
+/**
+ * 過去の回答の選択肢の見出し。**出題 ID と保存日時だけにする。**
+ *
+ * 以前は `variant`・記述の件数・候補国・用語 ID の有無まで並べていた。
+ * 40 件を超えると 1 行が長く、**どれを選ぶかの判断に使わない情報で埋まっていた。**
+ *
+ * `variant` を落としたのは、**戻すのが観察メモと回答だからである。**
+ * v1 と v2 の違いは採点に何を渡したかであり、**入るスロットは同じ**である。
+ * ここで見せると「v2 の回答」という存在しない区別を作ってしまう。
+ *
+ * > **選ぶための情報だけを出す。** 記録に入っている情報を全部出すことではない。
+ *
+ * 採点の記録を選ぶ方（`過去の採点`）は `variant` を残している。
+ * あちらは**採点結果そのものを読み返す**ので、v1 と v2 で中身が違う。
+ */
+const runLabel = (r: RunSummary) => `${r.questionId}　${r.ts.slice(0, 16).replace('T', ' ')}`
 
 /** 読み込みが失敗したときに画面へ出す。**コンソールだけに出して黙らない** */
 const loadRunError = ref<string | null>(null)
@@ -646,13 +657,34 @@ function nextQuestion() {
                 いまは幅から 16:9 で高さを出す（`aspect-video`）。
                 行の高さは左列が決め、右列はそれに従う。
             -->
-            <div class="grid gap-4 xl:grid-cols-[7fr_3fr]">
+            <!--
+                ## 余った幅は右へ渡す
+
+                以前は `grid-cols-[7fr_3fr]` で 7 : 3 に割っていた。
+                風景の高さに上限があるため、**低い窓では上限が先に当たる。**
+                そのとき風景は左列の中で中央に寄り、
+                **左右に説明のつかない余白ができた**（実測 2026-08-18）。
+
+                列の幅を先に決めていたことが原因である。
+                `flex` にして、左列は「上限まで」とし、**余りを右列に渡す。**
+                余白が消えるだけでなく、観察欄が広くなる。
+
+                > **余った場所は、埋めるのではなく、使うものに渡す。**
+            -->
+            <div class="flex flex-col gap-4 xl:flex-row">
                 <!--
                     左列：風景。**回答欄は上に被せる**（`AnswerSheet`）。
                     上下に割っていたときは、回答する瞬間に観察欄（右列）が細くて
                     読み返せなかった。風景は回答の瞬間には要らない。
                 -->
-                <div class="flex min-w-0 flex-col gap-1">
+                <!--
+                    左列：風景。**幅の上限をここで持つ。**
+
+                    `xl:w-[68%]` を望みの幅とし、`xl:max-w-[calc(78dvh*4/3)]` で上限を掛ける。
+                    上限が当たったときは列そのものが縮むので、
+                    **余りは右列（`xl:flex-1`）が取る。** 風景の左右に余白が出ない。
+                -->
+                <div class="flex min-w-0 flex-col gap-1 xl:w-[68%] xl:max-w-[calc(78dvh*4/3)]">
                     <!--
                         既定は Embed（無料・無制限）。`NUXT_PUBLIC_STREETVIEW_MODE=nomove` で
                         JavaScript API に切り替わり移動を止められるが、Pro SKU で課金対象になる。
@@ -668,9 +700,9 @@ function nextQuestion() {
                         `max-height` で止めると、幅はそのままなので**比率が崩れる**
                         （`aspect-ratio` は幅と高さの両方が拘束されると無視される）。
 
-                        代わりに**幅の上限を高さから逆算する**。
-                        `max-w-[calc(78dvh*4/3)]` なら高さは 78dvh を超えず、
-                        **比率は常に正確である。** 上限に当たったときは中央に寄せる。
+                        代わりに**幅の上限を高さから逆算する**。上限は列側に持たせたので
+                        （`xl:max-w-[calc(78dvh*4/3)]`）、ここは列の幅いっぱいで済む。
+                        **中央寄せは要らない。** 列そのものが縮むので余白が出ない。
 
                         > **比率を保ちたいなら、拘束するのは片側だけにする。**
 
@@ -681,7 +713,7 @@ function nextQuestion() {
                         v-model="answerSheetOpen"
                         :summary="answerSummary"
                         :readonly="phase !== 'input'"
-                        frame-class="mx-auto aspect-[4/3] w-full max-w-[calc(78dvh*4/3)]"
+                        frame-class="aspect-[4/3] w-full"
                     >
                         <template #view>
                             <StreetViewNoMove v-if="noMove" :pano-id="current.panoId" fill />
@@ -807,8 +839,19 @@ function nextQuestion() {
                     採点後も入力した値を残す。消さない。
                     自分が何を書いたかを見ながら講評を読めないと、指摘の意味が分からない。
                 -->
-                <div class="relative min-h-0 min-w-0">
-                <div class="ggg-scroll absolute inset-0 overflow-y-scroll pr-1">
+                <div class="relative min-w-0 xl:flex-1">
+                <!--
+                    **広い画面では行の高さに従わせる**（`xl:absolute xl:inset-0`）。
+                    14 の欄は 2,000px を超えるので、そのまま置くと行の高さを支配する。
+                    絶対配置にして**高さの決定に参加させない。**
+
+                    **狭い画面では通常の流れに戻す。** 縦に積むので行の高さが無く、
+                    絶対配置のままだと**高さ 0 になって観察欄が消える。**
+                    代わりに上限を置いて内部スクロールさせる。
+
+                    > **絶対配置は、親の高さが決まっている場所でしか使えない。**
+                -->
+                <div class="ggg-scroll max-h-[70dvh] overflow-y-scroll pr-1 xl:absolute xl:inset-0 xl:max-h-none">
                     <!--
                         過去の回答をフォームへ戻す。**書く場所の真上に置く。**
 
