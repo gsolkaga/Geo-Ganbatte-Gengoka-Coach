@@ -31,7 +31,9 @@
         "compare": "vite-node scripts/compare-grading.ts",
         "audit:feedback": "node tools/audit-feedback.mjs",
         "inspect:whitespace": "node tools/inspect-whitespace.mjs",
-        "coverage": "node tools/coverage-report.mjs"
+        "coverage": "node tools/coverage-report.mjs",
+        "combo": "node tools/combo-report.mjs",
+        "crosscheck": "node tools/crosscheck-human-terms.mjs"
     },
     "dependencies": {
         "nuxt": "4.5.2",

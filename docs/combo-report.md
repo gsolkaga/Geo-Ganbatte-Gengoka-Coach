@@ -1,6 +1,6 @@
 # 掛け合わせて正解に届くか（AI 未使用、消費 0）
 
-生成: 2026-08-18T00:14:24.252Z　`node tools/combo-report.mjs`
+生成: 2026-08-18T00:54:40.746Z　`node tools/combo-report.mjs`
 
 ## 測る対象を間違えていた
 
@@ -21,13 +21,13 @@
 |---|---|---|---|---|
 | q-jp-01 | JP | 1 | **1 カ国** | `script`(1)→1 |
 | q-th-01 | TH | 4 | **1 カ国** | `script`(1)→1 |
-| q-tr-01 | TR | 1 | **78 カ国** | `traffic_side`(78)→78 |
-| q-br-01 | BR | 4 | **1 カ国** | `vehicle`(1)→1 |
+| q-tr-01 | TR | 2 | **1 カ国** | `sign`(1)→1 |
+| q-br-01 | BR | 3 | **1 カ国** | `vehicle`(1)→1 |
 | q-au-01 | AU | 1 | **24 カ国** | `traffic_side`(24)→24 |
 | q-is-01 | IS | 0 | **算出不能** | （なし） |
 | q-bg-01 | BG | 2 | **11 カ国** | `script`(11)→11 |
 | q-ru-01 | RU | 3 | **10 カ国** | `script`(11)→11 `road_marking`(85)→10 |
-| q-kz-01 | KZ | 3 | **4 カ国** | `other`(4)→4 |
+| q-kz-01 | KZ | 3 | **1 カ国** | `script`(1)→1 |
 | q-za-01 | ZA | 4 | **1 カ国** | `sign`(3)→3 `traffic_side`(24)→1 |
 
 `欄(単独の国数)→掛けた後の国数` の順に読む。
@@ -36,17 +36,15 @@
 
 | 到達 | 件数 |
 |---|---|
-| **1 カ国まで届いた** | 4 / 10 |
-| 複数カ国で止まった | 5 |
+| **1 カ国まで届いた** | 6 / 10 |
+| 複数カ国で止まった | 3 |
 | 算出不能（使える用語が無い） | 1 |
 
 ### 止まった出題と残った候補
 
-- `q-tr-01`（正解 TR）→ 78 カ国 [AD AE AL AR AT BA BE BG BO BR CA CH CL CO CR CZ DE DK DO EC EE ES FI FR GE GH GR GT HR HU IL IS IT JO KG KH KR KZ LB LT LU LV ME MG MK MN MX NG NL NO OM PA PE PH PL PR PT PY QA RE RO RS RU RW SE SI SK SN ST TN TR TW UA US UY UZ VN XK]
 - `q-au-01`（正解 AU）→ 24 カ国 [AU BD BT BW CY GB HK ID IE IN JP KE LK LS MT MY NA NP NZ SG SZ TH UG ZA]
 - `q-bg-01`（正解 BG）→ 11 カ国 [BA BG KG KZ MK MN RS RU UA UZ XK]
 - `q-ru-01`（正解 RU）→ 10 カ国 [BA BG KG KZ MK MN RS RU UA XK]
-- `q-kz-01`（正解 KZ）→ 4 カ国 [KG KZ UA UZ]
 
 **残った候補を割る軸が辞書に無い、または正解タグに記録されていない。**
 どちらなのかは正解タグの記述を読めば分かる。
