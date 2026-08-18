@@ -621,7 +621,26 @@ data/progress.json                データセットごとの進捗
 | `npm run coverage` | 欄ごとの被覆率 |
 | `npm run crosscheck` | 人手記述と出典の食い違い |
 | `npm run validate:keys` | 正解タグの整合性 |
+| `npm run fingerprint` | 辞書の指紋。**「足していない」を数字で示す** |
 | `node tools/fix-normalization-errors.mjs` | 誤った用語割り当ての検出 |
+
+### 別の地点で測るときは、辞書の指紋を先に残す
+
+`npm run combo` の到達は、**辞書を作るときに使った出題**での数字である。
+別の出題で測れば汎化を示せるが、そのとき
+**「辞書を 1 語も足していない」が信じられなければ意味がない。**
+
+```bash
+npm run fingerprint -- --write    測る前に記録する
+# ここで新しい出題を足して normalize:keys / combo を回す
+npm run fingerprint -- --verify   辞書が同一であることを確かめる
+```
+
+指紋は**絞り込みの結果を変える項目だけ**から作る（`countries` / `excludes` /
+`certainty` / `disputed` / `exhaustive`）。`note` や `plain` の文言を直しても変わらない。
+記録は [docs/glossary-fingerprint.md](docs/glossary-fingerprint.md) にある。
+
+> **主張の前提は、主張と一緒に検証できる形で置く。**
 
 辞書を直したいときは `data/glossary-human.json` を編集して
 `node scripts/build-glossary.mjs` を回す。**直せば応答が変わる**

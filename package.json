@@ -34,6 +34,7 @@
         "coverage": "node tools/coverage-report.mjs",
         "combo": "node tools/combo-report.mjs",
         "crosscheck": "node tools/crosscheck-human-terms.mjs",
+        "fingerprint": "node tools/glossary-fingerprint.mjs",
         "dataset": "vite-node scripts/dataset.mts"
     },
     "dependencies": {
