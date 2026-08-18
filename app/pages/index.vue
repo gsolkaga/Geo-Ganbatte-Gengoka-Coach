@@ -706,6 +706,22 @@ function nextQuestion() {
 
                         > **比率を保ちたいなら、拘束するのは片側だけにする。**
 
+                        ## 縦積みのときだけ比率を諦める
+
+                        `xl` 未満では左右に並べず縦に積む。そのとき風景は幅いっぱいなので、
+                        4:3 だと**高さが幅の 3/4 になり、観察欄が画面の外まで押し下げられた**
+                        （実測 2026-08-18）。
+
+                        `max-xl:max-h-[55dvh]` で高さを止める。
+                        幅は変えないので**比率は崩れる**（4:3 より横長になる）。
+
+                        比率を守るなら幅を絞ることになるが、そうすると
+                        **狭い画面で左右に余白ができる。** 直したばかりの問題が戻る。
+
+                        > **狭い画面では、比率よりも両方が見えることを採る。**
+
+                        比率の保証は `xl` 以上、つまり**実際に練習する画面幅**で効く。
+
                         枠と帯の組み立ては `AnswerSheet` が持つ。
                         **閉じている帯は枠の外に出る**ので、風景は全部見える。
                     -->
@@ -713,7 +729,7 @@ function nextQuestion() {
                         v-model="answerSheetOpen"
                         :summary="answerSummary"
                         :readonly="phase !== 'input'"
-                        frame-class="aspect-[4/3] w-full"
+                        frame-class="aspect-[4/3] w-full max-xl:max-h-[55dvh]"
                     >
                         <template #view>
                             <StreetViewNoMove v-if="noMove" :pano-id="current.panoId" fill />
