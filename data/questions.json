@@ -300,7 +300,9 @@
             "script": {
                 "state": "visible",
                 "plain": "Gの上にチェックマーク、Sの下にヒゲみたいなのが付いている",
-                "terms": [],
+                "terms": [
+                    "ref_lang_lat_turkish"
+                ],
                 "confirmed": true,
                 "recognition": "easy"
             },
@@ -426,6 +428,7 @@
                 "state": "visible",
                 "plain": "Aの上にニョロ、Aの上に黒丸があり、DEやDAという区切り文字がある",
                 "terms": [
+                    "ref_script_latin",
                     "ai_script_02"
                 ],
                 "confirmed": true,
@@ -482,7 +485,9 @@
             "season": {
                 "state": "visible",
                 "plain": "影が無いのでほぼ真上に太陽がある",
-                "terms": [],
+                "terms": [
+                    "ref_sun_overhead_no_shadow"
+                ],
                 "confirmed": true,
                 "recognition": "easy"
             },
@@ -611,6 +616,7 @@
                 "state": "visible",
                 "plain": "木の陰が北側に出ている",
                 "terms": [
+                    "ref_sun_shadow_to_north",
                     "ai_season_01"
                 ],
                 "confirmed": true,
@@ -898,9 +904,9 @@
                 "state": "visible",
                 "plain": "中央線は白い実線、縁石が白と黒の石、車線が白の短い破線",
                 "terms": [
-                    "ref_road_marking_center_white",
                     "ai_road_marking_02",
-                    "ai_road_marking_03"
+                    "ai_road_marking_03",
+                    "ai_road_marking_04"
                 ],
                 "confirmed": true,
                 "recognition": "easy"
@@ -1029,9 +1035,9 @@
                 "plain": "中央線は黄色の実線、路肩は線なし、車線は白い破線、横断歩道は縁だけ白い破線で中は何もなし",
                 "terms": [
                     "road_marking_center_yellow",
-                    "ref_road_marking_center_yellow",
                     "ai_road_marking_02",
-                    "ai_road_marking_03"
+                    "ai_road_marking_03",
+                    "ai_road_marking_05"
                 ],
                 "confirmed": true,
                 "recognition": "easy"
@@ -1260,7 +1266,9 @@
             "season": {
                 "state": "visible",
                 "plain": "太陽が北から照っている",
-                "terms": [],
+                "terms": [
+                    "ref_sun_shadow_to_south"
+                ],
                 "confirmed": true,
                 "recognition": "easy"
             },
