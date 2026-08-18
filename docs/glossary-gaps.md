@@ -1,6 +1,6 @@
 # 正解タグと用語辞書の不整合
 
-生成: 2026-08-18T01:30:42.928Z　
+生成: 2026-08-18T01:47:48.964Z　
 `node scripts/validate-answer-keys.mjs` が算出した。**AI を使っていない。リクエスト消費 0。**
 
 ## これはタグ付けの誤りではない
@@ -41,23 +41,10 @@ note に「**この用語は現状ほぼ機能しない。** 欧州の国を埋�
 
 (b) では積集合が正解を含まないことが**正しい診断**である。`.RU` ドメインと同じ誤誘導である。
 
-## 検出: 1 件
+## 検出: 0 件
 
-| 問 | 正解 | スロット | 種類 | 残り | 用語（該当国数） | 見立て |
-|---|---|---|---|---|---|---|
-| q-kz-01 | KZ | `road_marking` | 正解を含まない | 37 | ref_road_marking_center_yellow(37) | (b) 観察が誤誘導の可能性（用語は正しく、手がかりが国を示さない） |
+（なし）
 
-## 対応の候補
-
-**見立ては機械的な推定である。** `note` に「保留」「機能しない」と
-書いてあるかどうかで分けているだけなので、最終判断は人間が行う。
-
-### q-kz-01 / `road_marking`（正解 KZ、残り 37 カ国）
-
-- 用語: ref_road_marking_center_yellow(37)
-- 見立て: (b) 観察が誤誘導の可能性（用語は正しく、手がかりが国を示さない）
-- 対応: 用語が正しければ直す必要はない。**その手がかりが KZ を示さないことが正しい診断である**
-- note — ref_road_marking_center_yellow: `KZ` を含まない。 人手の road_marking_center_yellow（13 カ国）は本人の連想であり、こちらは記載である。上書きせず別に持つ。出典が独立に「黄色い中央線はカザフスタンを示さない」という診断と一致した。
 
 ## 絞り込みに使える用語が無いスロット: 29 件
 
@@ -73,23 +60,23 @@ note に「**この用語は現状ほぼ機能しない。** 欧州の国を埋�
 | q-jp-01 | JP | `pavement` | ai_pavement_01(unverified, disputed) |
 | q-th-01 | TH | `vehicle` | ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) |
 | q-tr-01 | TR | `vehicle` | ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) + ref_plate_eu_blue_band(heuristic) |
-| q-br-01 | BR | `script` | ai_script_02(unverified, disputed) |
 | q-br-01 | BR | `pavement` | ai_pavement_01(unverified, disputed) + ai_pavement_02(unverified, disputed) |
 | q-au-01 | AU | `bollard` | ai_bollard_01(unverified, disputed) |
 | q-au-01 | AU | `ground` | ai_ground_03(unverified, disputed) |
 | q-au-01 | AU | `terrain_vegetation` | ref_flora_eucalyptus(heuristic) |
 | q-au-01 | AU | `vehicle` | ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) |
 | q-au-01 | AU | `pavement` | ai_pavement_01(unverified, disputed) + ai_pavement_05(unverified, disputed) |
-| q-au-01 | AU | `season` | ai_season_01(unverified, disputed) |
 | q-is-01 | IS | `ground` | ai_ground_03(unverified, disputed) |
 | q-is-01 | IS | `terrain_vegetation` | ref_flora_grass_only_no_trees(heuristic) |
 | q-is-01 | IS | `pavement` | ai_pavement_04(unverified, disputed) |
 | q-bg-01 | BG | `sign` | ai_sign_01(unverified, disputed) |
 | q-bg-01 | BG | `vehicle` | ref_plate_eu_blue_band(heuristic) + ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) + ai_vehicle_05(unverified, disputed) |
 | q-bg-01 | BG | `pavement` | ai_pavement_01(unverified, disputed) + ai_pavement_02(unverified, disputed) |
+| q-ru-01 | RU | `road_marking` | ai_road_marking_02(unverified, disputed) + ai_road_marking_03(unverified, disputed) + ai_road_marking_04(unverified, disputed) |
 | q-ru-01 | RU | `pole` | ai_pole_03(unverified) |
 | q-ru-01 | RU | `vehicle` | ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) |
 | q-ru-01 | RU | `pavement` | ai_pavement_01(unverified, disputed) + ai_pavement_03(unverified, disputed) |
+| q-kz-01 | KZ | `road_marking` | road_marking_center_yellow(heuristic) + ai_road_marking_02(unverified, disputed) + ai_road_marking_03(unverified, disputed) + ai_road_marking_05(unverified, disputed) |
 | q-kz-01 | KZ | `pole` | ai_pole_01(unverified, disputed) |
 | q-kz-01 | KZ | `vehicle` | ai_vehicle_01(unverified, disputed) + ai_vehicle_02(unverified, disputed) |
 | q-kz-01 | KZ | `pavement` | ai_pavement_01(unverified, disputed) |

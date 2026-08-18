@@ -616,8 +616,8 @@
                 "state": "visible",
                 "plain": "木の陰が北側に出ている",
                 "terms": [
-                    "ref_sun_shadow_to_north",
-                    "ai_season_01"
+                    "ai_season_01",
+                    "ref_sun_from_north"
                 ],
                 "confirmed": true,
                 "recognition": "easy"
@@ -1267,7 +1267,7 @@
                 "state": "visible",
                 "plain": "太陽が北から照っている",
                 "terms": [
-                    "ref_sun_shadow_to_south"
+                    "ref_sun_from_north"
                 ],
                 "confirmed": true,
                 "recognition": "easy"

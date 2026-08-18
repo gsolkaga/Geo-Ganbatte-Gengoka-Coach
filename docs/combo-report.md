@@ -1,6 +1,6 @@
 # 掛け合わせて正解に届くか（AI 未使用、消費 0）
 
-生成: 2026-08-18T01:39:19.162Z　`node tools/combo-report.mjs`
+生成: 2026-08-18T01:46:49.715Z　`node tools/combo-report.mjs`
 
 ## 測る対象を間違えていた
 
@@ -23,7 +23,7 @@
 | q-th-01 | TH | 4 | **1 カ国** | `script`(1)→1 |
 | q-tr-01 | TR | 3 | **1 カ国** | `sign`(1)→1 |
 | q-br-01 | BR | 5 | **1 カ国** | `vehicle`(1)→1 |
-| q-au-01 | AU | 2 | **21 カ国** | `traffic_side`(24)→24 `season`(98)→21 |
+| q-au-01 | AU | 2 | **17 カ国** | `traffic_side`(24)→24 `season`(46)→17 |
 | q-is-01 | IS | 0 | **算出不能** | （なし） |
 | q-bg-01 | BG | 2 | **11 カ国** | `script`(11)→11 |
 | q-ru-01 | RU | 2 | **11 カ国** | `script`(11)→11 |
@@ -42,7 +42,7 @@
 
 ### 止まった出題と残った候補
 
-- `q-au-01`（正解 AU）→ 21 カ国 [AU BD BT BW CY GB HK ID IE IN JP KE LK MT MY NA NP SG TH UG ZA]
+- `q-au-01`（正解 AU）→ 17 カ国 [AU BD BW HK ID IN KE LK LS MY NA NZ SG SZ TH UG ZA]
 - `q-bg-01`（正解 BG）→ 11 カ国 [BA BG KG KZ MK MN RS RU UA UZ XK]
 - `q-ru-01`（正解 RU）→ 11 カ国 [BA BG KG KZ MK MN RS RU UA UZ XK]
 
