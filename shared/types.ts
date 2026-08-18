@@ -230,6 +230,31 @@ export interface Term {
     modelCount?: number
 }
 
+/**
+ * **網羅でない用語が示唆する国。積集合とは別枠で持つ。**
+ *
+ * `exhaustive: false` の用語は絞り込みに使えない。しかし
+ * 「ユーカリの木だらけ」に何も返さないのは学習アプリとして誤りである。
+ *
+ * > **絞り込みに使えないことと、言うべきことが無いことは別である。**
+ *
+ * `countries` を `IntersectionResult` と同じ形にしないのは意図的である。
+ * **型が違えば、積集合に混ぜる実装は書けない。**
+ */
+export interface NonExhaustiveHint {
+    slot: SlotId
+    termId: string
+    canonical: string
+    /**
+     * 出典が挙げている国。**網羅ではない。** 積集合に入れてはならない。
+     * 「ここに多い」であって「ここにしか無い」ではない。
+     */
+    countries: string[]
+    /** 連続変化する軸。断定ではなく傾向として説明するために渡す */
+    gradient?: Term['gradient']
+    sources?: string[]
+}
+
 export type FailureMode =
     /** 観察漏れ */
     | 'observation_miss'
@@ -335,6 +360,15 @@ export interface CodeJudgement {
      * AI の推測ではなく計算結果である。v1 では正解タグがないため算出できない。
      */
     nextPriority: { slot: SlotId, resultingSize: number }[] | null
+    /**
+     * **網羅でない用語が示唆する国。** 絞り込み（`intersection`）とは別である。
+     *
+     * ユーカリ・EU 式ナンバー・植生のように、「ここに多い」までしか言えない
+     * 手がかりを渡す。**候補を切る根拠にはできないが、説明はできる。**
+     *
+     * 辞書が必要なため v1 では null。`[]`（該当なし）と null は別である。
+     */
+    nonExhaustiveHints: NonExhaustiveHint[] | null
 }
 
 /** 採点プロンプトの出力スキーマ（`grading-prompt.md` が正典） */

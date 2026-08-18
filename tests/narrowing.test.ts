@@ -11,6 +11,7 @@ import {
     buildIntersection,
     buildNarrowingPower,
     buildNextPriority,
+    buildNonExhaustiveHints,
     indexTerms,
 } from '../server/utils/narrowing'
 import { createEmptySlots } from '../shared/slots'
@@ -444,5 +445,97 @@ describe('disputed な用語を絞り込みに使わない', () => {
         ])
         const slots = slotsWith({ road_marking: seen(['road_marking_center_white']) })
         expect(buildNarrowingPower(slots, revived)).toEqual({ road_marking: 3 })
+    })
+})
+
+/**
+ * 網羅でない手がかりを、絞り込みに混ぜずに、しかし捨てずに渡す。
+ *
+ * 実測（2026-08-18）。オーストラリアの出題でユーカリ（該当国 AU の 1 カ国）が
+ * 割り当てられているのに、`combo` は「使える欄 1 / 24 カ国」と出した。
+ * **学習者の一番鋭い観察が、応答のどこにも現れていなかった。**
+ */
+describe('buildNonExhaustiveHints', () => {
+    const hintGlossary: Term[] = [
+        // 出典もの。ユーカリは AU に多いが PT ES BR にもある
+        {
+            ...term('ref_flora_eucalyptus', 'terrain_vegetation', ['AU']),
+            source: 'reference',
+            exhaustive: false,
+            sources: ['https://geometas.com/metas/categories/flora/'],
+        },
+        // 人手の連想。**配らない**
+        {
+            ...term('trees_close_to_road', 'terrain_vegetation', ['BR', 'ID', 'PH']),
+            source: 'human',
+            certainty: 'heuristic',
+            exhaustive: false,
+        },
+        // 網羅もの。積集合が扱うのでここには出さない
+        { ...term('ref_traffic_side_left', 'traffic_side', ['AU', 'GB', 'JP']), source: 'reference' },
+        // AI 生成。網羅でなくても配らない
+        {
+            ...term('ai_flora_01', 'terrain_vegetation', ['AU', 'NZ']),
+            source: 'ai',
+            certainty: 'unverified',
+            exhaustive: false,
+        },
+        // 勾配のあるもの
+        {
+            ...term('ref_tuktuk_roof', 'other', ['PH']),
+            source: 'reference',
+            exhaustive: false,
+            gradient: { axis: 'north_south', note: '北部ほど屋根が高い' },
+        },
+    ]
+    const hintById = indexTerms(hintGlossary)
+
+    it('網羅でない出典ものを示唆として返す。積集合は 24 カ国のままでも消さない', () => {
+        const slots = slotsWith({
+            terrain_vegetation: seen(['ref_flora_eucalyptus']),
+            traffic_side: seen(['ref_traffic_side_left']),
+        })
+        // 積集合はユーカリを使わない（正しい。ポルトガルを誤って消さないため）
+        expect(buildIntersection(slots, 'AU', hintById)!.countries).toEqual(['AU', 'GB', 'JP'])
+        // それでも示唆としては残る
+        expect(buildNonExhaustiveHints(slots, hintById)).toEqual([
+            {
+                slot: 'terrain_vegetation',
+                termId: 'ref_flora_eucalyptus',
+                canonical: 'ref_flora_eucalyptus',
+                countries: ['AU'],
+                gradient: undefined,
+                sources: ['https://geometas.com/metas/categories/flora/'],
+            },
+        ])
+    })
+
+    it('人手の連想は配らない。示唆に出せば積集合から外した理由がそのまま戻ってくる', () => {
+        const slots = slotsWith({ terrain_vegetation: seen(['trees_close_to_road']) })
+        expect(buildNonExhaustiveHints(slots, hintById)).toEqual([])
+    })
+
+    it('AI 生成は網羅でなくても配らない', () => {
+        const slots = slotsWith({ terrain_vegetation: seen(['ai_flora_01']) })
+        expect(buildNonExhaustiveHints(slots, hintById)).toEqual([])
+    })
+
+    it('網羅の用語は示唆に出さない。積集合が扱うので二重に数えない', () => {
+        const slots = slotsWith({ traffic_side: seen(['ref_traffic_side_left']) })
+        expect(buildNonExhaustiveHints(slots, hintById)).toEqual([])
+    })
+
+    it('勾配を持つ用語は軸の説明を添えて返す。断定ではなく傾向として説明させる', () => {
+        const slots = slotsWith({ other: seen(['ref_tuktuk_roof']) })
+        const hints = buildNonExhaustiveHints(slots, hintById)
+        expect(hints).toHaveLength(1)
+        expect(hints[0]!.gradient).toEqual({ axis: 'north_south', note: '北部ほど屋根が高い' })
+    })
+
+    it('absent や unknown のスロットは見ない', () => {
+        const slots = slotsWith({
+            terrain_vegetation: { state: 'absent', plain: null, terms: ['ref_flora_eucalyptus'] },
+        })
+        expect(buildNonExhaustiveHints(slots, hintById)).toEqual([])
     })
 })

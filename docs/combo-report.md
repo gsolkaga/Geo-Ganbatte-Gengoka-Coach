@@ -1,6 +1,6 @@
 # 掛け合わせて正解に届くか（AI 未使用、消費 0）
 
-生成: 2026-08-18T00:54:40.746Z　`node tools/combo-report.mjs`
+生成: 2026-08-18T01:18:25.872Z　`node tools/combo-report.mjs`
 
 ## 測る対象を間違えていた
 
@@ -50,6 +50,49 @@
 どちらなのかは正解タグの記述を読めば分かる。
 - 記述があるのに用語が無い → **辞書に足す**
 - 記述が無い → **その地点でその特徴が見えていない。足しても意味がない**
+
+## 絞り込みに使えないが、説明はできる手がかり
+
+`exhaustive: false` の用語は積集合に入れない。ユーカリを入れれば
+ポルトガル・スペイン・ブラジルを誤って消してしまう。
+
+**しかし完全に捨てるのも誤りだった。** オーストラリアの出題では
+学習者が「ユーカリの木だらけ」と書き、`ref_flora_eucalyptus`（該当国 AU）が
+割り当てられているのに、応答のどこにも現れていなかった。
+
+> **絞り込みに使えないことと、言うべきことが無いことは別である。**
+
+`buildNonExhaustiveHints` で別枠として渡す。件数は書かない。
+**件数を書くと絞り込み力に見える。**
+
+- `q-tr-01`（正解 TR）
+    - `vehicle` EU 式の青い縦帯（左端） → よく見られる国 [AT BE BG CY CZ DE DK EE ES FI FR GR HR HU IE IT LT LU LV MT NL PL PT RO SE SI SK TR]
+- `q-au-01`（正解 AU）
+    - `terrain_vegetation` ユーカリ（背が高く樹皮が白い木） → よく見られる国 [AU]
+- `q-is-01`（正解 IS）
+    - `terrain_vegetation` 草しかなく樹木がない → よく見られる国 [IS]
+- `q-bg-01`（正解 BG）
+    - `vehicle` EU 式の青い縦帯（左端） → よく見られる国 [AT BE BG CY CZ DE DK EE ES FI FR GR HR HU IE IT LT LU LV MT NL PL PT RO SE SI SK TR]
+- `q-za-01`（正解 ZA）
+    - `ground` 赤い土 → よく見られる国 [BR LK UG ZA]
+
+## 用語は入っているのに絞り込みに使えない欄
+
+**被覆率を上げても到達が上がらない原因はここにある。**
+画面上は欄が埋まっているが、中身が積集合に入らない。
+
+- `q-jp-01` terrain_vegetation(AI生成) pavement(AI生成)
+- `q-th-01` vehicle(AI生成)
+- `q-tr-01` vehicle(AI生成・網羅でない)
+- `q-br-01` script(AI生成) pavement(AI生成)
+- `q-au-01` bollard(AI生成) ground(AI生成) terrain_vegetation(網羅でない) vehicle(AI生成) pavement(AI生成) season(AI生成)
+- `q-is-01` ground(AI生成) terrain_vegetation(網羅でない) pavement(AI生成)
+- `q-bg-01` sign(AI生成) vehicle(網羅でない・AI生成) pavement(AI生成)
+- `q-ru-01` pole(AI生成) vehicle(AI生成) pavement(AI生成)
+- `q-kz-01` pole(AI生成) vehicle(AI生成) pavement(AI生成) season(AI生成)
+- `q-za-01` pole(AI生成) ground(網羅でない) vehicle(AI生成) pavement(AI生成)
+
+`AI生成` は増やしても到達に効かない。**出典から埋める必要がある。**
 
 ## この指標の使い方
 

@@ -106,7 +106,52 @@ for (const q of questions) {
                 const set = slotCountries(q.slots, s)
                 return set && set.size > 0 && set.has(q.country)
             }).length,
+        hints: hintsFor(q.slots),
+        blocked: blockedFor(q.slots),
     })
+}
+
+/**
+ * **絞り込みに使えないが説明はできる手がかり。**
+ * `server/utils/narrowing.ts` の `buildNonExhaustiveHints` と同じ条件。
+ */
+function hintsFor(slots) {
+    const out = []
+    for (const [slot, entry] of Object.entries(slots ?? {})) {
+        if (entry.state !== 'visible') continue
+        for (const id of entry.terms ?? []) {
+            const t = byId.get(id)
+            if (!t || t.exhaustive !== false) continue
+            if (t.certainty === 'unverified' || t.disputed === true) continue
+            if (t.source !== 'reference') continue
+            out.push({ slot, id, canonical: t.canonical, countries: [...t.countries].sort() })
+        }
+    }
+    return out
+}
+
+/**
+ * **用語は入っているのに絞り込みに使えない欄。** 理由別に数える。
+ *
+ * 被覆率を上げても到達が上がらない原因はここにある。
+ * 欄は埋まって見えるが、中身が積集合に入らない。
+ */
+function blockedFor(slots) {
+    const out = []
+    for (const [slot, entry] of Object.entries(slots ?? {})) {
+        if (entry.state !== 'visible') continue
+        const terms = (entry.terms ?? []).map((id) => byId.get(id)).filter(Boolean)
+        if (terms.length === 0) continue
+        if (terms.some(usable)) continue
+        const reasons = new Set()
+        for (const t of terms) {
+            if (t.certainty === 'unverified') reasons.add('AI生成')
+            else if (t.disputed === true) reasons.add('不一致あり')
+            else if (t.exhaustive === false) reasons.add('網羅でない')
+        }
+        out.push({ slot, reasons: [...reasons] })
+    }
+    return out
 }
 
 const lines = [
@@ -174,6 +219,52 @@ if (stuck.length) {
     )
 }
 
+const withHints = rows.filter((r) => r.hints.length)
+if (withHints.length) {
+    lines.push(
+        '## 絞り込みに使えないが、説明はできる手がかり',
+        '',
+        '`exhaustive: false` の用語は積集合に入れない。ユーカリを入れれば',
+        'ポルトガル・スペイン・ブラジルを誤って消してしまう。',
+        '',
+        '**しかし完全に捨てるのも誤りだった。** オーストラリアの出題では',
+        '学習者が「ユーカリの木だらけ」と書き、`ref_flora_eucalyptus`（該当国 AU）が',
+        '割り当てられているのに、応答のどこにも現れていなかった。',
+        '',
+        '> **絞り込みに使えないことと、言うべきことが無いことは別である。**',
+        '',
+        '`buildNonExhaustiveHints` で別枠として渡す。件数は書かない。',
+        '**件数を書くと絞り込み力に見える。**',
+        '',
+    )
+    for (const r of withHints) {
+        lines.push(`- \`${r.id}\`（正解 ${r.country}）`)
+        for (const h of r.hints) {
+            lines.push(`    - \`${h.slot}\` ${h.canonical} → よく見られる国 [${h.countries.join(' ')}]`)
+        }
+    }
+    lines.push('')
+}
+
+const withBlocked = rows.filter((r) => r.blocked.length)
+if (withBlocked.length) {
+    lines.push(
+        '## 用語は入っているのに絞り込みに使えない欄',
+        '',
+        '**被覆率を上げても到達が上がらない原因はここにある。**',
+        '画面上は欄が埋まっているが、中身が積集合に入らない。',
+        '',
+    )
+    for (const r of withBlocked) {
+        lines.push(`- \`${r.id}\` ${r.blocked.map((b) => `${b.slot}(${b.reasons.join('・')})`).join(' ')}`)
+    }
+    lines.push(
+        '',
+        '`AI生成` は増やしても到達に効かない。**出典から埋める必要がある。**',
+        '',
+    )
+}
+
 lines.push(
     '## この指標の使い方',
     '',
@@ -199,7 +290,15 @@ for (const r of rows) {
     if (r.finalSize !== null && r.finalSize > 1) {
         console.log(`   残り: ${r.finalCountries.join(' ')}`)
     }
+    for (const h of r.hints) {
+        console.log(`   示唆（絞り込みに使わない）: ${h.slot} ${h.canonical} [${h.countries.join(' ')}]`)
+    }
+    if (r.blocked.length) {
+        console.log(`   埋まっているが使えない欄: `
+            + r.blocked.map((b) => `${b.slot}(${b.reasons.join('・')})`).join(' '))
+    }
 }
 console.log('')
 console.log(`1 カ国まで届いた: ${reached} / ${rows.length}`)
+console.log(`示唆が出る出題: ${withHints.length} / ${rows.length}`)
 console.log(`保存先: ${OUT_PATH}`)

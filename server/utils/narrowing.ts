@@ -16,7 +16,7 @@
  */
 import type { SlotId } from '../../shared/slots'
 import { SLOT_IDS } from '../../shared/slots'
-import type { SlotRecord, Term } from '../../shared/types'
+import type { NonExhaustiveHint, SlotRecord, Term } from '../../shared/types'
 
 /** 用語 ID から辞書項目を引く索引 */
 export function indexTerms(glossary: Term[]): Map<string, Term> {
@@ -249,6 +249,76 @@ export function buildIntersection(
         excludedCountries: [...excluded].sort(),
         intersectionUnavailable: false,
     }
+}
+
+/**
+ * **網羅でない用語の示唆。積集合には入れないが、捨てもしない。**
+ *
+ * ## 一番鋭い観察が、黙って消えていた
+ *
+ * 実測（2026-08-18、`npm run combo`）。オーストラリアの出題で
+ * 学習者は「ユーカリの木だらけ」と書き、正規化は
+ * `ref_flora_eucalyptus`（該当国 `AU` の 1 カ国）を割り当てた。
+ *
+ * それでも到達は **24 カ国**、`使える欄 1` と表示された。
+ * ユーカリが `exhaustive: false` であるため `usableForNarrowing` が落としている。
+ *
+ * 落とすのは正しい。ユーカリはポルトガル・スペイン・ブラジル・南アフリカにもある。
+ * 積集合に入れればポルトガルを誤って消す。
+ *
+ * **しかし完全に消すのも誤りである。** 学習者から見れば、
+ * 自分が挙げた最も鋭い手がかりが何の反応も生まなかったことになる。
+ *
+ * > **絞り込みに使えないことと、言うべきことが無いことは別である。**
+ *
+ * 正しい応答は絞ることではなく、**言うこと**である。
+ *
+ * ```
+ * ユーカリはオーストラリアで最も多く見られるが、
+ * ポルトガル・スペイン・ブラジル・南アフリカにも植林されている。
+ * 単独では決められない。他の欄と合わせる。
+ * ```
+ *
+ * それが学習アプリの仕事である。だから絞り込みとは**別枠**で返す。
+ * 型を分けておけば、積集合に混ぜる実装は書けない。
+ *
+ * ## 人手の連想は出さない
+ *
+ * `source: 'reference'` に限る。人手ワークシート §9 の
+ * 「道路のすぐ横に木々があるとブラジル・インドネシア・フィリピンを連想する」は
+ * **その人がその地点で何を考えたかの記録**であり、学習者に配る知識ではない。
+ *
+ * これを示唆として出せば、オーストラリアの出題で
+ * 「インドネシアを示唆する」と表示される。積集合から外した理由がそのまま戻ってくる。
+ */
+export function buildNonExhaustiveHints(
+    slots: SlotRecord,
+    byId: Map<string, Term>,
+): NonExhaustiveHint[] {
+    const hints: NonExhaustiveHint[] = []
+    for (const slot of SLOT_IDS) {
+        const entry = slots[slot]
+        if (!entry || entry.state !== 'visible') continue
+        for (const id of entry.terms) {
+            const term = byId.get(id)
+            if (!term) continue
+            // 網羅のものは積集合で扱う。ここは網羅でないものだけ
+            if (term.exhaustive !== false) continue
+            if (term.certainty === 'unverified') continue
+            if (term.disputed === true) continue
+            // **人手の連想は配らない。** 出典があるものだけ
+            if (term.source !== 'reference') continue
+            hints.push({
+                slot,
+                termId: term.id,
+                canonical: term.canonical,
+                countries: [...term.countries].sort(),
+                gradient: term.gradient,
+                sources: term.sources,
+            })
+        }
+    }
+    return hints
 }
 
 /**

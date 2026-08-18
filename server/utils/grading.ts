@@ -37,6 +37,7 @@ import {
     buildIntersection,
     buildNarrowingPower,
     buildNextPriority,
+    buildNonExhaustiveHints,
     indexTerms,
 } from './narrowing'
 
@@ -215,6 +216,7 @@ export function buildV1Judgement(answer: Answer, answerCountry: string): CodeJud
         narrowingPower: null,
         intersection: null,
         nextPriority: null,
+        nonExhaustiveHints: null,
     }
 }
 
@@ -267,6 +269,8 @@ export function buildV2Judgement(
             // **視認できないスロットを「次に見ろ」と言ってはならない**
             exclude: diff.blindSlots as readonly SlotId[],
         }),
+        // **絞り込みに使えない手がかりを黙って捨てない。** 別枠で渡す
+        nonExhaustiveHints: buildNonExhaustiveHints(answer.slots, byId),
     }
 }
 

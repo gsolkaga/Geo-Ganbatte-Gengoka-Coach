@@ -434,6 +434,27 @@ function formatNextPriority(value: CodeJudgement['nextPriority']): string {
 }
 
 /**
+ * 網羅でない手がかり。**「示唆する」までしか書かせない。**
+ *
+ * 実測（2026-08-18）。オーストラリアの出題で `ref_flora_eucalyptus`（1 カ国）が
+ * 割り当てられているのに、絞り込みは 24 カ国のままだった。
+ * 学習者の一番鋭い観察が、応答のどこにも現れていなかった。
+ *
+ * ここに渡すのは絞り込みの材料ではない。**説明の材料である。**
+ * 件数を書かないのは意図的である。**件数を書くと絞り込み力に見える。**
+ */
+function formatNonExhaustiveHints(value: CodeJudgement['nonExhaustiveHints']): string {
+    if (value === null) return NOT_JUDGED
+    if (!value.length) return '（なし）'
+    return value
+        .map((h) => {
+            const grad = h.gradient ? ` / 勾配: ${h.gradient.note}` : ''
+            return `- ${h.slot}: ${h.canonical} → よく見られる国 [${h.countries.join(' ')}]${grad}`
+        })
+        .join('\n')
+}
+
+/**
  * ユーザープロンプトを組み立てる。
  *
  * **v1 / v2 で同一のテンプレートを使う。** `context` が null のとき、
@@ -480,6 +501,14 @@ export function buildGradingUserPrompt(input: GradingPromptInput): string {
             `達成された絞り込み（積集合）: ${formatIntersection(judgement.intersection)}`,
             `次に見るべきスロット（コードの計算結果。並べ替えないこと）: ${formatNextPriority(judgement.nextPriority)}`,
             `自力で見つけた名前のない手がかり: ${formatList(judgement.discoveries)}`,
+            '',
+            '## 絞り込みには使えないが、説明すべき手がかり',
+            '',
+            '**候補を切る根拠にしてはならない。** 挙げた国以外にも存在する。',
+            'ただし黙って無視してもならない。学習者はこれを観察できている。',
+            '「よく見られるが、単独では決められない」という形で必ず触れること。',
+            '',
+            formatNonExhaustiveHints(judgement.nonExhaustiveHints),
         ].join('\n'),
     ]
 
