@@ -133,6 +133,16 @@ export const termSchema = z.object({
     plain: z.string(),
     aliases: z.array(z.string()).default([]),
     countries: z.array(countryCodeSchema).default([]),
+    /**
+     * **これが見えたら候補から外れる国。** 網羅でなくても使える
+     * （`shared/types.ts` に経緯がある）。`exhaustive: false` でも有効。
+     */
+    excludes: z.array(countryCodeSchema).optional(),
+    /** 地域をまたいで連続的に変化する軸。**境界ではなく勾配である** */
+    gradient: z.object({
+        axis: z.enum(['north_south', 'west_east', 'urban_rural', 'highland_lowland', 'cold_warm']),
+        note: z.string(),
+    }).optional(),
     confusableWith: z.array(z.string()).default([]),
     requires: z
         .array(z.object({ slot: slotIdSchema, what: z.string() }))

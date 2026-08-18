@@ -1669,7 +1669,15 @@
             "sources": [
                 "https://geometas.com/metas/categories/license_plate/"
             ],
-            "exhaustive": false
+            "exhaustive": false,
+            "excludes": [
+                "AD",
+                "CH",
+                "GB",
+                "IS",
+                "RU",
+                "UA"
+            ]
         },
         {
             "id": "ref_plate_black_background",
@@ -1785,6 +1793,18 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/license_plate/"
+            ],
+            "excludes": [
+                "AT",
+                "BE",
+                "CZ",
+                "DE",
+                "ES",
+                "FR",
+                "IT",
+                "NL",
+                "PL",
+                "SE"
             ]
         },
         {
@@ -1857,6 +1877,10 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/google_car/"
+            ],
+            "excludes": [
+                "MK",
+                "RS"
             ]
         },
         {
@@ -1882,6 +1906,10 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/google_car/"
+            ],
+            "excludes": [
+                "MK",
+                "RS"
             ]
         },
         {
@@ -1904,6 +1932,10 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/google_car/"
+            ],
+            "excludes": [
+                "MK",
+                "RS"
             ]
         },
         {
@@ -1931,6 +1963,9 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/google_car/"
+            ],
+            "excludes": [
+                "JO"
             ]
         },
         {
@@ -1958,6 +1993,9 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/google_car/"
+            ],
+            "excludes": [
+                "AE"
             ]
         },
         {
@@ -1986,7 +2024,11 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/google_car/"
-            ]
+            ],
+            "gradient": {
+                "axis": "west_east",
+                "note": "モンゴルではバーに黒いゴムが詰まっているかで東西が分かれる（詰まっていれば西部かウランバートル）。**境界ではなく傾向である。**"
+            }
         },
         {
             "id": "ref_camera_motorbike",
@@ -2131,7 +2173,11 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/google_car/"
-            ]
+            ],
+            "gradient": {
+                "axis": "north_south",
+                "note": "チュニジアの伴走車は北部（ハンマメット以北）が明るい緑、中南部が濃い緑で車種も違う。**色は連続ではなく切り替わるが、境界の近くでは判断できない。**"
+            }
         },
         {
             "id": "ref_bollard_red_rectangle_front_white_back",
@@ -2597,6 +2643,9 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/poles/"
+            ],
+            "excludes": [
+                "PL"
             ]
         },
         {
@@ -2621,6 +2670,10 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/poles/"
+            ],
+            "excludes": [
+                "HU",
+                "RO"
             ]
         },
         {
@@ -2778,7 +2831,11 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/poles/"
-            ]
+            ],
+            "gradient": {
+                "axis": "north_south",
+                "note": "インドネシアでは上端が揃っているか不揃いかが地域で変わる。**連続変化なので、揃っていないことを国の否定に使わない。**"
+            }
         },
         {
             "id": "ref_pole_crucifix",
@@ -3062,6 +3119,9 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/signposts/"
+            ],
+            "excludes": [
+                "US"
             ]
         },
         {
@@ -3429,6 +3489,10 @@
             "source": "reference",
             "sources": [
                 "https://en.wikipedia.org/wiki/Kazakh_alphabets"
+            ],
+            "excludes": [
+                "BG",
+                "RU"
             ]
         },
         {
@@ -3454,6 +3518,10 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/language/"
+            ],
+            "excludes": [
+                "BG",
+                "RU"
             ]
         },
         {
@@ -3478,6 +3546,10 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/language/"
+            ],
+            "excludes": [
+                "BG",
+                "RU"
             ]
         },
         {
@@ -3502,6 +3574,10 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/language/"
+            ],
+            "excludes": [
+                "BG",
+                "RU"
             ]
         },
         {
@@ -3527,6 +3603,10 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/language/"
+            ],
+            "excludes": [
+                "BG",
+                "RU"
             ]
         },
         {
@@ -3552,6 +3632,10 @@
             "source": "reference",
             "sources": [
                 "https://en.wikipedia.org/wiki/Cyrillic_script"
+            ],
+            "excludes": [
+                "BG",
+                "RU"
             ]
         },
         {
@@ -3600,6 +3684,9 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/language/"
+            ],
+            "excludes": [
+                "SK"
             ]
         },
         {
@@ -3624,6 +3711,9 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/language/"
+            ],
+            "excludes": [
+                "CZ"
             ]
         },
         {
@@ -3672,6 +3762,9 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/language/"
+            ],
+            "excludes": [
+                "HU"
             ]
         },
         {
@@ -3695,6 +3788,9 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/language/"
+            ],
+            "excludes": [
+                "RO"
             ]
         },
         {
@@ -3719,6 +3815,9 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/language/"
+            ],
+            "excludes": [
+                "SI"
             ]
         },
         {
@@ -3861,6 +3960,10 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/language/"
+            ],
+            "excludes": [
+                "FI",
+                "SE"
             ]
         },
         {
@@ -3886,6 +3989,10 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/language/"
+            ],
+            "excludes": [
+                "DK",
+                "NO"
             ]
         },
         {
@@ -3911,6 +4018,9 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/language/"
+            ],
+            "excludes": [
+                "CH"
             ]
         },
         {
@@ -4005,6 +4115,15 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/language/"
+            ],
+            "excludes": [
+                "AR",
+                "CL",
+                "CO",
+                "ES",
+                "MX",
+                "PE",
+                "UY"
             ]
         },
         {
@@ -4073,6 +4192,1018 @@
             "source": "reference",
             "sources": [
                 "https://geometas.com/metas/categories/language/"
+            ]
+        },
+        {
+            "id": "ref_flora_eucalyptus",
+            "slot": "terrain_vegetation",
+            "canonical": "ユーカリ（背が高く樹皮が白い木）",
+            "plain": "ユーカリの木だらけ",
+            "aliases": [
+                "ユーカリ",
+                "白い幹の高い木"
+            ],
+            "countries": [
+                "AU"
+            ],
+            "confusableWith": [],
+            "note": "**連想である。網羅ではない。**絞り込み計算には使わない。オーストラリアで目立つ。**ポルトガル・スペイン・カリフォルニア・エチオピアにもある。**監査で「ユーカリの木だらけ」が辞書に無い用語として落とされた。受け皿として置く。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "exhaustive": false,
+            "sources": [
+                "https://geometas.com/metas/categories/flora/"
+            ]
+        },
+        {
+            "id": "ref_flora_fern_forest",
+            "slot": "terrain_vegetation",
+            "canonical": "森にシダが生えている",
+            "plain": "森の中にシダが生えている",
+            "aliases": [
+                "シダ",
+                "羊歯"
+            ],
+            "countries": [
+                "NZ"
+            ],
+            "confusableWith": [],
+            "note": "**連想である。網羅ではない。**絞り込み計算には使わない。ニュージーランドの森でよく見る。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "exhaustive": false,
+            "sources": [
+                "https://geometas.com/metas/categories/flora/"
+            ]
+        },
+        {
+            "id": "ref_flora_white_painted_trunk",
+            "slot": "terrain_vegetation",
+            "canonical": "木の幹の根元が白く塗られている",
+            "plain": "木の根元が白く塗られている",
+            "aliases": [
+                "幹が白い",
+                "根元が白い木"
+            ],
+            "countries": [
+                "UA"
+            ],
+            "confusableWith": [],
+            "note": "**連想である。網羅ではない。**絞り込み計算には使わない。ウクライナでよく見る。**旧ソ連圏に広く見られる習慣**であり、ウクライナ限定ではない。電柱の根元が白いのとは別の軸。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "exhaustive": false,
+            "sources": [
+                "https://geometas.com/metas/categories/flora/"
+            ]
+        },
+        {
+            "id": "ref_flora_grass_only_no_trees",
+            "slot": "terrain_vegetation",
+            "canonical": "草しかなく樹木がない",
+            "plain": "草だけで木が生えていない",
+            "aliases": [
+                "木がない",
+                "草だけ"
+            ],
+            "countries": [
+                "IS"
+            ],
+            "confusableWith": [],
+            "note": "**連想である。網羅ではない。**絞り込み計算には使わない。アイスランド。道は平坦で、遠くに丘や山が見える。**グリーンランド・フェロー諸島・北ノルウェーにも似た景観がある。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "exhaustive": false,
+            "sources": [
+                "https://geometas.com/metas/categories/flora/"
+            ]
+        },
+        {
+            "id": "ref_flora_bare_tabletop_mountains",
+            "slot": "terrain_vegetation",
+            "canonical": "樹木のないテーブル状の山",
+            "plain": "木が生えていない、頭が平らな山",
+            "aliases": [
+                "テーブルマウンテン",
+                "禿げた山"
+            ],
+            "countries": [
+                "LS"
+            ],
+            "confusableWith": [],
+            "note": "**連想である。網羅ではない。**絞り込み計算には使わない。レソト。水平の岩の稜線が特徴で、草が短い。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "exhaustive": false,
+            "sources": [
+                "https://geometas.com/metas/categories/flora/"
+            ]
+        },
+        {
+            "id": "ref_flora_tall_forested_mountains",
+            "slot": "terrain_vegetation",
+            "canonical": "高い山が木で覆われている",
+            "plain": "高い山が木でびっしり覆われている",
+            "aliases": [
+                "森に覆われた高い山"
+            ],
+            "countries": [
+                "BT"
+            ],
+            "confusableWith": [],
+            "note": "**連想である。網羅ではない。**絞り込み計算には使わない。ブータンは GeoGuessr で最も山がちな国とされる。**ネパール・スイス・コロンビアにも似た景観がある。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "exhaustive": false,
+            "sources": [
+                "https://geometas.com/metas/categories/flora/"
+            ]
+        },
+        {
+            "id": "ref_flora_hilly_in_nordics",
+            "slot": "terrain_vegetation",
+            "canonical": "北欧で起伏や山が多い",
+            "plain": "北欧っぽいのに山や起伏が多い",
+            "aliases": [
+                "北欧の山地"
+            ],
+            "countries": [
+                "NO"
+            ],
+            "confusableWith": [],
+            "note": "**連想である。網羅ではない。**絞り込み計算には使わない。ノルウェーは他の北欧諸国が平坦なのに対して山がち。**人手ワークシート §13 の「ノルウェーとスウェーデンで迷う」に効く連想である。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "exhaustive": false,
+            "sources": [
+                "https://geometas.com/metas/categories/flora/"
+            ],
+            "gradient": {
+                "axis": "north_south",
+                "note": "ノルウェーは南北に長く、起伏の強さが連続的に変わる。**「起伏があるからノルウェー」ではなく「北欧で平坦でなければノルウェーに寄る」。**"
+            }
+        },
+        {
+            "id": "ref_flora_palm_tropical_dirt",
+            "slot": "terrain_vegetation",
+            "canonical": "ヤシの木＋濃い緑＋土が見える",
+            "plain": "ヤシの木があって緑が濃く、土が見えている",
+            "aliases": [
+                "熱帯の景観",
+                "ヤシと土"
+            ],
+            "countries": [
+                "LK",
+                "TH"
+            ],
+            "confusableWith": [],
+            "note": "**連想である。網羅ではない。**絞り込み計算には使わない。タイとスリランカ。**スリランカは赤みの土**を伴うことが多い。東南アジア全域に似た景観がある。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "exhaustive": false,
+            "sources": [
+                "https://geometas.com/metas/categories/flora/"
+            ]
+        },
+        {
+            "id": "ref_flora_palm_mediterranean",
+            "slot": "terrain_vegetation",
+            "canonical": "ヤシの木＋白い地中海風の建物",
+            "plain": "ヤシの木と白い建物、空が青い",
+            "aliases": [
+                "地中海の景観"
+            ],
+            "countries": [
+                "TN"
+            ],
+            "confusableWith": [],
+            "note": "**連想である。網羅ではない。**絞り込み計算には使わない。チュニジア。中東風の要素が混ざる。**地中海沿岸全域に似た景観がある。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "exhaustive": false,
+            "sources": [
+                "https://geometas.com/metas/categories/flora/"
+            ]
+        },
+        {
+            "id": "ref_flora_open_grassland_gentle_hills",
+            "slot": "terrain_vegetation",
+            "canonical": "開けた草地とゆるやかな丘",
+            "plain": "広い草地でゆるい丘が続く",
+            "aliases": [
+                "草原とゆるい丘"
+            ],
+            "countries": [
+                "LU",
+                "UY"
+            ],
+            "confusableWith": [],
+            "note": "**連想である。網羅ではない。**絞り込み計算には使わない。ウルグアイは曇りが多く道路の状態が周辺国より悪い。ルクセンブルクは平地が少なく緑の草地が多い。**大陸をまたぐので単独では使えない。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "exhaustive": false,
+            "sources": [
+                "https://geometas.com/metas/categories/flora/"
+            ]
+        },
+        {
+            "id": "ref_flora_rock_walls_low_vegetation",
+            "slot": "terrain_vegetation",
+            "canonical": "岩の塀と低い植生",
+            "plain": "石を積んだ塀があって、背の低い草しかない",
+            "aliases": [
+                "岩の塀"
+            ],
+            "countries": [
+                "MT"
+            ],
+            "confusableWith": [],
+            "note": "**連想である。網羅ではない。**絞り込み計算には使わない。マルタ。景観の要素がすべて地面に近い。**人手ワークシート §5 のイギリスの石垣とは別の軸。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "exhaustive": false,
+            "sources": [
+                "https://geometas.com/metas/categories/flora/"
+            ]
+        },
+        {
+            "id": "ref_flora_cabbage_like_plants",
+            "slot": "terrain_vegetation",
+            "canonical": "キャベツのような植生",
+            "plain": "キャベツみたいな植物が生えている",
+            "aliases": [
+                "キャベツ状の植生"
+            ],
+            "countries": [
+                "JP"
+            ],
+            "confusableWith": [],
+            "note": "**連想である。網羅ではない。**絞り込み計算には使わない。日本の北海道（と時に東北）で見られる。**国ではなく地域の手がかりであり、リージョンゲスは対象外である。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "exhaustive": false,
+            "sources": [
+                "https://geometas.com/metas/categories/flora/"
+            ]
+        },
+        {
+            "id": "ref_flora_green_hilly_with_trees",
+            "slot": "terrain_vegetation",
+            "canonical": "緑が濃く丘が多く木が見える",
+            "plain": "緑が濃くて丘が多い",
+            "aliases": [
+                "緑の丘"
+            ],
+            "countries": [
+                "SZ"
+            ],
+            "confusableWith": [],
+            "note": "**連想である。網羅ではない。**絞り込み計算には使わない。エスワティニ。南部アフリカの他国と景観が似るため、**ボラードや電柱で割る。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "exhaustive": false,
+            "sources": [
+                "https://geometas.com/metas/categories/flora/"
+            ]
+        },
+        {
+            "id": "ref_ground_red_soil",
+            "slot": "ground",
+            "canonical": "赤い土",
+            "plain": "土が赤い",
+            "aliases": [
+                "赤土",
+                "赤茶色の土"
+            ],
+            "countries": [
+                "BR",
+                "LK",
+                "UG",
+                "ZA"
+            ],
+            "confusableWith": [],
+            "note": "**連想である。網羅ではない。**絞り込み計算には使わない。ブラジル（北部・ゴイアスなど）、ウガンダ、スリランカ、南アフリカ。**熱帯・亜熱帯に広く分布するため単独では絞れない。**通行帯や文字と掛けて使う。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "exhaustive": false,
+            "sources": [
+                "https://geometas.com/metas/categories/flora/"
+            ],
+            "gradient": {
+                "axis": "cold_warm",
+                "note": "赤い土は熱帯・亜熱帯に広く分布し、**気候帯に沿って濃さが変わる。**国境では切れない。"
+            }
+        },
+        {
+            "id": "ref_sign_stop_dur",
+            "slot": "sign",
+            "canonical": "停止標識に DUR",
+            "plain": "八角形の赤い標識に「DUR」と書いてある",
+            "aliases": [
+                "DUR",
+                "ドゥル"
+            ],
+            "countries": [
+                "TR"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**トルコの停止標識は `DUR`。**`q-tr-01` はこれが辞書に無かったため 78 カ国のまま止まっていた。**トルコ語の `ş ç ı` と併せると確定に近い。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/Stop_sign"
+            ]
+        },
+        {
+            "id": "ref_sign_stop_berhenti",
+            "slot": "sign",
+            "canonical": "停止標識に BERHENTI",
+            "plain": "赤い標識に「BERHENTI」と書いてある",
+            "aliases": [
+                "BERHENTI"
+            ],
+            "countries": [
+                "MY"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。**マレー語の「止まれ」。マレーシアとブルネイ。**インドネシアは `STOP` を使う**ので、マレーシアとインドネシアの見分けに効く（人手ワークシートの `AWAS` と同じ向きの手がかり）。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/Stop_sign"
+            ]
+        },
+        {
+            "id": "ref_sign_stop_tomare",
+            "slot": "sign",
+            "canonical": "停止標識が逆三角形で「止まれ」",
+            "plain": "赤い逆三角形に「止まれ」と書いてある",
+            "aliases": [
+                "止まれ",
+                "逆三角形の停止標識"
+            ],
+            "countries": [
+                "JP"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**日本の停止標識は**八角形ではなく逆三角形**で、世界的に珍しい。**形だけでも分かる。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/Stop_sign"
+            ]
+        },
+        {
+            "id": "ref_sign_stop_ting",
+            "slot": "sign",
+            "canonical": "停止標識に「停」",
+            "plain": "赤い標識に「停」と書いてある",
+            "aliases": [
+                "停"
+            ],
+            "countries": [
+                "TW"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**台湾。中国本土は Street View の被写域が無い。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/Stop_sign"
+            ]
+        },
+        {
+            "id": "ref_sign_stop_pare",
+            "slot": "sign",
+            "canonical": "停止標識に PARE",
+            "plain": "赤い標識に「PARE」と書いてある",
+            "aliases": [
+                "PARE"
+            ],
+            "countries": [
+                "AR",
+                "BR"
+            ],
+            "confusableWith": [],
+            "note": "**強い。2 カ国。**ポルトガル語とスペイン語（南米）の一部。**メキシコと中米は `ALTO`** なので、南米か中米かが割れる。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/Stop_sign"
+            ]
+        },
+        {
+            "id": "ref_sign_stop_alto",
+            "slot": "sign",
+            "canonical": "停止標識に ALTO",
+            "plain": "赤い標識に「ALTO」と書いてある",
+            "aliases": [
+                "ALTO"
+            ],
+            "countries": [
+                "CR",
+                "DO",
+                "GT",
+                "MX",
+                "PA"
+            ],
+            "confusableWith": [],
+            "note": "**強い。**メキシコと中米。**南米の `PARE` と対になる。**スペイン語圏でも語が違うことが手がかりになる。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/Stop_sign"
+            ]
+        },
+        {
+            "id": "ref_sign_stop_cyrillic",
+            "slot": "sign",
+            "canonical": "停止標識に СТОП",
+            "plain": "赤い標識にキリル文字で「СТОП」と書いてある",
+            "aliases": [
+                "СТОП"
+            ],
+            "countries": [
+                "BG",
+                "KG",
+                "KZ",
+                "MK",
+                "MN",
+                "RS",
+                "RU",
+                "UA"
+            ],
+            "confusableWith": [],
+            "note": "**中程度。キリル圏に共通。**ラテン文字の `STOP` ではないことが分かるだけでキリル圏に寄る。**割るのは文字の細部（`і ї є` `ђ ћ` `ѓ ќ` `қ ғ ә`）である。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://en.wikipedia.org/wiki/Stop_sign"
+            ]
+        },
+        {
+            "id": "ref_sign_street_g_lt",
+            "slot": "sign",
+            "canonical": "通り名が「g.」で終わる",
+            "plain": "通りの名前のあとに「g.」と書いてある",
+            "aliases": [
+                "g.",
+                "gatvė",
+                "gatve"
+            ],
+            "countries": [
+                "LT"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**リトアニア語 `gatvė`（通り）の略。`pr.` は `prospektas`。**ラトビアは `iela`、エストニアは `tn`。** これで**バルト三国が通り名だけで割れる。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://efisha.com/2022/08/15/how-to-tell-baltic-countries-apart-in-geoguessr/"
+            ]
+        },
+        {
+            "id": "ref_sign_street_iela_lv",
+            "slot": "sign",
+            "canonical": "通り名に「iela」",
+            "plain": "通りの名前に「iela」と書いてある",
+            "aliases": [
+                "iela"
+            ],
+            "countries": [
+                "LV"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**ラトビア語の「通り」。**リトアニアは `g.`、エストニアは `tn`。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://efisha.com/2022/08/15/how-to-tell-baltic-countries-apart-in-geoguessr/"
+            ]
+        },
+        {
+            "id": "ref_sign_street_tn_ee",
+            "slot": "sign",
+            "canonical": "通り名に「tn」または道が「-tee」で終わる",
+            "plain": "通りの名前に「tn」、田舎の道が「-tee」で終わる",
+            "aliases": [
+                "tn",
+                "tänav",
+                "-tee"
+            ],
+            "countries": [
+                "EE"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**エストニア語 `tänav`（通り）の略が `tn`。地方の道は `-tee`。**フィンランド語の `-tie` と紛れるので、`Õ` の有無で割る。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://efisha.com/2022/08/15/how-to-tell-baltic-countries-apart-in-geoguessr/"
+            ]
+        },
+        {
+            "id": "ref_sign_street_utca_hu",
+            "slot": "sign",
+            "canonical": "通り名に「utca」",
+            "plain": "「utca」と書いてある",
+            "aliases": [
+                "utca"
+            ],
+            "countries": [
+                "HU"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**ハンガリー語の「通り」。`ő ű` と併せると確定に近い。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/street_name/"
+            ]
+        },
+        {
+            "id": "ref_sign_street_ulica_hr",
+            "slot": "sign",
+            "canonical": "通り名に「Ulica」（青地に白文字）",
+            "plain": "「Ulica」と書いてある青い標識",
+            "aliases": [
+                "Ulica"
+            ],
+            "countries": [
+                "BA",
+                "HR",
+                "RS",
+                "SI"
+            ],
+            "confusableWith": [],
+            "note": "**中程度。**クロアチアの標識は**青地に白文字。**`Ulica` はスラブ諸語で広く使われるため、**色と `ć` の有無で割る。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/street_name/"
+            ]
+        },
+        {
+            "id": "ref_sign_street_ulitsa_bg",
+            "slot": "sign",
+            "canonical": "通り名に「улица」",
+            "plain": "キリル文字で「улица」と書いてある",
+            "aliases": [
+                "улица"
+            ],
+            "countries": [
+                "BG",
+                "MK",
+                "RS",
+                "RU"
+            ],
+            "confusableWith": [],
+            "note": "**中程度。キリル圏に共通。**ブルガリア語も同じ語。**ウクライナは `вулиця`（略 `вул.`）で違う。**そこが割れ目である。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/street_name/"
+            ]
+        },
+        {
+            "id": "ref_sign_street_vulytsya_ua",
+            "slot": "sign",
+            "canonical": "通り名に「вулиця」または「вул.」",
+            "plain": "キリル文字で「вулиця」か「вул.」と書いてある",
+            "aliases": [
+                "вулиця",
+                "вул."
+            ],
+            "countries": [
+                "UA"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**ウクライナ語の「通り」。**ロシア語・ブルガリア語の `улица` とは語が違う。**人手ワークシート §13 の「ブルガリアとウクライナで迷う」がここで割れる。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/street_name/"
+            ]
+        },
+        {
+            "id": "ref_sign_street_triq_mt",
+            "slot": "sign",
+            "canonical": "通り名に「Triq」",
+            "plain": "「Triq」と書いてある",
+            "aliases": [
+                "Triq"
+            ],
+            "countries": [
+                "MT"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**マルタ語の「通り」。マルタ全土の看板に出る。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/street_name/"
+            ]
+        },
+        {
+            "id": "ref_sign_street_rruga_al",
+            "slot": "sign",
+            "canonical": "通り名に「rruga」",
+            "plain": "「rruga」と書いてある",
+            "aliases": [
+                "rruga"
+            ],
+            "countries": [
+                "AL"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**アルバニア語の「通り」。**ボラードではイタリアと割れないが、ここで割れる。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/street_name/"
+            ]
+        },
+        {
+            "id": "ref_sign_street_via_it",
+            "slot": "sign",
+            "canonical": "通り名に「VIA」",
+            "plain": "「VIA」と書いてある",
+            "aliases": [
+                "VIA"
+            ],
+            "countries": [
+                "IT"
+            ],
+            "confusableWith": [],
+            "note": "**強い。1 カ国。**イタリア語の「通り」。スイス南部でも見られる。語末が母音になる傾向と併せる。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/street_name/"
+            ]
+        },
+        {
+            "id": "ref_sign_street_rue_fr",
+            "slot": "sign",
+            "canonical": "通り名に「rue」",
+            "plain": "「rue」と書いてある",
+            "aliases": [
+                "rue"
+            ],
+            "countries": [
+                "BE",
+                "CH",
+                "FR",
+                "LU"
+            ],
+            "confusableWith": [],
+            "note": "**中程度。フランス語圏に共通。**ベルギーは**市の名前が標識に入る**ことが多い。スイスはフランス語圏のみ。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/street_name/"
+            ]
+        },
+        {
+            "id": "ref_sign_street_calle_es",
+            "slot": "sign",
+            "canonical": "通り名に「CALLE」",
+            "plain": "「CALLE」と書いてある",
+            "aliases": [
+                "CALLE"
+            ],
+            "countries": [
+                "AR",
+                "BO",
+                "CL",
+                "CO",
+                "CR",
+                "DO",
+                "EC",
+                "ES",
+                "GT",
+                "MX",
+                "PA",
+                "PE",
+                "PY",
+                "UY"
+            ],
+            "confusableWith": [],
+            "note": "**弱い。スペイン語圏に共通。**単独では絞れない。**停止標識が `PARE` か `ALTO` か**で南米と中米が割れる。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/street_name/"
+            ]
+        },
+        {
+            "id": "ref_sign_street_straat_nl",
+            "slot": "sign",
+            "canonical": "通り名が「straat」「weg」で終わる",
+            "plain": "「straat」や「weg」で終わる通りの名前",
+            "aliases": [
+                "straat",
+                "weg"
+            ],
+            "countries": [
+                "NL"
+            ],
+            "confusableWith": [],
+            "note": "**強い。**オランダ語。`straat` は「通り」、`weg` は「道」。`ij` の並びと併せると確定に近い。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/street_name/"
+            ]
+        },
+        {
+            "id": "ref_sign_street_gatan_se",
+            "slot": "sign",
+            "canonical": "通り名が「...gatan」「...vägen」で終わる",
+            "plain": "「gatan」や「vägen」で終わる通りの名前",
+            "aliases": [
+                "gatan",
+                "vägen"
+            ],
+            "countries": [
+                "SE"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**スウェーデン語。**ノルウェーは `vei/veien` `gate/gata`、デンマークは `vej` `gade`。**北欧の割り方として文字（`ø æ`）と二重になる。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/street_name/"
+            ]
+        },
+        {
+            "id": "ref_sign_street_vej_dk",
+            "slot": "sign",
+            "canonical": "通り名が「...vej」「...gade」で終わる",
+            "plain": "「vej」や「gade」で終わる通りの名前",
+            "aliases": [
+                "vej",
+                "gade"
+            ],
+            "countries": [
+                "DK"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**デンマーク語。**ノルウェーは `vei`（i が入る）**で 1 文字違う。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/street_name/"
+            ]
+        },
+        {
+            "id": "ref_sign_street_vei_no",
+            "slot": "sign",
+            "canonical": "通り名が「...vei」「...gate」で終わる",
+            "plain": "「vei」「veien」「gate」「gata」で終わる通りの名前",
+            "aliases": [
+                "vei",
+                "veien",
+                "gate",
+                "gata"
+            ],
+            "countries": [
+                "NO"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**ノルウェー語。**デンマークは `vej`（j）、ノルウェーは `vei`（i）。**人手ワークシート §13 の「ノルウェーとスウェーデンで迷う」がここで割れる。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/street_name/"
+            ]
+        },
+        {
+            "id": "ref_sign_street_katu_fi",
+            "slot": "sign",
+            "canonical": "通り名が「...katu」「...ntie」で終わる",
+            "plain": "「katu」や「ntie」で終わる通りの名前",
+            "aliases": [
+                "katu",
+                "ntie",
+                "tie"
+            ],
+            "countries": [
+                "FI"
+            ],
+            "confusableWith": [],
+            "note": "**非常に強い。1 カ国。**フィンランド語。**エストニアの `-tee` と紛れる**ので `Õ` の有無で割る。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/street_name/"
+            ]
+        },
+        {
+            "id": "ref_sign_green_white_yellow_numbers",
+            "slot": "sign",
+            "canonical": "緑地・白文字・黄色の道路番号",
+            "plain": "緑の看板に白い文字、道路番号が黄色",
+            "aliases": [
+                "緑地に黄色い番号"
+            ],
+            "countries": [
+                "BW",
+                "LS",
+                "NA",
+                "SZ",
+                "ZA"
+            ],
+            "confusableWith": [],
+            "note": "**強い。南部アフィリカに共通。**南アフリカは番号が `R M N`、レソトは `A`、エスワティニは `MR` で始まる。**番号の頭文字で割れる。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/street_name/"
+            ]
+        },
+        {
+            "id": "ref_sign_green_white_border_do",
+            "slot": "sign",
+            "canonical": "緑地に白枠・白文字の通り名標識",
+            "plain": "緑の看板に白い枠と白い文字",
+            "aliases": [
+                "緑地に白枠"
+            ],
+            "countries": [
+                "DO"
+            ],
+            "confusableWith": [],
+            "note": "**強い。1 カ国。**ドミニカ共和国の通り名標識。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/street_name/"
+            ]
+        },
+        {
+            "id": "ref_sign_white_street_sign_au",
+            "slot": "sign",
+            "canonical": "通り名標識が白い",
+            "plain": "通りの名前の看板が白い",
+            "aliases": [
+                "白い通り名標識"
+            ],
+            "countries": [
+                "AU"
+            ],
+            "confusableWith": [],
+            "note": "**中程度。**オーストラリアは白、**ニュージーランドは青か緑。**人手ワークシート §13 の「オーストラリアだと思ったら南アフリカだった」に対しては、南部アフリカが緑地なので割れる。",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/street_name/"
+            ]
+        },
+        {
+            "id": "ref_sign_blue_or_green_street_sign_nz",
+            "slot": "sign",
+            "canonical": "通り名標識が青か緑",
+            "plain": "通りの名前の看板が青か緑",
+            "aliases": [
+                "青い通り名標識",
+                "緑の通り名標識"
+            ],
+            "countries": [
+                "NZ"
+            ],
+            "confusableWith": [],
+            "note": "**中程度。1 カ国。**オーストラリアは白。**左側通行で白でなければニュージーランドに寄る。**",
+            "verifiedByHuman": false,
+            "disputed": false,
+            "kind": "atomic",
+            "certainty": "heuristic",
+            "source": "reference",
+            "sources": [
+                "https://geometas.com/metas/categories/street_name/"
             ]
         }
     ],

@@ -159,6 +159,15 @@ export interface IntersectionResult {
     empty: boolean
     /** 積集合に寄与したスロット。何が効いたかを学習者に示すため */
     contributingSlots: SlotId[]
+    /**
+     * **否定要素で消した国。** 積集合とは別の成果である。
+     *
+     * 「絞れた」だけでなく「消せた」を見せる。
+     * 設計書 §22 の「否定要素で候補を削除できるプレイヤーを育てる」がこれである。
+     */
+    excludedCountries?: string[]
+    /** 積集合そのものが算出不能で、除外だけが効いている状態 */
+    intersectionUnavailable?: boolean
 }
 
 /**
@@ -184,15 +193,61 @@ export function buildIntersection(
         sets.push(countries)
         contributingSlots.push(slot)
     }
-    if (sets.length === 0) return null
+    /**
+     * **否定要素で引く。** 積集合とは別の仕組みである。
+     *
+     * `countries`（積集合）は網羅でなければ使えないが、**引き算は使える。**
+     * 「スイスは `ß` を使わない」と 1 カ国について分かっていれば、
+     * `ß` を使う国の全リストが無くてもスイスを消せる。
+     *
+     * 設計書（`docs/offline-works/geo_guessr_reasoning_system.md` §4-6）の
+     * 「否定要素を見る」である。
+     *
+     * > **無いと分かっている 1 カ国は、あると分かっている 100 カ国より安い。**
+     *
+     * `exhaustive: false`（連想）の用語でも `excludes` は有効にする。
+     * **「ユーカリがある国の全部」は書けないが「ここには無い」は書ける。**
+     */
+    const excluded = new Set<string>()
+    for (const slot of SLOT_IDS) {
+        const entry = slots[slot]
+        if (!entry || entry.state !== 'visible') continue
+        for (const id of entry.terms) {
+            const term = byId.get(id)
+            // **除外は網羅を要求しない。** exhaustive を見ない
+            if (!term || term.certainty === 'unverified' || term.disputed === true) continue
+            for (const code of term.excludes ?? []) excluded.add(code)
+        }
+    }
 
-    const result = intersectAll(sets)
+    if (sets.length === 0) {
+        /**
+         * 積集合は作れないが、**除外だけは効いていることがある。**
+         * それを捨てると「否定要素で 3 カ国消した」という成果が消える。
+         * ただし全 195 カ国から引いた集合は返さない（`design.md`）。
+         * ここでは算出不能を返し、**除外の成果は `excludedCountries` で伝える。**
+         */
+        return excluded.size === 0
+            ? null
+            : {
+                countries: [],
+                containsAnswer: false,
+                empty: false,
+                contributingSlots: [],
+                excludedCountries: [...excluded].sort(),
+                intersectionUnavailable: true,
+            }
+    }
+
     const target = answerCountry.trim().toUpperCase()
+    const result = new Set([...intersectAll(sets)].filter((c) => !excluded.has(c)))
     return {
         countries: [...result].sort(),
         containsAnswer: result.has(target),
         empty: result.size === 0,
         contributingSlots,
+        excludedCountries: [...excluded].sort(),
+        intersectionUnavailable: false,
     }
 }
 
