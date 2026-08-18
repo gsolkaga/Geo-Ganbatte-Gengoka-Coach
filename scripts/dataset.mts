@@ -186,6 +186,19 @@ function cmdList() {
     }
     console.log('')
 
+    /**
+     * **棚から消えたアクティブなデータも言う。**
+     * 出さないと、いま何を使っているのか分からなくなる。出典表示も出せない。
+     */
+    if (lib.activeId && !lib.entries.some((e) => e.id === lib.activeId)) {
+        const rec = readJson<{ active?: { name?: string, attribution?: string } }>(LIBRARY, {}).active
+        console.log(`**棚には無いが、いま使っている: \`${lib.activeId}\`**`)
+        if (rec?.name) console.log(`  ${rec.name}`)
+        if (rec?.attribution) console.log(`  出典表示: ${rec.attribution}`)
+        console.log(`  出題は data/questions.json にある。棚に戻すには取り込み直す`)
+        console.log('')
+    }
+
     if (lib.activeId) {
         const p = prog.byDataset[lib.activeId]
         const ids = datasetQuestionIds(lib.activeId)
@@ -198,11 +211,20 @@ function cmdList() {
     console.log('出典表示は各データセットの attribution を使う（npm run dataset -- list の後に dataset.json を見よ）')
 }
 
+/**
+ * データセットの出題 ID。**棚が無ければ索引に写した並びを使う。**
+ * どちらも無ければアクティブな出題から数える。
+ */
 function datasetQuestionIds(id: string): string[] {
     const p = path.join(LIB_DIR, id, 'dataset.json')
-    if (!fs.existsSync(p)) return []
-    const d: Dataset = JSON.parse(fs.readFileSync(p, 'utf8'))
-    return d.questions.map((q) => q.id)
+    if (fs.existsSync(p)) {
+        const d: Dataset = JSON.parse(fs.readFileSync(p, 'utf8'))
+        return d.questions.map((q) => q.id)
+    }
+    // 棚が無い。索引に写した並びを使う（**「何問目」を言い続けるため**）
+    const rec = readJson<{ active?: { id?: string, questionIds?: string[] } }>(LIBRARY, {}).active
+    if (rec?.id === id && rec.questionIds?.length) return rec.questionIds
+    return readJson<Question[]>(QUESTIONS, []).map((q) => q.id)
 }
 
 // ============================================================
@@ -377,8 +399,25 @@ function cmdUse() {
     const glossaryDoc = readJson<Record<string, unknown>>(GLOSSARY, {})
     writeJson(GLOSSARY, { ...glossaryDoc, terms: d.glossary.terms })
 
-    // **選ばれているものだけを書く。** 一覧はディレクトリが正典である
-    writeJson(LIBRARY, { formatVersion: LIBRARY_FORMAT_VERSION, activeId: id })
+    /**
+     * **選ばれているものと、その由来を書く。** 一覧はディレクトリが正典である。
+     *
+     * 由来を写すのは、**棚から消しても出典表示を残すため**である。
+     * 参照で守っていたものを複製で守る。消せるようにするための代償である。
+     */
+    writeJson(LIBRARY, {
+        formatVersion: LIBRARY_FORMAT_VERSION,
+        activeId: id,
+        active: {
+            id,
+            name: d.meta.name,
+            author: d.meta.author,
+            license: d.meta.license,
+            attribution: d.meta.attribution,
+            sources: d.meta.sources,
+            questionIds: d.questions.map((q) => q.id),
+        },
+    })
 
     const prog = loadProgress()
     if (!prog.byDataset[id]) {

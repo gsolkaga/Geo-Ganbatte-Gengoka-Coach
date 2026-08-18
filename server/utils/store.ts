@@ -15,7 +15,7 @@ import { mkdir, readFile, writeFile, appendFile, readdir, rm, copyFile } from 'n
 import { dirname, join, resolve } from 'node:path'
 import { glossarySchema, questionsSchema } from '../../shared/schemas'
 import { LIBRARY_FORMAT_VERSION, PROGRESS_FORMAT_VERSION, isSafeDatasetId } from '../../shared/dataset'
-import type { Dataset, ProgressFile } from '../../shared/dataset'
+import type { ActiveRecord, Dataset, ProgressFile } from '../../shared/dataset'
 import type { Question, RunRecord, Term } from '../../shared/types'
 
 /**
@@ -265,10 +265,12 @@ export async function writeDataset(id: string, dataset: Dataset): Promise<void> 
 }
 
 /**
- * ライブラリから消す。**アクティブなデータは消さない。**
+ * ライブラリから消す。**アクティブな `data/questions.json` は触らない。**
  *
- * `data/questions.json` はアクティブであり、消すと出題が 0 件になる。
- * ライブラリの削除は「棚から取り出す」であって「捨てる」ではない。
+ * 削除は「棚から取り出す」であって「捨てる」ではない。
+ * 消しても学習は続けられ、出典表示は `library.json` の `active` に残る。
+ *
+ * **戻すには配布物を取り込み直す。** それが棚の意味である。
  */
 export async function removeDataset(id: string): Promise<void> {
     if (!isSafeDatasetId(id)) throw new Error(`データセット ID が不正である: ${id}`)
@@ -282,9 +284,43 @@ export async function readActiveDatasetId(): Promise<string | null> {
     return id && isSafeDatasetId(id) ? id : null
 }
 
-export async function writeActiveDatasetId(id: string | null): Promise<void> {
-    if (id !== null && !isSafeDatasetId(id)) throw new Error(`データセット ID が不正である: ${id}`)
-    await writeJson(dataPath('library.json'), { formatVersion: LIBRARY_FORMAT_VERSION, activeId: id })
+/**
+ * 選ばれているものの由来。**棚を消しても残る。**
+ *
+ * これを持たないと、アクティブなデータセットを削除できない
+ * （`attribution` を引く先が無くなり CC BY を守れない）。
+ * 同梱の標準データセットはアクティブかつ棚に 1 つだけなので、
+ * 切り替え先が無く**一生消せなかった。**
+ */
+export async function readActiveRecord(): Promise<ActiveRecord | null> {
+    const lib = await readJson<{ active?: ActiveRecord | null }>(dataPath('library.json'), {})
+    const rec = lib.active ?? null
+    if (!rec?.id || !isSafeDatasetId(rec.id)) return null
+    return rec
+}
+
+export async function writeActive(record: ActiveRecord | null): Promise<void> {
+    if (record !== null && !isSafeDatasetId(record.id)) {
+        throw new Error(`データセット ID が不正である: ${record.id}`)
+    }
+    await writeJson(dataPath('library.json'), {
+        formatVersion: LIBRARY_FORMAT_VERSION,
+        activeId: record?.id ?? null,
+        active: record,
+    })
+}
+
+/** データセットから由来を写す。**切り替えの時点で確定させる** */
+export function toActiveRecord(id: string, dataset: Dataset): ActiveRecord {
+    return {
+        id,
+        name: dataset.meta.name,
+        author: dataset.meta.author,
+        license: dataset.meta.license,
+        attribution: dataset.meta.attribution,
+        sources: dataset.meta.sources,
+        questionIds: dataset.questions.map((q) => q.id),
+    }
 }
 
 export async function readProgressFile(): Promise<ProgressFile> {

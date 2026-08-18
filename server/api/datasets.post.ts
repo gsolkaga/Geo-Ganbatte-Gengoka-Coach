@@ -36,7 +36,8 @@ import {
     readProgressFile,
     removeDataset,
     replaceGlossaryTerms,
-    writeActiveDatasetId,
+    toActiveRecord,
+    writeActive,
     writeDataset,
     writeProgressFile,
     writeQuestions,
@@ -135,7 +136,11 @@ async function use(body: Body) {
      * 裸の配列にすると `combo` や `coverage` が黙って 0 語として動く。
      */
     await replaceGlossaryTerms(d.glossary.terms)
-    await writeActiveDatasetId(id)
+    /**
+     * **由来を写す。** 参照で守っていたものを複製で守る。
+     * これがあるので、後で棚から消しても出典表示が残る。
+     */
+    await writeActive(toActiveRecord(id, d))
 
     const progressFile = await readProgressFile()
     if (!progressFile.byDataset[id]) {
@@ -159,20 +164,22 @@ async function remove(body: Body) {
     if (!isSafeDatasetId(id)) {
         throw createError({ statusCode: 400, statusMessage: `データセット ID が不正である: ${id}` })
     }
+    /**
+     * **アクティブなものも消せる。** 最初は拒否していたが誤りだった。
+     *
+     * 同梱の標準データセットはアクティブかつ棚に 1 つだけなので、
+     * 切り替え先が無く**一生消せなかった。**
+     *
+     * 拒否した理由は「出典表示の根拠（`attribution`）を失うから」である。
+     * 切り替えの時点で由来を `library.json` に写すようにしたので、
+     * **棚を消しても出典表示は残る。**
+     *
+     * > **参照で守っていたものを、複製で守る。消せるようにするための代償である。**
+     *
+     * `data/questions.json` はアクティブなので学習も続けられる。
+     */
     const activeId = await readActiveDatasetId()
-    if (id === activeId) {
-        /**
-         * **アクティブなものは消せない。**
-         *
-         * `data/questions.json` はアクティブなので、棚から消しても出題は残る。
-         * しかし「いま使っているものを消した」状態は、
-         * 出典表示の根拠（`attribution`）を失う。CC BY を守れなくなる。
-         */
-        throw createError({
-            statusCode: 409,
-            statusMessage: 'いま選ばれているデータセットは削除できない。先に別のものへ切り替える',
-        })
-    }
+    const removingActive = id === activeId
     const ids = await listDatasetIds()
     if (!ids.includes(id)) {
         throw createError({ statusCode: 404, statusMessage: `ライブラリに無い: ${id}` })
@@ -186,5 +193,13 @@ async function remove(body: Body) {
      * 同じデータセットを入れ直したときに、何問目まで進んだかが戻る。
      * 棚から取り出すことと、記録を捨てることは別である。
      */
-    return { ok: true, id, note: 'ライブラリから消した。**進捗は残している**（入れ直せば戻る）' }
+    return {
+        ok: true,
+        id,
+        removedActive: removingActive,
+        note: removingActive
+            ? 'ライブラリから消した。**いま使っているデータなので学習は続けられる**'
+            + '（出典表示は library.json に残している）。棚に戻すには取り込み直す'
+            : 'ライブラリから消した。**進捗は残している**（入れ直せば戻る）',
+    }
 }

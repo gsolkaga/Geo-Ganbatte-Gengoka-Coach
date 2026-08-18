@@ -392,10 +392,41 @@ export interface LibraryEntry {
     createdAt: string
 }
 
+/**
+ * いま選ばれているデータセットの記録。**出典表示を索引側にも残す。**
+ *
+ * ## 棚から消しても、誰の何を使っているかは残る
+ *
+ * 最初の実装は `activeId` だけを持っていた。そのため
+ * **アクティブなデータセットをライブラリから削除できなかった。**
+ * 消すと `attribution` を引く先が無くなり、CC BY の出典表示ができなくなる。
+ *
+ * しかし同梱の標準データセットはアクティブかつ棚に 1 つだけなので、
+ * 切り替え先が無く、**結果として一生消せない。**
+ *
+ * 由来を切り替えの時点で写しておけば、棚を消しても出典表示は残る。
+ *
+ * > **参照で守っていたものを、複製で守る。消せるようにするための代償である。**
+ *
+ * `data/questions.json` はアクティブなので、棚を消しても学習は続けられる。
+ */
+export interface ActiveRecord {
+    id: string
+    name: string
+    author: string
+    license: string
+    attribution: string
+    sources: string[]
+    /** 出題 ID の並び。**棚を消した後も「何問目」を言うために要る** */
+    questionIds: string[]
+}
+
 export interface Library {
     formatVersion: number
     /** いま `data/questions.json` に載っているデータセット。未選択は null */
     activeId: string | null
+    /** 選ばれているものの由来。**棚を消しても残す** */
+    active?: ActiveRecord | null
     entries: LibraryEntry[]
 }
 

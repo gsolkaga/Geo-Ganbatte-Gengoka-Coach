@@ -9,8 +9,9 @@
  *
  * - 同じ ID が既にあれば**両方を見せて止まる。** 上書きは明示的に選ばせる
  * - 切り替えの前に控えを取る（サーバ側で `.backup/<日時>/`）
- * - **アクティブなものは削除できない**（出典表示の根拠を失う）
  * - 削除しても**進捗は残す**（入れ直せば戻る）
+ * - **アクティブなものも削除できる。** 棚に 1 つだけのとき切り替え先が無く、
+ *   以前は一生消せなかった。由来を `library.json` に写しているので出典表示は残る
  *
  * ## 出典表示を必ず見せる
  *
@@ -153,12 +154,21 @@ async function use(id: string) {
 
 async function remove(id: string) {
     reset()
+    const isActive = datasets.value.find((d) => d.id === id)?.active === true
+    const extra = isActive
+        // **いま使っているものを消す場合は、何が残るのかを先に言う**
+        ? '\n\nこれはいま使っているデータである。出題（data/questions.json）は残るので学習は続けられる。'
+            + '\n棚に戻すには配布物を取り込み直す。'
+        : ''
     // eslint-disable-next-line no-alert
-    if (!confirm(`「${id}」をライブラリから消す。\n\n進捗は残る（入れ直せば戻る）。続けるか？`)) return
+    if (!confirm(`「${id}」をライブラリから消す。\n\n進捗は残る（入れ直せば戻る）。${extra}\n\n続けるか？`)) return
     busy.value = id
     try {
-        await $fetch('/api/datasets', { method: 'POST', body: { action: 'remove', id } })
-        notice.value = `ライブラリから消した: ${id}。**進捗は残している**`
+        const r = await $fetch<{ removedActive: boolean, note: string }>(
+            '/api/datasets',
+            { method: 'POST', body: { action: 'remove', id } },
+        )
+        notice.value = `ライブラリから消した: ${id}。${r.note}`
         await reload()
     }
     catch (e) {
@@ -362,9 +372,9 @@ async function remove(id: string) {
                     </p>
                 </div>
 
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap items-center gap-2">
                     <button
-                        v-if="!d.active"
+                        v-if="!d.active && d.onShelf"
                         type="button"
                         :disabled="busy !== null"
                         class="rounded bg-slate-900 px-3 py-1.5 text-sm text-white hover:bg-slate-800 disabled:opacity-40"
@@ -372,11 +382,14 @@ async function remove(id: string) {
                     >
                         これを使う
                     </button>
-                    <span v-else class="text-xs text-slate-600">
-                        いま使っている。<strong>削除できない</strong>（出典表示の根拠を失うため）
-                    </span>
+
+                    <!--
+                        **アクティブなものも消せる。** 棚に 1 つだけのとき切り替え先が無く、
+                        以前は一生消せなかった。由来を `library.json` に写しているので
+                        棚を消しても出典表示は残る。
+                    -->
                     <button
-                        v-if="!d.active"
+                        v-if="d.onShelf"
                         type="button"
                         :disabled="busy !== null"
                         class="rounded border border-rose-500 px-3 py-1.5 text-sm text-rose-700 hover:bg-rose-50 disabled:opacity-40"
@@ -384,6 +397,15 @@ async function remove(id: string) {
                     >
                         ライブラリから消す
                     </button>
+
+                    <span v-if="d.active && !d.onShelf" class="text-xs text-slate-700">
+                        <strong>棚には無いが、いま使っている。</strong>
+                        学習は続けられる（出題は <code>data/questions.json</code> にある）。
+                        棚に戻すには配布物を取り込み直す。
+                    </span>
+                    <span v-else-if="d.active" class="text-xs text-slate-600">
+                        いま使っている。消しても学習は続けられる
+                    </span>
                 </div>
             </article>
         </section>

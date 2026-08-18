@@ -522,3 +522,35 @@ describe('isSafeDatasetId', () => {
         }
     })
 })
+
+/**
+ * 棚から消しても「何問目」を言い続けられること。
+ *
+ * 同梱の標準データセットはアクティブかつ棚に 1 つだけなので、
+ * 切り替え先が無く**一生消せなかった。** 由来を索引に写して消せるようにした。
+ *
+ * > **参照で守っていたものを、複製で守る。**
+ */
+describe('棚を消した後の進捗', () => {
+    const ids = ['q-1', 'q-2', 'q-3']
+
+    it('索引に写した並びがあれば、棚が無くても何問目か言える', () => {
+        const progress = { order: ids, answered: ['q-1'] }
+        // 棚から読めなくなっても、写した questionIds を渡せば計算できる
+        expect(nextQuestion(progress, ids)).toEqual({ questionId: 'q-2', index: 2, total: 3 })
+        expect(summarizeProgress(progress, ids).answered).toBe(1)
+    })
+
+    it('**進捗は消さない。** 入れ直せば同じ位置から続く', () => {
+        const before = recordAnswered(initProgress(ids), 'q-1')
+        // 棚を消して入れ直す＝進捗はそのまま渡される
+        const after = nextQuestion(before, ids)
+        expect(after).toEqual({ questionId: 'q-2', index: 2, total: 3 })
+    })
+
+    it('出題 ID が 1 つも分からなければ算出しない。**推測しない**', () => {
+        expect(nextQuestion({ order: ids, answered: [] }, [])).toBeNull()
+        expect(summarizeProgress({ order: ids, answered: [] }, []))
+            .toEqual({ answered: 0, total: 0, remaining: 0, done: false })
+    })
+})

@@ -19,6 +19,7 @@ import { nextQuestion, summarizeProgress } from '../../shared/dataset'
 import {
     listDatasetIds,
     readActiveDatasetId,
+    readActiveRecord,
     readDataset,
     readProgressFile,
     readQuestions,
@@ -39,6 +40,14 @@ export interface DatasetListItem {
     progress: { answered: number, total: number, remaining: number, done: boolean }
     /** 次に出る出題と何問目か。1 周していれば null */
     next: { questionId: string, index: number, total: number } | null
+    /**
+     * **棚には無いが、いま使っている。** ライブラリから削除したアクティブなデータ。
+     *
+     * `data/questions.json` は残っているので学習は続けられる。
+     * 出典表示は `library.json` の `active` から出す。
+     * 棚に戻すには配布物を取り込み直す。
+     */
+    onShelf: boolean
 }
 
 export default defineEventHandler(async (): Promise<{
@@ -47,9 +56,10 @@ export default defineEventHandler(async (): Promise<{
     /** ライブラリに載っていないアクティブなデータ。**同梱の初期状態がこれである** */
     activeQuestionCount: number
 }> => {
-    const [ids, activeId, progressFile, activeQuestions] = await Promise.all([
+    const [ids, activeId, activeRecord, progressFile, activeQuestions] = await Promise.all([
         listDatasetIds(),
         readActiveDatasetId(),
+        readActiveRecord(),
         readProgressFile(),
         readQuestions().catch(() => []),
     ])
@@ -74,6 +84,37 @@ export default defineEventHandler(async (): Promise<{
             active: id === activeId,
             progress: summarizeProgress(progress, questionIds),
             next: nextQuestion(progress, questionIds),
+            onShelf: true,
+        })
+    }
+
+    /**
+     * **棚から消えたアクティブなデータも一覧に出す。**
+     *
+     * 出さないと、いま何を使っているのか画面から分からなくなる。
+     * CC BY の出典表示も出せない。件数は `data/questions.json` から数える。
+     */
+    if (activeId && activeRecord && !datasets.some((d) => d.id === activeId)) {
+        const questionIds = activeRecord.questionIds.length
+            ? activeRecord.questionIds
+            : activeQuestions.map((q) => q.id)
+        const progress = progressFile.byDataset[activeId] ?? { order: questionIds, answered: [] }
+        datasets.unshift({
+            id: activeId,
+            name: activeRecord.name,
+            author: activeRecord.author,
+            license: activeRecord.license,
+            attribution: activeRecord.attribution,
+            description: null,
+            sources: activeRecord.sources,
+            createdAt: '',
+            questionCount: activeQuestions.length,
+            // **棚が無いので用語数は数えられない。** 0 と書かず -1 にはしない
+            termCount: 0,
+            active: true,
+            progress: summarizeProgress(progress, questionIds),
+            next: nextQuestion(progress, questionIds),
+            onShelf: false,
         })
     }
 
