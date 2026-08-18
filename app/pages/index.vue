@@ -501,7 +501,12 @@ function nextQuestion() {
 
         > **形を保ちたいものがあるなら、そこを基準にして周りを従わせる。**
     -->
-    <div class="mx-auto flex max-w-7xl flex-col gap-4 p-4">
+    <!--
+        **横幅を使う。** `max-w-7xl`（1280px）では広い画面で左右が余っていた。
+        風景が幅から高さを決めるので、**幅を許すほど風景が大きくなる。**
+        ただし無制限にはしない。観察欄の 1 行が長くなりすぎると読みにくい。
+    -->
+    <div class="mx-auto flex max-w-[110rem] flex-col gap-4 p-4">
         <header class="shrink-0 flex flex-wrap items-baseline justify-between gap-2">
             <div>
                 <h1 class="text-xl font-bold text-slate-900">
@@ -653,31 +658,36 @@ function nextQuestion() {
                         JavaScript API に切り替わり移動を止められるが、Pro SKU で課金対象になる。
                     -->
                     <!--
-                        **幅から高さを決める。** `aspect-video`（16:9）で比率を固定する。
+                        **幅から高さを決める。** `aspect-[4/3]` で比率を固定する。
+
+                        16:9 から 4:3 に変えた。**同じ幅で上下が広く見える。**
+                        観察するのは路面・ボラード・電柱・空であり、
+                        横に広いより縦に見えた方が数えられるものが増える。
 
                         高さが伸びすぎないように上限を置くが、**上限は高さに掛けない。**
                         `max-height` で止めると、幅はそのままなので**比率が崩れる**
                         （`aspect-ratio` は幅と高さの両方が拘束されると無視される）。
 
                         代わりに**幅の上限を高さから逆算する**。
-                        `max-w-[calc(72dvh*16/9)]` なら高さは 72dvh を超えず、
+                        `max-w-[calc(78dvh*4/3)]` なら高さは 78dvh を超えず、
                         **比率は常に正確である。** 上限に当たったときは中央に寄せる。
 
                         > **比率を保ちたいなら、拘束するのは片側だけにする。**
 
-                        被せ板の基準にするため `relative` を持つ。
-                        `aspect-ratio` は確定した高さを与えるので、
-                        板の `max-h-[85%]` も解決する。
+                        枠と帯の組み立ては `AnswerSheet` が持つ。
+                        **閉じている帯は枠の外に出る**ので、風景は全部見える。
                     -->
-                    <div class="relative mx-auto aspect-video w-full max-w-[calc(72dvh*16/9)] overflow-hidden rounded">
-                        <StreetViewNoMove v-if="noMove" :pano-id="current.panoId" fill />
-                        <StreetViewFrame v-else :pano-id="current.panoId" fill />
+                    <AnswerSheet
+                        v-model="answerSheetOpen"
+                        :summary="answerSummary"
+                        :readonly="phase !== 'input'"
+                        frame-class="mx-auto aspect-[4/3] w-full max-w-[calc(78dvh*4/3)]"
+                    >
+                        <template #view>
+                            <StreetViewNoMove v-if="noMove" :pano-id="current.panoId" fill />
+                            <StreetViewFrame v-else :pano-id="current.panoId" fill />
+                        </template>
 
-                        <AnswerSheet
-                            v-model="answerSheetOpen"
-                            :summary="answerSummary"
-                            :readonly="phase !== 'input'"
-                        >
                             <div class="grid min-w-0 gap-3">
                             <fieldset :disabled="phase !== 'input'" class="grid min-w-0 gap-3">
                             <AnswerPanel ref="answerPanel" v-model="answer" :country-options="countryOptions" />
@@ -785,8 +795,7 @@ function nextQuestion() {
                                 {{ normalizeNote }}
                             </p>
                             </div>
-                        </AnswerSheet>
-                    </div>
+                    </AnswerSheet>
                     <p v-if="!noMove" class="shrink-0 text-xs text-slate-500">
                         この表示は移動できる。<strong>移動すると正解タグと一致しなくなる。</strong>
                         視点の回転だけで観察する。

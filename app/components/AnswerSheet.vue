@@ -49,6 +49,13 @@ const props = defineProps<{
     summary: string
     /** 入力できない状態（採点中・採点後）。**値は見せるが編集させない** */
     readonly?: boolean
+    /**
+     * 被せる対象（`view` スロット）の枠に付けるクラス。
+     *
+     * **縦横比は呼び出し側が決める。** 何を被せるかを知っているのはページであり、
+     * この部品は「その上に板を出す」ことだけを知っている。
+     */
+    frameClass?: string
 }>()
 
 const sheet = ref<HTMLElement | null>(null)
@@ -76,45 +83,30 @@ function onKeydown(event: KeyboardEvent) {
 </script>
 
 <template>
+    <div class="flex min-w-0 flex-col gap-1">
     <!--
-        親は `relative` を持つこと（風景のペイン）。
+        被せる対象を中に置く。**板の基準になるので `relative` を持つ。**
 
-        **`inset-0` にする。`bottom-0` だけでは高さが決まらない。**
-
-        当初は `inset-x-0 bottom-0` だった。上端が無いので高さが内容依存になり、
-        子の `max-h-[85%]` が**何に対する 85% か決まらなかった。**
-        結果、板は中身なりに伸びて風景の上へはみ出し、
-        **先頭の候補国の欄が切れたうえにスクロールバーも出なかった**（実測 2026-08-18）。
+        枠は呼び出し側が渡したクラスで縦横比を決める。
+        `aspect-ratio` は確定した高さを与えるので、板の `max-h-*` が解決する。
 
         > **百分率の高さは、親の高さが決まっていて初めて意味を持つ。**
-
-        `pointer-events-none` で全面を覆っても風景の操作を妨げない。
-        受け取る子（帯と板）だけが `pointer-events-auto` を持つ。
     -->
-    <div class="pointer-events-none absolute inset-0 z-20 flex flex-col justify-end">
-        <!--
-            閉じているときの帯。**開くボタンと要約を兼ねる。**
-            閉じた状態でも「何を答えたか」が読めるようにする。
-        -->
-        <div
-            v-show="!open"
-            class="pointer-events-auto flex flex-wrap items-center gap-2 border-t border-slate-300 bg-white/95 px-3 py-2 backdrop-blur"
-        >
-            <button
-                ref="toggle"
-                type="button"
-                :aria-expanded="open"
-                aria-controls="answer-sheet"
-                class="rounded bg-slate-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-slate-800"
-                @click="open = true"
-            >
-                回答を開く
-            </button>
-            <p class="min-w-0 flex-1 truncate text-xs text-slate-700">
-                {{ summary }}
-            </p>
-        </div>
+    <div class="relative overflow-hidden rounded" :class="props.frameClass">
+        <slot name="view" />
 
+        <!--
+            板を受け止める枠。**`inset-0` にする。`bottom-0` だけでは高さが決まらない。**
+
+            当初は `inset-x-0 bottom-0` だった。上端が無いので高さが内容依存になり、
+            子の `max-h-[85%]` が**何に対する 85% か決まらなかった。**
+            結果、板は中身なりに伸びて風景の上へはみ出し、
+            **先頭の候補国の欄が切れたうえにスクロールバーも出なかった**（実測 2026-08-18）。
+
+            `pointer-events-none` で全面を覆っても風景の操作を妨げない。
+            受け取る板だけが `pointer-events-auto` を持つ。
+        -->
+        <div class="pointer-events-none absolute inset-0 z-20 flex flex-col justify-end">
         <!--
             開いたときの板。**高さを上限で止める。**
             全面を覆うと「被せ板」ではなく画面遷移になり、戻る手段が分からなくなる。
@@ -181,5 +173,36 @@ function onKeydown(event: KeyboardEvent) {
                 </div>
             </section>
         </Transition>
+        </div>
+    </div>
+
+    <!--
+        閉じているときの帯。**風景の外（枠の下）に置く。**
+
+        当初は枠の中に重ねていた。開いていないときでも**風景の下端を隠していた**
+        （実測 2026-08-18）。被せてよいのは「開いたとき」だけである。
+
+        > **常に出ているものを、見たいものの上に置かない。**
+
+        開くボタンと要約を兼ねる。閉じた状態でも「何を答えたか」が読める。
+    -->
+    <div
+        v-show="!open"
+        class="flex flex-wrap items-center gap-2 rounded border border-slate-300 bg-white px-3 py-2"
+    >
+        <button
+            ref="toggle"
+            type="button"
+            :aria-expanded="open"
+            aria-controls="answer-sheet"
+            class="rounded bg-slate-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-slate-800"
+            @click="open = true"
+        >
+            回答を開く
+        </button>
+        <p class="min-w-0 flex-1 truncate text-xs text-slate-700">
+            {{ summary }}
+        </p>
+    </div>
     </div>
 </template>
