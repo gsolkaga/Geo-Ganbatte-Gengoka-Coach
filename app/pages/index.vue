@@ -286,7 +286,7 @@ const selectedModels = computed(() =>
 )
 
 /**
- * v1 / v2 の切り替え。**既定は v1。**
+ * v1 / v2 の切り替え。**既定は v2。**
  *
  * v2 は正解タグと用語辞書を渡す。**同じ画面・同じプロンプト骨格で、
  * 渡す情報だけを変える**のが対照実験の条件である（要件 9-3）。
@@ -294,8 +294,21 @@ const selectedModels = computed(() =>
  * v2 では採点の前に観察メモを正規化する（1 リクエスト追加）。
  * 絞り込み力・積集合・次に見るべきスロットは**用語 ID の集合演算**で計算するため、
  * 正規化しないと全部「算出不能」になる（実測 2026-08-17）。
+ *
+ * ## 既定を v1 から v2 に変えた
+ *
+ * v1 は**対照実験のために残してある選択肢**であり、学習に使うものではない。
+ * 正解タグも辞書も渡さないので、見落としの判定ができず、
+ * 絞り込み力も積集合も「算出不能」になる。
+ *
+ * 既定を v1 にしていたため、**初めて触った人は最も情報の少ない採点を受ける**ことになった。
+ * 「当たり障りのない褒め言葉しか返ってこない」のは v1 の性質である。
+ *
+ * > **既定は、比較のための条件ではなく、いちばん良い体験にする。**
+ *
+ * 消費は 1 → 2 に増える。押す前に画面へ出しているので黙って増えることはない。
  */
-const variant = ref<Variant>('v1')
+const variant = ref<Variant>('v2')
 
 /** 実行前に消費数を出す（要件 26.1）。**押す前に分かること** */
 const requestCost = computed(() => selectedModels.value.length + (variant.value === 'v2' ? 1 : 0))
@@ -573,92 +586,40 @@ function nextQuestion() {
                 <span class="text-xs text-slate-500">
                     採点せずに移動できる。入力は問題ごとに保持される
                 </span>
-            </div>
 
-            <!--
-                この問題の過去の採点結果。**採点し直さずに読み返せる（消費 0）。**
-                講評を読むために 1 リクエスト使うのは無駄である。
-                フォームには触らない。「読み返しただけなのに入力が消えた」を作らない。
-            -->
-            <div
-                v-if="runsForCurrent.length"
-                class="shrink-0 flex flex-wrap items-center gap-2 rounded border border-slate-300 bg-white px-2 py-1.5"
-            >
-                <span class="text-xs font-medium text-slate-700">
-                    この問題の過去の採点（{{ runsForCurrent.length }} 件・<strong>消費 0</strong>）
-                </span>
-                <button
-                    v-for="r in runsForCurrent.slice(0, 6)"
-                    :key="r.file"
-                    type="button"
-                    :disabled="grading.running.value"
-                    class="rounded border px-2 py-1 text-xs hover:bg-slate-100 disabled:opacity-30"
-                    :class="viewingRun?.file === r.file ? 'border-slate-900 bg-slate-100 font-medium' : 'border-slate-400'"
-                    @click="viewRun(r.file)"
-                >
-                    {{ r.ts.slice(5, 16).replace('T', ' ') }}　{{ r.variant }}
-                </button>
-                <span v-if="viewRunError" role="alert" class="text-xs font-medium text-rose-700">
-                    {{ viewRunError }}
-                </span>
-                <span v-else-if="viewingRun" class="text-xs text-slate-600">
-                    <strong>過去の記録を表示中</strong>（{{ viewingRun.ts.slice(0, 16).replace('T', ' ') }}）。
-                    フォームの入力は変えていない
-                </span>
-            </div>
+                <!--
+                    この問題の過去の採点。**採点し直さずに読み返せる（消費 0）。**
+                    講評を読むために 1 リクエストを使うのは無駄である。
+                    フォームには触らない。「読み返しただけなのに入力が消えた」を作らない。
 
-            <!--
-                過去の回答をフォームへ戻す。
-                **14 スロットを埋める労力に対し、採点 1 回で使い捨てるのは不経済である。**
-                モデルや variant を変えて再採点するときに打ち直しをさせない。
-            -->
-            <div
-                v-if="runs.length"
-                class="shrink-0 flex flex-wrap items-center gap-2 rounded border border-slate-300 bg-slate-50 px-2 py-1.5"
-            >
-                <label for="run-select" class="text-xs font-medium text-slate-700">
-                    過去の回答を読み込む
-                </label>
-                <select
-                    id="run-select"
-                    v-model="selectedRunFile"
-                    :disabled="grading.running.value"
-                    class="min-w-0 flex-1 rounded border border-slate-400 px-2 py-1 text-xs"
-                >
-                    <option value="">
-                        選択してください（{{ runs.length }} 件）
-                    </option>
-                    <option v-for="r in runOptions" :key="r.file" :value="r.file">
-                        {{ runLabel(r) }}
-                    </option>
-                </select>
-                <button
-                    type="button"
-                    :disabled="!selectedRunFile || grading.running.value"
-                    class="rounded border border-slate-500 bg-white px-2 py-1 text-xs font-medium hover:bg-slate-100 disabled:opacity-30"
-                    @click="loadRun"
-                >
-                    フォームに入れる
-                </button>
-                <button
-                    type="button"
-                    :disabled="grading.running.value"
-                    class="rounded border border-slate-400 px-2 py-1 text-xs hover:bg-slate-100 disabled:opacity-30"
-                    @click="clearInput"
-                >
-                    入力を空にする
-                </button>
-                <!-- **失敗を黙らせない。** コンソールにだけ出すと「押しても何も起きない」になる -->
-                <span v-if="loadRunError" role="alert" class="text-xs font-medium text-rose-700">
-                    {{ loadRunError }}
-                </span>
-                <span v-else-if="loadedFrom" class="text-xs text-emerald-700">
-                    読み込み済み。編集して再採点できる
-                </span>
-                <!-- **正解は出さない。** 記録の判定結果とフィードバックは取得していない -->
-                <span v-else class="text-xs text-slate-500">
-                    選んだ記録の問題へ移動して流し込む。上書き前に確認する
-                </span>
+                    **並べたボタンから選択肢に変えた。** 記録が増えると横幅を食い、
+                    問題移動の行が押し出されていた。**行の右端に寄せて 1 つにまとめる。**
+                -->
+                <div v-if="runsForCurrent.length" class="ml-auto flex items-center gap-2">
+                    <label for="view-run-select" class="text-xs font-medium text-slate-700">
+                        過去の採点
+                    </label>
+                    <select
+                        id="view-run-select"
+                        :value="viewingRun?.file ?? ''"
+                        :disabled="grading.running.value"
+                        class="rounded border border-slate-400 px-2 py-1 text-xs"
+                        @change="viewRun(($event.target as HTMLSelectElement).value)"
+                    >
+                        <option value="">
+                            {{ runsForCurrent.length }} 件（消費 0）
+                        </option>
+                        <option v-for="r in runsForCurrent" :key="r.file" :value="r.file">
+                            {{ r.ts.slice(0, 16).replace('T', ' ') }}　{{ r.variant }}
+                        </option>
+                    </select>
+                    <span v-if="viewRunError" role="alert" class="text-xs font-medium text-rose-700">
+                        {{ viewRunError }}
+                    </span>
+                    <span v-else-if="viewingRun" class="text-xs text-slate-600">
+                        <strong>表示中</strong>。入力は変えていない
+                    </span>
+                </div>
             </div>
 
             <!--
@@ -703,6 +664,7 @@ function nextQuestion() {
                             :summary="answerSummary"
                             :readonly="phase !== 'input'"
                         >
+                            <div class="grid min-w-0 gap-3">
                             <fieldset :disabled="phase !== 'input'" class="grid min-w-0 gap-3">
                             <AnswerPanel ref="answerPanel" v-model="answer" :country-options="countryOptions" />
 
@@ -750,23 +712,49 @@ function nextQuestion() {
                                 </p>
                             </div>
 
+                            </fieldset>
+
                             <!--
                                 **押す前に消費数が分かること。** 実行後に知らせても遅い。
 
                                 無効の条件は `canGrade` に集めた。**未定を「押してよい」と読まない。**
                                 無効にするだけでは「押しても何も起きない」と同じなので、
                                 足りないものを下に並べる。
+
+                                **この行は `fieldset` の外に置く。**
+                                中に入れると採点後（`phase !== 'input'`）に閉じるボタンまで
+                                無効になり、**開けたのに閉じられない板**ができる。
+                                採点ボタンは `canGrade` が自分で条件を持っているので、
+                                `fieldset` に頼る必要がない。
                             -->
                             <div class="grid gap-1">
-                                <button
-                                    type="button"
-                                    :disabled="!canGrade"
-                                    :aria-describedby="canGrade ? undefined : 'grade-blockers'"
-                                    class="justify-self-start rounded bg-slate-900 px-4 py-2 text-sm text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-40"
-                                    @click="submit"
-                                >
-                                    {{ variant }} で採点する（{{ requestCost }} リクエスト）
-                                </button>
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <!--
+                                        **閉じるボタンを採点の隣にも置く。**
+
+                                        板の見出しにも閉じるボタンがあるが、
+                                        書き終わる場所は下端であり、そこから見出しまで戻るのは遠い。
+                                        **操作が終わる場所に、次の操作を置く。**
+
+                                        `Escape` でも閉じられるが、マウスで書いている人には見えない。
+                                    -->
+                                    <button
+                                        type="button"
+                                        class="rounded border border-slate-400 px-3 py-2 text-sm text-slate-700 hover:bg-slate-100"
+                                        @click="answerSheetOpen = false"
+                                    >
+                                        閉じる
+                                    </button>
+                                    <button
+                                        type="button"
+                                        :disabled="!canGrade"
+                                        :aria-describedby="canGrade ? undefined : 'grade-blockers'"
+                                        class="rounded bg-slate-900 px-4 py-2 text-sm text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-40"
+                                        @click="submit"
+                                    >
+                                        {{ variant }} で採点する（{{ requestCost }} リクエスト）
+                                    </button>
+                                </div>
                                 <ul
                                     v-if="!canGrade"
                                     id="grade-blockers"
@@ -782,7 +770,7 @@ function nextQuestion() {
                             <p v-if="normalizeNote" class="text-xs text-slate-700">
                                 {{ normalizeNote }}
                             </p>
-                            </fieldset>
+                            </div>
                         </AnswerSheet>
                     </div>
                     <p v-if="!noMove" class="shrink-0 text-xs text-slate-500">
@@ -797,6 +785,63 @@ function nextQuestion() {
                     自分が何を書いたかを見ながら講評を読めないと、指摘の意味が分からない。
                 -->
                 <div class="ggg-scroll min-h-0 overflow-y-scroll pr-1">
+                    <!--
+                        過去の回答をフォームへ戻す。**書く場所の真上に置く。**
+
+                        **14 の欄を埋める労力に対し、採点 1 回で使い捨てるのは不経済である。**
+                        モデルや `variant` を変えて再採点するときに打ち直しをさせない。
+
+                        以前は画面上部の独立した帯だった。**書く場所から遠かった。**
+                        「打ち直したくない」と思うのは書き始める瞬間なので、
+                        そのとき目に入る位置に置く。小さくして観察欄を圧迫しない。
+                    -->
+                    <div
+                        v-if="runs.length"
+                        class="mb-2 grid gap-1 rounded border border-slate-300 bg-slate-50 px-2 py-1.5"
+                    >
+                        <div class="flex items-center gap-1.5">
+                            <label for="run-select" class="shrink-0 text-xs text-slate-600">
+                                過去の回答
+                            </label>
+                            <select
+                                id="run-select"
+                                v-model="selectedRunFile"
+                                :disabled="grading.running.value"
+                                class="min-w-0 flex-1 rounded border border-slate-400 px-1.5 py-0.5 text-xs"
+                            >
+                                <option value="">
+                                    選ぶ（{{ runs.length }} 件）
+                                </option>
+                                <option v-for="r in runOptions" :key="r.file" :value="r.file">
+                                    {{ runLabel(r) }}
+                                </option>
+                            </select>
+                            <button
+                                type="button"
+                                :disabled="!selectedRunFile || grading.running.value"
+                                class="shrink-0 rounded border border-slate-500 bg-white px-1.5 py-0.5 text-xs hover:bg-slate-100 disabled:opacity-30"
+                                @click="loadRun"
+                            >
+                                入れる
+                            </button>
+                            <button
+                                type="button"
+                                :disabled="grading.running.value"
+                                class="shrink-0 rounded border border-slate-400 px-1.5 py-0.5 text-xs hover:bg-slate-100 disabled:opacity-30"
+                                @click="clearInput"
+                            >
+                                空に
+                            </button>
+                        </div>
+                        <!-- **失敗を黙らせない。** コンソールにだけ出すと「押しても何も起きない」になる -->
+                        <p v-if="loadRunError" role="alert" class="text-xs font-medium text-rose-700">
+                            {{ loadRunError }}
+                        </p>
+                        <p v-else-if="loadedFrom" class="text-xs text-emerald-700">
+                            読み込み済み。編集して再採点できる
+                        </p>
+                    </div>
+
                     <fieldset :disabled="phase !== 'input'" class="min-w-0">
                         <SlotForm v-model="slots" mode="learn" />
                     </fieldset>

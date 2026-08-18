@@ -71,11 +71,11 @@ onMounted(reload)
  * ファイルを読む。**読むだけで取り込まない。**
  * JSON として壊れていればここで分かる（サーバへ投げる前に気づける）。
  */
-async function onFile(event: Event) {
+async function takeFile(file: File | null | undefined) {
     reset()
-    const file = (event.target as HTMLInputElement).files?.[0]
     if (!file) return
     fileName.value = file.name
+    fileSize.value = file.size
     try {
         pending.value = JSON.parse(await file.text())
     }
@@ -86,6 +86,50 @@ async function onFile(event: Event) {
     }
     await install(false)
 }
+
+async function onFile(event: Event) {
+    const input = event.target as HTMLInputElement
+    await takeFile(input.files?.[0])
+    // **同じファイルを選び直せるようにする。** 値が残ると change が起きない
+    input.value = ''
+}
+
+/**
+ * ## ファイルを置ける場所を、見える大きさで用意する
+ *
+ * 素の `<input type="file">` は小さく、**取り込みの入口だと分かりにくい。**
+ * 押せる大きさの領域と、ドラッグして落とせる領域を兼ねさせる。
+ *
+ * `<input>` は消さずに視覚的に隠すだけにする（`sr-only`）。
+ * **`label` と結び付いているので、キーボードでも到達できる。**
+ * 見た目のためにボタンを置いて `<input>` を消すと、支援技術から入口が消える。
+ */
+const dragging = ref(false)
+const fileSize = ref<number | null>(null)
+const fileInput = ref<HTMLInputElement | null>(null)
+
+function onDragOver(event: DragEvent) {
+    event.preventDefault()
+    dragging.value = true
+}
+
+function onDragLeave() {
+    dragging.value = false
+}
+
+async function onDrop(event: DragEvent) {
+    event.preventDefault()
+    dragging.value = false
+    const file = event.dataTransfer?.files?.[0]
+    if (!file) return
+    // **拡張子で弾かない。** 中身を読んで JSON かどうかで判断する
+    await takeFile(file)
+}
+
+const prettySize = (bytes: number) =>
+    bytes >= 1024 * 1024
+        ? `${(bytes / 1024 / 1024).toFixed(1)}MB`
+        : `${Math.max(1, Math.round(bytes / 1024))}KB`
 
 function reset() {
     notice.value = null
@@ -108,6 +152,7 @@ async function install(force: boolean) {
             + '。**使うには切り替えが必要である**'
         pending.value = null
         fileName.value = null
+        fileSize.value = null
         await reload()
     }
     catch (e) {
@@ -205,14 +250,53 @@ async function remove(id: string) {
                 <code>npm run dataset -- export</code> で書き出したファイルを選ぶ。
                 <strong>検証に失敗したら 1 件も取り込まない。</strong>
             </p>
-            <input
-                type="file"
-                accept="application/json,.json"
-                :disabled="busy !== null"
-                class="text-sm"
-                aria-label="データセットのファイルを選ぶ"
-                @change="onFile"
+
+            <!--
+                **入口を見える大きさにする。** 素の `<input type="file">` は小さく、
+                取り込みの入口だと分かりにくかった。
+
+                `<input>` は消さず `sr-only` で隠すだけにする。`label` と結び付いているので
+                **キーボードでも到達できる。** 見た目のために `<input>` を消すと、
+                支援技術から入口が消える。
+            -->
+            <div
+                class="grid justify-items-center gap-2 rounded border-2 border-dashed p-6 transition-colors"
+                :class="dragging
+                    ? 'border-slate-900 bg-slate-100'
+                    : 'border-slate-400 bg-slate-50'"
+                @dragover="onDragOver"
+                @dragleave="onDragLeave"
+                @drop="onDrop"
             >
+                <p class="text-sm text-slate-700">
+                    ここにファイルを<strong>ドラッグ</strong>する
+                </p>
+                <p class="text-xs text-slate-500">
+                    または
+                </p>
+                <label
+                    class="cursor-pointer rounded bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-slate-900"
+                    :class="busy !== null ? 'cursor-not-allowed opacity-40' : ''"
+                >
+                    ファイルを選ぶ…
+                    <input
+                        ref="fileInput"
+                        type="file"
+                        accept="application/json,.json"
+                        :disabled="busy !== null"
+                        class="sr-only"
+                        @change="onFile"
+                    >
+                </label>
+                <p v-if="fileName" class="text-xs text-slate-700">
+                    選んだファイル: <strong>{{ fileName }}</strong>
+                    <span v-if="fileSize">（{{ prettySize(fileSize) }}）</span>
+                </p>
+                <p v-else class="text-xs text-slate-500">
+                    <code>.json</code> の配布ファイル（画像は含まれない）
+                </p>
+            </div>
+
             <p class="text-xs text-slate-600">
                 画像・<code>data:</code> URL・API キーらしい文字列が入っていれば弾く。
                 <strong>規約は読めば分かる。守られているかはコードで確かめる。</strong>
