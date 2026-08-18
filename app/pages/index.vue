@@ -296,6 +296,39 @@ onMounted(async () => {
 
 const answerPanel = ref<{ valid: boolean } | null>(null)
 
+/**
+ * 回答の被せ板の開閉。**既定は閉じている。**
+ *
+ * 開いた状態で始めると、風景を見る前に回答を書く画面が出る。
+ * 順序は「見る → 書く → 答える」であり、最後だけが被せ板である。
+ */
+const answerSheetOpen = ref(false)
+
+/**
+ * 閉じているときに帯へ出す要約。**閉じても状態が読めること。**
+ *
+ * 開かないと何を答えたか分からない作りにすると、
+ * 確認のために毎回開くことになり、被せた意味が無くなる。
+ */
+const answerSummary = computed(() => {
+    const picks = answer.value.candidates
+        .filter((c) => c.country)
+        .map((c) => `${countryNameByCode.value.get(c.country) ?? c.country}（${c.confidence}）`)
+    const decisive = answer.value.decisiveSlot
+    const parts: string[] = []
+    parts.push(picks.length ? `候補: ${picks.join('、')}` : '候補は未入力')
+    if (decisive) parts.push(`決め手: ${decisive}`)
+    parts.push(`${variant.value} / ${requestCost.value} リクエスト`)
+    return parts.join('　')
+})
+
+/**
+ * 問題を移動したら閉じる。**前の問題の回答を開いたまま見せない。**
+ * 採点が終わったら開く。**結果を見る前に、何を答えたかを確認させる。**
+ */
+watch(currentIndex, () => { answerSheetOpen.value = false })
+watch(phase, (p) => { if (p === 'result') answerSheetOpen.value = false })
+
 async function submit() {
     if (!current.value) return
     phase.value = 'grading'
@@ -497,27 +530,27 @@ function nextQuestion() {
                 class="grid gap-4 xl:min-h-0 xl:grid-cols-[7fr_3fr]"
                 :class="phase === 'input' ? 'xl:flex-1' : 'xl:h-[60dvh]'"
             >
-                <div class="grid min-h-0 gap-4 xl:grid-rows-[7fr_3fr]">
-                    <!-- 左上：風景 -->
-                    <div class="flex min-h-0 flex-col gap-1">
-                        <!--
-                            既定は Embed（無料・無制限）。`NUXT_PUBLIC_STREETVIEW_MODE=nomove` で
-                            JavaScript API に切り替わり移動を止められるが、Pro SKU で課金対象になる。
-                        -->
-                        <!-- 親の高さは全フェーズで確定しているので fill が効く -->
-                        <div class="min-h-0 flex-1">
-                            <StreetViewNoMove v-if="noMove" :pano-id="current.panoId" fill />
-                            <StreetViewFrame v-else :pano-id="current.panoId" fill />
-                        </div>
-                        <p v-if="!noMove" class="shrink-0 text-xs text-slate-500">
-                            この表示は移動できる。<strong>移動すると正解タグと一致しなくなる。</strong>
-                            視点の回転だけで観察する。
-                        </p>
-                    </div>
+                <!--
+                    左列：風景。**回答欄は上に被せる**（`AnswerSheet`）。
+                    上下に割っていたときは、回答する瞬間に観察欄（右列）が細くて
+                    読み返せなかった。風景は回答の瞬間には要らない。
+                -->
+                <div class="flex min-h-0 flex-col gap-1">
+                    <!--
+                        既定は Embed（無料・無制限）。`NUXT_PUBLIC_STREETVIEW_MODE=nomove` で
+                        JavaScript API に切り替わり移動を止められるが、Pro SKU で課金対象になる。
+                    -->
+                    <!-- 被せ板の基準にするため `relative` を持つ -->
+                    <div class="relative min-h-0 flex-1 overflow-hidden rounded">
+                        <StreetViewNoMove v-if="noMove" :pano-id="current.panoId" fill />
+                        <StreetViewFrame v-else :pano-id="current.panoId" fill />
 
-                    <!-- 左下：回答。採点後も値を残し、編集だけ止める -->
-                    <div class="min-h-0 overflow-y-auto pr-1">
-                        <fieldset :disabled="phase !== 'input'" class="grid min-w-0 gap-3">
+                        <AnswerSheet
+                            v-model="answerSheetOpen"
+                            :summary="answerSummary"
+                            :readonly="phase !== 'input'"
+                        >
+                            <fieldset :disabled="phase !== 'input'" class="grid min-w-0 gap-3">
                             <AnswerPanel ref="answerPanel" v-model="answer" :country-options="countryOptions" />
 
                             <!--
@@ -578,8 +611,13 @@ function nextQuestion() {
                             <p v-if="normalizeNote" class="text-xs text-slate-700">
                                 {{ normalizeNote }}
                             </p>
-                        </fieldset>
+                            </fieldset>
+                        </AnswerSheet>
                     </div>
+                    <p v-if="!noMove" class="shrink-0 text-xs text-slate-500">
+                        この表示は移動できる。<strong>移動すると正解タグと一致しなくなる。</strong>
+                        視点の回転だけで観察する。
+                    </p>
                 </div>
 
                 <!--
