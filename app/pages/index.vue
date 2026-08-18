@@ -96,6 +96,34 @@ const countryNameByCode = computed(
     () => new Map(countryOptions.value.map((c) => [c.code, c.name])),
 )
 
+/**
+ * いま使っているデータセットと進捗。**ヘッダーに出す。**
+ *
+ * 「何問目か」が画面に出ていないと、進捗を記録する意味が薄い。
+ * 取得に失敗しても学習は続けられるので、**副機能として扱う**（null のまま出さない）。
+ */
+const datasetInfo = ref<{ name: string, answered: number, total: number } | null>(null)
+const datasetStatus = computed(() => {
+    const d = datasetInfo.value
+    if (!d) return null
+    return `${d.name}　${d.answered} / ${d.total} 問`
+})
+
+async function loadDatasetInfo() {
+    try {
+        const r = await $fetch<{
+            datasets: { id: string, name: string, active: boolean, progress: { answered: number, total: number } }[]
+        }>('/api/datasets')
+        const active = r.datasets.find((d) => d.active)
+        datasetInfo.value = active
+            ? { name: active.name, answered: active.progress.answered, total: active.progress.total }
+            : null
+    }
+    catch {
+        datasetInfo.value = null
+    }
+}
+
 // ---- 過去の回答の読み込み（打ち直しをさせない） ----
 
 /**
@@ -142,6 +170,48 @@ const runLabel = (r: RunSummary) => {
 
 /** 読み込みが失敗したときに画面へ出す。**コンソールだけに出して黙らない** */
 const loadRunError = ref<string | null>(null)
+
+// ---- 過去の採点結果を読み返す（消費 0） ----
+
+/**
+ * 現在の問題に対する過去の記録。**採点し直さずに講評を読み返せるようにする。**
+ *
+ * 講評を読み返すのに 1 リクエスト消費するのは無駄である。
+ * 記録が存在するということは、その問題には既に答えたということなので、
+ * **正解が見えても新しく漏れるものは無い。**
+ */
+const runsForCurrent = computed(() =>
+    runs.value
+        .filter((r) => r.questionId === current.value?.id)
+        .sort((a, b) => b.ts.localeCompare(a.ts)),
+)
+
+/** 読み返しているとき、それが過去の記録であることを画面に出す */
+const viewingRun = ref<{ file: string, ts: string, variant: string } | null>(null)
+const viewRunError = ref<string | null>(null)
+
+/**
+ * 過去の採点結果を下段に流し込む。**消費 0。**
+ *
+ * フォームには触らない。`loadRun`（フォームへ戻す）とは別の操作である。
+ * 混ぜると「読み返しただけなのに入力が消えた」が起きる。
+ */
+async function viewRun(file: string) {
+    viewRunError.value = null
+    try {
+        const r = await $fetch<{
+            record: { ts: string, variant: string, questionId: string, result: unknown }
+            question: { id: string, country: string, region: string | null } | null
+        }>('/api/run', { query: { file } })
+        grading.showSaved(r.record.result as never, r.question ?? undefined)
+        viewingRun.value = { file, ts: r.record.ts, variant: r.record.variant }
+        phase.value = 'result'
+        answerSheetOpen.value = false
+    }
+    catch (error) {
+        viewRunError.value = `読み込みに失敗した: ${error instanceof Error ? error.message : String(error)}`
+    }
+}
 
 /**
  * 記録をフォームへ戻す。
@@ -280,13 +350,8 @@ onMounted(async () => {
         countryOptions.value = countryResponse.countries
         phase.value = questions.value.length ? 'input' : 'empty'
 
-        // 記録の一覧は失敗しても出題の表示を止めない。**副機能である**
-        try {
-            runs.value = (await $fetch<{ runs: RunSummary[] }>('/api/runs')).runs
-        }
-        catch {
-            runs.value = []
-        }
+        // 記録の一覧と進捗は失敗しても出題の表示を止めない。**副機能である**
+        await Promise.all([refreshRuns(), loadDatasetInfo()])
     }
     catch (error) {
         loadError.value = error instanceof Error ? error.message : String(error)
@@ -326,7 +391,12 @@ const answerSummary = computed(() => {
  * 問題を移動したら閉じる。**前の問題の回答を開いたまま見せない。**
  * 採点が終わったら開く。**結果を見る前に、何を答えたかを確認させる。**
  */
-watch(currentIndex, () => { answerSheetOpen.value = false })
+watch(currentIndex, () => {
+    answerSheetOpen.value = false
+    // **前の問題の講評を残さない。** 別の問題の結果を見ていると誤解する
+    viewingRun.value = null
+    viewRunError.value = null
+})
 watch(phase, (p) => { if (p === 'result') answerSheetOpen.value = false })
 
 async function submit() {
@@ -342,6 +412,17 @@ async function submit() {
         models: selectedModels.value,
     })
     phase.value = 'result'
+    // 採点が終わると記録が 1 件増え、進捗も進む。**画面の数字を実態に合わせる**
+    viewingRun.value = null
+    await Promise.all([refreshRuns(), loadDatasetInfo()])
+}
+
+/** 記録の一覧を取り直す。**副機能なので失敗しても学習を止めない** */
+async function refreshRuns() {
+    try {
+        runs.value = (await $fetch<{ runs: RunSummary[] }>('/api/runs')).runs
+    }
+    catch { /* 一覧が古いままでも学習は続けられる */ }
 }
 
 /**
@@ -388,9 +469,21 @@ function nextQuestion() {
                     風景を見て、気づいたことを書く。書いたものを採点する。
                 </p>
             </div>
-            <p class="text-xs text-slate-500">
-                このセッションの消費: {{ grading.requestsConsumed.value }} リクエスト
-            </p>
+            <div class="flex items-center gap-3">
+                <!-- 進捗。**何問目かを言えることが目的である** -->
+                <p v-if="datasetStatus" class="text-xs text-slate-600">
+                    {{ datasetStatus }}
+                </p>
+                <p class="text-xs text-slate-500">
+                    このセッションの消費: {{ grading.requestsConsumed.value }} リクエスト
+                </p>
+                <NuxtLink
+                    to="/datasets"
+                    class="rounded border border-slate-400 px-2 py-1 text-xs text-slate-700 hover:bg-slate-50"
+                >
+                    データセット
+                </NuxtLink>
+            </div>
         </header>
 
         <p v-if="phase === 'loading'" role="status">
@@ -451,6 +544,38 @@ function nextQuestion() {
 
                 <span class="text-xs text-slate-500">
                     採点せずに移動できる。入力は問題ごとに保持される
+                </span>
+            </div>
+
+            <!--
+                この問題の過去の採点結果。**採点し直さずに読み返せる（消費 0）。**
+                講評を読むために 1 リクエスト使うのは無駄である。
+                フォームには触らない。「読み返しただけなのに入力が消えた」を作らない。
+            -->
+            <div
+                v-if="runsForCurrent.length"
+                class="shrink-0 flex flex-wrap items-center gap-2 rounded border border-slate-300 bg-white px-2 py-1.5"
+            >
+                <span class="text-xs font-medium text-slate-700">
+                    この問題の過去の採点（{{ runsForCurrent.length }} 件・<strong>消費 0</strong>）
+                </span>
+                <button
+                    v-for="r in runsForCurrent.slice(0, 6)"
+                    :key="r.file"
+                    type="button"
+                    :disabled="grading.running.value"
+                    class="rounded border px-2 py-1 text-xs hover:bg-slate-100 disabled:opacity-30"
+                    :class="viewingRun?.file === r.file ? 'border-slate-900 bg-slate-100 font-medium' : 'border-slate-400'"
+                    @click="viewRun(r.file)"
+                >
+                    {{ r.ts.slice(5, 16).replace('T', ' ') }}　{{ r.variant }}
+                </button>
+                <span v-if="viewRunError" role="alert" class="text-xs font-medium text-rose-700">
+                    {{ viewRunError }}
+                </span>
+                <span v-else-if="viewingRun" class="text-xs text-slate-600">
+                    <strong>過去の記録を表示中</strong>（{{ viewingRun.ts.slice(0, 16).replace('T', ' ') }}）。
+                    フォームの入力は変えていない
                 </span>
             </div>
 

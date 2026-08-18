@@ -17,6 +17,7 @@ import {
     findImageLike,
     findSecretLike,
     initProgress,
+    isSafeDatasetId,
     mergeDataset,
     nextQuestion,
     recordAnswered,
@@ -477,5 +478,47 @@ describe('findSecretLike', () => {
 
     it('普通の文章は拾わない', () => {
         expect(findSecretLike({ a: 'キリル文字が見えた', b: 'https://example.com/page' })).toEqual([])
+    })
+})
+
+// ============================================================
+// ID をパスに使う前の検証
+// ============================================================
+
+/**
+ * データセット ID はディレクトリ名になる。**外から来た文字列である。**
+ *
+ * `POST /api/datasets` は取り込み時に ID を受け取れる。
+ * `../` を含む ID を渡されると `data/` の外に出られる。
+ *
+ * > **パスを組み立てる前に、組み立ててよい文字列かを確かめる。**
+ */
+describe('isSafeDatasetId', () => {
+    it('生成した id を通す', () => {
+        expect(isSafeDatasetId(datasetId('gsolkaga', 'Standard 10'))).toBe(true)
+        expect(isSafeDatasetId(datasetId('作者', '標準10問'))).toBe(true)
+    })
+
+    it('**パスの区切りと親参照を弾く**', () => {
+        for (const bad of ['../etc', 'a/../b', 'a/b', 'a\\b', '..', './x']) {
+            expect(isSafeDatasetId(bad), bad).toBe(false)
+        }
+    })
+
+    it('空と長すぎるものを弾く', () => {
+        expect(isSafeDatasetId('')).toBe(false)
+        expect(isSafeDatasetId('a'.repeat(97))).toBe(false)
+    })
+
+    it('大文字・記号・空白を弾く。**生成側が ASCII 小文字に限っている**', () => {
+        for (const bad of ['Standard', 'a b', 'a.b', 'a:b', 'a*b', 'あ']) {
+            expect(isSafeDatasetId(bad), bad).toBe(false)
+        }
+    })
+
+    it('区切りだけの並びを弾く', () => {
+        for (const bad of ['-a', 'a-', '__', 'a__', '__a']) {
+            expect(isSafeDatasetId(bad), bad).toBe(false)
+        }
     })
 })

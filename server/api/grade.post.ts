@@ -33,7 +33,16 @@ import { callChatStream, httpStatusOf, localIsoString, resolveModel, wasBilled }
 import type { StreamProgress } from '../utils/ai'
 import { buildJsonSchemaFormat, extractJson, requestStructured } from '../utils/structured'
 import { repairTruncatedJson } from '../../shared/json-repair'
-import { readGlossary, readQuestion, saveRun } from '../utils/store'
+import {
+    readActiveDatasetId,
+    readDataset,
+    readGlossary,
+    readProgressFile,
+    readQuestion,
+    saveRun,
+    writeProgressFile,
+} from '../utils/store'
+import { initProgress, recordAnswered } from '../../shared/dataset'
 
 /**
  * AI に渡す辞書の抜粋。
@@ -502,5 +511,47 @@ async function persistRun(
         answer,
         result: { ...judgement, models },
     }
-    return saveRun(record)
+    const file = await saveRun(record)
+    // **進捗は記録の後に付ける。** 逆にすると、保存が落ちたのに進んだことになる
+    await markAnswered(questionId)
+    return file
+}
+
+/**
+ * 進捗に「回答済み」を足す。
+ *
+ * ## 採点が終わった時点で記録する
+ *
+ * 「開いた」でも「書いた」でもなく**採点が終わった時点**を回答済みとする。
+ * 途中で閉じたものを数えると、進捗が「見た問題数」になってしまう。
+ *
+ * 同じ出題を再挑戦しても 1 件である（`recordAnswered`）。
+ * 何回やったかは `data/runs/` が持っている。
+ *
+ * ## 進捗の記録で採点を落とさない
+ *
+ * 進捗は補助である。書けなくても採点結果は返す。
+ * **失敗を握り潰すが、黙らない**（サーバのログに出す）。
+ */
+async function markAnswered(questionId: string): Promise<void> {
+    try {
+        const activeId = await readActiveDatasetId()
+        // アクティブなデータセットが未選択なら記録先が決まらない。**推測しない**
+        if (!activeId) return
+
+        const file = await readProgressFile()
+        const dataset = await readDataset(activeId)
+        const current = file.byDataset[activeId]
+            ?? initProgress((dataset?.questions ?? []).map((q) => q.id))
+
+        const updated = recordAnswered(current, questionId)
+        // 変化が無ければ書かない。再挑戦でファイルを触る意味がない
+        if (updated === current) return
+
+        file.byDataset[activeId] = updated
+        await writeProgressFile(file)
+    }
+    catch (error) {
+        console.error('[grade] 進捗の記録に失敗した（採点結果は返す）:', error)
+    }
 }

@@ -11,9 +11,11 @@
  * `data/glossary-human*.json` `data/countries-*.json` `data/regions.json` `data/bollard-axes.json`
  * は検証・生成の一次データであり、**このモジュールからは書き込まない。**
  */
-import { mkdir, readFile, writeFile, appendFile, readdir } from 'node:fs/promises'
+import { mkdir, readFile, writeFile, appendFile, readdir, rm, copyFile } from 'node:fs/promises'
 import { dirname, join, resolve } from 'node:path'
 import { glossarySchema, questionsSchema } from '../../shared/schemas'
+import { LIBRARY_FORMAT_VERSION, PROGRESS_FORMAT_VERSION, isSafeDatasetId } from '../../shared/dataset'
+import type { Dataset, ProgressFile } from '../../shared/dataset'
 import type { Question, RunRecord, Term } from '../../shared/types'
 
 /**
@@ -25,6 +27,9 @@ export function dataDir(): string {
 }
 
 export const dataPath = (...parts: string[]): string => join(dataDir(), ...parts)
+
+// **ID の検証は `shared/dataset.ts` にある。** 生成側と同じ場所に置く
+export { isSafeDatasetId }
 
 async function ensureDir(filePath: string): Promise<void> {
     await mkdir(dirname(filePath), { recursive: true })
@@ -51,9 +56,22 @@ async function readJson<T>(filePath: string, fallback: T): Promise<T> {
     }
 }
 
+/**
+ * **字下げを生成物に揃える。**
+ *
+ * `scripts/build-glossary.mjs` と `scripts/dataset.mts` は 4 文字で書く。
+ * ここが 2 文字だと、**サーバ側が 1 回書くだけで全行が差分になる。**
+ *
+ * データセットを切り替えるたびに 13,000 行の差分が出て、
+ * **本当の変更が読めなくなる。**
+ *
+ * > **書き手が複数いるファイルは、書式を 1 つに決める。**
+ */
+const JSON_INDENT = 4
+
 async function writeJson(filePath: string, value: unknown): Promise<void> {
     await ensureDir(filePath)
-    await writeFile(filePath, `${JSON.stringify(value, null, 2)}\n`, 'utf8')
+    await writeFile(filePath, `${JSON.stringify(value, null, JSON_INDENT)}\n`, 'utf8')
 }
 
 async function appendJsonl(filePath: string, record: unknown): Promise<void> {
@@ -103,6 +121,31 @@ export async function readGlossary(): Promise<Term[]> {
 
 export async function writeGlossary(terms: Term[]): Promise<void> {
     await writeJson(dataPath('glossary.json'), terms)
+}
+
+/**
+ * 用語だけを差し替える。**包みを壊さない。**
+ *
+ * `data/glossary.json` は `scripts/build-glossary.mjs` の生成物であり、
+ * `{ _comment, _schema, generatedAt, terms }` という形をしている。
+ *
+ * `writeGlossary` は裸の配列を書く（読み取り側が両方を受けるため成立している）。
+ * しかし**道具は `.terms` を読む。**
+ *
+ * ```
+ * tools/combo-report.mjs      JSON.parse(...).terms
+ * tools/coverage-report.mjs   同じ
+ * ```
+ *
+ * 裸の配列にすると、これらが黙って 0 語として動く。
+ * **落ちるのではなく、空として動くのが最悪である。**
+ *
+ * > **読み取り側が寛容でも、書き込み側は形を守る。**
+ */
+export async function replaceGlossaryTerms(terms: Term[]): Promise<void> {
+    const existing = await readJson<Record<string, unknown>>(dataPath('glossary.json'), {})
+    const wrapper = Array.isArray(existing) ? {} : existing
+    await writeJson(dataPath('glossary.json'), { ...wrapper, terms })
 }
 
 // --- countries.json / regions.json（読み取り専用） -------------------------
@@ -172,4 +215,105 @@ export async function appendPanoRejection(record: {
     status?: string
 }): Promise<void> {
     await appendJsonl(dataPath('pano-rejections.jsonl'), record)
+}
+
+// --- datasets/ · library.json · progress.json ------------------------------
+
+/**
+ * ## 索引を正典にしない
+ *
+ * 一覧は `data/datasets/` を走査して作る。`library.json` は
+ * **「いま何が選ばれているか」だけ**を持つ。
+ *
+ * 索引を正典にすると、**配布物を置いただけでは使えない。**
+ * リポジトリに追加のデータセットを同梱しても、取り込み操作を通すまで見えなくなる。
+ *
+ * > **置いてあるものが一覧である。**
+ *
+ * ## ID をパスに使う前に検証する
+ *
+ * データセット ID はディレクトリ名になる。**外から来た文字列である。**
+ * `../` を含む ID を渡されると `data/` の外に出られる。
+ *
+ * > **パスを組み立てる前に、組み立ててよい文字列かを確かめる。**
+ */
+function datasetFile(id: string): string {
+    if (!isSafeDatasetId(id)) throw new Error(`データセット ID が不正である: ${id}`)
+    return dataPath('datasets', id, 'dataset.json')
+}
+
+export async function listDatasetIds(): Promise<string[]> {
+    try {
+        const entries = await readdir(dataPath('datasets'), { withFileTypes: true })
+        return entries
+            .filter((e) => e.isDirectory() && isSafeDatasetId(e.name))
+            .map((e) => e.name)
+            .sort()
+    }
+    catch (error) {
+        if (isNotFound(error)) return []
+        throw error
+    }
+}
+
+export async function readDataset(id: string): Promise<Dataset | null> {
+    return readJson<Dataset | null>(datasetFile(id), null)
+}
+
+export async function writeDataset(id: string, dataset: Dataset): Promise<void> {
+    await writeJson(datasetFile(id), dataset)
+}
+
+/**
+ * ライブラリから消す。**アクティブなデータは消さない。**
+ *
+ * `data/questions.json` はアクティブであり、消すと出題が 0 件になる。
+ * ライブラリの削除は「棚から取り出す」であって「捨てる」ではない。
+ */
+export async function removeDataset(id: string): Promise<void> {
+    if (!isSafeDatasetId(id)) throw new Error(`データセット ID が不正である: ${id}`)
+    await rm(dataPath('datasets', id), { recursive: true, force: true })
+}
+
+export async function readActiveDatasetId(): Promise<string | null> {
+    const lib = await readJson<{ activeId?: string | null }>(dataPath('library.json'), {})
+    const id = lib.activeId ?? null
+    // **索引が壊れていても落とさない。** 不正な ID は未選択として扱う
+    return id && isSafeDatasetId(id) ? id : null
+}
+
+export async function writeActiveDatasetId(id: string | null): Promise<void> {
+    if (id !== null && !isSafeDatasetId(id)) throw new Error(`データセット ID が不正である: ${id}`)
+    await writeJson(dataPath('library.json'), { formatVersion: LIBRARY_FORMAT_VERSION, activeId: id })
+}
+
+export async function readProgressFile(): Promise<ProgressFile> {
+    return readJson<ProgressFile>(dataPath('progress.json'), {
+        formatVersion: PROGRESS_FORMAT_VERSION,
+        byDataset: {},
+    })
+}
+
+export async function writeProgressFile(file: ProgressFile): Promise<void> {
+    await writeJson(dataPath('progress.json'), file)
+}
+
+/**
+ * 控えを取る。**取り消せない操作にしない。**
+ *
+ * アクティブなデータの差し替えは、人手で作った正解タグを上書きする。
+ * CLI と同じ場所（`.backup/<日時>/`）へ退避する。
+ */
+export async function backupActive(): Promise<string> {
+    const dir = resolve(process.cwd(), '.backup', new Date().toISOString().replace(/[:.]/g, '-'))
+    await mkdir(dir, { recursive: true })
+    for (const name of ['questions.json', 'glossary.json']) {
+        try {
+            await copyFile(dataPath(name), join(dir, name))
+        }
+        catch (error) {
+            if (!isNotFound(error)) throw error
+        }
+    }
+    return dir
 }

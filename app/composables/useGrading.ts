@@ -111,6 +111,40 @@ export function useGrading() {
         }
     }
 
+    /**
+     * 保存済みの採点結果を、採点し直さずに表示する。**消費 0。**
+     *
+     * 講評を読み返すために 1 リクエスト使うのは無駄である。
+     * `data/runs/` に全部入っているので、読むだけで足りる。
+     *
+     * ## `requestsConsumed` を増やさない
+     *
+     * ここが要点である。表示のために数字を動かすと、
+     * **「このセッションの消費」が実際の消費と合わなくなる。**
+     * 4xx を消費として数えていた誤りと同じ形になる。
+     *
+     * > **届いたことと、使われたことは別である。読むことは使うことではない。**
+     *
+     * ## 進捗のストリームは空にする
+     *
+     * 過去の記録に「いま何文字受信した」は無い。
+     * 残っていると、読み返しているのに受信中のように見える。
+     */
+    function showSaved(saved: {
+        models: ModelGrading[]
+        [key: string]: unknown
+    } & CodeJudgement, question?: { id: string, country: string, region: string | null }) {
+        const { models, ...code } = saved
+        judgement.value = code as CodeJudgement
+        if (question) questionInfo.value = question
+        activeModels.value = models.map((m) => m.model)
+        progress.value = Object.fromEntries(models.map((m) => [m.model, null]))
+        results.value = Object.fromEntries(models.map((m) => [m.model, m]))
+        runFile.value = null
+        error.value = null
+        // **消費は増やさない。** 読むことは使うことではない
+    }
+
     return {
         running,
         judgement,
@@ -122,5 +156,6 @@ export function useGrading() {
         error,
         requestsConsumed,
         grade,
+        showSaved,
     }
 }

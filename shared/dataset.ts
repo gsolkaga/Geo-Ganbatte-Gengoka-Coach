@@ -446,6 +446,23 @@ function asciiSlug(s: string): string {
 }
 
 /**
+ * **ID をパスに使う前に検証する。**
+ *
+ * データセット ID はディレクトリ名になる。取り込み API は ID を外から受け取れるので、
+ * `../` を含む ID を渡されると `data/` の外に出られる。
+ *
+ * > **パスを組み立てる前に、組み立ててよい文字列かを確かめる。**
+ *
+ * `datasetId` が作る形（ASCII 小文字・数字・`-`・`_`・区切りの `__`）だけを通す。
+ * **生成側と検証側を同じ場所に置く。** 離すと片方だけ変わる。
+ */
+export function isSafeDatasetId(id: string): boolean {
+    if (!id || id.length > 96) return false
+    if (id.includes('..') || id.includes('/') || id.includes('\\')) return false
+    return /^[a-z0-9]+(?:[-_][a-z0-9]+)*(?:__[a-z0-9]+(?:[-_][a-z0-9]+)*)?$/.test(id)
+}
+
+/**
  * 日本語だけの名前でも **決定的な** id を作るための短い指紋。
  *
  * ランダムにしない。**同じ名前からは同じ id が出る**必要がある
