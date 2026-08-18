@@ -40,6 +40,16 @@ const questions = JSON.parse(fs.readFileSync(path.join('data', 'questions.json')
 const glossary = JSON.parse(fs.readFileSync(path.join('data', 'glossary.json'), 'utf8')).terms
 const byId = new Map(glossary.map((t) => [t.id, t]))
 
+/** 辞書が扱う国の総数。**「広すぎる用語」の基準に使う** */
+const countryCount = (() => {
+    const all = new Set()
+    for (const t of glossary) for (const c of t.countries ?? []) all.add(c)
+    return all.size
+})()
+
+/** これを超える該当国しか無い欄は「観察が国を示さない」と分類する */
+const HALF = Math.ceil(countryCount / 2)
+
 /** `server/utils/narrowing.ts` の `usableForNarrowing` と同じ条件 */
 const usable = (t) => t !== undefined
     && t.certainty !== 'unverified'
@@ -108,7 +118,27 @@ for (const q of questions) {
             }).length,
         hints: hintsFor(q.slots),
         blocked: blockedFor(q.slots),
+        unmatched: unmatchedFor(q.slots),
     })
+}
+
+/**
+ * **記述があるのに用語が 1 つも付かなかった欄。** ここが本当の辞書の欠落である。
+ *
+ * `blocked` は用語が付いた欄しか見ていない。付かなかった欄は表に出てこないため、
+ * 「辞書は足りている」という誤った読みになる。
+ *
+ * ただし**記述を読まずに埋めてはならない。** 記述が
+ * 「Gen4」「木の陰が北側に出ている」なら、用語を作っても国は縮まない。
+ */
+function unmatchedFor(slots) {
+    const out = []
+    for (const [slot, entry] of Object.entries(slots ?? {})) {
+        if (entry.state !== 'visible') continue
+        if ((entry.terms ?? []).length > 0) continue
+        out.push({ slot, plain: entry.plain ?? '', recognition: entry.recognition ?? null })
+    }
+    return out
 }
 
 /**
@@ -131,10 +161,24 @@ function hintsFor(slots) {
 }
 
 /**
- * **用語は入っているのに絞り込みに使えない欄。** 理由別に数える。
+ * **辞書が足りないのか、観察が国を示さないのか。** これを混ぜてはならない。
  *
- * 被覆率を上げても到達が上がらない原因はここにある。
- * 欄は埋まって見えるが、中身が積集合に入らない。
+ * 最初にこの表を出したとき「pavement は 10 問すべてが AI生成。
+ * 出典から埋める必要がある」と結論した。**それは誤りだった。**
+ *
+ * ```
+ * ai_pavement_01「アスファルト舗装」   102 カ国
+ * ai_vehicle_01「白い横長のプレート」  101 カ国
+ * ```
+ *
+ * 出典から埋めても縮まない。**アスファルトはどこにでもある。**
+ * 観察が事実であることと、その観察が国を示すことは別である。
+ *
+ * > **足しても縮まないものを、足りないと呼んではならない。**
+ *
+ * 該当国が全体の半分を超える用語は「国を示さない」と分類する。
+ * `ground` と `season` を埋めないと決めたのと同じ理由である
+ * （土や葉の色は国境で切れない）。
  */
 function blockedFor(slots) {
     const out = []
@@ -143,13 +187,19 @@ function blockedFor(slots) {
         const terms = (entry.terms ?? []).map((id) => byId.get(id)).filter(Boolean)
         if (terms.length === 0) continue
         if (terms.some(usable)) continue
+        // **該当国が広すぎる用語しか無いなら、辞書の問題ではない**
+        const widest = Math.max(...terms.map((t) => t.countries?.length ?? 0))
+        if (widest > HALF) {
+            out.push({ slot, verdict: 'no_signal', widest })
+            continue
+        }
         const reasons = new Set()
         for (const t of terms) {
             if (t.certainty === 'unverified') reasons.add('AI生成')
             else if (t.disputed === true) reasons.add('不一致あり')
             else if (t.exhaustive === false) reasons.add('網羅でない')
         }
-        out.push({ slot, reasons: [...reasons] })
+        out.push({ slot, verdict: 'fixable', reasons: [...reasons], widest })
     }
     return out
 }
@@ -246,23 +296,83 @@ if (withHints.length) {
     lines.push('')
 }
 
-const withBlocked = rows.filter((r) => r.blocked.length)
-if (withBlocked.length) {
+const noSignal = rows.flatMap((r) => r.blocked.filter((b) => b.verdict === 'no_signal')
+    .map((b) => ({ ...b, q: r.id })))
+const fixable = rows.flatMap((r) => r.blocked.filter((b) => b.verdict === 'fixable')
+    .map((b) => ({ ...b, q: r.id })))
+
+lines.push(
+    '## 足しても縮まないものを、足りないと呼んではならない',
+    '',
+    'この表を最初に出したとき「pavement は 10 問すべてが AI生成。',
+    '出典から埋める必要がある」と結論した。**それは誤りだった。**',
+    '',
+    '```',
+    'ai_pavement_01「アスファルト舗装」   102 カ国',
+    'ai_vehicle_01「白い横長のプレート」  101 カ国',
+    '```',
+    '',
+    '出典から埋めても縮まない。**アスファルトはどこにでもある。**',
+    '観察が事実であることと、その観察が国を示すことは別である。',
+    '',
+    `辞書が扱う国は ${countryCount} 件。該当国が ${HALF} 件を超える用語しか無い欄は、`,
+    '**辞書の欠落ではなく観察の性質**として分類する。',
+    '`ground` と `season` を埋めないと決めたのと同じ理由である。',
+    '',
+)
+
+if (noSignal.length) {
+    const bySlot = new Map()
+    for (const b of noSignal) bySlot.set(b.slot, (bySlot.get(b.slot) ?? 0) + 1)
     lines.push(
-        '## 用語は入っているのに絞り込みに使えない欄',
+        '### 観察が国を示していない欄（辞書を足しても縮まない）',
         '',
-        '**被覆率を上げても到達が上がらない原因はここにある。**',
-        '画面上は欄が埋まっているが、中身が積集合に入らない。',
+        '| 欄 | 件数 |',
+        '|---|---|',
+        ...[...bySlot.entries()].sort((a, b) => b[1] - a[1]).map(([s, n]) => `| \`${s}\` | ${n} |`),
         '',
     )
-    for (const r of withBlocked) {
-        lines.push(`- \`${r.id}\` ${r.blocked.map((b) => `${b.slot}(${b.reasons.join('・')})`).join(' ')}`)
+}
+
+if (fixable.length) {
+    lines.push(
+        '### 辞書で直せる欄（該当国が狭い用語しか無い）',
+        '',
+        '**ここだけが出典から埋める対象である。**',
+        '',
+        ...fixable.map((b) =>
+            `- \`${b.q}\` \`${b.slot}\`（${b.reasons.join('・')} / 最も広い用語 ${b.widest} カ国）`),
+        '',
+    )
+}
+
+const unmatched = rows.flatMap((r) => r.unmatched.map((u) => ({ ...u, q: r.id })))
+if (unmatched.length) {
+    const bySlot = new Map()
+    for (const u of unmatched) {
+        if (!bySlot.has(u.slot)) bySlot.set(u.slot, [])
+        bySlot.get(u.slot).push(u)
     }
     lines.push(
+        '## 記述があるのに用語が 1 つも付かなかった欄',
         '',
-        '`AI生成` は増やしても到達に効かない。**出典から埋める必要がある。**',
+        '**ここが本当の辞書の欠落である。** 上の表は用語が付いた欄しか見ていないため、',
+        'これを出さないと「辞書は足りている」という誤った読みになる。',
+        '',
+        '**ただし記述を読まずに埋めてはならない。** 「Gen4」や',
+        '「木の陰が北側に出ている」に用語を作っても国は縮まない。',
+        '',
+        `合計 ${unmatched.length} 件。`,
         '',
     )
+    for (const [slot, items] of [...bySlot.entries()].sort((a, b) => b[1].length - a[1].length)) {
+        lines.push(`### \`${slot}\`（${items.length} 件）`, '')
+        for (const u of items) {
+            const rec = u.recognition ? ` [${u.recognition}]` : ''
+            lines.push(`- \`${u.q}\`${rec} ${u.plain || '（記述なし）'}`)
+        }
+        lines.push('')
+    }
 }
 
 lines.push(
@@ -293,12 +403,19 @@ for (const r of rows) {
     for (const h of r.hints) {
         console.log(`   示唆（絞り込みに使わない）: ${h.slot} ${h.canonical} [${h.countries.join(' ')}]`)
     }
-    if (r.blocked.length) {
-        console.log(`   埋まっているが使えない欄: `
-            + r.blocked.map((b) => `${b.slot}(${b.reasons.join('・')})`).join(' '))
+    const ns = r.blocked.filter((b) => b.verdict === 'no_signal')
+    const fx = r.blocked.filter((b) => b.verdict === 'fixable')
+    if (ns.length) {
+        console.log(`   観察が国を示さない欄: ${ns.map((b) => `${b.slot}(${b.widest}カ国)`).join(' ')}`)
+    }
+    if (fx.length) {
+        console.log(`   辞書で直せる欄: ${fx.map((b) => `${b.slot}(${b.reasons.join('・')})`).join(' ')}`)
     }
 }
 console.log('')
 console.log(`1 カ国まで届いた: ${reached} / ${rows.length}`)
 console.log(`示唆が出る出題: ${withHints.length} / ${rows.length}`)
+console.log(`観察が国を示さない欄: ${noSignal.length} 件（辞書を足しても縮まない）`)
+console.log(`辞書で直せる欄: ${fixable.length} 件`)
+console.log(`用語が 1 つも付かなかった欄: ${unmatched.length} 件（記述を読んで判断する）`)
 console.log(`保存先: ${OUT_PATH}`)
