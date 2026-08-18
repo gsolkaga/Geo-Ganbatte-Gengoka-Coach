@@ -76,8 +76,22 @@ function onKeydown(event: KeyboardEvent) {
 </script>
 
 <template>
-    <!-- 親は `relative` を持つこと（風景のペイン） -->
-    <div class="pointer-events-none absolute inset-x-0 bottom-0 z-20 flex flex-col justify-end">
+    <!--
+        親は `relative` を持つこと（風景のペイン）。
+
+        **`inset-0` にする。`bottom-0` だけでは高さが決まらない。**
+
+        当初は `inset-x-0 bottom-0` だった。上端が無いので高さが内容依存になり、
+        子の `max-h-[85%]` が**何に対する 85% か決まらなかった。**
+        結果、板は中身なりに伸びて風景の上へはみ出し、
+        **先頭の候補国の欄が切れたうえにスクロールバーも出なかった**（実測 2026-08-18）。
+
+        > **百分率の高さは、親の高さが決まっていて初めて意味を持つ。**
+
+        `pointer-events-none` で全面を覆っても風景の操作を妨げない。
+        受け取る子（帯と板）だけが `pointer-events-auto` を持つ。
+    -->
+    <div class="pointer-events-none absolute inset-0 z-20 flex flex-col justify-end">
         <!--
             閉じているときの帯。**開くボタンと要約を兼ねる。**
             閉じた状態でも「何を答えたか」が読めるようにする。
@@ -153,8 +167,16 @@ function onKeydown(event: KeyboardEvent) {
                     </button>
                 </div>
 
-                <!-- 中身は内部スクロール。**観察欄（右列）は覆わない** -->
-                <div class="min-h-0 flex-1 overflow-y-auto p-3">
+                <!--
+                    中身は内部スクロール。**観察欄（右列）は覆わない。**
+
+                    `scrollbar-gutter: stable` で溝を先に確保する。
+                    出たり消えたりすると**中身の幅が動いて読みにくい。**
+
+                    `overflow-y-scroll`（`auto` ではない）にして**常に見えるようにする。**
+                    スクロールできることが分からないと、下にボタンがあることに気づけない。
+                -->
+                <div class="ggg-scroll min-h-0 flex-1 overflow-y-scroll p-3">
                     <slot />
                 </div>
             </section>

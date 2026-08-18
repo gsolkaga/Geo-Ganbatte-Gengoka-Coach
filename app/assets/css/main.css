@@ -6,3 +6,46 @@
   --color-state-absent: oklch(0.58 0.18 25);
   --color-state-unknown: oklch(0.65 0.02 260);
 }
+
+/**
+ * 内部スクロールする領域のスクロールバー。
+ *
+ * この画面は 3 つの領域がそれぞれ内部スクロールする（風景・観察欄・回答の板）。
+ * 既定のスクロールバーは細く、環境によっては触るまで出てこない。
+ * **スクロールできることが分からないと、下に何があるか気づけない。**
+ *
+ * 実測（2026-08-18）で、回答の板の先頭にある候補国の欄が見えず、
+ * スクロールバーも出ていなかったため気づけなかった。
+ *
+ * > **隠れる UI は、無い UI と同じである。**
+ *
+ * `scrollbar-gutter: stable` で溝を先に確保する。
+ * 出たり消えたりすると中身の幅が動いて読みにくい。
+ */
+.ggg-scroll {
+  scrollbar-gutter: stable;
+  /* Firefox。細くしすぎない */
+  scrollbar-width: auto;
+  scrollbar-color: oklch(0.55 0.02 260) oklch(0.94 0.01 260);
+}
+
+/* WebKit / Blink は擬似要素でないと太さを指定できない */
+.ggg-scroll::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.ggg-scroll::-webkit-scrollbar-track {
+  background: oklch(0.94 0.01 260);
+  border-radius: 6px;
+}
+
+.ggg-scroll::-webkit-scrollbar-thumb {
+  background: oklch(0.62 0.02 260);
+  border: 2px solid oklch(0.94 0.01 260);
+  border-radius: 6px;
+}
+
+.ggg-scroll::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.5 0.02 260);
+}

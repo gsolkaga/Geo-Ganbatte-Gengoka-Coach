@@ -359,7 +359,35 @@ onMounted(async () => {
     }
 })
 
-const answerPanel = ref<{ valid: boolean } | null>(null)
+const answerPanel = ref<{ valid: boolean, issues: string[] } | null>(null)
+
+/**
+ * 採点を押せるか。**押せない理由も持つ。**
+ *
+ * ## 未定を「押してよい」と読まない
+ *
+ * 当初は `:disabled="answerPanel?.valid === false"` だった。
+ * `answerPanel` が未束縛なら `undefined === false` は `false` になり、
+ * **押せる状態になる。** 何も入力していなくても押せてしまう。
+ *
+ * > **未定を偽と読むと、危ない側に倒れる。** `=== true` で肯定を要求する。
+ *
+ * ## 押せない理由を出す
+ *
+ * 無効にするだけでは「押しても何も起きない」と同じである。
+ * 何が足りないのかを並べる（`AnswerPanel` の `issues`）。
+ */
+const gradeBlockers = computed<string[]>(() => {
+    const list: string[] = []
+    if (phase.value !== 'input') list.push('採点結果を表示中である。編集するには問題を選び直す')
+    if (grading.running.value) list.push('採点中である')
+    const panel = answerPanel.value
+    if (!panel) list.push('回答欄をまだ読み込めていない')
+    else if (panel.valid !== true) list.push(...panel.issues)
+    return list
+})
+
+const canGrade = computed(() => gradeBlockers.value.length === 0)
 
 /**
  * 回答の被せ板の開閉。**既定は閉じている。**
@@ -722,15 +750,33 @@ function nextQuestion() {
                                 </p>
                             </div>
 
-                            <!-- **押す前に消費数が分かること。** 実行後に知らせても遅い -->
-                            <button
-                                type="button"
-                                :disabled="answerPanel?.valid === false"
-                                class="justify-self-start rounded bg-slate-900 px-4 py-2 text-sm text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-40"
-                                @click="submit"
-                            >
-                                {{ variant }} で採点する（{{ requestCost }} リクエスト）
-                            </button>
+                            <!--
+                                **押す前に消費数が分かること。** 実行後に知らせても遅い。
+
+                                無効の条件は `canGrade` に集めた。**未定を「押してよい」と読まない。**
+                                無効にするだけでは「押しても何も起きない」と同じなので、
+                                足りないものを下に並べる。
+                            -->
+                            <div class="grid gap-1">
+                                <button
+                                    type="button"
+                                    :disabled="!canGrade"
+                                    :aria-describedby="canGrade ? undefined : 'grade-blockers'"
+                                    class="justify-self-start rounded bg-slate-900 px-4 py-2 text-sm text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-40"
+                                    @click="submit"
+                                >
+                                    {{ variant }} で採点する（{{ requestCost }} リクエスト）
+                                </button>
+                                <ul
+                                    v-if="!canGrade"
+                                    id="grade-blockers"
+                                    class="grid gap-0.5 text-xs text-amber-800"
+                                >
+                                    <li v-for="reason in gradeBlockers" :key="reason">
+                                        ・{{ reason }}
+                                    </li>
+                                </ul>
+                            </div>
 
                             <!-- 正規化の結果を隠さない。**失敗しても採点は続けるが、成功したことにしない** -->
                             <p v-if="normalizeNote" class="text-xs text-slate-700">
@@ -750,7 +796,7 @@ function nextQuestion() {
                     採点後も入力した値を残す。消さない。
                     自分が何を書いたかを見ながら講評を読めないと、指摘の意味が分からない。
                 -->
-                <div class="min-h-0 overflow-y-auto pr-1">
+                <div class="ggg-scroll min-h-0 overflow-y-scroll pr-1">
                     <fieldset :disabled="phase !== 'input'" class="min-w-0">
                         <SlotForm v-model="slots" mode="learn" />
                     </fieldset>
