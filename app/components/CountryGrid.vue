@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * 候補国を選ぶグリッド。
+ * 候補国を選ぶドロップダウン。**開いた中がグリッドになっている。**
  *
  * ## 国コードを覚えている前提を捨てる
  *
@@ -10,22 +10,26 @@
  *
  * > **入力の形式を覚えることが、練習の一部になってはいけない。**
  *
- * ## 地域でまとめる
+ * ## 開くまでは畳んでおく
  *
- * 102 件を平らに並べると壁になる。人は「北欧のどこか」と絞ってから
- * 国を見比べるので、その順に並べる（`shared/region-labels.ts`）。
+ * 最初は 102 件を出したままにしていた。**閉じられないので場所を取り続け、**
+ * 確信度と採点ボタンが下へ押し出された（実測 2026-08-19）。
+ * 選ぶのは 1 プレイに 1〜3 回なので、**必要なときだけ開く。**
  *
- * ## コードは消さずに併記する
+ * ## 地域でまとめるのをやめた
  *
- * 選ぶのに要らなくても、`KZ` を目にし続けることで自然に覚える。
- * **要らないものを消すのではなく、要る人にだけ効く場所に置く。**
+ * 「北欧」「東欧」で括って地理順に並べていた。**却って探しにくかった**（実測）。
+ * 目当ての国がどの括りに入るかを先に考える必要があり、
+ * その判断が 1 手増える。カテゴリの当て方を間違えると見つからない。
+ *
+ * > **分類は、分類を知っている人にしか効かない。**
+ *
+ * いまは五十音順の平らなグリッドで、絞り込み欄で詰める。
+ * **順番を覚えなくても、頭の 2 文字を打てば出る。**
  */
-import { groupByRegion } from '#shared/region-labels'
-
 interface CountryOption {
     code: string
     name: string
-    region: string | null
 }
 
 const props = withDefaults(
@@ -41,14 +45,16 @@ const props = withDefaults(
 
 const emit = defineEmits<{ toggle: [string] }>()
 
+const open = ref(false)
 const query = ref('')
+const root = ref<HTMLElement | null>(null)
+const filterInput = ref<HTMLInputElement | null>(null)
+const panelId = useId()
 
 const selectedSet = computed(() => new Set(props.selected))
+const nameByCode = computed(() => new Map(props.countries.map((c) => [c.code, c.name])))
 
-/**
- * 絞り込み。**日本語名の部分一致と、コードの前方一致**の両方を見る。
- * コードで探す人（`KZ` と打つ）と、名前で探す人（`カザ` と打つ）の両方が居る。
- */
+/** 絞り込み。**日本語名の部分一致と、コードの前方一致**の両方を見る */
 const filtered = computed(() => {
     const raw = query.value.trim()
     if (!raw) return props.countries
@@ -61,54 +67,107 @@ const filtered = computed(() => {
     )
 })
 
-const groups = computed(() => groupByRegion(filtered.value).filter((g) => g.items.length > 0))
+const atMax = computed(() => props.selected.length >= props.max)
 
 /** 上限に達したら未選択のものは押せない。**選択済みは常に押せる**（外せなくなるため） */
 function isBlocked(code: string): boolean {
-    if (props.disabled) return true
     if (selectedSet.value.has(code)) return false
-    return props.selected.length >= props.max
+    return atMax.value
 }
 
-const atMax = computed(() => props.selected.length >= props.max)
+/** 閉じているときの表示。**開かなくても何を選んだか分かること** */
+const summary = computed(() => {
+    if (props.selected.length === 0) return '国を選ぶ'
+    return props.selected.map((code) => nameByCode.value.get(code) ?? code).join('、')
+})
+
+async function toggleOpen() {
+    if (props.disabled) return
+    open.value = !open.value
+    if (!open.value) return
+    // 開いたら絞り込みへ入れる。**打ち始められる状態にする**
+    await nextTick()
+    filterInput.value?.focus()
+}
+
+function close() {
+    open.value = false
+    query.value = ''
+}
+
+function onKeydown(event: KeyboardEvent) {
+    if (event.key === 'Escape' && open.value) {
+        event.stopPropagation()
+        close()
+    }
+}
+
+/** 外を押したら閉じる。**開いたことを忘れて他を触れる状態にしない** */
+function onPointerDown(event: PointerEvent) {
+    if (!open.value) return
+    if (root.value && !root.value.contains(event.target as Node)) close()
+}
+
+onMounted(() => document.addEventListener('pointerdown', onPointerDown))
+onUnmounted(() => document.removeEventListener('pointerdown', onPointerDown))
 </script>
 
 <template>
-    <div class="grid gap-2">
-        <div class="flex flex-wrap items-center gap-2">
-            <label class="flex items-center gap-1.5">
-                <span class="text-xs text-slate-700">絞り込み</span>
+    <div ref="root" class="relative" @keydown="onKeydown">
+        <button
+            type="button"
+            :disabled="disabled"
+            :aria-expanded="open"
+            :aria-controls="panelId"
+            class="flex w-full max-w-md items-center justify-between gap-2 rounded border border-slate-400 bg-white px-3 py-2 text-left text-sm hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
+            @click="toggleOpen"
+        >
+            <span :class="selected.length ? 'text-slate-900' : 'text-slate-500'">
+                {{ summary }}
+            </span>
+            <span class="shrink-0 text-xs text-slate-600">
+                {{ selected.length }} / {{ max }}
+                <span aria-hidden="true">{{ open ? '▲' : '▼' }}</span>
+            </span>
+        </button>
+
+        <div
+            v-if="open"
+            :id="panelId"
+            class="absolute z-20 mt-1 w-full max-w-md rounded border border-slate-400 bg-white p-2 shadow-lg"
+        >
+            <div class="mb-2 flex flex-wrap items-center gap-2">
                 <input
+                    ref="filterInput"
                     v-model="query"
                     type="search"
-                    :disabled="disabled"
-                    placeholder="カザ / KZ"
-                    class="w-32 rounded border border-slate-400 px-2 py-1 text-sm"
+                    placeholder="カザ / KZ で絞り込む"
+                    class="min-w-0 flex-1 rounded border border-slate-400 px-2 py-1 text-sm"
                 >
-            </label>
-            <span class="text-xs text-slate-600">
-                候補 {{ selected.length }} / {{ max }}
-            </span>
-            <span v-if="atMax" class="text-xs text-amber-700">
-                上限に達している。外してから選ぶ
-            </span>
-            <span v-if="query && groups.length === 0" role="status" class="text-xs text-slate-600">
-                一致する国が無い
-            </span>
-        </div>
+                <button
+                    type="button"
+                    class="rounded border border-slate-400 px-2 py-1 text-xs text-slate-700 hover:bg-slate-50"
+                    @click="close"
+                >
+                    閉じる
+                </button>
+            </div>
 
-        <!--
-            **高さを区切って内部スクロールにする。** 区切らないと 102 件で
-            確信度や採点ボタンが 2,000px 下へ押し出される。
-        -->
-        <div class="ggg-scroll max-h-[42dvh] overflow-y-scroll rounded border border-slate-300 p-2">
-            <fieldset v-for="group in groups" :key="group.label" class="mb-2 last:mb-0">
-                <legend class="mb-1 text-xs font-medium text-slate-700">
-                    {{ group.label }}
-                </legend>
-                <div class="grid grid-cols-2 gap-1 sm:grid-cols-3 xl:grid-cols-4">
+            <p v-if="atMax" class="mb-1 text-xs text-amber-700">
+                上限に達している。外してから選ぶ
+            </p>
+            <p v-if="query && filtered.length === 0" role="status" class="text-xs text-slate-600">
+                一致する国が無い
+            </p>
+
+            <!--
+                **地域で括らない。** 五十音順の平らな並びにして、絞り込みで詰める。
+                高さを区切るのは、開いた板が画面より長くならないため。
+            -->
+            <div class="ggg-scroll max-h-[38dvh] overflow-y-scroll">
+                <div class="grid grid-cols-2 gap-1 sm:grid-cols-3">
                     <button
-                        v-for="country in group.items"
+                        v-for="country in filtered"
                         :key="country.code"
                         type="button"
                         :aria-pressed="selectedSet.has(country.code)"
@@ -126,7 +185,7 @@ const atMax = computed(() => props.selected.length >= props.max)
                         >{{ country.code }}</span>
                     </button>
                 </div>
-            </fieldset>
+            </div>
         </div>
     </div>
 </template>

@@ -24,19 +24,20 @@ import type { AnswerDraft } from '#shared/types'
 const props = withDefaults(
   defineProps<{
     modelValue: AnswerDraft
-    /** 候補の選択肢。`region` はグリッドのまとめに使う */
-    countryOptions?: { code: string, name: string, region?: string | null }[]
+    /**
+     * 候補の選択肢。**地域は渡さない。**
+     *
+     * 以前は地域でまとめて地理順に並べていたが、実測で却って探しにくかった
+     * （目当ての国がどの括りに入るかを先に考える手が増える）。
+     * いまは五十音順の平らなグリッドと絞り込みで足りている。
+     */
+    countryOptions?: { code: string, name: string }[]
     disabled?: boolean
   }>(),
   { countryOptions: () => [], disabled: false },
 )
 
 const emit = defineEmits<{ 'update:modelValue': [AnswerDraft] }>()
-
-/** グリッドに渡す形。`region` が無いデータでも落とさない */
-const gridCountries = computed(() =>
-  props.countryOptions.map((c) => ({ code: c.code, name: c.name, region: c.region ?? null })),
-)
 
 const nameByCode = computed(() => new Map(props.countryOptions.map((c) => [c.code, c.name])))
 
@@ -135,7 +136,7 @@ defineExpose({ valid, issues })
       <CountryGrid
         v-if="countryOptions.length"
         class="mt-2"
-        :countries="gridCountries"
+        :countries="countryOptions"
         :selected="selectedCodes"
         :max="MAX_CANDIDATES"
         :disabled="disabled"

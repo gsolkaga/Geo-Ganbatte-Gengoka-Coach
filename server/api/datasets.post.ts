@@ -19,7 +19,9 @@
  * 自分で直した辞書が他人のデータで戻ると、直せることが売りなのに意味が無い。
  */
 import {
+    DATASET_KIND,
     LIBRARY_FORMAT_VERSION,
+    collectSources,
     datasetId as makeDatasetId,
     initProgress,
     validateDataset,
@@ -43,7 +45,7 @@ import {
     writeQuestions,
 } from '../utils/store'
 
-type Action = 'install' | 'use' | 'remove'
+type Action = 'install' | 'use' | 'remove' | 'create'
 
 interface Body {
     action: Action
@@ -53,6 +55,10 @@ interface Body {
     id?: string
     /** 既にある ID を上書きする */
     force?: boolean
+    /** `create` のとき。人が読む名前と作成者 */
+    name?: string
+    author?: string
+    description?: string
 }
 
 async function knownCountries(): Promise<string[]> {
@@ -67,8 +73,12 @@ export default defineEventHandler(async (event) => {
     if (body?.action === 'install') return install(body)
     if (body?.action === 'use') return use(body)
     if (body?.action === 'remove') return remove(body)
+    if (body?.action === 'create') return create(body)
 
-    throw createError({ statusCode: 400, statusMessage: 'action は install / use / remove のいずれか' })
+    throw createError({
+        statusCode: 400,
+        statusMessage: 'action は install / use / remove / create のいずれか',
+    })
 })
 
 async function install(body: Body) {
@@ -156,6 +166,101 @@ async function use(body: Body) {
         questionCount: d.questions.length,
         termCount: d.glossary.terms.length,
         attribution: d.meta.attribution,
+    }
+}
+
+/**
+ * 出題が空の問題集を作り、それをアクティブにする。
+ *
+ * ## 辞書は引き継ぐ。**出題だけを空にする**
+ *
+ * 新しい問題集を「まったくの白紙」にすると、辞書も空になる。
+ * それでは**用語を選べないのでタグ付けができない。**
+ * それ以上に、辞書ごと作り直した問題集で測った結果は、
+ * 前の結果と比べられない（辞書が変われば別の道具である）。
+ *
+ * > **測るものを変えるときは、測る道具を変えない。**
+ *
+ * `data/glossary.json` には**触らない。** 触らないことが指紋の一致を保証する
+ * （`npm run fingerprint -- --verify`）。
+ * 新しい棚のデータセットには、いまの辞書をそのまま写して入れる。
+ *
+ * ## 前の問題集は棚に残る
+ *
+ * `data/questions.json` を空にする前に控えを取る（`.backup/<日時>/`）。
+ * 加えて、前の問題集がライブラリにあるなら**そのまま棚に残る**ので、
+ * `use` で戻せる。**戻る道がある操作にする。**
+ */
+async function create(body: Body) {
+    const name = body.name?.trim() ?? ''
+    const author = body.author?.trim() ?? ''
+    if (!name || !author) {
+        // **既定値を作らない。** 「無題」で作ると、後から何の問題集か分からなくなる
+        throw createError({
+            statusCode: 400,
+            statusMessage: '問題集の名前と作成者は必須である（出典表示に使う）',
+        })
+    }
+
+    const id = body.id?.trim() || makeDatasetId(author, name)
+    if (!isSafeDatasetId(id)) {
+        throw createError({ statusCode: 400, statusMessage: `データセット ID が不正である: ${id}` })
+    }
+
+    const existing = await readDataset(id).catch(() => null)
+    if (existing && !body.force) {
+        // **黙って上書きしない。** 既にある問題集を名前の一致だけで消さない
+        throw createError({
+            statusCode: 409,
+            statusMessage: '同じ ID の問題集が既にある',
+            data: {
+                id,
+                mine: {
+                    name: existing.meta.name,
+                    questionCount: existing.questions.length,
+                    createdAt: existing.meta.createdAt,
+                },
+            },
+        })
+    }
+
+    const terms = await readGlossary()
+    const dataset: Dataset = {
+        kind: DATASET_KIND,
+        formatVersion: LIBRARY_FORMAT_VERSION,
+        meta: {
+            name,
+            author,
+            license: 'CC BY 4.0',
+            licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+            attribution: `${name} by ${author}, CC BY 4.0`,
+            sources: collectSources(terms),
+            createdAt: new Date().toISOString(),
+            ...(body.description?.trim() ? { description: body.description.trim() } : {}),
+        },
+        questions: [],
+        glossary: { terms },
+    }
+
+    // **取り消せない操作にしない。** 人手で付けた正解タグを空にするため
+    const backup = await backupActive()
+
+    await writeDataset(id, dataset)
+    await writeQuestions([])
+    // **`replaceGlossaryTerms` を呼ばない。** 同じ内容でも書き込めば指紋の話が濁る
+    await writeActive(toActiveRecord(id, dataset))
+
+    const progressFile = await readProgressFile()
+    progressFile.byDataset[id] = initProgress([])
+    await writeProgressFile(progressFile)
+
+    return {
+        ok: true,
+        id,
+        backup,
+        created: { name, author, questionCount: 0, termCount: terms.length },
+        note: '出題が空の問題集を作ってアクティブにした。'
+            + '辞書は引き継いでいる（glossary.json は変更していない）',
     }
 }
 

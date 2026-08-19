@@ -5,6 +5,23 @@
   --color-state-visible: oklch(0.62 0.16 150);
   --color-state-absent: oklch(0.58 0.18 25);
   --color-state-unknown: oklch(0.65 0.02 260);
+
+  /**
+   * 編集モードの配色。**学習画面と共通の色を 1 つも使わない。**
+   *
+   * 学習画面は白地とスレート、編集画面は濃い藍と琥珀にする。
+   * 同じ部品（`SlotForm`）を使い回すので、**色だけが「いまどちらに居るか」を伝える。**
+   * 明るさ違いにすると、画面写真を見たときに区別できない。
+   *
+   * > **取り違えると教材が壊れる画面は、見た瞬間に違うと分かること。**
+   */
+  --color-edit-bg: oklch(0.27 0.06 277);
+  --color-edit-panel: oklch(0.36 0.05 277);
+  --color-edit-border: oklch(0.5 0.06 277);
+  --color-edit-text: oklch(0.97 0.01 277);
+  --color-edit-muted: oklch(0.82 0.03 277);
+  --color-edit-accent: oklch(0.79 0.16 76);
+  --color-edit-accent-text: oklch(0.25 0.08 76);
 }
 
 /**
