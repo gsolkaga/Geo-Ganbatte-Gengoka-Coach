@@ -564,9 +564,12 @@ onMounted(loadList)
                 </p>
 
                 <p class="mt-3 text-xs text-edit-muted">
-                    出来た問題集を配るには
-                    <code class="text-edit-text">npm run dataset -- export --name "..."</code>
-                    を使う（<code>dist/ggg-dataset.json</code> が出る）
+                    出来た問題集は
+                    <NuxtLink to="/datasets" class="text-edit-text underline">
+                        データセット画面
+                    </NuxtLink>
+                    から書き出せる（CLI なら
+                    <code class="text-edit-text">npm run dataset -- export</code>）
                 </p>
             </section>
 

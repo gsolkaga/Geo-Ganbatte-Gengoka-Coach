@@ -197,6 +197,100 @@ async function use(id: string) {
     }
 }
 
+// ---- 書き出し ----
+
+const exportName = ref('')
+const exportAuthor = ref('')
+const usedTermsOnly = ref(false)
+const exportWarnings = ref<string[]>([])
+const exportInfo = ref<{
+    id: string
+    questionCount: number
+    termCount: number
+    sourceCount: number
+    bytes: number
+} | null>(null)
+
+/** アクティブの由来。**入力の既定にする**（いま作ったものに、いまの名前が付く） */
+const activeRecord = computed(() => datasets.value.find((d) => d.active) ?? null)
+const activeName = computed(() => activeRecord.value?.name ?? null)
+const activeAuthor = computed(() => activeRecord.value?.author ?? null)
+
+function exportQuery() {
+    const q: Record<string, string> = {}
+    if (exportName.value.trim()) q.name = exportName.value.trim()
+    if (exportAuthor.value.trim()) q.author = exportAuthor.value.trim()
+    if (usedTermsOnly.value) q.usedTermsOnly = '1'
+    return q
+}
+
+/**
+ * 書き出さずに中身だけ確かめる。**検証もここで走る。**
+ *
+ * ダウンロードだけだと、通ったのか落ちたのかがファイルの有無でしか分からない。
+ * 件数と警告を先に見せる。
+ */
+async function checkExport() {
+    reset()
+    exportInfo.value = null
+    exportWarnings.value = []
+    busy.value = 'export-check'
+    try {
+        const r = await $fetch<{
+            id: string
+            questionCount: number
+            termCount: number
+            sourceCount: number
+            bytes: number
+            warnings: string[]
+        }>('/api/dataset-export', { query: { ...exportQuery(), download: '0' } })
+        exportInfo.value = r
+        exportWarnings.value = r.warnings
+        notice.value = `検証に通った: ${r.id}`
+    }
+    catch (e) {
+        error.value = message(e)
+    }
+    finally {
+        busy.value = null
+    }
+}
+
+/**
+ * ファイルとして落とす。
+ *
+ * **`window.open` を使わない。** 422 のときに新しいタブでエラー JSON が開くだけで、
+ * 何が悪かったのか画面に出せない。取ってから中身を見て、通ったときだけ保存する。
+ */
+async function downloadExport() {
+    reset()
+    exportWarnings.value = []
+    busy.value = 'export'
+    try {
+        const blob = await $fetch<Blob>('/api/dataset-export', {
+            query: exportQuery(),
+            responseType: 'blob',
+        })
+        const info = await $fetch<{ id: string, warnings: string[] }>('/api/dataset-export', {
+            query: { ...exportQuery(), download: '0' },
+        })
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = `${info.id}.json`
+        a.click()
+        URL.revokeObjectURL(url)
+        exportWarnings.value = info.warnings
+        notice.value = `書き出した: ${info.id}.json（${prettySize(blob.size)}）`
+    }
+    catch (e) {
+        error.value = message(e)
+    }
+    finally {
+        busy.value = null
+    }
+}
+
 async function remove(id: string) {
     reset()
     const isActive = datasets.value.find((d) => d.id === id)?.active === true
@@ -375,6 +469,111 @@ async function remove(id: string) {
                 </li>
             </ul>
         </div>
+
+        <!--
+            書き出し。**取り込みの隣に置く。** 配る側と受け取る側は同じ画面で足りる。
+            以前は「配るには `npm run dataset -- export` を使う」と書くだけだった。
+            **取り込みが画面でできて書き出しだけ CLI というのは、非対称である。**
+        -->
+        <section aria-labelledby="export-heading" class="grid gap-2 rounded border border-slate-300 p-4">
+            <h2 id="export-heading" class="text-base font-semibold text-slate-900">
+                書き出す
+            </h2>
+            <p class="text-sm text-slate-700">
+                いま使っている出題と辞書を配布形式にする。<strong>消費 0。</strong>
+                画像の検査に通らなければ<strong>ファイルを渡さない</strong>（<code>422</code>）
+            </p>
+
+            <div class="flex flex-wrap items-end gap-2">
+                <label class="grid gap-1">
+                    <span class="text-xs text-slate-700">名前</span>
+                    <input
+                        v-model="exportName"
+                        :placeholder="activeName ?? 'GGG データセット'"
+                        class="w-64 rounded border border-slate-400 bg-white px-2 py-1 text-sm text-slate-900"
+                    >
+                </label>
+                <label class="grid gap-1">
+                    <span class="text-xs text-slate-700">作成者</span>
+                    <input
+                        v-model="exportAuthor"
+                        :placeholder="activeAuthor ?? 'unknown'"
+                        class="w-40 rounded border border-slate-400 bg-white px-2 py-1 text-sm text-slate-900"
+                    >
+                </label>
+                <button
+                    type="button"
+                    :disabled="busy !== null || activeQuestionCount === 0"
+                    class="rounded border border-slate-500 px-3 py-1.5 text-sm text-slate-800 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
+                    @click="checkExport"
+                >
+                    {{ busy === 'export-check' ? '検査中…' : '中身を確かめる' }}
+                </button>
+                <button
+                    type="button"
+                    :disabled="busy !== null || activeQuestionCount === 0"
+                    class="rounded bg-slate-900 px-4 py-1.5 text-sm text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-40"
+                    @click="downloadExport"
+                >
+                    {{ busy === 'export' ? '書き出し中…' : '書き出してダウンロード' }}
+                </button>
+            </div>
+
+            <label class="flex items-center gap-2 text-sm text-slate-800">
+                <input v-model="usedTermsOnly" type="checkbox" class="size-4">
+                使っている用語だけにする（<strong>既定は辞書を丸ごと配る。</strong>絞ると「次に見るべき欄」の計算が痩せる）
+            </label>
+
+            <p v-if="activeQuestionCount === 0" class="text-sm text-amber-800">
+                出題が 0 件なので配るものが無い。
+                <NuxtLink to="/admin" class="underline">
+                    編集モード
+                </NuxtLink>
+                で地点を登録する
+            </p>
+
+            <!-- **確かめた結果をその場に出す。** 押して落ちてくるだけでは中身が分からない -->
+            <dl v-if="exportInfo" class="grid grid-cols-2 gap-x-4 gap-y-1 rounded border border-slate-200 bg-slate-50 p-3 text-sm sm:grid-cols-4">
+                <div>
+                    <dt class="text-xs text-slate-600">
+                        ID
+                    </dt>
+                    <dd class="font-mono text-xs text-slate-900">
+                        {{ exportInfo.id }}
+                    </dd>
+                </div>
+                <div>
+                    <dt class="text-xs text-slate-600">
+                        出題
+                    </dt>
+                    <dd class="text-slate-900">
+                        {{ exportInfo.questionCount }} 件
+                    </dd>
+                </div>
+                <div>
+                    <dt class="text-xs text-slate-600">
+                        用語
+                    </dt>
+                    <dd class="text-slate-900">
+                        {{ exportInfo.termCount }} 語
+                    </dd>
+                </div>
+                <div>
+                    <dt class="text-xs text-slate-600">
+                        出典
+                    </dt>
+                    <dd class="text-slate-900">
+                        {{ exportInfo.sourceCount }} 件／{{ prettySize(exportInfo.bytes) }}
+                    </dd>
+                </div>
+            </dl>
+
+            <ul v-if="exportWarnings.length" class="grid gap-0.5 text-xs text-amber-800">
+                <li v-for="w in exportWarnings" :key="w">
+                    ・{{ w }}
+                </li>
+            </ul>
+        </section>
 
         <!-- 一覧 -->
         <section aria-labelledby="library-heading" class="grid gap-3">
