@@ -259,12 +259,66 @@ describe('datasetId', () => {
     })
 
     it('**ASCII に限る。** ディレクトリ名と URL に使うため', () => {
-        expect(datasetId('gsolkaga', 'Standard 10 Set!')).toBe('gsolkaga__standard-10-set')
+        const id = datasetId('gsolkaga', 'Standard 10 Set!')
+        expect(id).toMatch(/^[a-z0-9]+(?:[-_][a-z0-9]+)*__[a-z0-9]+(?:[-_][a-z0-9]+)*$/)
+        expect(id).toContain('gsolkaga__standard-10-set')
+    })
+
+    /**
+     * `!` は `-` にもならず消える。**消えた文字は区別できない。**
+     * 「Standard 10 Set!」と「Standard 10 Set?」を同じ id にしないため指紋を足す。
+     */
+    it('記号を落としたときは指紋を足す', () => {
+        expect(datasetId('gsolkaga', 'Standard 10 Set!'))
+            .not.toBe(datasetId('gsolkaga', 'Standard 10 Set?'))
     })
 
     it('日本語だけの名前でも id を作る', () => {
         const id = datasetId('gsolkaga', '標準10問')
-        expect(id).toMatch(/^gsolkaga__[a-z0-9]+$/)
+        expect(id).toMatch(/^gsolkaga__[a-z0-9-]+$/)
+    })
+
+    /**
+     * **ASCII 以外を捨てると、残った側だけでは区別できない。**
+     *
+     * 以前は「slug が空になったときだけ指紋を足す」形だった。
+     * 「汎化テスト 10」と「別のテスト 10」はどちらも `10` が残るので
+     * **指紋が付かず、同じ id になっていた**（実測 2026-08-19）。
+     */
+    it('**日本語部分だけが違う名前を区別する。** 残る ASCII が同じでも', () => {
+        const a = datasetId('gsolkaga', '汎化テスト 10')
+        const b = datasetId('gsolkaga', '別のテスト 10')
+        expect(a).not.toBe(b)
+        // 読める部分は残す。**指紋だけの id にしない**
+        expect(a).toContain('10')
+        expect(b).toContain('10')
+    })
+
+    it('**切り詰めた先しか違わない名前を区別する**', () => {
+        const long = 'a'.repeat(45)
+        expect(datasetId('gsolkaga', `${long}X`)).not.toBe(datasetId('gsolkaga', `${long}Y`))
+    })
+
+    /**
+     * **既存の棚を壊さない。** `data/datasets/gsolkaga__standard-10/` は
+     * 同梱しているディレクトリである。指紋を常に足す実装にすると、
+     * 同じ名前から別の id が出て**棚に二重に入る。**
+     */
+    it('捨てる文字が無ければ指紋を足さない（既存の id を変えない）', () => {
+        expect(datasetId('gsolkaga', 'Standard 10')).toBe('gsolkaga__standard-10')
+        expect(datasetId('gsolkaga', 'Standard append 10')).toBe('gsolkaga__standard-append-10')
+    })
+
+    it('区切りは捨てたと数えない（空白・ハイフン・下線）', () => {
+        // 語の切れ目という情報は `-` に残るので、指紋は要らない
+        expect(datasetId('gsolkaga', 'Standard-10')).toBe('gsolkaga__standard-10')
+        expect(datasetId('gsolkaga', 'Standard_10')).toBe('gsolkaga__standard-10')
+    })
+
+    it('id は 96 字を超えない（isSafeDatasetId の上限）', () => {
+        const id = datasetId('あ'.repeat(60), 'い'.repeat(60))
+        expect(id.length).toBeLessThanOrEqual(96)
+        expect(isSafeDatasetId(id)).toBe(true)
     })
 
     it('**同じ名前からは同じ id が出る。** 取り込み直しで別物にならない', () => {

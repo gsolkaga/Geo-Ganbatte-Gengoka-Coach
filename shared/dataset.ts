@@ -457,23 +457,65 @@ export const PROGRESS_FORMAT_VERSION = 1
  * 「標準 10 問」は誰でも名付けられる。
  */
 export function datasetId(author: string, name: string): string {
-    const a = asciiSlug(author) || shortHash(author) || 'unknown'
-    const n = asciiSlug(name) || shortHash(name) || 'dataset'
-    return `${a}__${n}`
+    return `${idPart(author, 'unknown')}__${idPart(name, 'dataset')}`
 }
+
+/**
+ * ID の片側を作る。**捨てた情報があるときは指紋を足す。**
+ *
+ * ## 落とした文字は、落としたと分かるようにする
+ *
+ * 以前は「slug が空になったときだけ指紋を使う」形だった。**衝突した。**
+ *
+ * ```
+ * 汎化テスト 10  → 10   ┐ 同じ ID になる
+ * 別のテスト 10  → 10   ┘
+ * ```
+ *
+ * ASCII 以外を捨てると `10` だけが残り、**残った側が空でないので指紋が付かない。**
+ * 40 字で切り詰めるときも同じで、41 字目以降しか違わない名前が同じ ID になった。
+ *
+ * > **情報を捨てた事実を、結果に残す。**
+ *
+ * 捨てていなければ指紋を足さない。**既存の ID を変えないため**である
+ * （`gsolkaga__standard-10` は棚のディレクトリ名として既に存在する）。
+ */
+function idPart(raw: string, fallback: string): string {
+    const { slug, lossy } = asciiSlug(raw)
+    if (!slug) return shortHash(raw) || fallback
+    if (!lossy) return slug
+    // 指紋のぶんを空ける。**片側 40 字を超えさせない**（`isSafeDatasetId` の 96 字に収める）
+    return `${slug.slice(0, 32).replace(/-+$/, '')}-${shortHash(raw)}`
+}
+
+/** 切り詰める長さ。**指紋を足す余地を残して 40 字に収める** */
+const SLUG_MAX = 40
 
 /**
  * **ASCII に限る。** この文字列はディレクトリ名になり、URL の一部にもなりうる。
  *
  * 日本語を残すと読みやすいが、**環境によって扱いが変わる場所に置く名前**である。
  * 読みやすさより、どこでも同じに動くことを採る。
+ *
+ * `lossy` は**文字を捨てたか**である。呼び出し側が指紋を足すかを決める。
+ * 全角を半角に直す（NFKC）のは変換であって欠落ではないので、`lossy` にしない。
  */
-function asciiSlug(s: string): string {
-    return s.normalize('NFKC')
-        .toLowerCase()
+function asciiSlug(s: string): { slug: string, lossy: boolean } {
+    const normalized = s.normalize('NFKC').toLowerCase()
+    const full = normalized
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-+|-+$/g, '')
-        .slice(0, 40)
+    const slug = full.slice(0, SLUG_MAX).replace(/-+$/, '')
+
+    /**
+     * 捨てた文字があるか。**区切りは捨てたと数えない。**
+     *
+     * 空白・ハイフン・下線は `-` になるだけで、語の切れ目という情報は残る。
+     * それ以外（日本語・記号・絵文字）は**消えて何も残らない**ので指紋が要る。
+     */
+    const dropped = [...normalized].some((ch) => !/[a-z0-9 \t\-_]/.test(ch))
+
+    return { slug, lossy: dropped || slug !== full }
 }
 
 /**
