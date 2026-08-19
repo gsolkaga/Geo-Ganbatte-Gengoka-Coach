@@ -552,14 +552,26 @@ function nextQuestion() {
             <p v-if="loadError">
                 出題の読み込みに失敗した: {{ loadError }}
             </p>
+            <!--
+                **行き先を書く。** 以前は「タスク 12 で data/questions.json に登録する」
+                と書いていた。開発中の覚え書きがそのまま残っていたもので、
+                **読んだ人がこの画面から次にどこへ行けばよいか分からない。**
+
+                > **直し方を知っている人に向けて書かない。**
+            -->
             <template v-else>
                 <p class="font-medium">
                     出題データがまだ 1 件もない。
                 </p>
                 <p class="mt-1">
-                    タスク 12 で <code>data/questions.json</code> に登録する。
-                    <code>POST /api/questions</code> に座標と国コードを渡すと、
-                    メタデータ照会で著作権表記を確認してから登録される。
+                    <NuxtLink to="/datasets" class="underline">
+                        データセット画面
+                    </NuxtLink>
+                    で問題集を取り込むか、
+                    <NuxtLink to="/admin" class="underline">
+                        編集モード
+                    </NuxtLink>
+                    で地点を登録する。
                 </p>
             </template>
         </section>

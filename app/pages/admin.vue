@@ -370,12 +370,20 @@ onMounted(loadList)
                 <span class="text-sm font-semibold">教材を作る・直す</span>
                 <span class="text-xs text-edit-muted">すべて消費 0（AI を呼ばない）</span>
             </div>
-            <NuxtLink
-                to="/"
-                class="rounded border border-edit-border px-2 py-1 text-xs text-edit-text hover:bg-edit-bg"
-            >
-                学習画面へ戻る
-            </NuxtLink>
+            <div class="flex flex-wrap items-center gap-2">
+                <NuxtLink
+                    to="/datasets"
+                    class="rounded border border-edit-border px-2 py-1 text-xs text-edit-text hover:bg-edit-bg"
+                >
+                    データセット画面へ
+                </NuxtLink>
+                <NuxtLink
+                    to="/"
+                    class="rounded border border-edit-border px-2 py-1 text-xs text-edit-text hover:bg-edit-bg"
+                >
+                    学習画面へ戻る
+                </NuxtLink>
+            </div>
         </div>
 
         <div class="mx-auto flex max-w-[110rem] flex-col gap-4 p-4">

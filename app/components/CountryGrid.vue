@@ -184,8 +184,14 @@ onUnmounted(() => document.removeEventListener('pointerdown', onPointerDown))
             <p v-if="atMax" class="mb-1 text-xs text-amber-700">
                 上限に達している。外してから選ぶ
             </p>
+            <!--
+                **無いことを、無いと言う。** 候補は `data/countries.json` の国だけである。
+                以前は「一致する国が無い」だけを出していたが、
+                打ち間違いなのか一覧に無いのかが**区別できなかった。**
+            -->
             <p v-if="query && filtered.length === 0" role="status" class="text-xs text-slate-600">
-                一致する国が無い
+                一致する国が無い。候補は {{ countries.length }} カ国ぶんしか持っていない
+                （<code>data/countries.json</code>）
             </p>
 
             <!--

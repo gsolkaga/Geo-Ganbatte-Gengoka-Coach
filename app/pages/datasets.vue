@@ -236,9 +236,22 @@ async function remove(id: string) {
                     配布された問題セットと用語辞書を取り込んで、切り替える。<strong>AI を使わない。消費 0。</strong>
                 </p>
             </div>
-            <NuxtLink to="/" class="rounded border border-slate-400 px-3 py-1.5 text-sm hover:bg-slate-50">
-                学習に戻る
-            </NuxtLink>
+            <div class="flex flex-wrap items-center gap-2">
+                <!--
+                    **配る側の 2 画面をつなぐ。** ここは受け取った問題集を切り替える場所で、
+                    問題集そのものを作るのは編集モードである。
+                    行き先が無いと、出題を足したい人がここで詰まる。
+                -->
+                <NuxtLink
+                    to="/admin"
+                    class="rounded border border-edit-border bg-edit-panel px-3 py-1.5 text-sm text-edit-text hover:bg-edit-bg"
+                >
+                    編集モードへ（問題を作る）
+                </NuxtLink>
+                <NuxtLink to="/" class="rounded border border-slate-400 px-3 py-1.5 text-sm hover:bg-slate-50">
+                    学習に戻る
+                </NuxtLink>
+            </div>
         </header>
 
         <!-- 取り込み -->
