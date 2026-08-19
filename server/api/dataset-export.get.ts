@@ -15,11 +15,27 @@
  * `error` が 1 件でもあれば **422 を返して何も渡さない。**
  * CLI が `process.exit(1)` で書き出さないのと同じである。
  *
- * ## 既定値は「いま何を編集していたか」から取る
+ * ## 名前と作成者は聞かない。**由来から取る**
  *
- * CLI の既定は標準データセットの名前で固定だった。画面では
- * `data/library.json` の由来（`create` や `use` で書いた記録）を既定にする。
- * **いま作ったものに、いまの名前が付く。**
+ * 最初は画面に名前と作成者の入力欄を置いていた。**二度書かせていた。**
+ * 問題集を作る時点（`/admin` の `create`）で入れているし、
+ * 受け取ったものを使う時点（`use`）でも由来を写している。
+ * `data/library.json` に既にある。
+ *
+ * それ以上に、**入力欄は帰属を書き換えられる。** 他人のデータセットに
+ * 自分の名前を入れて出せてしまう。CC BY で配っているものに対して、
+ * 一番やってはいけないことを画面から 1 手でできる状態だった。
+ *
+ * > **持っていない権利を許諾できないのと同じで、書いていない名前を名乗らせない。**
+ *
+ * ## 由来が無ければ書き出さない
+ *
+ * 既定値で埋めるのもやめた。`data/library.json` は `.gitignore` に入っているので、
+ * **clone した直後は由来が無い。** そこで既定を当てると
+ * `author: "unknown"` の配布物が黙って出来る（実測 2026-08-19）。
+ *
+ * 由来が無ければ 409 で止めて、由来を作る操作へ案内する。
+ * 切り替え（`use`）と作成（`create`）が由来を書く唯一の場所である。
  *
  * ## ダウンロードとして返す
  *
@@ -68,9 +84,20 @@ export default defineEventHandler(async (event) => {
         })
     }
 
-    const name = String(query.name ?? '').trim() || active?.name || 'GGG データセット'
-    const author = String(query.author ?? '').trim() || active?.author || 'unknown'
-    const description = String(query.description ?? '').trim()
+    if (!active?.name?.trim() || !active?.author?.trim()) {
+        /**
+         * **名前を作らない。** ここで既定を当てると、
+         * 作成者が `unknown` の配布物が出来て CC BY の帰属が成立しない。
+         */
+        throw createError({
+            statusCode: 409,
+            statusMessage: 'いま使っているデータの由来が記録されていない。'
+                + '/datasets で問題集を切り替えるか、/admin で新しく作ると名前と作成者が記録される',
+        })
+    }
+
+    const name = active.name
+    const author = active.author
 
     const selected = usedTermsOnly ? selectUsedTerms(questions, terms) : terms
 
@@ -85,8 +112,7 @@ export default defineEventHandler(async (event) => {
             attribution: `${name} (${author}), CC BY 4.0 — ${REPO}`,
             sources: collectSources(selected),
             createdAt: new Date().toISOString(),
-            description: description
-                || '出題は pano ID のみを保持する（Street View の画像は含まない）。'
+            description: '出題は pano ID のみを保持する（Street View の画像は含まない）。'
                 + '**間違いは自分で直せる。** 検証ツールを同梱している。',
         },
         questions,

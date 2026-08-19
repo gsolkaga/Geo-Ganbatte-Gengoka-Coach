@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 /**
  * データセットの管理画面。取り込み・切り替え・削除。
  *
@@ -199,8 +199,6 @@ async function use(id: string) {
 
 // ---- 書き出し ----
 
-const exportName = ref('')
-const exportAuthor = ref('')
 const usedTermsOnly = ref(false)
 const exportWarnings = ref<string[]>([])
 const exportInfo = ref<{
@@ -216,13 +214,18 @@ const activeRecord = computed(() => datasets.value.find((d) => d.active) ?? null
 const activeName = computed(() => activeRecord.value?.name ?? null)
 const activeAuthor = computed(() => activeRecord.value?.author ?? null)
 
+/**
+ * 書き出しに渡すもの。**名前と作成者は渡さない。**
+ * サーバが `data/library.json` の由来から取る（帰属を画面から変えられないようにする）。
+ */
 function exportQuery() {
-    const q: Record<string, string> = {}
-    if (exportName.value.trim()) q.name = exportName.value.trim()
-    if (exportAuthor.value.trim()) q.author = exportAuthor.value.trim()
-    if (usedTermsOnly.value) q.usedTermsOnly = '1'
-    return q
+    return usedTermsOnly.value ? { usedTermsOnly: '1' } : {}
 }
+
+/** 由来が記録されていないと書き出せない */
+const canExport = computed(
+    () => activeQuestionCount.value > 0 && !!activeName.value && !!activeAuthor.value,
+)
 
 /**
  * 書き出さずに中身だけ確かめる。**検証もここで走る。**
@@ -484,26 +487,32 @@ async function remove(id: string) {
                 画像の検査に通らなければ<strong>ファイルを渡さない</strong>（<code>422</code>）
             </p>
 
+            <!--
+                **名前と作成者は聞かない。** 問題集を作る時点（`/admin`）と
+                受け取ったものを使う時点（切り替え）で既に記録している。
+                入力欄を置くと二度書かせるだけでなく、**帰属を書き換えられる。**
+                他人のデータセットに自分の名前を入れて出せる状態だった。
+            -->
+            <p v-if="activeName && activeAuthor" class="text-sm text-slate-800">
+                <strong>{{ activeName }}</strong>
+                <span class="text-slate-600">／{{ activeAuthor }}</span>
+                <span class="text-xs text-slate-600">
+                    （名前と作成者は、この問題集を作った／取り込んだ時点の記録を使う）
+                </span>
+            </p>
+            <p v-else class="text-sm text-amber-800">
+                <strong>由来が記録されていないので書き出せない。</strong>
+                下の一覧から問題集を選んで切り替えるか、
+                <NuxtLink to="/admin" class="underline">
+                    編集モード
+                </NuxtLink>
+                で新しく作ると、名前と作成者が記録される
+            </p>
+
             <div class="flex flex-wrap items-end gap-2">
-                <label class="grid gap-1">
-                    <span class="text-xs text-slate-700">名前</span>
-                    <input
-                        v-model="exportName"
-                        :placeholder="activeName ?? 'GGG データセット'"
-                        class="w-64 rounded border border-slate-400 bg-white px-2 py-1 text-sm text-slate-900"
-                    >
-                </label>
-                <label class="grid gap-1">
-                    <span class="text-xs text-slate-700">作成者</span>
-                    <input
-                        v-model="exportAuthor"
-                        :placeholder="activeAuthor ?? 'unknown'"
-                        class="w-40 rounded border border-slate-400 bg-white px-2 py-1 text-sm text-slate-900"
-                    >
-                </label>
                 <button
                     type="button"
-                    :disabled="busy !== null || activeQuestionCount === 0"
+                    :disabled="busy !== null || !canExport"
                     class="rounded border border-slate-500 px-3 py-1.5 text-sm text-slate-800 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
                     @click="checkExport"
                 >
@@ -511,7 +520,7 @@ async function remove(id: string) {
                 </button>
                 <button
                     type="button"
-                    :disabled="busy !== null || activeQuestionCount === 0"
+                    :disabled="busy !== null || !canExport"
                     class="rounded bg-slate-900 px-4 py-1.5 text-sm text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-40"
                     @click="downloadExport"
                 >
