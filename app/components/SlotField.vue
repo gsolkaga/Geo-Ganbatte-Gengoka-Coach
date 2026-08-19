@@ -20,8 +20,13 @@ const props = withDefaults(
     mode?: 'learn' | 'admin'
     /** 管理モードで、値が AI または国定数テーブル由来の下書きであるか */
     draft?: boolean
+    /**
+     * 管理モードで選べる用語（このスロットのものだけ）。
+     * **該当国数の少ない順で渡す。** 絞り込み力の強い用語を先に見せる
+     */
+    termOptions?: { id: string, plain: string, countries: number, certainty: string }[]
   }>(),
-  { mode: 'learn', draft: false },
+  { mode: 'learn', draft: false, termOptions: () => [] },
 )
 
 const emit = defineEmits<{ 'update:modelValue': [SlotEntry] }>()
@@ -51,6 +56,39 @@ function setPlain(value: string) {
 
 function setConfirmed(value: boolean) {
   emit('update:modelValue', { ...props.modelValue, confirmed: value })
+}
+
+/**
+ * 視認可能性（管理モードのみ）。**既定値を置かない。**
+ *
+ * 既定を `easy` にすると「確認していない」が「見えるはず」に化けて、
+ * タグ付けの手抜きが学習者の失敗として表示される（`SlotEntry.recognition` の注記）。
+ * だから未選択という状態を残し、保存時に `validateAnswerKey` が弾く。
+ */
+const RECOGNITIONS = [
+  { value: 'easy', label: '見ればすぐ', meaning: '見ればすぐ分かる' },
+  { value: 'hard', label: '探せば', meaning: '意識して探せば見える' },
+  { value: 'blind', label: '気づけない', meaning: '写っているが認識できない。見落としに数えない' },
+] as const
+
+function setRecognition(value: 'easy' | 'hard' | 'blind') {
+  emit('update:modelValue', { ...props.modelValue, recognition: value })
+}
+
+/**
+ * 用語 ID の開閉（管理モードのみ）。
+ *
+ * **人手で選べるようにしたのは、消費 0 で済むからである。**
+ * `npm run normalize:keys` は AI に任せる代わりに出題数ぶんのリクエストを使う。
+ * タグ付けの時点で分かっているなら、そこで入れておけば枠を使わない。
+ */
+const termSet = computed(() => new Set(props.modelValue.terms))
+
+function toggleTerm(id: string) {
+  const next = termSet.value.has(id)
+    ? props.modelValue.terms.filter((t) => t !== id)
+    : [...props.modelValue.terms, id]
+  emit('update:modelValue', { ...props.modelValue, terms: next })
 }
 
 const stateClasses: Record<SlotState, string> = {
@@ -109,6 +147,70 @@ const stateClasses: Record<SlotState, string> = {
     <p v-if="!isVisible" class="mt-1 text-xs text-slate-500">
       「見えた」を選ぶと記述欄が使える
     </p>
+
+    <!--
+      用語 ID。**該当国数を併記する。**
+      「その表現では 91 カ国」が見えていないと、粗い用語を選んだことに気づけない。
+    -->
+    <fieldset v-if="mode === 'admin' && isVisible && termOptions.length" class="mt-2">
+      <legend class="text-xs text-slate-700">
+        用語（該当国数。少ないほど強い）
+      </legend>
+      <div class="ggg-scroll mt-1 max-h-40 overflow-y-scroll rounded border border-slate-200 p-1">
+        <div class="flex flex-wrap gap-1">
+          <button
+            v-for="term in termOptions"
+            :key="term.id"
+            type="button"
+            :aria-pressed="termSet.has(term.id)"
+            :title="`${term.id}（${term.certainty}）`"
+            class="rounded border px-2 py-0.5 text-xs focus:outline-2 focus:outline-offset-2 focus:outline-slate-900"
+            :class="termSet.has(term.id)
+              ? 'border-slate-900 bg-slate-900 text-white'
+              : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50'"
+            @click="toggleTerm(term.id)"
+          >
+            {{ term.plain }}
+            <span :class="termSet.has(term.id) ? 'text-slate-300' : 'text-slate-500'">
+              {{ term.countries }}
+            </span>
+          </button>
+        </div>
+      </div>
+      <p v-if="!modelValue.terms.length" class="mt-1 text-xs text-slate-600">
+        未選択（後から <code>npm run normalize:keys</code> でも埋められる）
+      </p>
+    </fieldset>
+
+    <!--
+      視認可能性は「見えた」のときだけ意味を持つ。
+      写っていないものに「見やすさ」は無い（スキーマ側でも落としている）。
+    -->
+    <fieldset v-if="mode === 'admin' && isVisible" class="mt-2">
+      <legend class="text-xs text-slate-700">
+        この学習者に見えるか
+      </legend>
+      <div class="mt-1 flex flex-wrap gap-2">
+        <button
+          v-for="option in RECOGNITIONS"
+          :key="option.value"
+          type="button"
+          role="radio"
+          :aria-checked="modelValue.recognition === option.value"
+          :title="option.meaning"
+          class="rounded border px-2 py-1 text-xs focus:outline-2 focus:outline-offset-2 focus:outline-slate-900"
+          :class="modelValue.recognition === option.value
+            ? 'border-slate-900 bg-slate-900 text-white'
+            : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50'"
+          @click="setRecognition(option.value)"
+        >
+          {{ option.label }}
+        </button>
+      </div>
+      <p v-if="!modelValue.recognition" class="mt-1 text-xs text-amber-700">
+        未設定（保存できない）
+      </p>
+    </fieldset>
 
     <label v-if="mode === 'admin'" class="mt-2 flex items-center gap-2 text-sm text-slate-800">
       <input

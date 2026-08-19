@@ -91,7 +91,8 @@ function goToQuestion(index: number) {
     phase.value = 'input'
 }
 
-const countryOptions = ref<{ code: string, name: string }[]>([])
+/** `region` はグリッドのまとめに使う。落とすとグリッドが平らになる */
+const countryOptions = ref<{ code: string, name: string, region: string | null }[]>([])
 const countryNameByCode = computed(
     () => new Map(countryOptions.value.map((c) => [c.code, c.name])),
 )
@@ -368,7 +369,7 @@ onMounted(async () => {
     try {
         const [questionResponse, countryResponse] = await Promise.all([
             $fetch<{ questions: typeof questions.value }>('/api/questions'),
-            $fetch<{ countries: { code: string, name: string }[] }>('/api/countries'),
+            $fetch<{ countries: { code: string, name: string, region: string | null }[] }>('/api/countries'),
         ])
         questions.value = questionResponse.questions
         countryOptions.value = countryResponse.countries

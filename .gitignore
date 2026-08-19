@@ -9,6 +9,7 @@ dist
 .env.*.local
 
 # 画像は 1 枚も置かない（Street View の画像はキャッシュ・再配布が禁止されている）
+# svg も除外する。**「全除外している」と書くなら、本当に全部を除外する**
 *.png
 *.jpg
 *.jpeg
@@ -16,6 +17,9 @@ dist
 *.webp
 *.bmp
 *.tiff
+*.svg
+*.avif
+*.ico
 
 # 一時ファイル
 .scratch/

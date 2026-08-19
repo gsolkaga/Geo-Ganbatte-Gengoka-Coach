@@ -17,8 +17,10 @@ const props = withDefaults(
     mode?: 'learn' | 'admin'
     /** 管理モードで下書き表示するスロット */
     draftSlots?: SlotId[]
+    /** 管理モードで選べる用語。スロット ID で引く */
+    termsBySlot?: Record<string, { id: string, plain: string, countries: number, certainty: string }[]>
   }>(),
-  { mode: 'learn', draftSlots: () => [] },
+  { mode: 'learn', draftSlots: () => [], termsBySlot: () => ({}) },
 )
 
 const emit = defineEmits<{ 'update:modelValue': [SlotRecord] }>()
@@ -65,6 +67,7 @@ defineExpose({ unconfirmedSlots })
         :model-value="modelValue[definition.id]"
         :mode="mode"
         :draft="draftSet.has(definition.id)"
+        :term-options="termsBySlot[definition.id] ?? []"
         @update:model-value="updateSlot(definition.id, $event)"
       />
     </div>

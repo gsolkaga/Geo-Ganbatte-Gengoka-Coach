@@ -141,7 +141,13 @@ data/countries-merged.json         上記から機械的に生成したもの
 ### Street View の画像とパノラマ
 
 Google および各撮影者に権利がある。**このリポジトリに画像ファイルは 1 枚も含まれていない**
-（`.gitignore` で画像拡張子を全除外している）。
+（`.gitignore` で画像の拡張子を除外している。`png` `jpg` `jpeg` `gif` `webp` `bmp` `tiff`
+`svg` `avif` `ico`）。
+
+`git ls-files` に画像が 1 件も出ないことで確かめられる。
+
+> **「全部を除外している」と書くなら、除外の一覧を書く。**
+> 何を除外したかを書かないと、後から増えた形式が漏れていても気づけない。
 
 `data/questions.json` に保存しているのは pano ID・座標・著作権表記・撮影年月のみである。
 Google Maps Platform の規約により pano ID の保存は許容されているが、
