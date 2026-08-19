@@ -91,6 +91,34 @@ function toggleTerm(id: string) {
   emit('update:modelValue', { ...props.modelValue, terms: next })
 }
 
+/** 「見えた」なのに記述が空。**`validateAnswerKey` が止める条件と同じ** */
+const needsPlain = computed(
+  () => props.mode === 'admin'
+    && isVisible.value
+    && (!props.modelValue.plain || props.modelValue.plain.trim() === ''),
+)
+
+const termsForDraft = computed(
+  () => props.termOptions.filter((t) => termSet.value.has(t.id)),
+)
+
+/**
+ * 選んだ用語から記述の**下書き**を作る。
+ *
+ * **自動では入れない。** 押したときだけ入れる。
+ * 記述は「この地点に何が写っているか」であり、用語は「一般にどの国にあるか」である。
+ * 黙って埋めると、辞書の一般語が**その地点の観察として記録される。**
+ *
+ * > **人間が書いたことにしてよいのは、人間が押したときだけである。**
+ *
+ * 入れた後は手で直せる。ここを空にしたまま保存する道は塞いである。
+ */
+function draftFromTerms() {
+  const text = termsForDraft.value.map((t) => t.plain).join('、')
+  if (text === '') return
+  emit('update:modelValue', { ...props.modelValue, plain: text })
+}
+
 const stateClasses: Record<SlotState, string> = {
   visible: 'border-state-visible bg-state-visible/10 text-state-visible',
   absent: 'border-state-absent bg-state-absent/10 text-state-absent',
@@ -130,16 +158,28 @@ const stateClasses: Record<SlotState, string> = {
       </button>
     </div>
 
+    <!--
+      **記述が主で、用語は従である。** 管理モードでは下に用語ピッカーが付くので、
+      ラベルが sr-only のままだと**選択式の欄に見えた**（実測 2026-08-19）。
+      用語だけ選んで保存しようとして 7 件で弾かれた。
+
+      > **必須の欄は、必須と書く。**
+    -->
     <label class="block">
-      <span class="sr-only">{{ definition.label }} の記述</span>
+      <span v-if="mode === 'admin'" class="mb-1 block text-xs text-slate-700">
+        何が見えたか（<strong>必須</strong>。これが学習者への説明の元になる）
+      </span>
+      <span v-else class="sr-only">{{ definition.label }} の記述</span>
       <textarea
         :id="fieldId"
         :value="modelValue.plain ?? ''"
         :placeholder="definition.placeholder"
         :disabled="!isVisible"
         :aria-describedby="`${fieldId}-hint`"
+        :aria-invalid="needsPlain || undefined"
         rows="2"
-        class="w-full rounded border border-slate-300 p-2 text-sm disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-400"
+        class="w-full rounded border p-2 text-sm disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-400"
+        :class="needsPlain ? 'border-2 border-amber-600 bg-amber-50' : 'border-slate-300'"
         @input="setPlain(($event.target as HTMLTextAreaElement).value)"
       />
     </label>
@@ -148,13 +188,32 @@ const stateClasses: Record<SlotState, string> = {
       「見えた」を選ぶと記述欄が使える
     </p>
 
+    <!-- **保存できない理由をその場に出す。** 一覧の下まで行かないと分からない状態にしない -->
+    <div v-else-if="needsPlain" class="mt-1 flex flex-wrap items-center gap-2">
+      <p class="text-xs text-amber-800">
+        記述が空だと保存できない。用語を選んでも記述の代わりにはならない
+      </p>
+      <button
+        v-if="termsForDraft.length"
+        type="button"
+        class="rounded border border-amber-600 px-2 py-0.5 text-xs text-amber-900 hover:bg-amber-100"
+        @click="draftFromTerms"
+      >
+        選んだ用語から下書きする
+      </button>
+    </div>
+
     <!--
       用語 ID。**該当国数を併記する。**
       「その表現では 91 カ国」が見えていないと、粗い用語を選んだことに気づけない。
     -->
     <fieldset v-if="mode === 'admin' && isVisible && termOptions.length" class="mt-2">
+      <!--
+        **記述の代わりではない。** 用語は絞り込みの計算（コード）に使い、
+        記述は学習者への説明（AI）に使う。送り先が違うので片方では足りない。
+      -->
       <legend class="text-xs text-slate-700">
-        用語（該当国数。少ないほど強い）
+        用語（任意。<strong>記述の代わりにはならない</strong>／該当国数は少ないほど強い）
       </legend>
       <div class="ggg-scroll mt-1 max-h-40 overflow-y-scroll rounded border border-slate-200 p-1">
         <div class="flex flex-wrap gap-1">

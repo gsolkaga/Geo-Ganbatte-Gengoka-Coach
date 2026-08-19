@@ -612,10 +612,17 @@ onMounted(loadList)
                     <!-- 右：タグ入力。**中身は学習画面と同じ部品なので白いまま** -->
                     <div class="relative min-w-0 xl:flex-1">
                         <div class="ggg-scroll max-h-[70dvh] overflow-y-scroll pr-1 xl:absolute xl:inset-0 xl:max-h-none">
+                            <!--
+                                **保存を止める条件を先に出す。** 記述の空欄は
+                                「全部埋めたつもりで押したら 7 件で弾かれた」経路になる（実測 2026-08-19）。
+                            -->
                             <div class="mb-2 rounded border border-edit-border bg-edit-panel px-2 py-1.5 text-xs">
                                 確認 {{ progress.confirmed }} / {{ progress.total }}　
                                 見えた {{ progress.visible }}　
                                 用語入り {{ progress.withTerms }} / {{ progress.visible }}
+                                <span v-if="progress.emptyPlain" class="ml-1 rounded bg-edit-accent px-1.5 py-0.5 font-semibold text-edit-accent-text">
+                                    記述が空 {{ progress.emptyPlain }} 件
+                                </span>
                             </div>
 
                             <div class="rounded bg-white p-2">

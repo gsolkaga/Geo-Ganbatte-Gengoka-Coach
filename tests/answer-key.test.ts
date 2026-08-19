@@ -137,7 +137,23 @@ describe('answerKeyProgress', () => {
         }
         slots.pole = { state: 'visible', plain: '木製', terms: [], confirmed: true, recognition: 'hard' }
         expect(answerKeyProgress(slots)).toEqual({
-            confirmed: 14, visible: 2, withTerms: 1, total: 14,
+            confirmed: 14, visible: 2, withTerms: 1, emptyPlain: 0, total: 14,
         })
+    })
+
+    /**
+     * **用語だけ選んで記述が空**という状態を数える。
+     * 実測（2026-08-19）でこの形のまま保存しようとして 7 件で弾かれた。
+     */
+    it('用語を選んでも記述が空なら emptyPlain に数える', () => {
+        const slots = confirmedSlots()
+        slots.script = {
+            state: 'visible', plain: null, terms: ['ref_script_latin'],
+            confirmed: true, recognition: 'easy',
+        }
+        slots.pole = { state: 'visible', plain: '   ', terms: [], confirmed: true, recognition: 'hard' }
+        const progress = answerKeyProgress(slots)
+        expect(progress.emptyPlain).toBe(2)
+        expect(progress.withTerms).toBe(1)
     })
 })

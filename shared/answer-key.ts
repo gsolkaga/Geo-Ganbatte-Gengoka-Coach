@@ -140,11 +140,20 @@ export function answerKeyProgress(slots: SlotRecord): {
     confirmed: number
     visible: number
     withTerms: number
+    /**
+     * **「見えた」なのに記述が空のスロット数。**
+     *
+     * 保存を止める条件を数として出す。実測（2026-08-19）で、
+     * 用語ピッカーだけを埋めて保存しようとして 7 件で弾かれた。
+     * **押せない理由が押した後にしか出ないと、全部埋めてから気づく。**
+     */
+    emptyPlain: number
     total: number
 } {
     let confirmed = 0
     let visible = 0
     let withTerms = 0
+    let emptyPlain = 0
     for (const id of SLOT_IDS) {
         const entry = slots[id]
         if (!entry) continue
@@ -152,7 +161,8 @@ export function answerKeyProgress(slots: SlotRecord): {
         if (entry.state === 'visible') {
             visible += 1
             if (entry.terms.length > 0) withTerms += 1
+            if (!entry.plain || entry.plain.trim() === '') emptyPlain += 1
         }
     }
-    return { confirmed, visible, withTerms, total: SLOT_IDS.length }
+    return { confirmed, visible, withTerms, emptyPlain, total: SLOT_IDS.length }
 }
