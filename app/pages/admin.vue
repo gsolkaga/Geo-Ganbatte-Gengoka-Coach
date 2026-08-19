@@ -70,9 +70,13 @@ const noMove = computed(() => String(runtimeConfig.public.streetviewMode ?? 'emb
 const mode = ref<'edit' | 'create'>('edit')
 
 const summaries = ref<Summary[]>([])
-const countryNameByCode = ref(new Map<string, string>())
+const countryOptions = ref<{ code: string, name: string }[]>([])
 const datasets = ref<DatasetItem[]>([])
 const loadError = ref<string | null>(null)
+
+const countryNameByCode = computed(
+    () => new Map(countryOptions.value.map((c) => [c.code, c.name])),
+)
 
 const activeDataset = computed(() => datasets.value.find((d) => d.active) ?? null)
 const shelf = computed(() => datasets.value.filter((d) => d.onShelf && !d.active))
@@ -135,7 +139,7 @@ async function loadList() {
             $fetch<{ datasets: DatasetItem[] }>('/api/datasets'),
         ])
         summaries.value = list.questions
-        countryNameByCode.value = new Map(countries.countries.map((c) => [c.code, c.name]))
+        countryOptions.value = countries.countries
         datasets.value = library.datasets
     }
     catch (error) {
@@ -304,6 +308,14 @@ async function switchSet() {
 const draft = ref({ country: '', lat: '', lng: '', heading: '0', difficulty: '2', note: '' })
 const adding = ref(false)
 const addMessage = ref<string | null>(null)
+
+/** グリッドは複数選択の形なので、1 件を配列にして渡す */
+const draftCountryCodes = computed(() => (draft.value.country ? [draft.value.country] : []))
+
+/** 同じ国を押したら外す。違う国なら**入れ替える**（1 手で選び直せる） */
+function pickDraftCountry(code: string) {
+    draft.value.country = draft.value.country === code ? '' : code
+}
 
 /**
  * 座標から出題を作る。**pano の解決と著作権の確認はサーバが行う**
@@ -691,10 +703,24 @@ onMounted(loadList)
                     </p>
 
                     <div class="mt-2 flex flex-wrap items-end gap-2">
-                        <label class="grid gap-1">
-                            <span class="text-xs text-edit-muted">国コード</span>
-                            <input v-model="draft.country" maxlength="2" placeholder="ZA" class="w-16 rounded border border-edit-border bg-edit-bg px-2 py-1 text-sm uppercase text-edit-text">
-                        </label>
+                        <!--
+                            **ここも国コードを打たせない。** 回答欄と同じグリッドを使う。
+                            `countries.json` に無い国は `POST /api/questions` が 400 で弾くので、
+                            自由入力は**グリッドでは作れない誤りしか生まない。**
+                        -->
+                        <div class="grid gap-1">
+                            <span class="text-xs text-edit-muted">国（{{ countryOptions.length }} カ国から選ぶ）</span>
+                            <div class="w-64">
+                                <CountryGrid
+                                    :countries="countryOptions"
+                                    :selected="draftCountryCodes"
+                                    :max="1"
+                                    single
+                                    tone="edit"
+                                    @toggle="pickDraftCountry"
+                                />
+                            </div>
+                        </div>
                         <label class="grid gap-1">
                             <span class="text-xs text-edit-muted">緯度</span>
                             <input v-model="draft.lat" inputmode="decimal" placeholder="-25.7" class="w-28 rounded border border-edit-border bg-edit-bg px-2 py-1 text-sm text-edit-text">

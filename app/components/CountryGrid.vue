@@ -39,8 +39,21 @@ const props = withDefaults(
         selected: string[]
         max: number
         disabled?: boolean
+        /**
+         * 1 件だけ選ぶ。**選んだら閉じる。**
+         *
+         * 出題の国のように答えが 1 つの欄で使う。
+         * `max=1` の複数選択で代用すると、**別の国に変えるのに 2 手かかる**
+         * （外してから選ぶ）。選び直しは 1 手であるべきである。
+         */
+        single?: boolean
+        /**
+         * 配色。編集モード（`/admin`）は濃い藍の中に置くので、
+         * **周りの入力欄と揃える。** 白いままだと 1 つだけ浮く。
+         */
+        tone?: 'learn' | 'edit'
     }>(),
-    { disabled: false },
+    { disabled: false, single: false, tone: 'learn' },
 )
 
 const emit = defineEmits<{ toggle: [string] }>()
@@ -67,7 +80,8 @@ const filtered = computed(() => {
     )
 })
 
-const atMax = computed(() => props.selected.length >= props.max)
+/** 1 件選びの場合は上限で塞がない。**押した国に入れ替わる** */
+const atMax = computed(() => !props.single && props.selected.length >= props.max)
 
 /** 上限に達したら未選択のものは押せない。**選択済みは常に押せる**（外せなくなるため） */
 function isBlocked(code: string): boolean {
@@ -80,6 +94,12 @@ const summary = computed(() => {
     if (props.selected.length === 0) return '国を選ぶ'
     return props.selected.map((code) => nameByCode.value.get(code) ?? code).join('、')
 })
+
+/** 1 件選びなら選んだ時点で閉じる。**用が済んだ板を残さない** */
+function pick(code: string) {
+    emit('toggle', code)
+    if (props.single) close()
+}
 
 async function toggleOpen() {
     if (props.disabled) return
@@ -119,14 +139,22 @@ onUnmounted(() => document.removeEventListener('pointerdown', onPointerDown))
             :disabled="disabled"
             :aria-expanded="open"
             :aria-controls="panelId"
-            class="flex w-full max-w-md items-center justify-between gap-2 rounded border border-slate-400 bg-white px-3 py-2 text-left text-sm hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
+            class="flex w-full max-w-md items-center justify-between gap-2 rounded border px-3 py-2 text-left text-sm disabled:cursor-not-allowed disabled:opacity-40"
+            :class="tone === 'edit'
+                ? 'border-edit-border bg-edit-bg text-edit-text hover:bg-edit-panel'
+                : 'border-slate-400 bg-white hover:bg-slate-50'"
             @click="toggleOpen"
         >
-            <span :class="selected.length ? 'text-slate-900' : 'text-slate-500'">
+            <span
+                :class="tone === 'edit'
+                    ? (selected.length ? 'text-edit-text' : 'text-edit-muted')
+                    : (selected.length ? 'text-slate-900' : 'text-slate-500')"
+            >
                 {{ summary }}
             </span>
-            <span class="shrink-0 text-xs text-slate-600">
-                {{ selected.length }} / {{ max }}
+            <span class="shrink-0 text-xs" :class="tone === 'edit' ? 'text-edit-muted' : 'text-slate-600'">
+                <!-- 1 件選びで「1 / 1」と出しても何も伝わらない -->
+                <template v-if="!single">{{ selected.length }} / {{ max }}</template>
                 <span aria-hidden="true">{{ open ? '▲' : '▼' }}</span>
             </span>
         </button>
@@ -176,7 +204,7 @@ onUnmounted(() => document.removeEventListener('pointerdown', onPointerDown))
                         :class="selectedSet.has(country.code)
                             ? 'border-slate-900 bg-slate-900 text-white'
                             : 'border-slate-300 bg-white text-slate-800 hover:bg-slate-50'"
-                        @click="emit('toggle', country.code)"
+                        @click="pick(country.code)"
                     >
                         <span class="truncate">{{ country.name }}</span>
                         <span
