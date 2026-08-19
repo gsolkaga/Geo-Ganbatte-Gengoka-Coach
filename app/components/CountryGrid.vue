@@ -162,7 +162,7 @@ onUnmounted(() => document.removeEventListener('pointerdown', onPointerDown))
         <div
             v-if="open"
             :id="panelId"
-            class="absolute z-20 mt-1 w-full max-w-md rounded border border-slate-400 bg-white p-2 shadow-lg"
+            class="absolute z-20 mt-1 w-full max-w-md rounded border border-slate-400 bg-white p-2 text-slate-900 shadow-lg"
         >
             <div class="mb-2 flex flex-wrap items-center gap-2">
                 <input
@@ -170,7 +170,7 @@ onUnmounted(() => document.removeEventListener('pointerdown', onPointerDown))
                     v-model="query"
                     type="search"
                     placeholder="カザ / KZ で絞り込む"
-                    class="min-w-0 flex-1 rounded border border-slate-400 px-2 py-1 text-sm"
+                    class="min-w-0 flex-1 rounded border border-slate-400 bg-white px-2 py-1 text-sm text-slate-900"
                 >
                 <button
                     type="button"

@@ -178,8 +178,8 @@ const stateClasses: Record<SlotState, string> = {
         :aria-describedby="`${fieldId}-hint`"
         :aria-invalid="needsPlain || undefined"
         rows="2"
-        class="w-full rounded border p-2 text-sm disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-400"
-        :class="needsPlain ? 'border-2 border-amber-600 bg-amber-50' : 'border-slate-300'"
+        class="w-full rounded border p-2 text-sm text-slate-900 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-400"
+        :class="needsPlain ? 'border-2 border-amber-600 bg-amber-50' : 'border-slate-300 bg-white'"
         @input="setPlain(($event.target as HTMLTextAreaElement).value)"
       />
     </label>

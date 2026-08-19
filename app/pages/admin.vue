@@ -625,7 +625,15 @@ onMounted(loadList)
                                 </span>
                             </div>
 
-                            <div class="rounded bg-white p-2">
+                            <!--
+                                **白い面には文字色を書く。** ページ側が
+                                `text-edit-text`（ほぼ白）なので、
+                                指定を省いた要素は**白地に白字**になる（実測 2026-08-19）。
+                                記述欄に打った文字が全選択するまで見えなかった。
+
+                                > **色は継がれる。継いで困る場所で断ち切る。**
+                            -->
+                            <div class="rounded bg-white p-2 text-slate-900">
                                 <SlotForm
                                     v-model="slots"
                                     mode="admin"
@@ -666,7 +674,7 @@ onMounted(loadList)
                                     <textarea
                                         v-model="note"
                                         rows="2"
-                                        class="w-full rounded border border-slate-300 p-2 text-sm"
+                                        class="w-full rounded border border-slate-300 bg-white p-2 text-sm text-slate-900"
                                     />
                                 </label>
                             </div>
