@@ -49,8 +49,15 @@ const runtimeConfig = useRuntimeConfig()
 const noMove = computed(() => String(runtimeConfig.public.streetviewMode ?? 'embed') === 'nomove')
 const loadError = ref<string | null>(null)
 
+/**
+ * 出題。**座標（`fallback`）は受け取らない。**
+ *
+ * 以前は型に書いてサーバから受け取っていたが、**一度も使っていなかった。**
+ * 緯度経度は答えそのものなので、使わないものを渡さない
+ * （`server/utils/learner-view.ts`）。
+ */
 const questions = ref<
-    { id: string, panoId: string, fallback: { lat: number, lng: number, heading: number }, difficulty: number, copyright: string }[]
+    { id: string, panoId: string, difficulty: number, copyright: string }[]
 >([])
 const currentIndex = ref(0)
 const current = computed(() => questions.value[currentIndex.value] ?? null)
@@ -177,7 +184,20 @@ const hasInput = computed(() => hasFormInput(slots.value, answer.value))
  * 採点の記録を選ぶ方（`過去の採点`）は `variant` を残している。
  * あちらは**採点結果そのものを読み返す**ので、v1 と v2 で中身が違う。
  */
-const runLabel = (r: RunSummary) => `${r.questionId}　${r.ts.slice(0, 16).replace('T', ' ')}`
+/**
+ * **出題 ID を出さない。** `q-kr-01` の `kr` は国コードである。
+ *
+ * ここに並ぶのは記録がある出題、つまり**既に答えた出題**なので、
+ * その問題の正解は本人が知っている。しかし一覧は全出題にまたがるので、
+ * **まだ答えていない問題の ID が混ざる余地を残さない。**
+ *
+ * 代わりに何問目かを出す。移動先が分かれば選ぶには足りる。
+ */
+const runLabel = (r: RunSummary) => {
+    const index = questions.value.findIndex((q) => q.id === r.questionId)
+    const where = index >= 0 ? `${index + 1} 問目` : '（一覧に無い出題）'
+    return `${where}　${r.ts.slice(0, 16).replace('T', ' ')}`
+}
 
 /** 読み込みが失敗したときに画面へ出す。**コンソールだけに出して黙らない** */
 const loadRunError = ref<string | null>(null)
@@ -598,8 +618,15 @@ function nextQuestion() {
                     aria-label="問題を選ぶ"
                     @change="goToQuestion(Number(($event.target as HTMLSelectElement).value))"
                 >
+                    <!--
+                        **出題 ID を出さない。** `q-kr-01` の `kr` は国コードである。
+                        正解タグを型で外していても、**ID がそのまま答えを名乗っていた**
+                        （実測 2026-08-19。全問が難易度 0 になっていた）。
+
+                        > **隠したものの一覧を作っても、残したものの中身は見ていない。**
+                    -->
                     <option v-for="(q, i) in questions" :key="q.id" :value="i">
-                        {{ i + 1 }} / {{ questions.length }}　{{ q.id }}（難易度 {{ q.difficulty }}）
+                        {{ i + 1 }} / {{ questions.length }}　難易度 {{ q.difficulty }}
                     </option>
                 </select>
 
