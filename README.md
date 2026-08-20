@@ -90,6 +90,18 @@ Node.js 20 以上。**採点 1 回に 20〜30 秒かかる**（モデルによ�
 
 出題と用語辞書をまとめて配れる。**正解データを配って終わりにしない。**
 
+**10 問を 2 セット同梱している。** 辞書は同じ 262 語で、出題だけが違う。
+
+```
+gsolkaga__standard-10         JP TH TR BR AU IS BG RU KZ ZA（最初から使える状態）
+gsolkaga__standard-append-10  KR GB CO SG MX NZ CA LV CL RW（use で切り替える）
+```
+
+`append-10` は**辞書を作り終えたあとに作った 10 問**である。辞書に合わせて出題を選んでいないので、
+**辞書がその 10 問に過剰適合していないか**を測れる（到達 6/10 → 5/10）。
+
+> **自分が作った問題で測ると、作ったとおりの結果が出る。**
+
 ```bash
 npm run dataset -- export --name "..."   # 配る側
 npm run dataset -- install <file>        # 受け取る側

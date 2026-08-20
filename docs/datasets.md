@@ -207,9 +207,31 @@ npm run fingerprint -- --verify   辞書が同一であることを確かめる
 `node scripts/build-glossary.mjs` を回す。**直せば応答が変わる**
 （実測: [docs/normalization-recurrence.md](normalization-recurrence.md)）。
 
-## 標準データセットは「取り込み済み」の状態で同梱している
+## 10 問を 2 セット同梱している
 
-同じ内容が 2 箇所にある。**重複だが意図的である。**
+棚に 2 つ入っている。**辞書は同じ 262 語で、出題だけが違う。**
+
+```
+gsolkaga__standard-10         JP TH TR BR AU IS BG RU KZ ZA
+gsolkaga__standard-append-10  KR GB CO SG MX NZ CA LV CL RW
+```
+
+`append-10` は**辞書を作り終えたあとに作った 10 問**である。
+辞書に合わせて出題を選んでいないので、**辞書がその 10 問に過剰適合していないか**を
+測るのに使える（到達 6/10 → 5/10。[`combo-report-append-10.md`](combo-report-append-10.md)）。
+
+> **自分が作った問題で測ると、作ったとおりの結果が出る。**
+
+切り替えはこれだけである。**辞書は変わらないので、成績を並べて読める。**
+
+```bash
+npm run dataset -- use gsolkaga__standard-append-10 --apply
+npm run combo                                        # 到達を測る（消費 0）
+```
+
+### 標準データセットは「取り込み済み」の状態で同梱している
+
+`standard-10` は同じ内容が 2 箇所にある。**重複だが意図的である。**
 
 ```
 data/questions.json                                アクティブ（道具が全部これを読む）
@@ -220,12 +242,14 @@ data/datasets/gsolkaga__standard-10/dataset.json   棚（347KB）
 棚にあるので、別のデータセットに切り替えた後でも `use` で戻ってこられる。
 **取り込み操作をしなくても最初から使える状態**にしてある。
 
+`append-10` は棚にだけある。使うには切り替えが必要である。
+
 ## アクティブなものも削除できる
 
 最初はアクティブなデータセットの削除を拒否していた。**それは誤りだった。**
 
-同梱の標準データセットはアクティブかつ棚に 1 つだけなので、
-切り替え先が無く**一生消せなかった。**
+当時、同梱の標準データセットはアクティブかつ棚に 1 つだけだったので、
+切り替え先が無く**一生消せなかった**（いまは棚に 2 つある）。
 
 拒否した理由は「出典表示（`attribution`）の根拠を失うから」である。
 切り替えの時点で由来を `data/library.json` に写すようにしたので、

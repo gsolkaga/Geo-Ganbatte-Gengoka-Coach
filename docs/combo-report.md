@@ -1,6 +1,6 @@
 # 掛け合わせて正解に届くか（AI 未使用、消費 0）
 
-生成: 2026-08-18T01:46:49.715Z　`node tools/combo-report.mjs`
+生成: 2026-08-20T08:11:28.718Z　`node tools/combo-report.mjs`
 
 ## 測る対象を間違えていた
 

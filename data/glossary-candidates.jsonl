@@ -168,3 +168,10 @@
 {"ts":"2026-08-18T10:34:53+09:00","slot":"terrain_vegetation","plain":"細い葉っぱの植物しか生えていない、少し遠くになだらかな山が見え三方を囲まれている","questionId":"q-za-01"}
 {"ts":"2026-08-18T10:34:53+09:00","slot":"architecture","plain":"赤茶色のレンガ作りの店舗が並ぶ","questionId":"q-za-01"}
 {"ts":"2026-08-18T10:34:53+09:00","slot":"camera","plain":"Gen4","questionId":"q-za-01"}
+{"ts":"2026-08-20T09:19:10+09:00","slot":"terrain_vegetation","plain":"白い桜が咲いている、小川沿い","questionId":"q-kr-01"}
+{"ts":"2026-08-20T09:19:10+09:00","slot":"architecture","plain":"金属の倉庫や工場、ビニールハウスが見える","questionId":"q-kr-01"}
+{"ts":"2026-08-20T09:30:18+09:00","slot":"sign","plain":"八角形STOP","questionId":"q-rw-01"}
+{"ts":"2026-08-20T09:30:18+09:00","slot":"architecture","plain":"赤色レンガ作りの家","questionId":"q-rw-01"}
+{"ts":"2026-08-20T09:47:22+09:00","slot":"terrain_vegetation","plain":"白い桜が咲いている、小川沿い","questionId":"q-kr-01"}
+{"ts":"2026-08-20T09:51:51+09:00","slot":"sign","plain":"八角形STOP","questionId":"q-rw-01"}
+{"ts":"2026-08-20T09:51:51+09:00","slot":"architecture","plain":"赤色レンガ作りの家","questionId":"q-rw-01"}
